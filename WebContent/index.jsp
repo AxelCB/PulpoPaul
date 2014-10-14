@@ -11,7 +11,7 @@
 </head>
 <body>
 <br>
-	<form class="form-horizontal" action="admin/homeAdmin.html">
+	<form class="form-horizontal" action="admin/homeAdmin.jsp">
 		<div class="form-group">
 			<label class="col-sm-2 control-label" for="usuario">Usuario</label>
 		  	<div class="col-sm-4">
