@@ -25,10 +25,17 @@
 		</div>
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
-				<input type="submit" class="btn btn-default" value="Acceder">
+				<input type="submit" class="btn btn-default" value="Acceder como Admin">
+				<input type="button" class="btn btn-default" value="Acceder como usuario" onclick="homeUsuario();">
 			</div>
 		</div>
 	</form>
+	<script type="text/javascript">
+		var homeUsuario=function(){
+			$(location).attr('href','http://localhost:8080/PulpoPaul/viajero/verMensajes.html');
+		};
+	</script>
+	
 	<a href="viajero/registrar.html">No esta registrado aún? Registrese aquí.</a>
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
