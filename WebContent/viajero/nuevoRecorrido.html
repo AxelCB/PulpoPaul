@@ -49,140 +49,100 @@
 	</nav>
 	<!-- Fin barra de navegacion del traveler -->
 	
-	<h1>Agregando recorrido</h1>
-		
-	<form class="form-horizontal" method="post">
-		<div class="form-group">
-			<label class="col-sm-2 control-label" for="rolViaje">Seleccione una de las opciones:</label>
-		  	<div class="col-sm-4">
-		  		<select name="rolViaje" class="form-control">
-		  			<option value="conductor">Conductor</option>
-		  			<option value="pasajero">Pasajero</option>
-		  			<option value="ambos">Ambos</option>
-		  		</select>
-		  	</div>
+	<!-- Comienzo de pagina -->
+	<div class="container">
+		<div class="jumbotron">	
+			<h2>Agregando recorrido</h2>
+				
+			<form class="form-horizontal" method="post">
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="rolViaje">Seleccione una de las opciones:</label>
+				  	<div class="col-sm-4">
+				  		<select name="rolViaje" class="form-control" id="rolViaje" onchange="cambiarRolViaje();">
+				  			<option value="pasajero">Pasajero</option>
+				  			<option value="conductor">Conductor</option>
+				  			<option value="ambos">Ambos</option>
+				  		</select>
+				  	</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="frecuenciaViaje">Seleccione:</label>
+				  	<div class="col-sm-4">
+				  		<select name="frecuenciaViaje" class="form-control" id="frecuenciaViaje" onchange="cambiarFrecuencia();">
+				  			<option value="diario" selected="selected">Diario</option>
+				  			<option value="periodico">Peri&oacute;dico</option>
+				  			<option value="puntual">Puntual</option>
+				  		</select>
+				  	</div>
+				</div>
+				<div class="form-group periodico">
+					<label class="col-sm-2 control-label" for="dias">Elija los d&iacute;as:</label>
+				  	<div class="col-sm-4">
+				  		<div class="row">
+				  			<div class="col-sm-3">Lunes</div>
+				  			<div class="col-sm-1"><input type="checkbox" name="dias" value="Lunes"></div>
+				  		</div>
+				  		<div class="row">
+				  			<div class="col-sm-3">Martes</div>
+				  			<div class="col-sm-1"><input type="checkbox" name="dias" value="Martes"></div>
+				  		</div>
+					    <div class="row">
+				  			<div class="col-sm-3">Miercoles</div>
+				  			<div class="col-sm-1"><input type="checkbox" name="dias" value="Miercoles"></div>
+				  		</div> 
+						<div class="row">
+				  			<div class="col-sm-3">Jueves</div>
+				  			<div class="col-sm-1"><input type="checkbox" name="dias" value="Jueves"></div>
+				  		</div>
+				  		<div class="row">
+				  			<div class="col-sm-3">Viernes</div>
+				  			<div class="col-sm-1"><input type="checkbox" name="dias" value="Viernes"></div>
+				  		</div>			     	
+					</div>
+				</div>
+				<div class="form-group puntual">
+					<label class="col-sm-2 control-label" for="fechaPuntual">Fecha:</label>
+				  	<div class="col-sm-4">
+					    <div class="input-append date datepicker" id="fechaPuntual">
+			    			<input class="span2" size="16" type="text">
+						    <span class="add-on"><i class="icon-th"></i></span>
+			    		</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label" for="idaOVuelta">Seleccione:</label>
+				  	<div class="col-sm-4">
+				  		<select name="idaOVuelta" class="form-control" id="idaOVuelta" onchange="cambiarIdaOVuelta();">
+				  			<option value="ida">Ida</option>
+				  			<option value="vuelta">Vuelta</option>
+				  			<option value="idaYVuelta">Ida y vuelta</option>
+				  		</select>
+				  	</div>
+				</div>
+				<div class="form-group ida">
+					<label class="col-sm-2 control-label" for="partida">Hora de Partida:</label>
+				  	<div class="col-sm-4">
+				  		<input type="time" name="partida" class="form-control" required>
+				  	</div>
+				</div>
+				<div class="form-group vuelta">
+					<label class="col-sm-2 control-label" for="regreso">Hora de Regreso:</label>
+				  	<div class="col-sm-4">
+				  		<input type="time" name="regreso" class="form-control" required>
+				  	</div>
+				</div>
+				<div class="form-group asientos">
+					<label class="col-sm-2 control-label" for="asientos">Cantidad de asientos disponibles:</label>
+				  	<div class="col-sm-4">
+				  		<input type="number" name="asientos" class="form-control" required>
+				  	</div>
+				</div>
+				<div id="map_canvas" style="width: 500px;height: 400px;"></div>
+			</form>
 		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label" for="frecuenciaViaje">Seleccione:</label>
-		  	<div class="col-sm-4">
-		  		<select name="frecuenciaViaje" class="form-control" id="frecuenciaViaje" onchange="cambiarFrecuencia();">
-		  			<option value="diario" selected="selected">Diario</option>
-		  			<option value="periodico">Peri&oacute;dico</option>
-		  			<option value="puntual">Puntual</option>
-		  		</select>
-		  	</div>
-		</div>
-		<div class="form-group periodico">
-			<label class="col-sm-2 control-label" for="dias">Elija los d&iacute;as:</label>
-		  	<div class="col-sm-4">
-		  		<div class="row">
-		  			<div class="col-sm-3">Lunes</div>
-		  			<div class="col-sm-1"><input type="checkbox" name="dias" value="Lunes"></div>
-		  		</div>
-		  		<div class="row">
-		  			<div class="col-sm-3">Martes</div>
-		  			<div class="col-sm-1"><input type="checkbox" name="dias" value="Martes"></div>
-		  		</div>
-			    <div class="row">
-		  			<div class="col-sm-3">Miercoles</div>
-		  			<div class="col-sm-1"><input type="checkbox" name="dias" value="Miercoles"></div>
-		  		</div> 
-				<div class="row">
-		  			<div class="col-sm-3">Jueves</div>
-		  			<div class="col-sm-1"><input type="checkbox" name="dias" value="Jueves"></div>
-		  		</div>
-		  		<div class="row">
-		  			<div class="col-sm-3">Viernes</div>
-		  			<div class="col-sm-1"><input type="checkbox" name="dias" value="Viernes"></div>
-		  		</div>			     	
-			</div>
-		</div>
-		<div class="form-group puntual">
-			<label class="col-sm-2 control-label" for="fechaPuntual">Fecha:</label>
-		  	<div class="col-sm-4">
-			    <div class="input-append date datepicker" id="fechaPuntual">
-	    			<input class="span2" size="16" type="text">
-				    <span class="add-on"><i class="icon-th"></i></span>
-	    		</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label" for="idaOVuelta">Seleccione:</label>
-		  	<div class="col-sm-4">
-		  		<select name="idaOVuelta" class="form-control" id="idaOVuelta" onchange="cambiarIdaOVuelta();">
-		  			<option value="ida" selected="selected">Ida</option>
-		  			<option value="vuelta">Vuelta</option>
-		  			<option value="idaYVuelta">Ida y vuelta</option>
-		  		</select>
-		  	</div>
-		</div>
-		<div class="form-group ida">
-			<label class="col-sm-2 control-label" for="partida">Hora de Partida:</label>
-		  	<div class="col-sm-4">
-		  		<input type="time" name="partida" class="form-control" required>
-		  	</div>
-		</div>
-		<div class="form-group vuelta">
-			<label class="col-sm-2 control-label" for="regreso">Hora de Regreso:</label>
-		  	<div class="col-sm-4">
-		  		<input type="time" name="regreso" class="form-control" required>
-		  	</div>
-		</div>
-		
-	</form>
-	
-	<script type="text/javascript">
-		var cambiarFrecuencia=function(){
-			var valorSeleccionado = $('#frecuenciaViaje').val();
-			if(valorSeleccionado =='diario'){
-				$('.periodico').css('display','none');
-				$('.puntual').css('display','none');
-			}else{
-				if(valorSeleccionado=='periodico'){
-					$('.periodico').css('display','inline');
-					$('.puntual').css('display','none');
-				}else{ //es puntual
-					$('.periodico').css('display','none');
-					$('.puntual').css('display','inline');
-					$(function(){
-						$('#fechaPuntual').datepicker({
-							format: 'dd-mm-yyyy'
-						});	
-					});
-				}
-			}
-		};
-		var cambiarIdaOVuelta=function(){
-			var valorSeleccionado = $('#idaOVuelta').val();
-			if(valorSeleccionado =='ida'){
-				$('.ida').css('display','inline');
-				$('.vuelta').css('display','none');
-			}else{
-				if(valorSeleccionado=='vuelta'){
-					$('.ida').css('display','none');
-					$('.vuelta').css('display','inline');
-				}else{ //es ida y vuelta
-					$('.ida').css('display','inline');
-					$('.vuelta').css('display','inline');
-				}
-			}
-		};
-	</script>
-	
+	</div>
+	<script src="../resources/customJS/nuevoRecorridoSelects.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js"></script>
-    <script>
-      function initialize() {
-        var mapCanvas = document.getElementById('map_canvas');
-        var mapOptions = {
-          center: new google.maps.LatLng(44.5403, -78.5463),
-          zoom: 8,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
-        var map = new google.maps.Map(mapCanvas, mapOptions)
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
-    
-    <div id="map_canvas" style="width: 500px;height: 400px;"></div>
+    <script src="../resources/customJS/googleMapsInitialization.js"></script>
 </body>
 </html>
