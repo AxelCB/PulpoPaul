@@ -41,3 +41,13 @@ var cambiarRolViaje=function(){
 		$('.asientos').css('display','inline');
 	}
 };
+var toogleBusqueda=function(){
+	if($('#parametros').css('display') == 'none'){
+		$('#parametros').css('display','inline');
+		$('#viajes').css('display','none');
+	}
+	else{
+		$('#parametros').css('display','none');
+		$('#viajes').css('display','inline')
+	}
+}

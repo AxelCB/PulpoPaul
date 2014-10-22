@@ -1,5 +1,5 @@
 @CHARSET "UTF-8";
 
-.puntual, .periodico, .vuelta, .asientos{
+.puntual, .periodico, .vuelta, .asientos, #parametros{
 	display:none;
 }
