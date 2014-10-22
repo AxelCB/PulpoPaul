@@ -32,7 +32,11 @@
 	</form>
 	<script type="text/javascript">
 		var homeUsuario=function(){
-			$(location).attr('href','http://localhost:8080/PulpoPaul/viajero/verMensajes.html');
+			if(window.location.hostname!='localhost'){
+				$(location).attr('href',window.location.protocol+'//'+window.location.host+'/viajero/verMensajes.html');
+			}else{
+				$(location).attr('href',window.location.protocol+'//'+window.location.host+'/PulpoPaul/viajero/verMensajes.html');
+			}
 		};
 	</script>
 	
