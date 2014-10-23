@@ -3,6 +3,6 @@
 .puntual{
 	
 }
-.periodico, .vuelta, .asientos{
+.periodico, .vuelta, .asientos#parametros{
 	display:none;
 }
