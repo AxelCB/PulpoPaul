@@ -14,8 +14,12 @@
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script src="//code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!-- 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
+	<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
 	<script src="../resources/datepicker/js/bootstrap-datepicker.js"></script>
+	<script src="../resources/customJS/nuevoRecorridoSelects.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="../resources/customJS/googleMapsInitialization.js"></script>
 
 	<!-- Comienzo barra de navegacion del traveler -->
 	<nav class="navbar navbar-default" role="navigation">
@@ -103,10 +107,10 @@
 				<div class="form-group puntual">
 					<label class="col-sm-2 control-label" for="fechaPuntual">Fecha:</label>
 				  	<div class="col-sm-4">
-					    <div class="input-append date datepicker" id="fechaPuntual">
-			    			<input class="span2" size="16" type="text">
-						    <span class="add-on"><i class="icon-th"></i></span>
-			    		</div>
+						<div class="input-append date" id="fechaPuntual" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+							<input class="span2" size="16" type="text" value="12-02-2012">
+							<span class="add-on"><i class="icon-th"></i></span>
+						</div>
 					</div>
 				</div>
 				<div class="form-group">
@@ -141,8 +145,5 @@
 			</form>
 		</div>
 	</div>
-	<script src="../resources/customJS/nuevoRecorridoSelects.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js"></script>
-    <script src="../resources/customJS/googleMapsInitialization.js"></script>
 </body>
 </html>

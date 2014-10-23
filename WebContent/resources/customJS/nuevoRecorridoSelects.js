@@ -1,3 +1,7 @@
+$(function(){
+	$('.datepicker').datepicker();	
+});
+
 var cambiarFrecuencia=function(){
 	var valorSeleccionado = $('#frecuenciaViaje').val();
 	if(valorSeleccionado =='diario'){
@@ -10,11 +14,11 @@ var cambiarFrecuencia=function(){
 		}else{ //es puntual
 			$('.periodico').css('display','none');
 			$('.puntual').css('display','inline');
-			$(function(){
-				$('#fechaPuntual').datepicker({
-					format: 'dd-mm-yyyy'
-				});	
-			});
+//			$(function(){
+//				$('#fechaPuntual').datepicker({
+//					format: 'dd-mm-yyyy'
+//				});	
+//			});
 		}
 	}
 };
