@@ -3,3 +3,8 @@
 .periodico, .vuelta, .asientos, .puntual, #parametros{
 	display:none;
 }
+
+
+textarea {
+    resize: none;
+}

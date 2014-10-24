@@ -46,6 +46,7 @@
 					<th>Contrase&ntilde;a</th>
 					<th></th>
 					<th></th>
+					<th></th>
 				</tr></thead>
 				<tbody>
 					<tr>
@@ -54,8 +55,9 @@
 						<td>2964 611519</td>
 						<td>axelcollardbovy@gmail.com</td>
 						<td>1234</td>
+						<td><a href="#" ><span class="glyphicon glyphicon-ban-circle"></span></a>
 						<td><a href="#" onclick="mostrarModalNuevoUsuario();"><span class="glyphicon glyphicon-pencil"></span></a>
-						<td><a href="#"><span class="glyphicon glyphicon-trash"></span></a>
+						<td><a href="#" onclick="mostrarModalEliminar();"><span class="glyphicon glyphicon-trash"></span></a>
 					</tr>
 					<tr>
 						<td>Santiago</td>
@@ -63,8 +65,9 @@
 						<td>3401 2230456</td>
 						<td>santiagoruta@gmail.com</td>
 						<td>4321</td>
+						<td><a href="#" ><span class="glyphicon glyphicon-ban-circle"></span></a>
 						<td><a href="#" onclick="mostrarModalNuevoUsuario();"><span class="glyphicon glyphicon-pencil"></span></a>
-						<td><a href="#"><span class="glyphicon glyphicon-trash"></span></a>
+						<td><a href="#" onclick="mostrarModalEliminar();"><span class="glyphicon glyphicon-trash"></span></a>
 					</tr>
 				</tbody>
 			</table>
@@ -75,7 +78,7 @@
 	</div>
 	<!-- Fin de pagina -->
 	
-	<!-- Modal -->
+	<!-- Comienzo Modal Nuevo Usuario -->
 	<div class="modal fade" id="nuevo-usuario" tabindex="-1" role="dialog" aria-labelledby="tituloModalNuevoUsuario" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
@@ -136,7 +139,25 @@
 	    </div><!-- /.modal-content -->
 	  </div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
-	
+
+	<!-- Comienzo Modal Eliminar -->	
+	<div class="modal fade" id="eliminar-elemento" tabindex="-1" role="dialog" aria-labelledby="tituloModalEliminarUsuario" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+					<h4 id="tituloModalEliminarUsuario" class="modal-title">Eliminar</h4>	
+				</div>
+				<div class="modal-body">¿Está seguro de
+					eliminar este elemento?</div>
+				<div class="modal-footer">
+					<button data-dismiss="modal" class="btn btn-primary" type="button">Eliminar</button>
+					<button data-dismiss="modal" class="btn btn-default" type="button">Cancelar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Fin Modal Eliminar -->
 	
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
