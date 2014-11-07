@@ -1,5 +1,6 @@
 package unlp.ttpsInfoPoolCBR.model;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class Usuario {
     private String telefono;
     private String email;
     private String clave;
-    //private File foto; ???
+    private File foto;
 
     private Rol rol;
     private List<CalificacionUsuario> misCalificaciones = new ArrayList<CalificacionUsuario>();
@@ -138,5 +139,13 @@ public class Usuario {
 
     public void setBandejaSalida(List<Mensaje> bandejaSalida) {
         this.bandejaSalida = bandejaSalida;
+    }
+
+    public File getFoto() {
+        return foto;
+    }
+
+    public void setFoto(File foto) {
+        this.foto = foto;
     }
 }
