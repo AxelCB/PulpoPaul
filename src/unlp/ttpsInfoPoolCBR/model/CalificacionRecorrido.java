@@ -1,33 +1,54 @@
 package unlp.ttpsInfoPoolCBR.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 /**
  * Created by axel on 05/11/14.
  */
-public class CalificacionRecorrido {
+@Entity
+@Table
+public class CalificacionRecorrido extends AbstractEntity {
 
-    private Long id;
+//    private Long id;
+    @Column
     private Integer calificacion;
 
-    private Recorrido calificado;
+    @ManyToOne(optional = false)
+    private Viaje calificado;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof CalificacionRecorrido)) return false;
+    @ManyToOne(optional = false)
+    private Usuario calificador;
 
-        CalificacionRecorrido that = (CalificacionRecorrido) o;
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (!(o instanceof CalificacionRecorrido)) return false;
+//
+//        CalificacionRecorrido that = (CalificacionRecorrido) o;
+//
+//        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+//
+//        return true;
+//    }
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
-        return true;
+
+    public Usuario getCalificador() {
+        return calificador;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setCalificador(Usuario calificador) {
+        this.calificador = calificador;
     }
 
     public Integer getCalificacion() {
@@ -38,11 +59,11 @@ public class CalificacionRecorrido {
         this.calificacion = calificacion;
     }
 
-    public Recorrido getCalificado() {
+    public Viaje getCalificado() {
         return calificado;
     }
 
-    public void setCalificado(Recorrido calificado) {
+    public void setCalificado(Viaje calificado) {
         this.calificado = calificado;
     }
 }

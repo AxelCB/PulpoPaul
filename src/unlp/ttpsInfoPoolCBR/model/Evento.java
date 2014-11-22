@@ -1,5 +1,9 @@
 package unlp.ttpsInfoPoolCBR.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -8,37 +12,44 @@ import java.util.List;
 /**
  * Created by axel on 05/11/14.
  */
-public class Evento {
+@Entity
+@Table
+public class Evento extends AbstractEntity{
 
-    private Long id;
+//    private Long id;
+    @Column
     private String nombre;
+    @Column
     private String descripcion;
+    @Column
     private Date fecha;
+    @Column
     private Time horaComienzo;
+    @Column
     private Time horaFin;
 
-    private Punto ubicacion;
+    @OneToMany(mappedBy="evento")
     private List<Recorrido> recorridos = new ArrayList<Recorrido>();
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Evento)) return false;
-
-        Evento evento = (Evento) o;
-
-        if (id != null ? !id.equals(evento.id) : evento.id != null) return false;
-
-        return true;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (!(o instanceof Evento)) return false;
+//
+//        Evento evento = (Evento) o;
+//
+//        if (id != null ? !id.equals(evento.id) : evento.id != null) return false;
+//
+//        return true;
+//    }
+//
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
     public String getNombre() {
         return nombre;
@@ -78,14 +89,6 @@ public class Evento {
 
     public void setHoraFin(Time horaFin) {
         this.horaFin = horaFin;
-    }
-
-    public Punto getUbicacion() {
-        return ubicacion;
-    }
-
-    public void setUbicacion(Punto ubicacion) {
-        this.ubicacion = ubicacion;
     }
 
     public List<Recorrido> getRecorridos() {

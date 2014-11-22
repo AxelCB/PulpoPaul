@@ -1,36 +1,47 @@
 package unlp.ttpsInfoPoolCBR.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 /**
  * Created by axel on 05/11/14.
  */
-public class Mensaje {
+@Entity
+@Table
+public class Mensaje extends AbstractEntity{
 
-    private Long id;
+//    private Long id;
+    @Column
     private String asunto;
+    @Column
     private String contenido;
 
+    @ManyToOne
     private Usuario emisor;
+    @ManyToOne
     private Usuario receptor;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Mensaje)) return false;
-
-        Mensaje denuncia = (Mensaje) o;
-
-        if (id != null ? !id.equals(denuncia.id) : denuncia.id != null) return false;
-
-        return true;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (!(o instanceof Mensaje)) return false;
+//
+//        Mensaje denuncia = (Mensaje) o;
+//
+//        if (id != null ? !id.equals(denuncia.id) : denuncia.id != null) return false;
+//
+//        return true;
+//    }
+//
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
     public String getAsunto() {
         return asunto;

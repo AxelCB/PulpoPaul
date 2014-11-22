@@ -1,5 +1,6 @@
 package unlp.ttpsInfoPoolCBR.model;
 
+import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -8,45 +9,62 @@ import java.util.List;
 /**
  * Created by axel on 05/11/14.
  */
-public class Recorrido {
+@Entity
+@Table
+public class Recorrido extends AbstractEntity{
 
-    private Long id;
+//    private Long id;
+    @Column
     private String nombre;
+    @Column
     private Time horaSalida;
+    @Column
     private Time horaVuelta;
+    @Column
     private Integer lugares;
+    @Column
     private Boolean idaYVuelta;
+    @Column
     private Date puntual;
+
+
     private List<Integer> dias = new ArrayList<Integer>();
+    @Column
     private Double precio;
+    @Column
     private TipoViaje tipo;
 
-    private Punto llegada;
-    private Punto salida;
+    @Column
+    private String googleMapsRecorrido;
+
+    @ManyToOne(optional = true)
     private Evento evento;
-    private List<CalificacionRecorrido> calificaciones = new ArrayList<CalificacionRecorrido>();
+    @OneToMany(mappedBy="recorrido")
+    private List<Viaje> viajes = new ArrayList<Viaje>();
+    @ManyToOne
     private Usuario propietario;
+    @ManyToMany
     private List<Usuario> pasajeros = new ArrayList<Usuario>();
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Recorrido)) return false;
-
-        Recorrido recorrido = (Recorrido) o;
-
-        if (id != null ? !id.equals(recorrido.id) : recorrido.id != null) return false;
-
-        return true;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (!(o instanceof Recorrido)) return false;
+//
+//        Recorrido recorrido = (Recorrido) o;
+//
+//        if (id != null ? !id.equals(recorrido.id) : recorrido.id != null) return false;
+//
+//        return true;
+//    }
+//
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
     public String getNombre() {
         return nombre;
@@ -120,36 +138,12 @@ public class Recorrido {
         this.tipo = tipo;
     }
 
-    public Punto getLlegada() {
-        return llegada;
-    }
-
-    public void setLlegada(Punto llegada) {
-        this.llegada = llegada;
-    }
-
-    public Punto getSalida() {
-        return salida;
-    }
-
-    public void setSalida(Punto salida) {
-        this.salida = salida;
-    }
-
     public Evento getEvento() {
         return evento;
     }
 
     public void setEvento(Evento evento) {
         this.evento = evento;
-    }
-
-    public List<CalificacionRecorrido> getCalificaciones() {
-        return calificaciones;
-    }
-
-    public void setCalificaciones(List<CalificacionRecorrido> calificaciones) {
-        this.calificaciones = calificaciones;
     }
 
     public Usuario getPropietario() {
@@ -167,4 +161,20 @@ public class Recorrido {
     public void setPasajeros(List<Usuario> pasajeros) {
         this.pasajeros = pasajeros;
     }
+    public String getGoogleMapsRecorrido() {
+        return googleMapsRecorrido;
+    }
+
+    public void setGoogleMapsRecorrido(String googleMapsRecorrido) {
+        this.googleMapsRecorrido = googleMapsRecorrido;
+    }
+
+    public List<Viaje> getViajes() {
+        return viajes;
+    }
+
+    public void setViajes(List<Viaje> viajes) {
+        this.viajes = viajes;
+    }
+
 }
