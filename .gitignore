@@ -26,3 +26,8 @@ local.properties
 # Locally stored "Eclipse launch configurations"
 *.launch
 /build/
+
+#IntelliJ Idea files
+/out/
+/.idea/
+/lib/

@@ -27,7 +27,8 @@ public class Recorrido extends AbstractEntity{
     @Column
     private Date puntual;
 
-
+    @ElementCollection
+    @CollectionTable
     private List<Integer> dias = new ArrayList<Integer>();
     @Column
     private Double precio;
