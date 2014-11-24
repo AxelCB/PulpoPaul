@@ -13,13 +13,13 @@ import javax.persistence.Table;
 public class CalificacionUsuario extends AbstractEntity {
 
 //    private Long id;
-    @Column
+    @Column(nullable = false)
     private Integer calificacion;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Usuario calificador;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Usuario calificado;
 
 //    @Override

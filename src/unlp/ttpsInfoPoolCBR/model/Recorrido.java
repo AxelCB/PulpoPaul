@@ -14,13 +14,13 @@ import java.util.List;
 public class Recorrido extends AbstractEntity{
 
 //    private Long id;
-    @Column
+    @Column(nullable = false)
     private String nombre;
-    @Column
+    @Column(nullable = false)
     private Time horaSalida;
     @Column
     private Time horaVuelta;
-    @Column
+    @Column(nullable = false)
     private Integer lugares;
     @Column
     private Boolean idaYVuelta;
@@ -30,19 +30,19 @@ public class Recorrido extends AbstractEntity{
     @ElementCollection
     @CollectionTable
     private List<Integer> dias = new ArrayList<Integer>();
-    @Column
+    @Column(nullable = false)
     private Double precio;
-    @Column
+    @Column(nullable = false)
     private TipoViaje tipo;
 
-    @Column
+    @Column(nullable = false)
     private String googleMapsRecorrido;
 
     @ManyToOne(optional = true)
     private Evento evento;
     @OneToMany(mappedBy="recorrido")
     private List<Viaje> viajes = new ArrayList<Viaje>();
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Usuario propietario;
     @ManyToMany
     private List<Usuario> pasajeros = new ArrayList<Usuario>();

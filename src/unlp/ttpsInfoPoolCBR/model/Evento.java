@@ -17,11 +17,11 @@ import java.util.List;
 public class Evento extends AbstractEntity{
 
 //    private Long id;
-    @Column
+    @Column(nullable = false)
     private String nombre;
-    @Column
+    @Column(length = 1023)
     private String descripcion;
-    @Column
+    @Column(nullable = false)
     private Date fecha;
     @Column
     private Time horaComienzo;

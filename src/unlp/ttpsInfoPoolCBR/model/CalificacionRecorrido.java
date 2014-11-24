@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class CalificacionRecorrido extends AbstractEntity {
 
 //    private Long id;
-    @Column
+    @Column(nullable = false)
     private Integer calificacion;
 
     @ManyToOne(optional = false)

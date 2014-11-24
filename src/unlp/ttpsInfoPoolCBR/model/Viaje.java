@@ -14,19 +14,19 @@ import java.util.List;
 public class Viaje extends AbstractEntity{
 
 //    private Long id;
-    @Column
+    @Column(nullable = false)
     private String nombre;
-    @Column
+    @Column(length = 1023)
     private String descripcion;
-    @Column
+    @Column(nullable = false)
     private Time horaSalida;
     @Column
     private Time horaVuelta;
-    @Column
+    @Column(nullable = false)
     private Integer lugares;
     @Column
     private Date dia;
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Recorrido recorrido;
 
     @OneToMany(mappedBy="calificado")

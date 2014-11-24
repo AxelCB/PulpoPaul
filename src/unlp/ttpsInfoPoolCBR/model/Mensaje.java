@@ -13,14 +13,15 @@ import javax.persistence.Table;
 public class Mensaje extends AbstractEntity{
 
 //    private Long id;
-    @Column
+    @Column(nullable = false)
     private String asunto;
-    @Column
+    @Column(length = 1023,
+    		nullable = false)
     private String contenido;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Usuario emisor;
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Usuario receptor;
 
 //    @Override

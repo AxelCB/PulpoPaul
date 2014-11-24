@@ -13,20 +13,20 @@ import java.util.List;
 public class Usuario extends AbstractEntity{
 
 //    private Long id;
-    @Column
+    @Column(nullable = false)
     private String nombres;
-    @Column
+    @Column(nullable = false)
     private String apellido;
     @Column
     private String telefono;
-    @Column
+    @Column(nullable = false)
     private String email;
-    @Column
+    @Column(nullable = false)
     private String clave;
     @Column
     private File foto;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Rol rol;
     @OneToMany(mappedBy = "calificado")
     private List<CalificacionUsuario> misCalificaciones = new ArrayList<CalificacionUsuario>();

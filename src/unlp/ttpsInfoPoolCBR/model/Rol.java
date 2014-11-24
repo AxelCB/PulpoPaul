@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class Rol extends AbstractEntity{
 
 //    private Long id;
-    @Column
+    @Column(nullable = false)
     private String nombre;
 
 //    public Long getId() {
