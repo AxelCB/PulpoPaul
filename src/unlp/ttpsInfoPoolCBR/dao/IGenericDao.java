@@ -14,5 +14,5 @@ public interface IGenericDao<M extends AbstractEntity,VO extends AbstractEntity>
     public void borrar(VO objetoVO) throws Exception;
 
     public List<VO> listar()throws Exception;
-
+    public VO encontrar(Integer id) throws Exception;
 }

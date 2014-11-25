@@ -18,39 +18,43 @@ public class EntityManagerFactoryHolder {
 
     private static EntityManagerFactory emf;
 
-    public void init() {
+    static {
+        EntityManagerFactoryHolder.init();
+    }
+
+    public static void init() {
 
         try {
-            _logger.info("Starting EMF Component Initter");
+//            _logger.info("Starting EMF Component Initter");
 
             emf = Persistence.createEntityManagerFactory("pulpoPaul");
             emf.createEntityManager();
 
-            _logger.info("EMF init method executed correctly");
+//            _logger.info("EMF init method executed correctly");
 
         } catch (Exception ex) {
-            _logger.error("Error creating EMF", ex);
+//            _logger.error("Error creating EMF", ex);
         }
     }
 
-    public EntityManager getEntityManager() {
+    public static EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
-    public void beginTransaction(EntityManager em){
+    public static void beginTransaction(EntityManager em){
         EntityTransaction tx = em.getTransaction();
         if (tx != null && !tx.isActive()) {
             tx.begin();
         }
     }
 
-    public void commitTransaction(EntityManager em){
+    public static void commitTransaction(EntityManager em){
         EntityTransaction tx = em.getTransaction();
         tx.commit();
         em.close();
     }
 
-    public void rollbackTransaction(EntityManager em){
+    public static void rollbackTransaction(EntityManager em){
         EntityTransaction tx = em.getTransaction();
         if (tx != null && tx.isActive()) {
             tx.rollback();

@@ -12,7 +12,6 @@ import java.util.List;
 @Table
 public class Usuario extends AbstractEntity{
 
-//    private Long id;
     @Column(nullable = false)
     private String nombres;
     @Column(nullable = false)
@@ -24,7 +23,7 @@ public class Usuario extends AbstractEntity{
     @Column(nullable = false)
     private String clave;
     @Column
-    private File foto;
+    private File foto=null;
 
     @ManyToOne(optional = false)
     private Rol rol;
@@ -38,9 +37,9 @@ public class Usuario extends AbstractEntity{
     private List<Denuncia> misDenuncias = new ArrayList<Denuncia>();
     @OneToMany(mappedBy="denunciante")
     private List<Denuncia> denunciasHechas = new ArrayList<Denuncia>();
-    @OneToMany(mappedBy="receptor")
+    @OneToMany(mappedBy="receptor",fetch = FetchType.LAZY)
     private List<Mensaje> bandejaEntrada = new ArrayList<Mensaje>();
-    @OneToMany(mappedBy="emisor")
+    @OneToMany(mappedBy="emisor",fetch = FetchType.LAZY)
     private List<Mensaje> bandejaSalida = new ArrayList<Mensaje>();
     @ManyToMany
     private List<Viaje> misViajes = new ArrayList<Viaje>();
@@ -52,25 +51,19 @@ public class Usuario extends AbstractEntity{
     @ManyToMany
     private List<Recorrido> historial = new ArrayList<Recorrido>();
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (!(o instanceof Usuario)) return false;
-//
-//        Usuario usuario = (Usuario) o;
-//
-//        if (id != null ? !id.equals(usuario.id) : usuario.id != null) return false;
-//
-//        return true;
-//    }
-//
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
+    public Usuario(){
+        super();
+    }
+
+    public Usuario(String nombres, String apellido, String telefono, String email, String clave, Rol rol, File foto) {
+        this.nombres = nombres;
+        this.apellido = apellido;
+        this.telefono = telefono;
+        this.email = email;
+        this.clave = clave;
+        this.rol = rol;
+        this.foto = foto;
+    }
 
     public String getNombres() {
         return nombres;

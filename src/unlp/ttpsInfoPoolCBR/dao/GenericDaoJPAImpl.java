@@ -14,7 +14,7 @@ import java.util.List;
 public class GenericDaoJPAImpl<M extends AbstractEntity,VO extends AbstractEntity> implements IGenericDao<M,VO>{
 
     //Esto sería inyectado a través de spring, cuando lo empecemos a usar
-    protected EntityManagerFactoryHolder emfh;
+//    protected EntityManagerFactoryHolder EntityManagerFactoryHolder;
 
     protected Class<M> persistentClass;
     protected Class<VO> voClass;
@@ -24,27 +24,24 @@ public class GenericDaoJPAImpl<M extends AbstractEntity,VO extends AbstractEntit
         this.voClass = voClass;
 
         //Esto sería inyectado a través de spring, cuando lo empecemos a usar
-        emfh= new EntityManagerFactoryHolder();
-        emfh.init();
+//        EntityManagerFactoryHolder= new EntityManagerFactoryHolder();
+//        EntityManagerFactoryHolder.init();
     }
 
     @Override
     public VO guardar(VO objetoVO) throws Exception {
         EntityManager em = null;
         try{
-            em = emfh.getEntityManager();
-            emfh.beginTransaction(em);
+            em = EntityManagerFactoryHolder.getEntityManager();
+            EntityManagerFactoryHolder.beginTransaction(em);
 
             objetoVO = em.merge(objetoVO);
 
-            emfh.commitTransaction(em);
+            EntityManagerFactoryHolder.commitTransaction(em);
 
         }catch(Exception ex){
-            emfh.rollbackTransaction(em);
+            EntityManagerFactoryHolder.rollbackTransaction(em);
             throw ex;
-
-        }finally {
-            em.close();
         }
         return objetoVO;
     }
@@ -53,19 +50,17 @@ public class GenericDaoJPAImpl<M extends AbstractEntity,VO extends AbstractEntit
     public VO modificar(VO objetoVO) throws Exception {
         EntityManager em = null;
         try{
-            em = emfh.getEntityManager();
-            emfh.beginTransaction(em);
+            em = EntityManagerFactoryHolder.getEntityManager();
+            EntityManagerFactoryHolder.beginTransaction(em);
 
             objetoVO = em.merge(objetoVO);
 
-            emfh.commitTransaction(em);
+            EntityManagerFactoryHolder.commitTransaction(em);
 
         }catch(Exception ex){
-            emfh.rollbackTransaction(em);
+            EntityManagerFactoryHolder.rollbackTransaction(em);
             throw ex;
 
-        }finally {
-            em.close();
         }
         return objetoVO;
     }
@@ -74,19 +69,17 @@ public class GenericDaoJPAImpl<M extends AbstractEntity,VO extends AbstractEntit
     public void borrar(VO objetoVO) throws Exception {
         EntityManager em = null;
         try{
-            em = emfh.getEntityManager();
-            emfh.beginTransaction(em);
+            em = EntityManagerFactoryHolder.getEntityManager();
+            EntityManagerFactoryHolder.beginTransaction(em);
 
             em.remove(objetoVO);
 
-            emfh.commitTransaction(em);
+            EntityManagerFactoryHolder.commitTransaction(em);
 
         }catch(Exception ex){
-            emfh.rollbackTransaction(em);
+            EntityManagerFactoryHolder.rollbackTransaction(em);
             throw ex;
 
-        }finally {
-            em.close();
         }
     }
 
@@ -95,17 +88,28 @@ public class GenericDaoJPAImpl<M extends AbstractEntity,VO extends AbstractEntit
         EntityManager em = null;
         List<VO> listaVO = new ArrayList<VO>();
         try{
-            em = emfh.getEntityManager();
-            System.out.println(persistentClass.getCanonicalName());
+            em = EntityManagerFactoryHolder.getEntityManager();
             Query jpaql = em.createQuery("select o from "+ persistentClass.getSimpleName() +" o");
             listaVO = (List<VO>)jpaql.getResultList();
 
         }catch(Exception ex){
             throw ex;
 
-        }finally {
-            em.close();
         }
         return listaVO;
+    }
+
+    @Override
+    public VO encontrar(Integer id) throws Exception {
+        EntityManager em = null;
+        VO objetoVO;
+        try{
+            em = EntityManagerFactoryHolder.getEntityManager();
+            objetoVO  = em.find(voClass,id);
+
+        }catch(Exception ex){
+            throw ex;
+        }
+        return objetoVO;
     }
 }
