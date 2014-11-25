@@ -14,40 +14,55 @@ public class Usuario extends AbstractEntity{
 
     @Column(nullable = false)
     private String nombres;
+    
     @Column(nullable = false)
     private String apellido;
+    
     @Column
     private String telefono;
+    
     @Column(nullable = false)
     private String email;
+    
     @Column(nullable = false)
     private String clave;
+    
     @Column
     private File foto=null;
 
     @ManyToOne(optional = false)
     private Rol rol;
+    
     @OneToMany(mappedBy = "calificado")
     private List<CalificacionUsuario> misCalificaciones = new ArrayList<CalificacionUsuario>();
+    
     @OneToMany(mappedBy = "calificador")
     private List<CalificacionUsuario> calificacionesHechas = new ArrayList<CalificacionUsuario>();
+    
     @OneToMany(mappedBy="calificador")
     private List<CalificacionRecorrido> recorridosCalificados = new ArrayList<CalificacionRecorrido>();
+    
     @OneToMany(mappedBy="denunciado")
     private List<Denuncia> misDenuncias = new ArrayList<Denuncia>();
+    
     @OneToMany(mappedBy="denunciante")
     private List<Denuncia> denunciasHechas = new ArrayList<Denuncia>();
+    
     @OneToMany(mappedBy="receptor",fetch = FetchType.LAZY)
     private List<Mensaje> bandejaEntrada = new ArrayList<Mensaje>();
+    
     @OneToMany(mappedBy="emisor",fetch = FetchType.LAZY)
     private List<Mensaje> bandejaSalida = new ArrayList<Mensaje>();
+    
     @ManyToMany
     private List<Viaje> misViajes = new ArrayList<Viaje>();
 
     @OneToMany(mappedBy="propietario")
     private List<Recorrido> recorridosMios = new ArrayList<Recorrido>();
+    
     @ManyToMany
     private List<Recorrido> recorridosViajo = new ArrayList<Recorrido>();
+    
     @ManyToMany
     private List<Recorrido> historial = new ArrayList<Recorrido>();
 

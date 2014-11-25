@@ -1,6 +1,7 @@
 package unlp.ttpsInfoPoolCBR.model;
 
 import javax.persistence.*;
+
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -13,34 +14,51 @@ import java.util.List;
 @Table
 public class Viaje extends AbstractEntity{
 
-//    private Long id;
     @Column(nullable = false)
     private String nombre;
+   
     @Column(length = 1023)
     private String descripcion;
+    
     @Column(nullable = false)
     private Time horaSalida;
+    
     @Column
     private Time horaVuelta;
+    
     @Column(nullable = false)
     private Integer lugares;
+    
     @Column
     private Date dia;
+    
     @ManyToOne(optional = false)
     private Recorrido recorrido;
 
     @OneToMany(mappedBy="calificado")
     private List<CalificacionRecorrido> calificaciones= new ArrayList<CalificacionRecorrido>();
+    
     @ManyToMany
     private List<Usuario> viajeros = new ArrayList<Usuario>();
 
-//    public Long getId() {
-//        return id;
-//    }
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-    public Recorrido getRecorrido() {
+    public Viaje(){
+    	super();
+    }
+    
+    public Viaje(String nombre, String descripcion, Time horaSalida,
+			Integer lugares, Date dia, Recorrido recorrido,
+			List<Usuario> viajeros) {
+		super();
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.horaSalida = horaSalida;
+		this.lugares = lugares;
+		this.dia = dia;
+		this.recorrido = recorrido;
+		this.viajeros = viajeros;
+	}
+
+	public Recorrido getRecorrido() {
         return recorrido;
     }
     public void setRecorrido(Recorrido recorrido) {

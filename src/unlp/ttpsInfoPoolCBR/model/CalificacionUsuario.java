@@ -12,7 +12,6 @@ import javax.persistence.Table;
 @Table
 public class CalificacionUsuario extends AbstractEntity {
 
-//    private Long id;
     @Column(nullable = false)
     private Integer calificacion;
 
@@ -22,27 +21,19 @@ public class CalificacionUsuario extends AbstractEntity {
     @ManyToOne(optional = false)
     private Usuario calificado;
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (!(o instanceof CalificacionUsuario)) return false;
-//
-//        CalificacionUsuario that = (CalificacionUsuario) o;
-//
-//        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-//
-//        return true;
-//    }
+    public CalificacionUsuario(){
+    	super();
+    }
+    
+    public CalificacionUsuario(Integer calificacion, Usuario calificador,
+			Usuario calificado) {
+		super();
+		this.calificacion = calificacion;
+		this.calificador = calificador;
+		this.calificado = calificado;
+	}
 
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-
-    public Integer getCalificacion() {
+	public Integer getCalificacion() {
         return calificacion;
     }
 

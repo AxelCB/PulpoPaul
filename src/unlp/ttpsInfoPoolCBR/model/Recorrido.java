@@ -1,6 +1,7 @@
 package unlp.ttpsInfoPoolCBR.model;
 
 import javax.persistence.*;
+
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -13,25 +14,31 @@ import java.util.List;
 @Table
 public class Recorrido extends AbstractEntity{
 
-//    private Long id;
     @Column(nullable = false)
     private String nombre;
+    
     @Column(nullable = false)
     private Time horaSalida;
+    
     @Column
     private Time horaVuelta;
+    
     @Column(nullable = false)
     private Integer lugares;
+    
     @Column
     private Boolean idaYVuelta;
+    
     @Column
     private Date puntual;
 
     @ElementCollection
     @CollectionTable
     private List<Integer> dias = new ArrayList<Integer>();
+    
     @Column(nullable = false)
     private Double precio;
+    
     @Column(nullable = false)
     private TipoViaje tipo;
 
@@ -40,34 +47,40 @@ public class Recorrido extends AbstractEntity{
 
     @ManyToOne(optional = true)
     private Evento evento;
+    
     @OneToMany(mappedBy="recorrido")
     private List<Viaje> viajes = new ArrayList<Viaje>();
+    
     @ManyToOne(optional = false)
     private Usuario propietario;
+    
     @ManyToMany
     private List<Usuario> pasajeros = new ArrayList<Usuario>();
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (!(o instanceof Recorrido)) return false;
-//
-//        Recorrido recorrido = (Recorrido) o;
-//
-//        if (id != null ? !id.equals(recorrido.id) : recorrido.id != null) return false;
-//
-//        return true;
-//    }
-//
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
+    public Recorrido(){
+    	super();
+    }
+    
+    public Recorrido(String nombre, Time horaSalida, Time horaVuelta,
+			Integer lugares, Boolean idaYVuelta, Date puntual,
+			List<Integer> dias, Double precio, TipoViaje tipo,
+			String googleMapsRecorrido, Evento evento, Usuario propietario) {
+		super();
+		this.nombre = nombre;
+		this.horaSalida = horaSalida;
+		this.horaVuelta = horaVuelta;
+		this.lugares = lugares;
+		this.idaYVuelta = idaYVuelta;
+		this.puntual = puntual;
+		this.dias = dias;
+		this.precio = precio;
+		this.tipo = tipo;
+		this.googleMapsRecorrido = googleMapsRecorrido;
+		this.evento = evento;
+		this.propietario = propietario;
+	}
 
-    public String getNombre() {
+	public String getNombre() {
         return nombre;
     }
 

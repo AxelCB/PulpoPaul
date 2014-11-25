@@ -12,39 +12,33 @@ import javax.persistence.Table;
 @Table
 public class Mensaje extends AbstractEntity{
 
-//    private Long id;
     @Column(nullable = false)
     private String asunto;
+
     @Column(length = 1023,
     		nullable = false)
     private String contenido;
 
     @ManyToOne(optional = false)
     private Usuario emisor;
+    
     @ManyToOne(optional = false)
     private Usuario receptor;
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (!(o instanceof Mensaje)) return false;
-//
-//        Mensaje denuncia = (Mensaje) o;
-//
-//        if (id != null ? !id.equals(denuncia.id) : denuncia.id != null) return false;
-//
-//        return true;
-//    }
-//
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
+    public Mensaje(){
+    	super();
+    }
+    
+    public Mensaje(String asunto, String contenido, Usuario emisor,
+			Usuario receptor) {
+		super();
+		this.asunto = asunto;
+		this.contenido = contenido;
+		this.emisor = emisor;
+		this.receptor = receptor;
+	}
 
-    public String getAsunto() {
+	public String getAsunto() {
         return asunto;
     }
 

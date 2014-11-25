@@ -31,3 +31,5 @@ local.properties
 /out/
 /.idea/
 
+#Test
+test-output
