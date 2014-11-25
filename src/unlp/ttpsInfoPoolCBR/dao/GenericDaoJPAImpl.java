@@ -4,7 +4,7 @@ import unlp.ttpsInfoPoolCBR.model.AbstractEntity;
 import unlp.ttpsInfoPoolCBR.util.EntityManagerFactoryHolder;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,8 +89,8 @@ public class GenericDaoJPAImpl<M extends AbstractEntity,VO extends AbstractEntit
         List<VO> listaVO = new ArrayList<VO>();
         try{
             em = EntityManagerFactoryHolder.getEntityManager();
-            Query jpaql = em.createQuery("select o from "+ persistentClass.getSimpleName() +" o");
-            listaVO = (List<VO>)jpaql.getResultList();
+            TypedQuery jpaql = em.createQuery("select o from "+ persistentClass.getSimpleName() +" o",persistentClass);
+            listaVO = jpaql.getResultList();
 
         }catch(Exception ex){
             throw ex;

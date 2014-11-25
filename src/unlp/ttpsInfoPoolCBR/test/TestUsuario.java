@@ -17,8 +17,8 @@ import java.util.List;
  */
 public class TestUsuario {
 
-    IUsuarioDao usuarioDao;
-    IRolDao rolDao;
+    private IUsuarioDao usuarioDao;
+    private IRolDao rolDao;
     @BeforeClass
     public void init(){
         usuarioDao= new UsuarioDaoJPAImpl();
