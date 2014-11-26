@@ -67,7 +67,7 @@ public class GenericDaoJPAImpl<M extends AbstractEntity,VO extends AbstractEntit
     }
 
     @Override
-    public void borrar(Long idObjetoVO) throws Exception {
+    public void borrar(Integer idObjetoVO) throws Exception {
         EntityManager em = null;
         try{
             em = EntityManagerFactoryHolder.getEntityManager();
