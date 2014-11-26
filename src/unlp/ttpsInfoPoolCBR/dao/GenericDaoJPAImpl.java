@@ -5,7 +5,6 @@ import unlp.ttpsInfoPoolCBR.util.EntityManagerFactoryHolder;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,13 +67,15 @@ public class GenericDaoJPAImpl<M extends AbstractEntity,VO extends AbstractEntit
     }
 
     @Override
-    public void borrar(VO objetoVO) throws Exception {
+    public void borrar(Long idObjetoVO) throws Exception {
         EntityManager em = null;
         try{
             em = EntityManagerFactoryHolder.getEntityManager();
             EntityManagerFactoryHolder.beginTransaction(em);
 
-            em.remove(objetoVO);
+            M objetoM = em.find(persistentClass,idObjetoVO);
+
+            em.remove(objetoM);
 
             EntityManagerFactoryHolder.commitTransaction(em);
         }catch(Exception ex){
