@@ -3,6 +3,7 @@ package unlp.ttpsInfoPoolCBR.test;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
 import unlp.ttpsInfoPoolCBR.dao.rol.IRolDao;
 import unlp.ttpsInfoPoolCBR.dao.rol.RolDaoJPAImpl;
 import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
@@ -26,20 +27,74 @@ public class TestUsuario {
     }
 
     @Test
-    public void addUsuario(){
+    public void shouldAddUsuario(){
         try{
-            Rol rol = rolDao.encontrar(1);
-            Usuario usuario = new Usuario("Santiago", "Ruta", "111222333444", "admin@admin", "admin",rol, null );
+            Rol rol = rolDao.buscarPorNombre("Administrador").get(0);
+            
+            Usuario usuario = new Usuario(	"Santiago", 
+            								"Ruta", 
+            								"111222333444", 
+            								"admin@admin", 
+            								"admin",
+            								rol, 
+            								null);
             usuario = usuarioDao.guardar(usuario);
+            usuario = new Usuario(	"Axel", 
+									"Collard", 
+									"999888777666", 
+									"noadmin@noadmin", 
+									"noadmin",
+									rol,
+									null);
+            usuario = usuarioDao.guardar(usuario);
+            usuario = new Usuario(	"Pepe", 
+									"Rodriguez", 
+									"111999222888", 
+									"asd@asd", 
+									"asd",
+									rol,
+									null);
+			usuario = usuarioDao.guardar(usuario);
             List<Usuario> usuarioList = usuarioDao.listar();
 
-            Assert.assertEquals(usuarioList.size(),1);
-            Assert.assertEquals(usuario,usuarioList.get(0));
+            Assert.assertEquals(usuarioList.size(),3);
+            Assert.assertEquals(usuario,usuarioList.get(2));
 
         }catch (Exception ex){
             ex.printStackTrace();
         }
-
+    }
+    
+    @Test(dependsOnMethods = {"shouldAddUsuario"})
+    public void shouldModifyUsuario(){
+    	try {
+			Usuario usuario = usuarioDao.buscarPorEmail("admin@admin").get(0);
+			
+			Assert.assertNotNull(usuario);
+			
+			Integer usuarioId = usuario.getId();
+			usuario.setNombres("Juan");
+			usuario = usuarioDao.modificar(usuario);
+			
+			Assert.assertEquals(usuarioDao.encontrar(usuarioId), usuario);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+    }
+    
+    @Test(dependsOnMethods = {"shouldAddUsuario"})
+    public void shouldRemoveUsuario(){
+    	Usuario usuario;
+		try {
+			usuario = usuarioDao.buscarPorEmail("admin@admin").get(0);
+	    	usuarioDao.borrar(usuario);
+	    	usuario = usuarioDao.buscarPorEmail("admin@admin").get(0);
+	    	
+			Assert.assertNull(usuario);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
     }
 
 }

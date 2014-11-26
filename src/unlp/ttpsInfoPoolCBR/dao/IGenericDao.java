@@ -15,4 +15,6 @@ public interface IGenericDao<M extends AbstractEntity,VO extends AbstractEntity>
 
     public List<VO> listar()throws Exception;
     public VO encontrar(Integer id) throws Exception;
+    
+    public void drop()throws Exception;
 }

@@ -3,6 +3,7 @@ package unlp.ttpsInfoPoolCBR.test;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
 import unlp.ttpsInfoPoolCBR.dao.rol.IRolDao;
 import unlp.ttpsInfoPoolCBR.dao.rol.RolDaoJPAImpl;
 import unlp.ttpsInfoPoolCBR.model.Rol;
@@ -31,6 +32,7 @@ public class TestRol {
             rol.setNombre("Usuario");
             rol = rolDao.guardar(rol);
             List<Rol> roles = rolDao.listar();
+            
             Assert.assertEquals(roles.size(), 2);
             Assert.assertEquals(rolDao.buscarPorNombre("Usuario").get(0),rol);
 
@@ -42,42 +44,31 @@ public class TestRol {
     @Test(dependsOnMethods = {"shouldAddRol"})
     public void shouldModifyRol(){
         try {
-            Integer rolId=0;
             Rol rol = rolDao.buscarPorNombre("Usuario").get(0);
+           
             Assert.assertNotNull(rol);
-            rolId = rol.getId();
-            rol.setNombre("Usuarito");
+            
+            Integer rolId = rol.getId();
+            rol.setNombre("Visitante");
             rol = rolDao.modificar(rol);
+            
             Assert.assertEquals(rolDao.encontrar(rolId),rol);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    @Test(dependsOnMethods = {"shouldAddRol"})
-    public void shouldRemoveRol(){
-        Rol rol = new Rol();
-        rol.setNombre("Pepito");
+   @Test(dependsOnMethods = {"shouldAddRol"})
+    public void shouldRemoveRol(){        
         try {
-            rol = rolDao.guardar(rol);
+        	Rol rol = rolDao.buscarPorNombre("Visitante").get(0);
             rolDao.borrar(rol);
-            rol = rolDao.buscarPorNombre("Pepito").get(0);
+            rol = rolDao.buscarPorNombre("Visitante").get(0);
+            
             Assert.assertNull(rol);
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public void removeAll(){
-        try {
-            List<Rol> roles = rolDao.listar();
-            for (Rol rol : roles){
-                rolDao.borrar(rol);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
     }
 
 }

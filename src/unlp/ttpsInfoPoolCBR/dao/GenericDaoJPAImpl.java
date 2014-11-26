@@ -5,6 +5,7 @@ import unlp.ttpsInfoPoolCBR.util.EntityManagerFactoryHolder;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,10 +39,11 @@ public class GenericDaoJPAImpl<M extends AbstractEntity,VO extends AbstractEntit
             objetoVO = em.merge(objetoVO);
 
             EntityManagerFactoryHolder.commitTransaction(em);
-
         }catch(Exception ex){
             EntityManagerFactoryHolder.rollbackTransaction(em);
             throw ex;
+        }finally{
+        	EntityManagerFactoryHolder.close(em);
         }
         return objetoVO;
     }
@@ -56,11 +58,11 @@ public class GenericDaoJPAImpl<M extends AbstractEntity,VO extends AbstractEntit
             objetoVO = em.merge(objetoVO);
 
             EntityManagerFactoryHolder.commitTransaction(em);
-
         }catch(Exception ex){
             EntityManagerFactoryHolder.rollbackTransaction(em);
             throw ex;
-
+        }finally{
+        	EntityManagerFactoryHolder.close(em);
         }
         return objetoVO;
     }
@@ -75,11 +77,11 @@ public class GenericDaoJPAImpl<M extends AbstractEntity,VO extends AbstractEntit
             em.remove(objetoVO);
 
             EntityManagerFactoryHolder.commitTransaction(em);
-
         }catch(Exception ex){
             EntityManagerFactoryHolder.rollbackTransaction(em);
             throw ex;
-
+        }finally{
+        	EntityManagerFactoryHolder.close(em);
         }
     }
 
@@ -91,10 +93,10 @@ public class GenericDaoJPAImpl<M extends AbstractEntity,VO extends AbstractEntit
             em = EntityManagerFactoryHolder.getEntityManager();
             TypedQuery jpaql = em.createQuery("select o from "+ persistentClass.getSimpleName() +" o",persistentClass);
             listaVO = jpaql.getResultList();
-
         }catch(Exception ex){
             throw ex;
-
+        }finally{
+        	EntityManagerFactoryHolder.close(em);
         }
         return listaVO;
     }
@@ -106,10 +108,34 @@ public class GenericDaoJPAImpl<M extends AbstractEntity,VO extends AbstractEntit
         try{
             em = EntityManagerFactoryHolder.getEntityManager();
             objetoVO  = em.find(voClass,id);
-
         }catch(Exception ex){
             throw ex;
+        }finally{
+        	EntityManagerFactoryHolder.close(em);
         }
         return objetoVO;
     }
+
+	@Override
+	public void drop() throws Exception {
+		EntityManager em = null;
+        List<VO> listaVO = new ArrayList<VO>();
+        try{
+            em = EntityManagerFactoryHolder.getEntityManager();
+            TypedQuery jpaql = em.createQuery("select o from "+ persistentClass.getSimpleName() +" o",persistentClass);
+            listaVO = jpaql.getResultList();
+            
+            for(int i = 0; i < listaVO.size(); i++){
+            	EntityManagerFactoryHolder.beginTransaction(em);
+                em.remove(listaVO.get(i));
+                EntityManagerFactoryHolder.commitTransaction(em);
+            }
+        }catch(Exception ex){
+            throw ex;
+        }finally{
+        	EntityManagerFactoryHolder.close(em);
+        }
+        
+	}
+  
 }

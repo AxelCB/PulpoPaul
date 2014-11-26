@@ -21,7 +21,8 @@ public class Usuario extends AbstractEntity{
     @Column
     private String telefono;
     
-    @Column(nullable = false)
+    @Column(nullable = false,
+    		unique = true)
     private String email;
     
     @Column(nullable = false)
