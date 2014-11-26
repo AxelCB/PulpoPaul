@@ -3,7 +3,6 @@ package unlp.ttpsInfoPoolCBR.test;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import unlp.ttpsInfoPoolCBR.dao.rol.IRolDao;
 import unlp.ttpsInfoPoolCBR.dao.rol.RolDaoJPAImpl;
 import unlp.ttpsInfoPoolCBR.model.Rol;
@@ -38,6 +37,7 @@ public class TestRol {
 
         } catch (Exception e) {
             e.printStackTrace();
+            Assert.fail();
         }
     }
 
@@ -55,6 +55,7 @@ public class TestRol {
             Assert.assertEquals(rolDao.encontrar(rolId),rol);
         } catch (Exception e) {
             e.printStackTrace();
+            Assert.fail();
         }
     }
 
@@ -62,12 +63,13 @@ public class TestRol {
     public void shouldRemoveRol(){        
         try {
         	Rol rol = rolDao.buscarPorNombre("Visitante").get(0);
-            rolDao.borrar(rol);
+            rolDao.borrar(rol.getId());
             rol = rolDao.buscarPorNombre("Visitante").get(0);
             
             Assert.assertNull(rol);
         } catch (Exception e) {
             e.printStackTrace();
+            Assert.fail();
         }
     }
 
