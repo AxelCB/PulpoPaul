@@ -20,18 +20,21 @@ public class RolDaoJPAImpl extends GenericDaoJPAImpl<Rol,Rol> implements IRolDao
 
 
     @Override
-    public List<Rol> buscarPorNombre(String nombre) throws Exception {
+    public Rol buscarPorNombre(String nombre) throws Exception {
         EntityManager em = null;
-        List<Rol> listaRol = new ArrayList<Rol>();
+        Rol rol = null;
         try{
             em = EntityManagerFactoryHolder.getEntityManager();
             TypedQuery jpaql = em.createQuery("select r from Rol r where r.nombre = :nombre",Rol.class);
             jpaql.setParameter("nombre",nombre);
-            listaRol = jpaql.getResultList();
-
+            
+            List<Rol> listaRol = jpaql.getResultList();
+            if(!listaRol.isEmpty()){
+            	rol = listaRol.get(0);
+            }
         }catch(Exception ex){
             throw ex;
         }
-        return listaRol;
+        return rol;
     }
 }

@@ -19,19 +19,21 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,Usuario> implem
     }
     
     @Override
-    public List<Usuario> buscarPorEmail(String email) throws Exception{
+    public Usuario buscarPorEmail(String email) throws Exception{
     	EntityManager em = null;
-    	List<Usuario> listaUsuario = new ArrayList<Usuario>();
+    	Usuario usuario = null;
     	try{
 	    	em = EntityManagerFactoryHolder.getEntityManager();
 	    	TypedQuery jpaql = em.createQuery("select u from Usuario u where u.email = :email", Usuario.class);
 	    	jpaql.setParameter("email", email);
-	    	listaUsuario = jpaql.getResultList();
+	    	List<Usuario> listaUsuario = jpaql.getResultList();
+	    	if(!listaUsuario.isEmpty()){
+	    		usuario = listaUsuario.get(0);
+	    	}
     	}
     	catch(Exception ex){
     		throw ex;
     	}
-    	
-    	return listaUsuario;
+    	return usuario;
     }
 }

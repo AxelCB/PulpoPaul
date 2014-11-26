@@ -51,11 +51,7 @@ public class EntityManagerFactoryHolder {
     public static void commitTransaction(EntityManager em){
         EntityTransaction tx = em.getTransaction();
         tx.commit();
-        //em.close();
-    }
-    
-    public static void close(EntityManager em){
-    	em.close();
+        em.close();
     }
 
     public static void rollbackTransaction(EntityManager em){
@@ -63,6 +59,6 @@ public class EntityManagerFactoryHolder {
         if (tx != null && tx.isActive()) {
             tx.rollback();
         }
-        //em.close();
+        em.close();
     }
 }

@@ -33,7 +33,7 @@ public class TestRol {
             List<Rol> roles = rolDao.listar();
             
             Assert.assertEquals(roles.size(), 2);
-            Assert.assertEquals(rolDao.buscarPorNombre("Usuario").get(0),rol);
+            Assert.assertEquals(rolDao.buscarPorNombre("Usuario"),rol);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,7 +44,7 @@ public class TestRol {
     @Test(dependsOnMethods = {"shouldAddRol"})
     public void shouldModifyRol(){
         try {
-            Rol rol = rolDao.buscarPorNombre("Usuario").get(0);
+            Rol rol = rolDao.buscarPorNombre("Usuario");
            
             Assert.assertNotNull(rol);
             
@@ -62,9 +62,9 @@ public class TestRol {
    @Test(dependsOnMethods = {"shouldAddRol"})
     public void shouldRemoveRol(){        
         try {
-        	Rol rol = rolDao.buscarPorNombre("Visitante").get(0);
+        	Rol rol = rolDao.buscarPorNombre("Visitante");
             rolDao.borrar(rol.getId());
-            rol = rolDao.buscarPorNombre("Visitante").get(0);
+            rol = rolDao.buscarPorNombre("Visitante");
             
             Assert.assertNull(rol);
         } catch (Exception e) {

@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface IRolDao extends IGenericDao<Rol,Rol> {
 
-    public List<Rol> buscarPorNombre(String nombre)throws Exception;
+    public Rol buscarPorNombre(String nombre)throws Exception;
 }
