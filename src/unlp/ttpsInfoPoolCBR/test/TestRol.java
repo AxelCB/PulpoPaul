@@ -1,11 +1,10 @@
 package unlp.ttpsInfoPoolCBR.test;
 
-import junit.framework.Assert;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import unlp.ttpsInfoPoolCBR.dao.rol.IRolDao;
 import unlp.ttpsInfoPoolCBR.dao.rol.RolDaoJPAImpl;
-import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
 import unlp.ttpsInfoPoolCBR.model.Rol;
 
 import java.util.List;
@@ -15,8 +14,8 @@ import java.util.List;
  */
 public class TestRol {
 
-    private IUsuarioDao usuarioDao;
     private IRolDao rolDao;
+
     @BeforeClass
     public void init(){
         rolDao = new RolDaoJPAImpl();
@@ -28,10 +27,11 @@ public class TestRol {
         rol.setNombre("Administrador");
         try {
             rol = rolDao.guardar(rol);
+            rol = new Rol();
             rol.setNombre("Usuario");
             rol = rolDao.guardar(rol);
             List<Rol> roles = rolDao.listar();
-            Assert.assertEquals(roles.size(),2);
+            Assert.assertEquals(roles.size(), 2);
             Assert.assertEquals(rolDao.buscarPorNombre("Usuario").get(0),rol);
 
         } catch (Exception e) {
@@ -63,6 +63,17 @@ public class TestRol {
             rolDao.borrar(rol);
             rol = rolDao.buscarPorNombre("Pepito").get(0);
             Assert.assertNull(rol);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void removeAll(){
+        try {
+            List<Rol> roles = rolDao.listar();
+            for (Rol rol : roles){
+                rolDao.borrar(rol);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
