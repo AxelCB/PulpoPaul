@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by Axel on 25/11/2014.
  */
-public class TestUsuario {
+public class Test2Usuario {
 
     private IUsuarioDao usuarioDao;
     private IRolDao rolDao;

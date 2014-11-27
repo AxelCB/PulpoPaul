@@ -28,7 +28,7 @@ import unlp.ttpsInfoPoolCBR.dao.viaje.ViajeDaoJPAImpl;
  * @author Santiago
  */
 
-public class DropEverything {
+public class Test0DropEverything {
 
 	private ICalificacionRecorridoDao califRecorridoDao;
 	private ICalificacionUsuarioDao califUsuarioDao;

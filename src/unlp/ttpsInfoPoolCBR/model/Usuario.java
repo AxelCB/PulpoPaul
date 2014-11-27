@@ -49,10 +49,10 @@ public class Usuario extends AbstractEntity{
     @OneToMany(mappedBy="denunciante")
     private List<Denuncia> denunciasHechas = new ArrayList<Denuncia>();
     
-    @OneToMany(mappedBy="receptor",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="receptor")
     private List<Mensaje> bandejaEntrada = new ArrayList<Mensaje>();
     
-    @OneToMany(mappedBy="emisor",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy="emisor")
     private List<Mensaje> bandejaSalida = new ArrayList<Mensaje>();
     
     @ManyToMany
