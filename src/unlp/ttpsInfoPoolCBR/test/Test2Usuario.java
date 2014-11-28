@@ -3,7 +3,6 @@ package unlp.ttpsInfoPoolCBR.test;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import unlp.ttpsInfoPoolCBR.dao.rol.IRolDao;
 import unlp.ttpsInfoPoolCBR.dao.rol.RolDaoJPAImpl;
 import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
@@ -20,13 +19,13 @@ public class Test2Usuario {
 
     private IUsuarioDao usuarioDao;
     private IRolDao rolDao;
-    @BeforeClass
+    @BeforeClass(groups = "TestAll" )
     public void init(){
         usuarioDao= new UsuarioDaoJPAImpl();
         rolDao = new RolDaoJPAImpl();
     }
 
-    @Test
+    @Test(groups = "TestAll" )
     public void shouldAddUsuario(){
         try{
             Rol rol = rolDao.buscarPorNombre("Administrador");
@@ -65,7 +64,7 @@ public class Test2Usuario {
         }
     }
     
-    @Test(dependsOnMethods = {"shouldAddUsuario"})
+    @Test(dependsOnMethods = {"shouldAddUsuario"},groups = "TestAll" )
     public void shouldModifyUsuario(){
     	try {
 			Usuario usuario = usuarioDao.buscarPorEmail("admin@admin");
@@ -82,7 +81,7 @@ public class Test2Usuario {
     	
     }
     
-    @Test(dependsOnMethods = {"shouldAddUsuario"})
+    @Test(dependsOnMethods = {"shouldAddUsuario"},groups = "TestAll" )
     public void shouldRemoveUsuario(){
     	Usuario usuario;
 		try {

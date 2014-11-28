@@ -16,12 +16,12 @@ public class Test1Rol {
 
     private IRolDao rolDao;
 
-    @BeforeClass
+    @BeforeClass(groups = "TestAll" )
     public void init(){
         rolDao = new RolDaoJPAImpl();
     }
 
-    @Test
+    @Test(groups = "TestAll")
     public void shouldAddRol(){
         Rol rol = new Rol();
         rol.setNombre("Administrador");
@@ -41,7 +41,7 @@ public class Test1Rol {
         }
     }
 
-    @Test(dependsOnMethods = {"shouldAddRol"})
+    @Test(dependsOnMethods = {"shouldAddRol"},groups = "TestAll")
     public void shouldModifyRol(){
         try {
             Rol rol = rolDao.buscarPorNombre("Usuario");
@@ -59,7 +59,7 @@ public class Test1Rol {
         }
     }
 
-   @Test(dependsOnMethods = {"shouldAddRol"})
+   @Test(dependsOnMethods = {"shouldAddRol"},groups = "TestAll")
     public void shouldRemoveRol(){        
         try {
         	Rol rol = rolDao.buscarPorNombre("Visitante");

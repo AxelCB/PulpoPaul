@@ -3,7 +3,6 @@ package unlp.ttpsInfoPoolCBR.test;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import unlp.ttpsInfoPoolCBR.dao.mensaje.IMensajeDao;
 import unlp.ttpsInfoPoolCBR.dao.mensaje.MensajeDaoJPAImpl;
 import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
@@ -16,13 +15,13 @@ public class Test3Mensaje {
 	private IMensajeDao mensajeDao;
 	private IUsuarioDao usuarioDao;
 	
-	@BeforeClass
+	@BeforeClass(groups = "TestAll" )
 	public void init(){
 		mensajeDao = new MensajeDaoJPAImpl();
 		usuarioDao = new UsuarioDaoJPAImpl();
 	}
 	
-	@Test
+	@Test(groups = "TestAll" )
 	public void shouldAddMessage(){
 		try {
 			Usuario usuarioUno = usuarioDao.buscarPorEmail("admin@admin");

@@ -1,10 +1,8 @@
 package unlp.ttpsInfoPoolCBR.test;
 
 import junit.framework.Assert;
-
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import unlp.ttpsInfoPoolCBR.dao.calificacionRecorrido.CalificacionRecorridoDaoJPAImpl;
 import unlp.ttpsInfoPoolCBR.dao.calificacionRecorrido.ICalificacionRecorridoDao;
 import unlp.ttpsInfoPoolCBR.dao.calificacionUsuario.CalificacionUsuarioDaoJPAImpl;
@@ -40,7 +38,7 @@ public class Test0DropEverything {
 	private IUsuarioDao usuarioDao;
 	private IViajeDao viajeDao;
 	
-	@BeforeClass
+	@BeforeClass(groups = "DropTest")
 	public void init(){
 		califRecorridoDao = new CalificacionRecorridoDaoJPAImpl();
 		califUsuarioDao = new CalificacionUsuarioDaoJPAImpl();
@@ -53,7 +51,7 @@ public class Test0DropEverything {
 		viajeDao = new ViajeDaoJPAImpl();
 	}
 	
-	@Test
+	@Test(groups = "DropTest" )
 	public void shouldDeleteAll(){
         try {
         	califRecorridoDao.drop();
