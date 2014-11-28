@@ -11,6 +11,9 @@ import unlp.ttpsInfoPoolCBR.dao.usuario.UsuarioDaoJPAImpl;
 import unlp.ttpsInfoPoolCBR.model.CalificacionUsuario;
 import unlp.ttpsInfoPoolCBR.model.Usuario;
 
+/**
+ * @author Santiago
+ */
 public class Test5CalificacionUsuario {
 
 	private ICalificacionUsuarioDao califUsuarioDao;
@@ -33,7 +36,7 @@ public class Test5CalificacionUsuario {
 			
 			CalificacionUsuario califUsuario = new CalificacionUsuario(1, usuarioUno, usuarioDos);
 			
-			califUsuarioDao.guardar(califUsuario);
+			califUsuario = califUsuarioDao.guardar(califUsuario);
 			
 			usuarioUno = usuarioDao.buscarPorEmail("admin@admin");
 			Assert.assertNotNull(usuarioUno);
@@ -41,8 +44,8 @@ public class Test5CalificacionUsuario {
 			usuarioDos = usuarioDao.buscarPorEmail("noadmin@noadmin");
 			Assert.assertNotNull(usuarioDos);
 			
-			Assert.assertEquals(usuarioUno.getCalificacionesHechas().get(0).getCalificacion(), califUsuario.getCalificacion());
-			Assert.assertEquals(usuarioDos.getMisCalificaciones().get(0).getCalificacion(), califUsuario.getCalificacion());
+			Assert.assertEquals(usuarioUno.getCalificacionesHechas().get(0), califUsuario);
+			Assert.assertEquals(usuarioDos.getMisCalificaciones().get(0), califUsuario);
 			
 		}
 		catch(Exception e){

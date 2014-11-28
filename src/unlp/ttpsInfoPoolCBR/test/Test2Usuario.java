@@ -14,7 +14,7 @@ import unlp.ttpsInfoPoolCBR.model.Usuario;
 import java.util.List;
 
 /**
- * Created by Axel on 25/11/2014.
+ * @author Santiago
  */
 public class Test2Usuario {
 

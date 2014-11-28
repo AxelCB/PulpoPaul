@@ -11,6 +11,9 @@ import unlp.ttpsInfoPoolCBR.dao.usuario.UsuarioDaoJPAImpl;
 import unlp.ttpsInfoPoolCBR.model.Denuncia;
 import unlp.ttpsInfoPoolCBR.model.Usuario;
 
+/**
+ * @author Santiago
+ */
 public class Test4Denuncia {
 
 	private IDenunciaDao denunciaDao;
@@ -36,7 +39,7 @@ public class Test4Denuncia {
 												usuarioUno,
 												usuarioDos);
 			
-			denunciaDao.guardar(denuncia);
+			denuncia = denunciaDao.guardar(denuncia);
 			
 			usuarioUno = usuarioDao.buscarPorEmail("admin@admin");
 			Assert.assertNotNull(usuarioUno);
@@ -44,8 +47,8 @@ public class Test4Denuncia {
 			usuarioDos = usuarioDao.buscarPorEmail("noadmin@noadmin");
 			Assert.assertNotNull(usuarioDos);
 			
-			Assert.assertEquals(usuarioUno.getDenunciasHechas().get(0).getAsunto(), denuncia.getAsunto());
-			Assert.assertEquals(usuarioDos.getMisDenuncias().get(0).getAsunto(), denuncia.getAsunto());
+			Assert.assertEquals(usuarioUno.getDenunciasHechas().get(0), denuncia);
+			Assert.assertEquals(usuarioDos.getMisDenuncias().get(0), denuncia);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
