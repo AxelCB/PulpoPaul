@@ -38,7 +38,7 @@ public class Viaje extends AbstractEntity{
     @OneToMany(mappedBy="calificado")
     private List<CalificacionRecorrido> calificaciones= new ArrayList<CalificacionRecorrido>();
     
-    @ManyToMany
+    @ManyToMany(mappedBy="misViajes")
     private List<Usuario> viajeros = new ArrayList<Usuario>();
 
     public Viaje(){

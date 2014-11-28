@@ -14,7 +14,8 @@ import java.util.List;
 @Table
 public class Recorrido extends AbstractEntity{
 
-    @Column(nullable = false)
+    @Column(nullable = false,
+    		unique = true)
     private String nombre;
     
     @Column(nullable = false)
@@ -54,14 +55,17 @@ public class Recorrido extends AbstractEntity{
     @ManyToOne(optional = false)
     private Usuario propietario;
     
-    @ManyToMany
+    @ManyToMany(mappedBy="recorridosViajo")
     private List<Usuario> pasajeros = new ArrayList<Usuario>();
+    
+    @ManyToMany(mappedBy="historial")
+    private List<Usuario> pasajerosHistorial = new ArrayList<Usuario>();
 
     public Recorrido(){
     	super();
     }
     
-    public Recorrido(String nombre, Time horaSalida, Time horaVuelta,
+    /*public Recorrido(String nombre, Time horaSalida, Time horaVuelta,
 			Integer lugares, Boolean idaYVuelta, Date puntual,
 			List<Integer> dias, Double precio, TipoViaje tipo,
 			String googleMapsRecorrido, Evento evento, Usuario propietario) {
@@ -78,8 +82,17 @@ public class Recorrido extends AbstractEntity{
 		this.googleMapsRecorrido = googleMapsRecorrido;
 		this.evento = evento;
 		this.propietario = propietario;
-	}
+	}*/
 
+    public Usuario agregarPasajero(Usuario usuario){
+    	this.pasajeros.add(usuario);
+    	return usuario;
+    }
+    
+    public Boolean eliminarPasajero(Usuario usuario){
+    	return this.pasajeros.remove(usuario);
+    }
+    
 	public String getNombre() {
         return nombre;
     }
@@ -171,10 +184,11 @@ public class Recorrido extends AbstractEntity{
     public List<Usuario> getPasajeros() {
         return pasajeros;
     }
-
+    
     public void setPasajeros(List<Usuario> pasajeros) {
         this.pasajeros = pasajeros;
     }
+    
     public String getGoogleMapsRecorrido() {
         return googleMapsRecorrido;
     }
@@ -190,5 +204,14 @@ public class Recorrido extends AbstractEntity{
     public void setViajes(List<Viaje> viajes) {
         this.viajes = viajes;
     }
+
+	public List<Usuario> getPasajerosHistorial() {
+		return pasajerosHistorial;
+	}
+
+	public void setPasajerosHistorial(List<Usuario> pasajerosHistorial) {
+		this.pasajerosHistorial = pasajerosHistorial;
+	}
+    
 
 }

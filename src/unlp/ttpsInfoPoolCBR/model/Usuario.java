@@ -54,18 +54,27 @@ public class Usuario extends AbstractEntity{
     
     @OneToMany(mappedBy="emisor")
     private List<Mensaje> bandejaSalida = new ArrayList<Mensaje>();
-    
-    @ManyToMany
-    private List<Viaje> misViajes = new ArrayList<Viaje>();
 
     @OneToMany(mappedBy="propietario")
     private List<Recorrido> recorridosMios = new ArrayList<Recorrido>();
     
     @ManyToMany
+    @JoinTable( name="Usuario_Recorrido_Viajo",
+    			joinColumns={@JoinColumn(name="usuario_id", nullable=false)},
+    			inverseJoinColumns={@JoinColumn(name="recorrido_id", nullable=false)})
     private List<Recorrido> recorridosViajo = new ArrayList<Recorrido>();
     
     @ManyToMany
+    @JoinTable( name="Usuario_Recorrido_Historial",
+				joinColumns={@JoinColumn(name="usuario_id", nullable=false)},
+				inverseJoinColumns={@JoinColumn(name="recorrido_id", nullable=false)})
     private List<Recorrido> historial = new ArrayList<Recorrido>();
+    
+    @ManyToMany
+    @JoinTable( name="Usuario_Recorrido_Viajes",
+				joinColumns={@JoinColumn(name="usuario_id", nullable=false)},
+				inverseJoinColumns={@JoinColumn(name="viaje_id", nullable=false)})
+    private List<Viaje> misViajes = new ArrayList<Viaje>();
 
     public Usuario(){
         super();
@@ -81,6 +90,15 @@ public class Usuario extends AbstractEntity{
         this.foto = foto;
     }
 
+    public Recorrido agregarRecorridoViajo(Recorrido recorrido){
+    	this.recorridosViajo.add(recorrido);
+    	return recorrido;
+    }
+    
+    public Boolean eliminarRecorridoViajo(Recorrido recorrido){
+    	return this.recorridosViajo.remove(recorrido);
+    }
+    
     public String getNombres() {
         return nombres;
     }
