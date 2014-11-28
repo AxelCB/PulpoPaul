@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="TestAll">
-<test name="TestAll" preserve-order="true">
+<suite name="TestearTodo">
+<test name="TestearTodo" preserve-order="true">
     <groups>
         <run>
             <include name="DropTest" />
-            <include name="TestAll" />
+            <include name="RolTest" />
+            <include name="UsuarioTest" />
+            <include name="MensajeTest" />
+            <include name="DenunciaTest" />
+            <include name="CalificacionUsuarioTest" />
+            <include name="RecorridoTest" />
+            <include name="EventoTest" />
         </run>
     </groups>
     <classes>
-        <!--<class name="unlp.ttpsInfoPoolCBR.test.Test0DropEverything"/>-->
+        <class name="unlp.ttpsInfoPoolCBR.test.Test0DropEverything"/>
         <class name="unlp.ttpsInfoPoolCBR.test.Test1Rol" />
         <class name="unlp.ttpsInfoPoolCBR.test.Test2Usuario" />
         <class name="unlp.ttpsInfoPoolCBR.test.Test3Mensaje" />
         <class name="unlp.ttpsInfoPoolCBR.test.Test4Denuncia" />
         <class name="unlp.ttpsInfoPoolCBR.test.Test5CalificacionUsuario" />
+        <class name="unlp.ttpsInfoPoolCBR.test.Test6Recorrido" />
+        <class name="unlp.ttpsInfoPoolCBR.test.Test7Evento" />
     </classes>
 </test>
 </suite>

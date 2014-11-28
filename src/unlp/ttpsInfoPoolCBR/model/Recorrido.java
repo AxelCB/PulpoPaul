@@ -49,16 +49,20 @@ public class Recorrido extends AbstractEntity{
     @ManyToOne(optional = true)
     private Evento evento;
     
-    @OneToMany(mappedBy="recorrido")
+    @OneToMany(mappedBy="recorrido"/*, cascade=CascadeType.ALL*/)
     private List<Viaje> viajes = new ArrayList<Viaje>();
     
     @ManyToOne(optional = false)
     private Usuario propietario;
     
-    @ManyToMany(mappedBy="recorridosViajo")
+    @ManyToMany(mappedBy="recorridosViajo",
+    			fetch = FetchType.EAGER,
+    			cascade={CascadeType.PERSIST,CascadeType.MERGE})
     private List<Usuario> pasajeros = new ArrayList<Usuario>();
     
     @ManyToMany(mappedBy="historial")
+    		//,
+    			//fetch = FetchType.EAGER)
     private List<Usuario> pasajerosHistorial = new ArrayList<Usuario>();
 
     public Recorrido(){

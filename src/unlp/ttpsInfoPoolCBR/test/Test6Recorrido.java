@@ -1,8 +1,6 @@
 package unlp.ttpsInfoPoolCBR.test;
 
 import java.sql.Time;
-import java.util.Date;
-import java.util.List;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -15,6 +13,7 @@ import unlp.ttpsInfoPoolCBR.dao.usuario.UsuarioDaoJPAImpl;
 import unlp.ttpsInfoPoolCBR.model.Recorrido;
 import unlp.ttpsInfoPoolCBR.model.TipoViaje;
 import unlp.ttpsInfoPoolCBR.model.Usuario;
+import unlp.ttpsInfoPoolCBR.util.EntityManagerFactoryHolder;
 
 /**
  * @author Santiago
@@ -24,13 +23,13 @@ public class Test6Recorrido {
 	private IRecorridoDao recorridoDao;
 	private IUsuarioDao usuarioDao;
 	
-	@BeforeClass
+	@BeforeClass(groups = "RecorridoTest",dependsOnGroups="CalificacionUsuarioTest")
 	public void init(){
 		recorridoDao = new RecorridoDaoJPAImpl();
 		usuarioDao = new UsuarioDaoJPAImpl();
 	}
 	
-	@Test
+	@Test(groups = "RecorridoTest",dependsOnGroups="CalificacionUsuarioTest")
 	public void shouldAddRecorrido(){
 		try{
 			Usuario usuarioUno = usuarioDao.buscarPorEmail("admin@admin");
@@ -71,7 +70,7 @@ public class Test6Recorrido {
 		}
 	}
 	
-	@Test(dependsOnMethods = {"shouldAddRecorrido"})
+	@Test(dependsOnMethods = {"shouldAddRecorrido"},groups = "RecorridoTest",dependsOnGroups="CalificacionUsuarioTest")
 	public void shouldModifyRecorrido(){
 		try{
 			Usuario usuarioUno = usuarioDao.buscarPorEmail("admin@admin");
@@ -90,7 +89,7 @@ public class Test6Recorrido {
 		}
 	}
 	
-	@Test(dependsOnMethods = {"shouldAddRecorrido"})
+	@Test(dependsOnMethods = {"shouldAddRecorrido"},groups = "RecorridoTest",dependsOnGroups="CalificacionUsuarioTest")
 	public void shouldAddPasajero(){
 		try{
 			Usuario usuarioUno = usuarioDao.buscarPorEmail("admin@admin");
@@ -101,8 +100,10 @@ public class Test6Recorrido {
 			
 			Recorrido recorrido = usuarioUno.getRecorridosMios().get(0);
 			
-			usuarioDos.agregarRecorridoViajo(recorrido);
+			recorrido.agregarPasajero(usuarioDos);
+			recorrido = recorridoDao.modificar(recorrido);
 			
+			usuarioDos.agregarRecorridoViajo(recorrido);
 			usuarioDos = usuarioDao.modificar(usuarioDos);
 			
 			Assert.assertEquals(usuarioDos.getRecorridosViajo().get(0), recorrido);
@@ -114,7 +115,7 @@ public class Test6Recorrido {
 		}
 	}
 	
-	@Test(dependsOnMethods = {"shouldAddPasajero"})
+	@Test(dependsOnMethods = {"shouldAddPasajero"},groups = "RecorridoTest",dependsOnGroups="CalificacionUsuarioTest")
 	public void shouldDeletePasajero(){
 		try{
 			Usuario usuarioUno = usuarioDao.buscarPorEmail("admin@admin");
@@ -126,14 +127,20 @@ public class Test6Recorrido {
 			Recorrido recorrido = usuarioUno.getRecorridosMios().get(0);
 			
 			recorrido.eliminarPasajero(usuarioDos);
-			
-			/*ESTO NO BORRA LA TABLA Usuario_Recorrido_Viajo*/
 			recorrido = recorridoDao.modificar(recorrido);
 			
-			usuarioDos = usuarioDao.buscarPorEmail("noadmin@noadmin");
+			usuarioDos.eliminarRecorridoViajo(recorrido);
+			usuarioDos = usuarioDao.modificar(usuarioDos);
+			//usuarioDos = usuarioDao.buscarPorEmail("noadmin@noadmin");
 			
-			Assert.assertNull(usuarioDos.getRecorridosViajo());
-			Assert.assertNull(recorrido.getPasajeros());			
+			Assert.assertEquals(usuarioDos.getRecorridosViajo().size(), 0);
+			Assert.assertEquals(recorrido.getPasajeros().size(),0);
+			
+			/*Esto es para los test que siguen*/
+			recorrido.agregarPasajero(usuarioDos);
+			recorrido = recorridoDao.modificar(recorrido);
+			usuarioDos.agregarRecorridoViajo(recorrido);
+			usuarioDos = usuarioDao.modificar(usuarioDos);
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -141,7 +148,7 @@ public class Test6Recorrido {
 		}
 	}
 	
-	@Test(dependsOnMethods = {"shouldAddRecorrido"})
+	@Test(dependsOnMethods = {"shouldDeletePasajero"},groups = "RecorridoTest",dependsOnGroups="CalificacionUsuarioTest")
 	public void shouldDeleteRecorrido(){
 		try{
 			Usuario usuarioUno = usuarioDao.buscarPorEmail("admin@admin");

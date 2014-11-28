@@ -18,13 +18,13 @@ public class Test4Denuncia {
 	private IDenunciaDao denunciaDao;
 	private IUsuarioDao usuarioDao;
 	
-	@BeforeClass(groups = "TestAll" )
+	@BeforeClass(groups = "DenunciaTest" ,dependsOnGroups="MensajeTest")
 	public void init(){
 		denunciaDao = new DenunciaDaoJPAImpl();
 		usuarioDao = new UsuarioDaoJPAImpl();
 	}
 	
-	@Test(groups = "TestAll" )
+	@Test(groups = "DenunciaTest" ,dependsOnGroups="MensajeTest")
 	public void shouldAddDenuncia(){
 		try {
 			Usuario usuarioUno = usuarioDao.buscarPorEmail("admin@admin");

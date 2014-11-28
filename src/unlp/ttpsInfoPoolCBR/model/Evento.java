@@ -1,14 +1,15 @@
 package unlp.ttpsInfoPoolCBR.model;
 
+import java.util.Date;
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import java.sql.Date;
-import java.sql.Time;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by axel on 05/11/14.
@@ -17,7 +18,8 @@ import java.util.List;
 @Table
 public class Evento extends AbstractEntity{
 
-    @Column(nullable = false)
+    @Column(nullable = false, 
+    		unique = true)
     private String nombre;
     
     @Column(length = 1023)
@@ -32,7 +34,8 @@ public class Evento extends AbstractEntity{
     @Column
     private Time horaFin;
 
-    @OneToMany(mappedBy="evento")
+    @OneToMany(	mappedBy="evento",
+    			cascade = CascadeType.ALL)
     private List<Recorrido> recorridos = new ArrayList<Recorrido>();
 
     public Evento(){
@@ -48,6 +51,15 @@ public class Evento extends AbstractEntity{
 		this.horaComienzo = horaComienzo;
 		this.horaFin = horaFin;
 	}
+    
+    /*public Recorrido agregarRecorrido(Recorrido recorrido){
+    	this.recorridos.add(recorrido);
+    	return recorrido;
+    }
+    
+    public Boolean eliminarRecorrido(Recorrido recorrido){
+    	return this.recorridos.remove(recorrido);
+    }*/
 
 	public String getNombre() {
         return nombre;

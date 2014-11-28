@@ -1,6 +1,7 @@
 package unlp.ttpsInfoPoolCBR.model;
 
 import javax.persistence.*;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +59,7 @@ public class Usuario extends AbstractEntity{
     @OneToMany(mappedBy="propietario")
     private List<Recorrido> recorridosMios = new ArrayList<Recorrido>();
     
-    @ManyToMany
+    @ManyToMany//(fetch = FetchType.EAGER)
     @JoinTable( name="Usuario_Recorrido_Viajo",
     			joinColumns={@JoinColumn(name="usuario_id", nullable=false)},
     			inverseJoinColumns={@JoinColumn(name="recorrido_id", nullable=false)})
@@ -70,7 +71,7 @@ public class Usuario extends AbstractEntity{
 				inverseJoinColumns={@JoinColumn(name="recorrido_id", nullable=false)})
     private List<Recorrido> historial = new ArrayList<Recorrido>();
     
-    @ManyToMany
+    @ManyToMany//(fetch = FetchType.EAGER)
     @JoinTable( name="Usuario_Recorrido_Viajes",
 				joinColumns={@JoinColumn(name="usuario_id", nullable=false)},
 				inverseJoinColumns={@JoinColumn(name="viaje_id", nullable=false)})
@@ -97,6 +98,15 @@ public class Usuario extends AbstractEntity{
     
     public Boolean eliminarRecorridoViajo(Recorrido recorrido){
     	return this.recorridosViajo.remove(recorrido);
+    }
+    
+    public Viaje agregarViaje(Viaje viaje){
+    	this.misViajes.add(viaje);
+    	return(viaje);
+    }
+    
+    public Boolean eliminarViaje(Viaje viaje){
+    	return this.misViajes.remove(viaje);
     }
     
     public String getNombres() {

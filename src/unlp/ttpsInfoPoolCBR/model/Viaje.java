@@ -38,11 +38,25 @@ public class Viaje extends AbstractEntity{
     @OneToMany(mappedBy="calificado")
     private List<CalificacionRecorrido> calificaciones= new ArrayList<CalificacionRecorrido>();
     
-    @ManyToMany(mappedBy="misViajes")
+    @ManyToMany(mappedBy="misViajes"
+    		/*,fetch = FetchType.EAGER,
+    			cascade={CascadeType.PERSIST,CascadeType.MERGE}*/)
     private List<Usuario> viajeros = new ArrayList<Usuario>();
 
     public Viaje(){
     	super();
+    }
+    
+    public Viaje(Recorrido recorrido, String descripcion, Date dia){
+    	super();
+    	this.setDescripcion(descripcion);
+        this.setNombre(recorrido.getNombre());
+        this.setHoraSalida(recorrido.getHoraSalida());
+        this.setHoraVuelta(recorrido.getHoraVuelta());
+        this.setLugares(recorrido.getLugares());
+        this.setDia(dia);
+//        this.setViajeros(recorrido.getPasajeros());
+        this.setRecorrido(recorrido);
     }
     
     public Viaje(String nombre, String descripcion, Time horaSalida,

@@ -13,8 +13,18 @@ public abstract class AbstractEntity {
     @Id
     @GeneratedValue
     private Integer id;
+    
+    private Boolean borrado = false;
+    
+    public Boolean getBorrado() {
+		return borrado;
+	}
 
-    public Integer getId() {
+	public void setBorrado(Boolean borrado) {
+		this.borrado = borrado;
+	}
+
+	public Integer getId() {
         return id;
     }
 

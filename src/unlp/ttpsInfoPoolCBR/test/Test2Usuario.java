@@ -19,13 +19,14 @@ public class Test2Usuario {
 
     private IUsuarioDao usuarioDao;
     private IRolDao rolDao;
-    @BeforeClass(groups = "TestAll" )
+    
+    @BeforeClass(groups = "UsuarioTest",dependsOnGroups="RolTest" )
     public void init(){
         usuarioDao= new UsuarioDaoJPAImpl();
         rolDao = new RolDaoJPAImpl();
     }
 
-    @Test(groups = "TestAll" )
+    @Test(groups = "UsuarioTest",dependsOnGroups="RolTest"  )
     public void shouldAddUsuario(){
         try{
             Rol rol = rolDao.buscarPorNombre("Administrador");
@@ -64,7 +65,7 @@ public class Test2Usuario {
         }
     }
     
-    @Test(dependsOnMethods = {"shouldAddUsuario"},groups = "TestAll" )
+    @Test(dependsOnMethods = {"shouldAddUsuario"},groups = "UsuarioTest" )
     public void shouldModifyUsuario(){
     	try {
 			Usuario usuario = usuarioDao.buscarPorEmail("admin@admin");
@@ -81,7 +82,7 @@ public class Test2Usuario {
     	
     }
     
-    @Test(dependsOnMethods = {"shouldAddUsuario"},groups = "TestAll" )
+    @Test(dependsOnMethods = {"shouldAddUsuario"},groups = "UsuarioTest" )
     public void shouldRemoveUsuario(){
     	Usuario usuario;
 		try {

@@ -18,13 +18,13 @@ public class Test5CalificacionUsuario {
 	private ICalificacionUsuarioDao califUsuarioDao;
 	private IUsuarioDao usuarioDao;
 	
-	@BeforeTest(groups = "TestAll" )
+	@BeforeTest(groups = "CalificacionUsuarioTest" ,dependsOnGroups="DenunciaTest")
 	public void init(){
 		califUsuarioDao = new CalificacionUsuarioDaoJPAImpl();
 		usuarioDao = new UsuarioDaoJPAImpl();
 	}
 	
-	@Test(groups = "TestAll" )
+	@Test(groups = "CalificacionUsuarioTest" ,dependsOnGroups="DenunciaTest")
 	public void shoulAddCalificacionUsuario(){
 		try{
 			Usuario usuarioUno = usuarioDao.buscarPorEmail("admin@admin");

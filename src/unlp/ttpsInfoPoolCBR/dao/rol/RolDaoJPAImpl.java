@@ -32,6 +32,7 @@ public class RolDaoJPAImpl extends GenericDaoJPAImpl<Rol,Rol> implements IRolDao
             if(!listaRol.isEmpty()){
             	rol = listaRol.get(0);
             }
+            em.close();
         }catch(Exception ex){
             throw ex;
         }

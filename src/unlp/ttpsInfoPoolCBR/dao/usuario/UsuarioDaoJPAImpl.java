@@ -30,10 +30,27 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,Usuario> implem
 	    	if(!listaUsuario.isEmpty()){
 	    		usuario = listaUsuario.get(0);
 	    	}
+	    	em.close();
     	}
     	catch(Exception ex){
     		throw ex;
     	}
     	return usuario;
     }
+
+	@Override
+	public Usuario traerMensajes(Usuario usuario) throws Exception {
+		EntityManager em = null;
+		try{
+			em = EntityManagerFactoryHolder.getEntityManager();
+			usuario = em.find(Usuario.class, usuario);
+			
+			usuario.getBandejaEntrada().size();
+			usuario.getBandejaSalida().size();
+			
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return usuario;
+	}
 }

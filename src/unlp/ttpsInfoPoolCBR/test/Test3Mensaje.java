@@ -18,13 +18,13 @@ public class Test3Mensaje {
 	private IMensajeDao mensajeDao;
 	private IUsuarioDao usuarioDao;
 	
-	@BeforeClass(groups = "TestAll" )
+	@BeforeClass(groups = "MensajeTest" ,dependsOnGroups="UsuarioTest")
 	public void init(){
 		mensajeDao = new MensajeDaoJPAImpl();
 		usuarioDao = new UsuarioDaoJPAImpl();
 	}
 	
-	@Test(groups = "TestAll" )
+	@Test(groups = "MensajeTest" ,dependsOnGroups="UsuarioTest")
 	public void shouldAddMessage(){
 		try {
 			Usuario usuarioUno = usuarioDao.buscarPorEmail("admin@admin");
@@ -45,6 +45,9 @@ public class Test3Mensaje {
 			
 			usuarioDos = usuarioDao.buscarPorEmail("noadmin@noadmin");
 			Assert.assertNotNull(usuarioDos);
+			
+			/*usuarioUno = usuarioDao.guardar(usuarioUno);
+			usuarioDos = usuarioDao.guardar(usuarioDos);*/
 			
 			Assert.assertEquals(usuarioUno.getBandejaSalida().get(0),mensaje);
 			Assert.assertEquals(usuarioDos.getBandejaEntrada().get(0),mensaje);

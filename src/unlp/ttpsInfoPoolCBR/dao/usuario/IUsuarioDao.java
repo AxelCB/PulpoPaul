@@ -10,4 +10,5 @@ import unlp.ttpsInfoPoolCBR.model.Usuario;
  */
 public interface IUsuarioDao extends IGenericDao<Usuario,Usuario>{
 	public Usuario buscarPorEmail(String email) throws Exception;
+	public Usuario traerMensajes(Usuario usuario) throws Exception;
 }

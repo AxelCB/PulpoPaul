@@ -13,8 +13,7 @@ import javax.persistence.Persistence;
  */
 public class EntityManagerFactoryHolder {
 
-    private Logger _logger = LoggerFactory
-            .getLogger(EntityManagerFactoryHolder.class);
+    private static Logger _logger = LoggerFactory.getLogger(EntityManagerFactoryHolder.class);
 
     private static EntityManagerFactory emf;
 
@@ -25,15 +24,15 @@ public class EntityManagerFactoryHolder {
     public static void init() {
 
         try {
-//            _logger.info("Starting EMF Component Initter");
+           _logger.info("Starting EMF Component Initter");
 
             emf = Persistence.createEntityManagerFactory("pulpoPaul");
             emf.createEntityManager();
 
-//            _logger.info("EMF init method executed correctly");
+           _logger.info("EMF init method executed correctly");
 
         } catch (Exception ex) {
-//            _logger.error("Error creating EMF", ex);
+           _logger.error("Error creating EMF", ex);
         }
     }
 
