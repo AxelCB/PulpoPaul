@@ -1,7 +1,6 @@
 package unlp.ttpsInfoPoolCBR.model;
 
 import javax.persistence.*;
-
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -13,6 +12,8 @@ import java.util.List;
 @Entity
 @Table
 public class Recorrido extends AbstractEntity{
+
+    private static final long serialVersionUID = -7094909164595425984L;
 
     @Column(nullable = false,
     		unique = true)

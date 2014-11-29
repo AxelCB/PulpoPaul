@@ -12,6 +12,8 @@ import javax.persistence.Table;
 @Table
 public class CalificacionRecorrido extends AbstractEntity {
 
+    private static final long serialVersionUID = 3242152665834722886L;
+
     @Column(nullable = false)
     private Integer calificacion;
 

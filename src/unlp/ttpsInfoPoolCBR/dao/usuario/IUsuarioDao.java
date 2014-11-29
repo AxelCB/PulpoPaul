@@ -1,7 +1,5 @@
 package unlp.ttpsInfoPoolCBR.dao.usuario;
 
-import java.util.List;
-
 import unlp.ttpsInfoPoolCBR.dao.IGenericDao;
 import unlp.ttpsInfoPoolCBR.model.Usuario;
 
@@ -11,4 +9,7 @@ import unlp.ttpsInfoPoolCBR.model.Usuario;
 public interface IUsuarioDao extends IGenericDao<Usuario,Usuario>{
 	public Usuario buscarPorEmail(String email) throws Exception;
 	public Usuario traerMensajes(Usuario usuario) throws Exception;
+	public Usuario traerDenuncias(Usuario usuario) throws Exception;
+	public Usuario traerCalificaciones(Usuario usuario) throws Exception;
+	public Usuario traerRecorridos(Usuario usuario) throws Exception;
 }

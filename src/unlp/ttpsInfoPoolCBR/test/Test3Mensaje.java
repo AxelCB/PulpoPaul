@@ -46,8 +46,8 @@ public class Test3Mensaje {
 			usuarioDos = usuarioDao.buscarPorEmail("noadmin@noadmin");
 			Assert.assertNotNull(usuarioDos);
 			
-			/*usuarioUno = usuarioDao.guardar(usuarioUno);
-			usuarioDos = usuarioDao.guardar(usuarioDos);*/
+			usuarioUno = usuarioDao.traerMensajes(usuarioUno);
+			usuarioDos = usuarioDao.traerMensajes(usuarioDos);
 			
 			Assert.assertEquals(usuarioUno.getBandejaSalida().get(0),mensaje);
 			Assert.assertEquals(usuarioDos.getBandejaEntrada().get(0),mensaje);

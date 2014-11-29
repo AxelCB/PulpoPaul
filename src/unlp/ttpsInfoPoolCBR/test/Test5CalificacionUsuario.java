@@ -42,6 +42,9 @@ public class Test5CalificacionUsuario {
 			
 			usuarioDos = usuarioDao.buscarPorEmail("noadmin@noadmin");
 			Assert.assertNotNull(usuarioDos);
+
+			usuarioUno = usuarioDao.traerCalificaciones(usuarioUno);
+			usuarioDos = usuarioDao.traerCalificaciones(usuarioDos);
 			
 			Assert.assertEquals(usuarioUno.getCalificacionesHechas().get(0), califUsuario);
 			Assert.assertEquals(usuarioDos.getMisCalificaciones().get(0), califUsuario);

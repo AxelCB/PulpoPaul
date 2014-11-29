@@ -1,7 +1,6 @@
 package unlp.ttpsInfoPoolCBR.model;
 
 import javax.persistence.*;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +11,8 @@ import java.util.List;
 @Entity
 @Table
 public class Usuario extends AbstractEntity{
+
+    private static final long serialVersionUID = 6080622647831511977L;
 
     @Column(nullable = false)
     private String nombres;

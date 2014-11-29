@@ -1,15 +1,10 @@
 package unlp.ttpsInfoPoolCBR.model;
 
-import java.util.Date;
+import javax.persistence.*;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  * Created by axel on 05/11/14.
@@ -18,7 +13,9 @@ import javax.persistence.Table;
 @Table
 public class Evento extends AbstractEntity{
 
-    @Column(nullable = false, 
+    private static final long serialVersionUID = 8431112769010964265L;
+
+    @Column(nullable = false,
     		unique = true)
     private String nombre;
     

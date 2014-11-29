@@ -45,6 +45,9 @@ public class Test4Denuncia {
 			
 			usuarioDos = usuarioDao.buscarPorEmail("noadmin@noadmin");
 			Assert.assertNotNull(usuarioDos);
+
+			usuarioUno = usuarioDao.traerDenuncias(usuarioUno);
+			usuarioDos = usuarioDao.traerDenuncias(usuarioDos);
 			
 			Assert.assertEquals(usuarioUno.getDenunciasHechas().get(0), denuncia);
 			Assert.assertEquals(usuarioDos.getMisDenuncias().get(0), denuncia);

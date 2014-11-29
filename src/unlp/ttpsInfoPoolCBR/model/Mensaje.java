@@ -12,6 +12,8 @@ import javax.persistence.Table;
 @Table
 public class Mensaje extends AbstractEntity{
 
+    private static final long serialVersionUID = -6523492302813042450L;
+
     @Column(nullable = false)
     private String asunto;
 

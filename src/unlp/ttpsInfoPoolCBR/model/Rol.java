@@ -11,6 +11,8 @@ import javax.persistence.Table;
 @Table
 public class Rol extends AbstractEntity{
 
+    private static final long serialVersionUID = -1395059380114488905L;
+
     @Column(nullable = false)
     private String nombre;
 

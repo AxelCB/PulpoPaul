@@ -1,13 +1,8 @@
 package unlp.ttpsInfoPoolCBR.test;
 
-import java.util.Date;
-import java.sql.Time;
-import java.util.Calendar;
-
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import unlp.ttpsInfoPoolCBR.dao.evento.EventoDaoJPAImpl;
 import unlp.ttpsInfoPoolCBR.dao.evento.IEventoDao;
 import unlp.ttpsInfoPoolCBR.dao.recorrido.IRecorridoDao;
@@ -18,13 +13,17 @@ import unlp.ttpsInfoPoolCBR.model.Evento;
 import unlp.ttpsInfoPoolCBR.model.Recorrido;
 import unlp.ttpsInfoPoolCBR.model.Usuario;
 
+import java.sql.Time;
+import java.util.Calendar;
+import java.util.Date;
+
 public class Test7Evento {
 
 	private IUsuarioDao usuarioDao;
 	private IEventoDao eventoDao;
 	private IRecorridoDao recorridoDao;
 	
-	@BeforeClass
+	@BeforeClass(groups={"EventoTest"})
 	public void init(){
 		usuarioDao = new UsuarioDaoJPAImpl();
 		eventoDao = new EventoDaoJPAImpl();

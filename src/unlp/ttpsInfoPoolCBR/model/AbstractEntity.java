@@ -3,12 +3,15 @@ package unlp.ttpsInfoPoolCBR.model;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
 
 /**
  * Created by Axel on 22/11/2014.
  */
 @MappedSuperclass
-public abstract class AbstractEntity {
+public abstract class AbstractEntity implements Serializable {
+
+    private static final long serialVersionUID = -8117348638460210536L;
 
     @Id
     @GeneratedValue

@@ -1,11 +1,8 @@
 package unlp.ttpsInfoPoolCBR.test;
 
-import java.sql.Time;
-
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import unlp.ttpsInfoPoolCBR.dao.recorrido.IRecorridoDao;
 import unlp.ttpsInfoPoolCBR.dao.recorrido.RecorridoDaoJPAImpl;
 import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
@@ -13,7 +10,8 @@ import unlp.ttpsInfoPoolCBR.dao.usuario.UsuarioDaoJPAImpl;
 import unlp.ttpsInfoPoolCBR.model.Recorrido;
 import unlp.ttpsInfoPoolCBR.model.TipoViaje;
 import unlp.ttpsInfoPoolCBR.model.Usuario;
-import unlp.ttpsInfoPoolCBR.util.EntityManagerFactoryHolder;
+
+import java.sql.Time;
 
 /**
  * @author Santiago
@@ -61,6 +59,8 @@ public class Test6Recorrido {
 			
 			usuarioUno = usuarioDao.buscarPorEmail("admin@admin");
 			Assert.assertNotNull(usuarioUno);
+
+			usuarioUno = usuarioDao.traerRecorridos(usuarioUno);
 			
 			Assert.assertEquals(usuarioUno.getRecorridosMios().get(1), recorrido);
 		}
@@ -75,6 +75,8 @@ public class Test6Recorrido {
 		try{
 			Usuario usuarioUno = usuarioDao.buscarPorEmail("admin@admin");
 			Assert.assertNotNull(usuarioUno);
+
+			usuarioUno = usuarioDao.traerRecorridos(usuarioUno);
 			
 			Recorrido recorrido = usuarioUno.getRecorridosMios().get(0);
 			recorrido.setGoogleMapsRecorrido("otra url");
@@ -97,7 +99,10 @@ public class Test6Recorrido {
 			
 			Usuario usuarioDos = usuarioDao.buscarPorEmail("noadmin@noadmin");
 			Assert.assertNotNull(usuarioDos);
-			
+
+			usuarioUno = usuarioDao.traerRecorridos(usuarioUno);
+			usuarioDos = usuarioDao.traerRecorridos(usuarioDos);
+
 			Recorrido recorrido = usuarioUno.getRecorridosMios().get(0);
 			
 			recorrido.agregarPasajero(usuarioDos);
@@ -105,7 +110,7 @@ public class Test6Recorrido {
 			
 			usuarioDos.agregarRecorridoViajo(recorrido);
 			usuarioDos = usuarioDao.modificar(usuarioDos);
-			
+
 			Assert.assertEquals(usuarioDos.getRecorridosViajo().get(0), recorrido);
 			Assert.assertEquals(recorrido.getPasajeros().get(recorrido.getPasajeros().indexOf(usuarioDos)), usuarioDos);	
 		}
@@ -123,7 +128,10 @@ public class Test6Recorrido {
 			
 			Usuario usuarioDos = usuarioDao.buscarPorEmail("noadmin@noadmin");
 			Assert.assertNotNull(usuarioDos);
-			
+
+			usuarioUno = usuarioDao.traerRecorridos(usuarioUno);
+			usuarioDos = usuarioDao.traerRecorridos(usuarioDos);
+
 			Recorrido recorrido = usuarioUno.getRecorridosMios().get(0);
 			
 			recorrido.eliminarPasajero(usuarioDos);
@@ -153,12 +161,15 @@ public class Test6Recorrido {
 		try{
 			Usuario usuarioUno = usuarioDao.buscarPorEmail("admin@admin");
 			Assert.assertNotNull(usuarioUno);
+
+			usuarioUno = usuarioDao.traerRecorridos(usuarioUno);
 			
 			Recorrido recorrido = usuarioUno.getRecorridosMios().get(1);
 			
 			recorridoDao.borrar(recorrido.getId());
 			
 			usuarioUno = usuarioDao.buscarPorEmail("admin@admin");
+			usuarioUno = usuarioDao.traerRecorridos(usuarioUno);
 			
 			Assert.assertEquals(usuarioUno.getRecorridosMios().size(),1);
 		}
