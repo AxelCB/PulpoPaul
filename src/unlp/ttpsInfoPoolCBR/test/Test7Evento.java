@@ -54,7 +54,9 @@ public class Test7Evento {
 		try{
 			Usuario usuarioUno = usuarioDao.buscarPorEmail("admin@admin");
 			Assert.assertNotNull(usuarioUno);
-			
+
+			usuarioUno = usuarioDao.traerRecorridos(usuarioUno);
+
 			Recorrido recorrido = usuarioUno.getRecorridosMios().get(0);
 			recorrido.setGoogleMapsRecorrido("otra url");
 			
