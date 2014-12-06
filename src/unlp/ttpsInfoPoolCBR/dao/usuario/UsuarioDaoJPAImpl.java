@@ -6,6 +6,7 @@ import unlp.ttpsInfoPoolCBR.util.EntityManagerFactoryHolder;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+
 import java.util.List;
 
 /**
@@ -22,7 +23,7 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,Usuario> implem
     	Usuario usuario = null;
     	try{
 	    	em = EntityManagerFactoryHolder.getEntityManager();
-	    	TypedQuery jpaql = em.createQuery("select u from Usuario u where u.email = :email", Usuario.class);
+	    	TypedQuery<Usuario> jpaql = em.createQuery("select u from Usuario u where u.email = :email", Usuario.class);
 	    	jpaql.setParameter("email", email);
 	    	List<Usuario> listaUsuario = jpaql.getResultList();
 	    	if(!listaUsuario.isEmpty()){
@@ -107,6 +108,17 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,Usuario> implem
 			ex.printStackTrace();
 		}
 		return usuario;
+	}
+
+	@Override
+	public Usuario login(String email, String password) throws Exception {
+		Usuario usuario = this.buscarPorEmail(email);
+		if(usuario != null){
+			if(!usuario.getClave().equals(password)){
+				usuario = null;
+			}
+		}
+    	return usuario;
 	}
 
 }
