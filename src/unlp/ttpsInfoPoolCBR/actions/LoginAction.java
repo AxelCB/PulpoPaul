@@ -39,6 +39,7 @@ public class LoginAction {
 			e.printStackTrace();
 		}
 		if(user != null){
+			
 			Rol rol = user.getRol();
 			if(rol.getNombre().equals("Administrador")){
 				resultado = "administrador";

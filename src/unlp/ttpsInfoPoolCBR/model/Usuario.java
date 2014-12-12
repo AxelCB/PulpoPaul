@@ -30,8 +30,9 @@ public class Usuario extends AbstractEntity{
     @Column(nullable = false)
     private String clave;
     
-    @Column
-    private File foto=null;
+    @Lob
+    @Column(length = 16777215)
+    private byte [] foto=null;
 
     @ManyToOne(optional = false)
     private Rol rol;
@@ -82,7 +83,7 @@ public class Usuario extends AbstractEntity{
         super();
     }
 
-    public Usuario(String nombres, String apellido, String telefono, String email, String clave, Rol rol, File foto) {
+    public Usuario(String nombres, String apellido, String telefono, String email, String clave, Rol rol, byte [] foto) {
         this.nombres = nombres;
         this.apellido = apellido;
         this.telefono = telefono;
@@ -206,11 +207,11 @@ public class Usuario extends AbstractEntity{
         this.bandejaSalida = bandejaSalida;
     }
 
-    public File getFoto() {
+    public byte [] getFoto() {
         return foto;
     }
 
-    public void setFoto(File foto) {
+    public void setFoto(byte [] foto) {
         this.foto = foto;
     }
 

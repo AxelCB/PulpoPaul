@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<!-- 
+/struts-jquery-tags
+/struts-jquery-grid-tags
+-->
 
 <!DOCTYPE html PUBLIC>
 <html>
@@ -48,7 +52,7 @@
 
 	</div>
 	
-	<a href="viajero/registrar.html" class="col-sm-offset-3 col-sm-9">¿No esta registrado? Registrese aqui­.</a>
+	<a href="viajero/registrar.jsp" class="col-sm-offset-3 col-sm-9">¿No esta registrado? Registrese aqui­.</a>
 		
 	<script type="text/javascript">
 		var homeUsuario = function() {

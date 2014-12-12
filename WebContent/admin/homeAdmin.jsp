@@ -8,6 +8,7 @@
 </head>
 <body>
 	<!-- Comienzo menu barra admin -->
+	
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="container-fluid">
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -18,13 +19,13 @@
 				    <li class="dropdown">
 			          <a href="#" class="dropdown-toggle" data-toggle="dropdown">ABMs <span class="caret"></span></a>
 			          <ul class="dropdown-menu" role="menu">
-			            <li><a href="abmUsuarios.html">Usuarios</a></li>
-			            <li><a href="abmRecorridos.html">Recorridos</a></li>
-			            <li><a href="abmMensajes.html">Mensajes</a></li>
+			            <li><a href="abmUsuarios.jsp">Usuarios</a></li>
+			            <li><a href="abmRecorridos.jsp">Recorridos</a></li>
+			            <li><a href="abmMensajes.jsp">Mensajes</a></li>
 			          </ul>
 			        </li>
-			        <li><a href="abmEventos.html">Eventos acad&eacute;micos</a></li>
-			        <li><a href="denuncias.html">Denuncias</a></li>
+			        <li><a href="abmEventos.jsp">Eventos acad&eacute;micos</a></li>
+			        <li><a href="denuncias.jsp">Denuncias</a></li>
 				 </ul>
 				 <ul class="nav navbar-nav navbar-right">
 					<li><a href="../index.html">Log Out</a></li>
@@ -32,6 +33,7 @@
 			</div>
 		</div>
 	</nav>
+	
 	<!-- Fin del menu barra admin -->
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
