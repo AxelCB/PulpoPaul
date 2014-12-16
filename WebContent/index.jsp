@@ -54,25 +54,9 @@
 	
 	<a href="viajero/registrar.jsp" class="col-sm-offset-3 col-sm-9">¿No esta registrado? Registrese aqui­.</a>
 		
-	<script type="text/javascript">
-		var homeUsuario = function() {
-			if (window.location.hostname != 'localhost') {
-				$(location).attr(
-						'href',
-						window.location.protocol + '//' + window.location.host
-								+ '/viajero/verMensajes.html');
-			} else {
-				$(location).attr(
-						'href',
-						window.location.protocol + '//' + window.location.host
-								+ '/PulpoPaul/viajero/verMensajes.html');
-			}
-		};
-	</script>
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script src="//code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>
-	<script
-		src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script	src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -34,7 +34,7 @@ public class Test2Usuario {
             
             Usuario usuario = new Usuario(	"Santiago", 
             								"Ruta", 
-            								"111222333444", 
+            								111222, 
             								"admin@admin", 
             								"admin",
             								rol, 
@@ -42,7 +42,7 @@ public class Test2Usuario {
             usuario = usuarioDao.guardar(usuario);
             usuario = new Usuario(	"Axel", 
 									"Collard", 
-									"999888777666", 
+									999888, 
 									"noadmin@noadmin", 
 									"noadmin",
 									rol,
@@ -50,7 +50,7 @@ public class Test2Usuario {
             usuario = usuarioDao.guardar(usuario);
             usuario = new Usuario(	"Pepe", 
 									"Rodriguez", 
-									"111999222888", 
+									111999, 
 									"asd@asd", 
 									"asd",
 									rol,

@@ -6,8 +6,13 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
+import unlp.ttpsInfoPoolCBR.dao.rol.IRolDao;
+import unlp.ttpsInfoPoolCBR.dao.rol.RolDaoJPAImpl;
+import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
+import unlp.ttpsInfoPoolCBR.dao.usuario.UsuarioDaoJPAImpl;
+import unlp.ttpsInfoPoolCBR.model.Usuario;
+
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.validator.validators.EmailValidator;
 
 @Action(value = "registrarUsuario")
 @Results({
@@ -34,8 +39,35 @@ public class RegistrarUsuarioAction extends ActionSupport{
 	private File foto;
 	
 	public String execute(){
-		//Crear el usuario		
-		return "input";
+		Usuario usuario = new Usuario();
+		
+		usuario.setNombres(this.getNombre());
+		usuario.setApellido(this.getApellido());
+		usuario.setTelefono(this.getTelefono());
+		usuario.setEmail(this.getEmail());
+		usuario.setClave(this.getClave());
+		
+		IRolDao rolDao = new RolDaoJPAImpl();
+		try {
+			usuario.setRol(rolDao.buscarPorNombre("viajero"));
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			return "input";
+		}
+		
+		//debe pasarse a array de bytes
+		//usuario.setFoto(foto);
+		
+		IUsuarioDao usuarioDao = new UsuarioDaoJPAImpl();
+		
+		try {
+			usuarioDao.guardar(usuario);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "input";
+		}
+		
+		return "exito";
 	}
 	
 	public void validate(){

@@ -21,7 +21,7 @@ public class Usuario extends AbstractEntity{
     private String apellido;
     
     @Column
-    private String telefono;
+    private Integer telefono;
     
     @Column(nullable = false,
     		unique = true)
@@ -83,7 +83,7 @@ public class Usuario extends AbstractEntity{
         super();
     }
 
-    public Usuario(String nombres, String apellido, String telefono, String email, String clave, Rol rol, byte [] foto) {
+    public Usuario(String nombres, String apellido, Integer telefono, String email, String clave, Rol rol, byte [] foto) {
         this.nombres = nombres;
         this.apellido = apellido;
         this.telefono = telefono;
@@ -127,11 +127,11 @@ public class Usuario extends AbstractEntity{
         this.apellido = apellido;
     }
 
-    public String getTelefono() {
+    public Integer getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(String telefono) {
+    public void setTelefono(Integer telefono) {
         this.telefono = telefono;
     }
 

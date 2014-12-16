@@ -41,7 +41,7 @@ public class LoginAction {
 		if(user != null){
 			
 			Rol rol = user.getRol();
-			if(rol.getNombre().equals("Administrador")){
+			if(rol.getNombre().equals("administrador")){
 				resultado = "administrador";
 			}
 			else{
