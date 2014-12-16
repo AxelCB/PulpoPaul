@@ -1,18 +1,18 @@
 package unlp.ttpsInfoPoolCBR.actions;
 
-import java.io.File;
-
+import com.opensymphony.xwork2.ActionSupport;
+import org.apache.commons.io.IOUtils;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
-
 import unlp.ttpsInfoPoolCBR.dao.rol.IRolDao;
 import unlp.ttpsInfoPoolCBR.dao.rol.RolDaoJPAImpl;
 import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
 import unlp.ttpsInfoPoolCBR.dao.usuario.UsuarioDaoJPAImpl;
 import unlp.ttpsInfoPoolCBR.model.Usuario;
 
-import com.opensymphony.xwork2.ActionSupport;
+import java.io.File;
+import java.io.FileInputStream;
 
 @Action(value = "registrarUsuario")
 @Results({
@@ -50,13 +50,14 @@ public class RegistrarUsuarioAction extends ActionSupport{
 		IRolDao rolDao = new RolDaoJPAImpl();
 		try {
 			usuario.setRol(rolDao.buscarPorNombre("viajero"));
+			//debe pasarse a array de bytes
+			usuario.setFoto(IOUtils.toByteArray(new FileInputStream(foto)));
+
 		} catch (Exception e1) {
 			e1.printStackTrace();
 			return "input";
 		}
-		
-		//debe pasarse a array de bytes
-		//usuario.setFoto(foto);
+
 		
 		IUsuarioDao usuarioDao = new UsuarioDaoJPAImpl();
 		
