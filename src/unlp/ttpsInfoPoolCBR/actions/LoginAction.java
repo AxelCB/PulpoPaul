@@ -4,6 +4,8 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
+import com.opensymphony.xwork2.ActionSupport;
+
 import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
 import unlp.ttpsInfoPoolCBR.dao.usuario.UsuarioDaoJPAImpl;
 import unlp.ttpsInfoPoolCBR.model.Rol;
@@ -17,42 +19,58 @@ import unlp.ttpsInfoPoolCBR.model.Usuario;
 	@Result(name = "administrador",
 			location = "administrador",
 			type = "redirect"),
-	@Result(name = "error",
+	@Result(name = "input",
 			location = "index",
 			type = "redirect")
 })
 
-public class LoginAction {
+public class LoginAction extends ActionSupport{
 
+	private static final long serialVersionUID = 1L;
+	
 	//ENTRADA
 	private String usuario;
 	private String clave;
 	
+	private Usuario user = null;
+	
 	public String execute(){
-		String resultado = "error";
+		String resultado = "";
 		
+		Rol rol = user.getRol();
+		if(rol.getNombre().equals("administrador")){
+			resultado = "administrador";
+		}
+		else{
+			resultado = "viajero";
+		}
+
+		return resultado;
+	}
+	
+	public void validate(){
+		if((getUsuario()==null)
+			|| (getUsuario().equals(""))){
+			addFieldError("usuarioError","Campo obligatorio");
+		}
+		
+		if((getClave()==null)
+			|| (getClave().equals(""))){
+			addFieldError("claveError","Campo obligatorio");
+		}
+		
+		//Validacion de exisitencia
 		IUsuarioDao usuarioDao = new UsuarioDaoJPAImpl();
-		Usuario user = null;
 		try {
 			user = usuarioDao.login(usuario, clave);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if(user != null){
-			
-			Rol rol = user.getRol();
-			if(rol.getNombre().equals("administrador")){
-				resultado = "administrador";
-			}
-			else{
-				resultado = "viajero";
-			}
-		}
 		
-		return resultado;
+		if(usuario == null){
+			addFieldError("loginError", "Usuario o clave incorrectos");
+		}
 	}
-	
-	
 	
 	
 	public String getUsuario() {

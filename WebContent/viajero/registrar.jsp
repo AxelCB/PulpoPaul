@@ -24,7 +24,7 @@
 			<label class="col-sm-2 control-label" for="nombre">Nombre:</label>
 		  	<div class="col-sm-4">
 		  		<s:textfield name="nombre" theme="simple" cssClass="form-control"/>
-		  		<s:fielderror fieldName="nombreError"/>
+				<s:fielderror fieldName="nombreError"/>
 		  	</div>
 		</div>
 		

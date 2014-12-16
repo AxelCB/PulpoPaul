@@ -26,12 +26,15 @@
 		</div>
 		<br>
 
+		<s:fielderror fieldName="loginError"/>
+
 		<s:form action="login" method="post" theme="simple" cssClass="form-horizontal">
 
 			<div class="form-group">
 				<label class="col-sm-2 control-label" for="usuario">Usuario</label>
 				<div class="col-sm-4">
 					<s:textfield name="usuario" theme="simple" cssClass="form-control" />
+					<s:fielderror fieldName="usuarioError"/>
 				</div>
 			</div>
 
@@ -39,6 +42,7 @@
 				<label class="col-sm-2 control-label" for="usuario">Contrase&ntilde;a</label>
 				<div class="col-sm-4">
 					<s:password name="clave" theme="simple" cssClass="form-control"/>
+					<s:fielderror fieldName="claveError"/>
 				</div>
 			</div>
 
@@ -49,7 +53,7 @@
 			</div>
 			
 		</s:form>
-
+		<s:fielderror fieldName="loginError"/>
 	</div>
 	
 	<a href="viajero/registrar.jsp" class="col-sm-offset-3 col-sm-9">¿No esta registrado? Registrese aqui­.</a>
