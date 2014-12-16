@@ -34,7 +34,7 @@
 					<li><a href="historial.html">Historial</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="../index.html">Log Out</a></li>
+					<li><a href="logout">Log Out</a></li>
 				</ul>
 			</div>
 		</div>

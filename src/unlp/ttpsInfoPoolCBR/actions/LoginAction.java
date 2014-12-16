@@ -1,8 +1,12 @@
 package unlp.ttpsInfoPoolCBR.actions;
 
+import java.util.Map;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
+import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -23,8 +27,7 @@ import unlp.ttpsInfoPoolCBR.model.Usuario;
 			location = "index",
 			type = "redirect")
 })
-
-public class LoginAction extends ActionSupport{
+public class LoginAction extends ActionSupport implements SessionAware{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -33,9 +36,12 @@ public class LoginAction extends ActionSupport{
 	private String clave;
 	
 	private Usuario user = null;
+	private SessionMap<String, Object> sessionMap;
 	
 	public String execute(){
 		String resultado = "";
+		
+		sessionMap.put("usuario", user);
 		
 		Rol rol = user.getRol();
 		if(rol.getNombre().equals("administrador")){
@@ -49,13 +55,16 @@ public class LoginAction extends ActionSupport{
 	}
 	
 	public void validate(){
+		//NINGUNO DE ESTOS ERRORES FUNCIONA PORQUE A DONDE SE VA
+		//ES OTRO ACTION (index) Y ESTE NO LOS MUESTRA
+		
 		if((getUsuario()==null)
-			|| (getUsuario().equals(""))){
+			|| (getUsuario().trim().equals(""))){
 			addFieldError("usuarioError","Campo obligatorio");
 		}
 		
 		if((getClave()==null)
-			|| (getClave().equals(""))){
+			|| (getClave().trim().equals(""))){
 			addFieldError("claveError","Campo obligatorio");
 		}
 		
@@ -67,11 +76,15 @@ public class LoginAction extends ActionSupport{
 			e.printStackTrace();
 		}
 		
-		if(usuario == null){
+		if(user == null){
 			addFieldError("loginError", "Usuario o clave incorrectos");
 		}
 	}
 	
+	@Override
+	public void setSession(Map<String, Object> map) {
+		sessionMap = (SessionMap) map;
+	}
 	
 	public String getUsuario() {
 		return usuario;

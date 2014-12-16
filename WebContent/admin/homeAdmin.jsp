@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +32,7 @@
 			        <li><a href="denuncias.jsp">Denuncias</a></li>
 				 </ul>
 				 <ul class="nav navbar-nav navbar-right">
-					<li><a href="../index.html">Log Out</a></li>
+					<li><a href='<s:url action="logout"/>'>Log Out</a></li>
 				</ul>
 			</div>
 		</div>

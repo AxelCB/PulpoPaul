@@ -26,6 +26,8 @@
 		</div>
 		<br>
 
+		<s:fielderror fieldName="logeadoError"/>	
+			
 		<s:fielderror fieldName="loginError"/>
 
 		<s:form action="login" method="post" theme="simple" cssClass="form-horizontal">
@@ -53,7 +55,7 @@
 			</div>
 			
 		</s:form>
-		<s:fielderror fieldName="loginError"/>
+
 	</div>
 	
 	<a href="viajero/registrar.jsp" class="col-sm-offset-3 col-sm-9">¿No esta registrado? Registrese aqui­.</a>
