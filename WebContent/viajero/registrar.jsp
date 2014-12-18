@@ -50,6 +50,7 @@
 		  		<s:textfield name="email" theme="simple" cssClass="form-control"/>
 		  		<s:fielderror fieldName="emailError"/>
 		  		<s:fielderror fieldName="emailError2"/>
+		  		<s:fielderror fieldName="repetidoError"/>
 		  	</div>
 		</div>
 		

@@ -12,7 +12,7 @@ import com.opensymphony.xwork2.ActionSupport;
 @Action(value = "logout")
 @Result(name = "exito",
 		location = "index",
-		type = "redirect")
+		type = "chain")
 public class LogOutAction extends ActionSupport implements SessionAware{
 
 	private static final long serialVersionUID = 1L;

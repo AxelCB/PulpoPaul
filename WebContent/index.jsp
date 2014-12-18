@@ -26,8 +26,7 @@
 		</div>
 		<br>
 
-		<s:fielderror fieldName="logeadoError"/>	
-			
+		<s:fielderror fieldName="nologedError"/>		
 		<s:fielderror fieldName="loginError"/>
 
 		<s:form action="login" method="post" theme="simple" cssClass="form-horizontal">

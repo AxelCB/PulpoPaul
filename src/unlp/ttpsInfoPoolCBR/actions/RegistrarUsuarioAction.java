@@ -23,7 +23,7 @@ import java.util.Map;
 @Results({
 		@Result(name = "exito", 
 				location = "misRecorridos",
-				type = "redirect"),
+				type = "chain"),
 		//si hay algun error en el validate() se busca el result input para ir
 		@Result(name = "input",
 				location = "/viajero/registrar.jsp")
@@ -74,6 +74,7 @@ public class RegistrarUsuarioAction extends ActionSupport implements SessionAwar
 				usuario = usuarioDao.guardar(usuario);
 			}
 			else{
+				addFieldError("repetidoError", "El mail ingresado ya existe");
 				return "input";
 			}
 		} catch (Exception e) {

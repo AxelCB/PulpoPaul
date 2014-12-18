@@ -19,13 +19,13 @@ import unlp.ttpsInfoPoolCBR.model.Usuario;
 @Results({
 	@Result(name = "viajero",
 			location = "misRecorridos",
-			type = "redirect"),
+			type = "chain"),
 	@Result(name = "administrador",
 			location = "administrador",
-			type = "redirect"),
+			type = "chain"),
 	@Result(name = "input",
 			location = "index",
-			type = "redirect")
+			type = "chain")
 })
 public class LoginAction extends ActionSupport implements SessionAware{
 
@@ -69,16 +69,23 @@ public class LoginAction extends ActionSupport implements SessionAware{
 		}
 		
 		//Validacion de exisitencia
-		IUsuarioDao usuarioDao = new UsuarioDaoJPAImpl();
-		try {
-			user = usuarioDao.login(usuario, clave);
-		} catch (Exception e) {
-			e.printStackTrace();
+		if(getUsuario()!=null
+			&& !getUsuario().trim().equals("")
+			&& getClave()!=null
+			&& !getClave().trim().equals("")){
+				
+			IUsuarioDao usuarioDao = new UsuarioDaoJPAImpl();
+			try {
+				user = usuarioDao.login(usuario, clave);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			if(user == null){
+				addFieldError("loginError", "Usuario o clave incorrectos");
+			}
 		}
 		
-		if(user == null){
-			addFieldError("loginError", "Usuario o clave incorrectos");
-		}
 	}
 	
 	@Override
