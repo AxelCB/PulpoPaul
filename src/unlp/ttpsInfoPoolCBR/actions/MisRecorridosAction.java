@@ -13,16 +13,16 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-@Action(value = "administrador")
+@Action(value = "misRecorridos")
 @Results({
 	@Result(name = "exito",
-			location = "/admin/homeAdmin.jsp"),
+			location = "/viajero/misRecorridos.jsp"),
 	@Result(name = "nologed",
 			location = "index",
 			type = "redirect")
 })
 
-public class AdministradorAction extends ActionSupport implements SessionAware{
+public class MisRecorridosAction extends ActionSupport implements SessionAware{
 
 	private static final long serialVersionUID = 1L;
 
@@ -32,18 +32,18 @@ public class AdministradorAction extends ActionSupport implements SessionAware{
 		HttpSession session = ServletActionContext.getRequest().getSession(false);  
 		if(session==null || session.getAttribute("usuario")==null){  
 			return "nologed";
-		}  
+		}
 		
 		return "exito";
 	}
 	
 	public void validate(){
-		
-	}
 
+	}
+	
 	@Override
 	public void setSession(Map<String, Object> map) {
-		sessionMap = (SessionMap)map;		
+		sessionMap = (SessionMap)map;
 	}
 	
 }

@@ -1,8 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<link href="../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link href="../resources/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Mis Recorridos</title>
 </head>
@@ -16,25 +20,25 @@
 	    	</div>
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="buscarRecorridos.html">Buscar Recorridos</a></li>
+					<li><a href="buscarRecorridos.jsp">Buscar Recorridos</a></li>
 					<li class="dropdown">
 			        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Recorridos Propios<span class="caret"></span></a>
 			       		<ul class="dropdown-menu" role="menu">
-				            <li><a href="nuevoRecorrido.html">Nuevo</a></li>
-				            <li><a href="misRecorridos.html">Ver</a></li>
+				            <li><a href="nuevoRecorrido.jsp">Nuevo</a></li>
+				            <li><a href="misRecorridos.jsp">Ver</a></li>
 				    	</ul>
 			        </li>
 					<li class="dropdown">
 			        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Mensajes<span class="caret"></span></a>
 			       		<ul class="dropdown-menu" role="menu">
-				            <li><a href="enviarMensaje.html">Enviar</a></li>
-				            <li><a href="verMensajes.html">Bandeja de entrada</a></li>
+				            <li><a href="enviarMensaje.jsp">Enviar</a></li>
+				            <li><a href="verMensajes.jsp">Bandeja de entrada</a></li>
 				    	</ul>
 			    	</li>
-					<li><a href="historial.html">Historial</a></li>
+					<li><a href="historial.jsp">Historial</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="logout">Log Out</a></li>
+					<li><a href='<s:url action="logout"/>'>Log Out</a></li>
 				</ul>
 			</div>
 		</div>

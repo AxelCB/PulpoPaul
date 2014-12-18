@@ -1,10 +1,14 @@
 package unlp.ttpsInfoPoolCBR.actions;
 
 import com.opensymphony.xwork2.ActionSupport;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
+import org.apache.struts2.dispatcher.SessionMap;
+import org.apache.struts2.interceptor.SessionAware;
+
 import unlp.ttpsInfoPoolCBR.dao.rol.IRolDao;
 import unlp.ttpsInfoPoolCBR.dao.rol.RolDaoJPAImpl;
 import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
@@ -13,21 +17,25 @@ import unlp.ttpsInfoPoolCBR.model.Usuario;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Map;
 
 @Action(value = "registrarUsuario")
 @Results({
 		@Result(name = "exito", 
-				location = "/viajero/misRecorridos.jsp"),
-		//si hay algun error se busca el result input para ir
+				location = "misRecorridos",
+				type = "redirect"),
+		//si hay algun error en el validate() se busca el result input para ir
 		@Result(name = "input",
 				location = "/viajero/registrar.jsp")
 })
 
-public class RegistrarUsuarioAction extends ActionSupport{
+public class RegistrarUsuarioAction extends ActionSupport implements SessionAware{
 
 	//http://www.javatpoint.com/struts-2-SessionAware-interface-example
 	
 	private static final long serialVersionUID = 1L;
+	
+	private SessionMap<String, Object> sessionMap;
 	
 	//ENTRADA
 	private String nombre;
@@ -50,24 +58,30 @@ public class RegistrarUsuarioAction extends ActionSupport{
 		IRolDao rolDao = new RolDaoJPAImpl();
 		try {
 			usuario.setRol(rolDao.buscarPorNombre("viajero"));
-			//debe pasarse a array de bytes
-			usuario.setFoto(IOUtils.toByteArray(new FileInputStream(foto)));
-
+			if(foto != null){
+				usuario.setFoto(IOUtils.toByteArray(new FileInputStream(foto)));
+			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
 			return "input";
 		}
-
 		
 		IUsuarioDao usuarioDao = new UsuarioDaoJPAImpl();
 		
 		try {
-			usuarioDao.guardar(usuario);
+			//Vemos si no se repite el email
+			if(usuarioDao.buscarPorEmail(usuario.getEmail()) == null){
+				usuario = usuarioDao.guardar(usuario);
+			}
+			else{
+				return "input";
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "input";
 		}
 		
+		sessionMap.put("usuario", usuario);
 		return "exito";
 	}
 	
@@ -110,6 +124,11 @@ public class RegistrarUsuarioAction extends ActionSupport{
 			){
 			addFieldError("repetirClaveError2","Las claves deben coincidir");
 		}
+	}
+	
+	@Override
+	public void setSession(Map<String, Object> map) {
+		sessionMap = (SessionMap)map;
 	}
 	
 	public String getNombre() {

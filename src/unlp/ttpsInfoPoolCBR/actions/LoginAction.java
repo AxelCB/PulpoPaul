@@ -18,7 +18,7 @@ import unlp.ttpsInfoPoolCBR.model.Usuario;
 @Action(value = "login")
 @Results({
 	@Result(name = "viajero",
-			location = "viajero",
+			location = "misRecorridos",
 			type = "redirect"),
 	@Result(name = "administrador",
 			location = "administrador",
@@ -56,7 +56,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 	
 	public void validate(){
 		//NINGUNO DE ESTOS ERRORES FUNCIONA PORQUE A DONDE SE VA
-		//ES OTRO ACTION (index) Y ESTE NO LOS MUESTRA
+		//ES OTRO ACTION (index) Y ESTE NO LOS PASA A LA JSP
 		
 		if((getUsuario()==null)
 			|| (getUsuario().trim().equals(""))){
