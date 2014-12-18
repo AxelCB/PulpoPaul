@@ -4,7 +4,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 
 
-@Action(value = "index")//,className = "indexAction")
+@Action(value = "index")
 @Result(name = "exito", location = "/index.jsp")
 public class IndexAction {
 

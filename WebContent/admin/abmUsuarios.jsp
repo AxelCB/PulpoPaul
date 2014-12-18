@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -146,10 +150,10 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+					<button aria-hidden="true" data-dismiss="modal" class="close" type="button">Ã</button>
 					<h4 id="tituloModalEliminarUsuario" class="modal-title">Eliminar</h4>	
 				</div>
-				<div class="modal-body">¿Está seguro de
+				<div class="modal-body">Â¿EstÃ¡ seguro de
 					eliminar este elemento?</div>
 				<div class="modal-footer">
 					<button data-dismiss="modal" class="btn btn-primary" type="button">Eliminar</button>

@@ -30,6 +30,12 @@ public class Evento extends AbstractEntity{
     
     @Column
     private Time horaFin;
+    
+    @Column(nullable = false)
+    private Double latitud;
+    
+    @Column(nullable = false)
+    private Double longitud;
 
     @OneToMany(	mappedBy="evento",
     			cascade = CascadeType.ALL)

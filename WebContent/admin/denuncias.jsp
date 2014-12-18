@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,7 +58,7 @@
 					</div>
 				</div>
 			  	<div class="panel-body">
-			    	Pasó a cualquier hora, y me dejó plantado a la vuelta. No lo recomiendo!
+			    	PasÃ³ a cualquier hora, y me dejÃ³ plantado a la vuelta. No lo recomiendo!
 			  	</div>
 			</div>
 			
@@ -73,7 +77,7 @@
 					</div>
 				</div>
 			  	<div class="panel-body">
-			    	El viaje estuvo bastante bien, pero el precio resultó excesivo. No recomiendo para billeteras livianas.
+			    	El viaje estuvo bastante bien, pero el precio resultÃ³ excesivo. No recomiendo para billeteras livianas.
 			  	</div>
 			</div>
 			
@@ -92,7 +96,7 @@
 					</div>
 				</div>
 			  	<div class="panel-body">
-			    	No suelo ser muy detallista, pero la verdad, que no recomiendo mucho este auto, por lo menos por ahora. El auto se paró varias veces, y un par de cuadras antes llegar se le rompió algo y tuvimos que ir caminando!
+			    	No suelo ser muy detallista, pero la verdad, que no recomiendo mucho este auto, por lo menos por ahora. El auto se parÃ³ varias veces, y un par de cuadras antes llegar se le rompiÃ³ algo y tuvimos que ir caminando!
 			  	</div>
 			</div>
 

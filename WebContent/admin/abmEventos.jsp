@@ -1,9 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" rel="stylesheet">
-<link href="../resources/customCSS/CustomViajeroStyle.css" rel="stylesheet">
+	<link href="../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../resources/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+	<link href="../resources/customCSS/jquery-gmaps-latlon-picker.css" rel="stylesheet">
+	<link href="../resources/customCSS/CustomViajeroStyle.css" rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Home Admin</title>
 </head>
@@ -63,7 +68,7 @@
 					</tr>
 					<tr>
 						<td>PHP Conference</td>
-<!-- 						<td>??¡</td> -->
+<!-- 						<td>??Â¡</td> -->
 						<td>UTN Berisso</td>
 						<td>Conferencia anual sobre el lenguaje PHP</td>
 						<td>10/11/2014 11:00 a.m.</td>
@@ -126,7 +131,13 @@
 						</div>
 					</div>
 					<div class="col-sm-6">
-						<div id="map_canvas" style="width: 400px;height: 300px;"></div>
+						<!-- Para mostrar un punto poner la lat y la long en el value, para guardar un punto sacarlos de ahi -->
+						<fieldset class="gllpLatlonPicker">
+							<div class="gllpMap">Google Maps</div>
+							<input type="hidden" class="gllpLatitude" value="" name="latitud"/>
+							<input type="hidden" class="gllpLongitude" value="" name="longitud"/>
+							<input type="hidden" class="gllpZoom"/>
+						</fieldset>
 					</div>
 				</form>
 			</div>
@@ -144,10 +155,10 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+					<button aria-hidden="true" data-dismiss="modal" class="close" type="button">Ã</button>
 					<h4 id="tituloModalEliminarEvento" class="modal-title">Eliminar</h4>	
 				</div>
-				<div class="modal-body">¿Está seguro de
+				<div class="modal-body">¿Esta seguro de
 					eliminar este elemento?</div>
 				<div class="modal-footer">
 					<button data-dismiss="modal" class="btn btn-primary" type="button">Eliminar</button>
@@ -161,9 +172,11 @@
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script src="//code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	
+	<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
 	<script src="../resources/customJS/funcionesAdmin.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js"></script>
-    <script src="../resources/customJS/googleMapsInitialization.js"></script>
+	
+	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	<script src="../resources/customJS/jquery-gmaps-latlon-picker.js"></script>
 </body>
 </html>

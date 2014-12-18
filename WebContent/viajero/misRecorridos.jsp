@@ -5,8 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" rel="stylesheet">
+	<link href="../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../resources/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Mis Recorridos</title>
 </head>
@@ -69,7 +69,9 @@
 				</div>
 				<div class="panel panel-body">
 					<div class="row">
-						<div class="col-sm-6" id="map_canvas" style="width: 500px;height: 400px;"></div>
+						<div class="col-cm-6">
+							<div id="map_canvas" style="width: 400px;height: 300px;"></div>
+						</div>
 						<div class="col-sm-6">
 							<p>Informacion del viaje</p>
 							<h4>Desde: Un lado</h4>
@@ -191,12 +193,14 @@
 	</div>
 	<!-- Fin de pagina -->
 
-	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<!--<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>-->
+	<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script src="//code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
 	<script src="../resources/customJS/nuevoRecorridoSelects.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js"></script>
-    <script src="../resources/customJS/googleMapsInitialization.js"></script>
+	
+	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	<script src="../resources/customJS/googleMapsInitialization.js"></script>
 </body>
 </html>

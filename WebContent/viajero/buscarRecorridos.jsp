@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -208,6 +212,7 @@
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script src="//code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
 	<script src="../resources/customJS/nuevoRecorridoSelects.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js"></script>
     <script src="../resources/customJS/googleMapsInitialization.js"></script>
