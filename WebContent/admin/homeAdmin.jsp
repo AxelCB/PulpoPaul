@@ -23,13 +23,13 @@
 				    <li class="dropdown">
 			          <a href="#" class="dropdown-toggle" data-toggle="dropdown">ABMs <span class="caret"></span></a>
 			          <ul class="dropdown-menu" role="menu">
-			            <li><a href="abmUsuarios.jsp">Usuarios</a></li>
-			            <li><a href="abmRecorridos.jsp">Recorridos</a></li>
-			            <li><a href="abmMensajes.jsp">Mensajes</a></li>
+			            <li><a href="/PulpoPaul/admin/abmUsuarios.jsp">Usuarios</a></li>
+			            <li><a href="/PulpoPaul/admin/abmRecorridos.jsp">Recorridos</a></li>
+			            <li><a href="/PulpoPaul/admin/abmMensajes.jsp">Mensajes</a></li>
 			          </ul>
 			        </li>
-			        <li><a href="abmEventos.jsp">Eventos acad&eacute;micos</a></li>
-			        <li><a href="denuncias.jsp">Denuncias</a></li>
+			        <li><a href="/PulpoPaul/admin/abmEventos.jsp">Eventos acad&eacute;micos</a></li>
+			        <li><a href="/PulpoPaul/admin/denuncias.jsp">Denuncias</a></li>
 				 </ul>
 				 <ul class="nav navbar-nav navbar-right">
 					<li><a href='<s:url action="logout"/>'>Log Out</a></li>
