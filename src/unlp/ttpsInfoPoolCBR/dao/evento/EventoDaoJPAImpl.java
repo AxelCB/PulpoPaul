@@ -1,14 +1,11 @@
 package unlp.ttpsInfoPoolCBR.dao.evento;
 
 
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-
 import unlp.ttpsInfoPoolCBR.dao.GenericDaoJPAImpl;
 import unlp.ttpsInfoPoolCBR.model.Evento;
-import unlp.ttpsInfoPoolCBR.util.EntityManagerFactoryHolder;
+
+import javax.persistence.TypedQuery;
+import java.util.List;
 
 /**
  * Created by Axel on 23/11/2014.
@@ -20,17 +17,15 @@ public class EventoDaoJPAImpl extends GenericDaoJPAImpl<Evento,Evento> implement
     
     @Override
     public Evento buscarPorNombre(String nombre) throws Exception{
-    	EntityManager em = null;
     	Evento evento = null;
     	try{
-	    	em = EntityManagerFactoryHolder.getEntityManager();
-	    	TypedQuery jpaql = em.createQuery("select e from Evento e where e.nombre = :nombre", Evento.class);
+	    	TypedQuery jpaql = this.getEm().createQuery("select e from Evento e where e.nombre = :nombre", Evento.class);
 	    	jpaql.setParameter("nombre", nombre);
 	    	List<Evento> listaEvento = jpaql.getResultList();
 	    	if(!listaEvento.isEmpty()){
 	    		evento = listaEvento.get(0);
 	    	}
-	    	em.close();
+	    	this.getEm().close();
     	}
     	catch(Exception ex){
     		throw ex;

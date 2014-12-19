@@ -1,36 +1,40 @@
 package unlp.ttpsInfoPoolCBR.actions;
 
-import java.util.Map;
-
+import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
-
-import com.opensymphony.xwork2.ActionSupport;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
-import unlp.ttpsInfoPoolCBR.dao.usuario.UsuarioDaoJPAImpl;
 import unlp.ttpsInfoPoolCBR.model.Rol;
 import unlp.ttpsInfoPoolCBR.model.Usuario;
+
+import java.util.Map;
 
 @Action(value = "login")
 @Results({
 	@Result(name = "viajero",
-			location = "misRecorridos",
-			type = "chain"),
+			location = "viajero",
+			type = "redirect"),
 	@Result(name = "administrador",
 			location = "administrador",
-			type = "chain"),
+			type = "redirect"),
 	@Result(name = "input",
 			location = "index",
-			type = "chain")
+			type = "redirect")
 })
 public class LoginAction extends ActionSupport implements SessionAware{
 
 	private static final long serialVersionUID = 1L;
-	
+
+	/**
+	 * Usuario dao (inyectado)
+	 */
+	@Autowired
+	IUsuarioDao usuarioDao;
+
 	//ENTRADA
 	private String usuario;
 	private String clave;
@@ -56,7 +60,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 	
 	public void validate(){
 		//NINGUNO DE ESTOS ERRORES FUNCIONA PORQUE A DONDE SE VA
-		//ES OTRO ACTION (index) Y ESTE NO LOS PASA A LA JSP
+		//ES OTRO ACTION (index) Y ESTE NO LOS MUESTRA
 		
 		if((getUsuario()==null)
 			|| (getUsuario().trim().equals(""))){
@@ -69,23 +73,16 @@ public class LoginAction extends ActionSupport implements SessionAware{
 		}
 		
 		//Validacion de exisitencia
-		if(getUsuario()!=null
-			&& !getUsuario().trim().equals("")
-			&& getClave()!=null
-			&& !getClave().trim().equals("")){
-				
-			IUsuarioDao usuarioDao = new UsuarioDaoJPAImpl();
-			try {
-				user = usuarioDao.login(usuario, clave);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			if(user == null){
-				addFieldError("loginError", "Usuario o clave incorrectos");
-			}
+
+		try {
+			user = usuarioDao.login(usuario, clave);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
+		if(user == null){
+			addFieldError("loginError", "Usuario o clave incorrectos");
+		}
 	}
 	
 	@Override

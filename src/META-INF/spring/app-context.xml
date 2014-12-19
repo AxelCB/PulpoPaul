@@ -1,8 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-    <!--default-autowire="byType">-->
-    <!--<tx:annotation-driven />-->
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+    <context:component-scan base-package="unlp.ttpsInfoPoolCBR.actions" />
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+        </property>
+    </bean>
+
+    <bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+
+    <!-- Habilitar @Transactionnal, no alcanza solamente con <context:annotation-config/> -->
+    <tx:annotation-driven transaction-manager="txManager" />
+
+    <!-- Struts Action -->
+    <!--<bean id="administradorAction" class="unlp.ttpsInfoPoolCBR.actions.AdministradorAction" scope="prototype"/>
+    <bean id="indexAction" class="unlp.ttpsInfoPoolCBR.actions.IndexAction" scope="prototype"/>
+    <bean id="loginAction" class="unlp.ttpsInfoPoolCBR.actions.LoginAction" scope="prototype">
+    </bean>
+    <bean id="logoutAction" class="unlp.ttpsInfoPoolCBR.actions.LogoutAction" scope="prototype"/>
+    <bean id="registrarUsuarioAction" class="unlp.ttpsInfoPoolCBR.actions.RegistrarUsuarioAction" scope="prototype"/>-->
+
+
+    <!-- DAO Beans -->
+    <bean id="calificacionRecorridoDao" class="unlp.ttpsInfoPoolCBR.dao.calificacionRecorrido.CalificacionRecorridoDaoJPAImpl" scope="prototype"/>
+    <bean id="calificacionUsuarioDao" class="unlp.ttpsInfoPoolCBR.dao.calificacionUsuario.CalificacionUsuarioDaoJPAImpl" scope="prototype"/>
+    <bean id="denunciaDao" class="unlp.ttpsInfoPoolCBR.dao.denuncia.DenunciaDaoJPAImpl" scope="prototype"/>
+    <bean id="eventoDao" class="unlp.ttpsInfoPoolCBR.dao.evento.EventoDaoJPAImpl" scope="prototype"/>
+    <bean id="mensajeDao" class="unlp.ttpsInfoPoolCBR.dao.mensaje.MensajeDaoJPAImpl" scope="prototype"/>
+    <bean id="recorridoDao" class="unlp.ttpsInfoPoolCBR.dao.recorrido.RecorridoDaoJPAImpl" scope="prototype"/>
+    <bean id="rolDao" class="unlp.ttpsInfoPoolCBR.dao.rol.RolDaoJPAImpl" scope="prototype"/>
+    <bean id="usuarioDao" class="unlp.ttpsInfoPoolCBR.dao.usuario.UsuarioDaoJPAImpl" scope="prototype"/>
+    <bean id="viajeDao" class="unlp.ttpsInfoPoolCBR.dao.viaje.ViajeDaoJPAImpl" scope="prototype"/>
+
 </beans>

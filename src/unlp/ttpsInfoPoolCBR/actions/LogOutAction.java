@@ -1,18 +1,17 @@
 package unlp.ttpsInfoPoolCBR.actions;
 
-import java.util.Map;
-
+import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.opensymphony.xwork2.ActionSupport;
+import java.util.Map;
 
 @Action(value = "logout")
 @Result(name = "exito",
 		location = "index",
-		type = "chain")
+		type = "redirect")
 public class LogOutAction extends ActionSupport implements SessionAware{
 
 	private static final long serialVersionUID = 1L;
