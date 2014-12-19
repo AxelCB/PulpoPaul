@@ -10,6 +10,8 @@ var mostrarModalEliminar= function(){
 	$('#eliminar-elemento').modal('show');
 }
 
-var mostrarModalMapa = function(){
+var mostrarModalMapa = function(latitud,longitud){
+	$('#latitudModal').val(latitud);
+	$('#longitudModal').val(longitud);
 	$('#detalle-mapa').modal('show');
 }

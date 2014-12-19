@@ -72,7 +72,7 @@
                     <td><s:date name="%{#evento.getFecha()}" format="EEEE yyyy-MM-dd" /><hr> </td>
                     <td><s:property value="%{#evento.getHoraComienzo()}" /></td>
                     <td><s:property value="%{#evento.getHoraFin()}" /></td>
-                    <td><a href="#" onclick="mostrarModalMapa();"><span class="glyphicon glyphicon-map-marker"></span></a>
+                    <td><a href="#" onclick="mostrarModalMapa(<s:property value="%{#evento.getLatitud()}" />,<s:property value="%{#evento.getLongitud()}" />);"><span class="glyphicon glyphicon-map-marker"></span></a>
                     </td>
                     <td><a href="#" onclick="mostrarModalNuevoEvento();"><span
                             class="glyphicon glyphicon-pencil"></span></a>
@@ -206,17 +206,15 @@
                 <h4 id="tituloModalDetalleMapa" class="modal-title">Ubicaci&oacute;n en Mapa</h4>
             </div>
             <div class="col-sm-6">
-                <%--<!-- Para mostrar un punto poner la lat y la long en el value, para guardar un punto sacarlos de ahi -->
+                <!-- Para mostrar un punto poner la lat y la long en el value, para guardar un punto sacarlos de ahi -->
                 <fieldset class="gllpLatlonPicker">
                     <div class="gllpMap">Google Maps</div>
-                    <s:textfield type="hidden" class="gllpLatitude" value="-34.921549" name="latitud"/>
-                    <s:textfield type="hidden" class="gllpLongitude" value="-57.954512" name="longitud"/>
+                    <input type="hidden" class="gllpLatitude" value="-34.921549" name="latitudModal"/>
+                    <input type="hidden" class="gllpLongitude" value="-57.954512" name="longitudModal"/>
                     <input type="hidden" class="gllpZoom"/>
-                </fieldset>--%>
+                </fieldset>
             </div>
             <div class="modal-footer">
-                <button data-dismiss="modal" class="btn btn-primary" type="button">Eliminar</button>
-                <button data-dismiss="modal" class="btn btn-default" type="button">Cancelar</button>
             </div>
         </div>
     </div>

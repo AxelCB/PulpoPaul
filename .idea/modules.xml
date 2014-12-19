@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../PruebaStrutsHibernate/PruebaStrutsHibernate.iml" filepath="$PROJECT_DIR$/../PruebaStrutsHibernate/PruebaStrutsHibernate.iml" />
       <module fileurl="file://$PROJECT_DIR$/PulpoPaul.iml" filepath="$PROJECT_DIR$/PulpoPaul.iml" />
     </modules>
   </component>
