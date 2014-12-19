@@ -28,7 +28,7 @@
 			            <li><a href="/PulpoPaul/admin/abmMensajes.jsp">Mensajes</a></li>
 			          </ul>
 			        </li>
-			        <li><a href="/PulpoPaul/admin/abmEventos.jsp">Eventos acad&eacute;micos</a></li>
+			        <li><s:a href="/PulpoPaul/eventos">Eventos acad&eacute;micos</s:a></li>
 			        <li><a href="/PulpoPaul/admin/denuncias.jsp">Denuncias</a></li>
 				 </ul>
 				 <ul class="nav navbar-nav navbar-right">
