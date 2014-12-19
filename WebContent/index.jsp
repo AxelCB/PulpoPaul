@@ -58,6 +58,8 @@
 	</div>
 	
 	<a href="viajero/registrar.jsp" class="col-sm-offset-3 col-sm-9">¿No esta registrado? Registrese aqui­.</a>
+	<br>
+	<p>Para activar los usuarios ejecute las consultas presentes en el archivo WEB-INF/SQL/script_inicial.sql</p>
 		
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
