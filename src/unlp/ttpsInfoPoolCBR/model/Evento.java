@@ -21,6 +21,9 @@ public class Evento extends AbstractEntity{
     
     @Column(length = 1023)
     private String descripcion;
+
+    @Column(length = 1023)
+    private String lugar;
     
     @Column(nullable = false)
     private Date fecha;
@@ -119,4 +122,8 @@ public class Evento extends AbstractEntity{
     public Double getLongitud() {return longitud;}
 
     public void setLongitud(Double longitud) {this.longitud = longitud;}
+
+    public String getLugar() {return lugar;}
+
+    public void setLugar(String lugar) {this.lugar = lugar;}
 }

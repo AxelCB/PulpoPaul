@@ -5,10 +5,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../resources/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="../resources/customCSS/jquery-gmaps-latlon-picker.css" rel="stylesheet">
-    <link href="../resources/customCSS/CustomViajeroStyle.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/../resources/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/../resources/customCSS/jquery-gmaps-latlon-picker.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/../resources/customCSS/CustomViajeroStyle.css" rel="stylesheet">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Home Admin</title>
 </head>
@@ -48,7 +48,7 @@
             <thead>
             <tr>
                 <th>Nombre</th>
-                <!-- 					<th>Tipo</th> -->
+                <th>Lugar</th>
                 <th>Latitud</th>
                 <th>Longitud</th>
                 <th>Descripci&oacute;n</th>
@@ -61,8 +61,8 @@
             <tbody>
             <s:iterator value="eventos" var="evento">
                 <tr>
-                    <%--<td><s:property value="%{#evento.getId()}" /></td>--%>
                     <td><s:property value="%{#evento.getNombre()}" /></td>
+                    <td><s:property value="%{#evento.getLugar()}" /></td>
                     <td><s:property value="%{#evento.getLatitud()}" /></td>
                     <td><s:property value="%{#evento.getLongitud()}" /></td>
                     <td><s:property value="%{#evento.getDescripcion()}" /></td>
@@ -73,17 +73,6 @@
                     <td><a href="#" onclick="mostrarModalEliminar();"><span class="glyphicon glyphicon-trash"></span></a>
                 </tr>
             </s:iterator>
-           <%-- <tr>
-                <td>PHP Conference</td>
-                <!-- 						<td>??Â¡</td> -->
-                <td>UTN Berisso</td>
-                <td>Conferencia anual sobre el lenguaje PHP</td>
-                <td>10/11/2014 11:00 a.m.</td>
-                <td>12/11/2014 6:00 p.m.</td>
-                <td><a href="#" onclick="mostrarModalNuevoEvento();"><span
-                        class="glyphicon glyphicon-pencil"></span></a>
-                <td><a href="#" onclick="mostrarModalEliminar();"><span class="glyphicon glyphicon-trash"></span></a>
-            </tr>--%>
             </tbody>
         </table>
         <div class="row">
@@ -105,20 +94,21 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <form method="post" class="form-horizontal" action="">
+                    <s:form action="eventos/guardar" method="post" theme="simple" cssClass="form-horizontal" enctype="multipart/form-data">
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" for="nombre">Nombre:</label>
                                 <div class="col-sm-7">
-                                    <input type="text" name="nombre" class="form-control" placeholder="Nombre" required>
+                                    <s:textfield name="nombre" theme="simple" cssClass="form-control"/>
+                                    <s:fielderror fieldName="nombreError"/>
                                 </div>
                             </div>
                             <!-- 					SELECT -->
                             <div class="form-group">
                                 <label class="col-sm-4 control-label control-label" for="lugar">Lugar</label>
-
                                 <div class="col-sm-7">
-                                    <input type="text" name="lugar" class="form-control" placeholder="Lugar" required>
+                                    <s:textfield id="lugar" name="lugar" theme="simple" cssClass="form-control"/>
+                                    <s:fielderror fieldName="lugarError"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -126,26 +116,29 @@
                                        for="descripcion">Descripci&oacute;n</label>
 
                                 <div class="col-sm-7">
-						  		<textarea id="descripcion" class="form-control" required="required" cols="40"
-                                          rows="3" placeholder="Descripci&oacute;n" name="descripcion"></textarea>
+						  		    <s:textarea id="descripcion" theme="simple" cssClass="form-control" cols="40"
+                                          rows="3" name="descripcion"></s:textarea>
+                                    <s:fielderror fieldName="descripcionError"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label control-label" for="comienzo">D&iacute;a y hora
-                                    comienzo</label>
-
+                                <label class="col-sm-4 control-label control-label" for="fecha">Fecha</label>
                                 <div class="col-sm-7">
-                                    <input type="datetime-local" name="comienzo" class="form-control"
-                                           placeholder="D&iacute;a y hora comienzo" required>
+                                    <s:textfield type="datetime-local" name="fecha" theme="simple" cssClass="form-control"/>
+                                    <s:fielderror fieldName="comienzoError"/>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-4 control-label control-label" for="clave">D&iacute;a y hora
-                                    fin</label>
-
+                                <label class="col-sm-4 control-label control-label" for="horaComienzo">Hora comienzo</label>
                                 <div class="col-sm-7">
-                                    <input type="datetime-local" name="fin" class="form-control"
-                                           placeholder="D&iacute;a y hora fin" required>
+                                    <s:textfield type="datetime-local" name="horaComienzo" theme="simple" cssClass="form-control"/>
+                                    <s:fielderror fieldName="comienzoError"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label control-label" for="horaFin">Hora fin</label>
+                                <div class="col-sm-7">
+                                    <s:textfield type="datetime-local" name="horaFin" theme="simple" cssClass="form-control" id="fin"/>
                                 </div>
                             </div>
                         </div>
@@ -153,18 +146,21 @@
                             <!-- Para mostrar un punto poner la lat y la long en el value, para guardar un punto sacarlos de ahi -->
                             <fieldset class="gllpLatlonPicker">
                                 <div class="gllpMap">Google Maps</div>
-                                <input type="hidden" class="gllpLatitude" value="" name="latitud"/>
-                                <input type="hidden" class="gllpLongitude" value="" name="longitud"/>
+                                <s:textfield type="hidden" class="gllpLatitude" value="-34.921549" name="latitud"/>
+                                <s:textfield type="hidden" class="gllpLongitude" value="-57.954512" name="longitud"/>
                                 <input type="hidden" class="gllpZoom"/>
                             </fieldset>
                         </div>
-                    </form>
+                        <s:submit value="Guardar" theme="simple" cssClass="btn btn-primary" />
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+
+                    </s:form>
                 </div>
             </div>
-            <div class="modal-footer">
+            <%--<div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
-            </div>
+            </div>--%>
         </div>
         <!-- /.modal-content -->
     </div>
@@ -197,10 +193,10 @@
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="//code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>
 
-<script src="../resources/bootstrap/js/bootstrap.min.js"></script>
-<script src="../resources/customJS/funcionesAdmin.js"></script>
+<script src="${pageContext.request.contextPath}/../resources/bootstrap/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/../resources/customJS/funcionesAdmin.js"></script>
 
 <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-<script src="../resources/customJS/jquery-gmaps-latlon-picker.js"></script>
+<script src="${pageContext.request.contextPath}/../resources/customJS/jquery-gmaps-latlon-picker.js"></script>
 </body>
 </html>
