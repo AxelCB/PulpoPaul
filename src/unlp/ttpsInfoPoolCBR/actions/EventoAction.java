@@ -1,12 +1,17 @@
 package unlp.ttpsInfoPoolCBR.actions;
 
+import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import unlp.ttpsInfoPoolCBR.dao.evento.IEventoDao;
 import unlp.ttpsInfoPoolCBR.model.Evento;
 
+import javax.servlet.http.HttpSession;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +21,7 @@ import java.util.List;
  */
 
 @Action(value = "eventos")
-public class EventoAction {
+public class EventoAction extends ActionSupport{
 
     private static final long serialVersionUID = 1L;
 
@@ -27,65 +32,122 @@ public class EventoAction {
     IEventoDao eventoDao;
 
     private List<Evento> eventos = new ArrayList<Evento>();
-    private String operacion = "";
 
-    //Entrada agregar usuario
+    //Entrada agregar evento
     private String nombre;
     private String lugar;
     private String descripcion;
-    private Date fecha;
-    private Time horaComienzo;
-    private Time horaFin;
+    private String fecha;
+    private String horaComienzo;
+    private String horaFin;
     private String longitud;
     private String latitud;
 
     @Action(value="guardar", results={
             @Result(name="exito", location="/admin/abmEventos.jsp"),
-            @Result(name="input", location="/admin/abmEventos.jsp")})
+            @Result(name="input", location="/admin/abmEventos.jsp"),
+            @Result(name = "nologed",location = "index",type = "chain")})
     public String guardarEvento(){
         try{
+            HttpSession session = ServletActionContext.getRequest().getSession(false);
+            if(session==null || session.getAttribute("usuario")==null){
+                addFieldError("nologed", "Autentiquese para utilizar la pagina");
+                return "nologed";
+            }
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
+            Date fecha =  formatter.parse(this.getFecha());
             Evento evento = new Evento();
             evento.setNombre(this.getNombre());
             evento.setDescripcion(this.getDescripcion());
-            /*evento.setFecha(this.getFecha());
-            evento.setHoraComienzo(this.getHoraComienzo());
-            evento.setHoraFin(this.getHoraFin());*/
+            evento.setLugar(this.getLugar());
+            evento.setFecha(fecha);
+            evento.setHoraComienzo(Time.valueOf(this.getHoraComienzo()+":00"));
+            evento.setHoraFin(Time.valueOf(this.getHoraFin()+":00"));
             evento.setLatitud(Double.parseDouble(this.getLatitud()));
             evento.setLongitud(Double.parseDouble(this.getLongitud()));
-
             eventoDao.guardar(evento);
         }catch(Exception e){
             e.printStackTrace();
             return "input";
+        }finally{
+            try{
+                this.setEventos(eventoDao.listar());
+            }catch(Exception e){
+                e.printStackTrace();
+                return "input";
+            }
+
         }
-        return "";
+        return "exito";
     }
 
     @Action(value="listar", results={
             @Result(name="input", location="/admin/abmEventos.jsp"),
-            @Result(name="exito", location="/admin/abmEventos.jsp")})
+            @Result(name="exito", location="/admin/abmEventos.jsp"),
+            @Result(name ="nologed",location = "index",type = "chain")})
+    @SkipValidation
     public String listarEvento(){
         try {
-//            if(this.getOperacion()==null || this.getOperacion()==""){
+            HttpSession session = ServletActionContext.getRequest().getSession(false);
+            if(session==null || session.getAttribute("usuario")==null){
+                addFieldError("nologed", "Autentiquese para utilizar la pagina");
+                return "nologed";
+            }
                 this.setEventos(eventoDao.listar());
-//            }
         } catch (Exception e) {
             e.printStackTrace();
             return "input";
         }
         return "exito";
     }
+    public void validate(){
+        if((this.getNombre()==null)
+                || (getNombre().equals(""))){
+            addFieldError("nombreError","Campo obligatorio");
+        }
+        if((this.getLugar()==null)
+                || (this.getLugar().equals(""))){
+            addFieldError("lugarError","Campo obligatorio");
+        }
+        if((this.getDescripcion()==null)
+                || (this.getDescripcion().equals(""))){
+            addFieldError("descripcionError", "Campo Obligatorio");
+        }
+        if((this.getFecha()==null)||(this.getFecha().equals(""))){
+            addFieldError("fechaError","Campo obligatorio. Elija una fecha valida");
+        }
+        try{
+            if((this.getHoraComienzo()==null)|| (this.getHoraComienzo().equals("")||Time.valueOf(this.getHoraComienzo()+":00")==null)){
+                addFieldError("horaComienzoError","Campo obligatorio. Elija una hora valida");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            addFieldError("horaComienzoError","Campo obligatorio. Elija una hora valida");
+        }
+        try{
+            if((this.getHoraFin()==null)|| (this.getHoraFin().equals(""))||Time.valueOf(this.getHoraFin()+":00")==null){
+                addFieldError("horaFinError","Campo obligatorio. Elija una hora valida (HH:MM)");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            addFieldError("horaFinError","Campo obligatorio. Elija una hora valida(HH:MM)");
+        }
+
+        if((this.getLatitud()==null)
+                || (this.getLatitud().equals(""))){
+            addFieldError("latitudError", "Campo Obligatorio");
+        }
+        if((this.getLongitud()==null)
+                || (this.getLongitud().equals(""))){
+            addFieldError("longitudError ", "Campo Obligatorio");
+        }
+    }
+
     public List<Evento> getEventos() {
         return eventos;
     }
     public void setEventos(List<Evento> eventos) {
         this.eventos = eventos;
-    }
-    public String getOperacion() {
-        return operacion;
-    }
-    public void setOperacion(String operacion) {
-        this.operacion = operacion;
     }
     public IEventoDao getEventoDao() {
         return eventoDao;
@@ -111,22 +173,28 @@ public class EventoAction {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    public Date getFecha() {
+
+    public String getFecha() {
         return fecha;
     }
-    public void setFecha(Date fecha) {
+
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
-    public Time getHoraComienzo() {
+
+    public String getHoraComienzo() {
         return horaComienzo;
     }
-    public void setHoraComienzo(Time horaComienzo) {
+
+    public void setHoraComienzo(String horaComienzo) {
         this.horaComienzo = horaComienzo;
     }
-    public Time getHoraFin() {
+
+    public String getHoraFin() {
         return horaFin;
     }
-    public void setHoraFin(Time horaFin) {
+
+    public void setHoraFin(String horaFin) {
         this.horaFin = horaFin;
     }
 

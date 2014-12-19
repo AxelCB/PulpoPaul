@@ -9,3 +9,7 @@ var mostrarModalNuevoEvento = function(){
 var mostrarModalEliminar= function(){
 	$('#eliminar-elemento').modal('show');
 }
+
+var mostrarModalMapa = function(){
+	$('#detalle-mapa').modal('show');
+}

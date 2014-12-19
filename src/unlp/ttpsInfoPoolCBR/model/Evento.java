@@ -26,7 +26,7 @@ public class Evento extends AbstractEntity{
     private String lugar;
     
     @Column(nullable = false)
-    private Date fecha;
+    private Date fecha = new Date();
     
     @Column
     private Time horaComienzo;
