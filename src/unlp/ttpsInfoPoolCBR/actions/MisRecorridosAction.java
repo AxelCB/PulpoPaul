@@ -32,6 +32,7 @@ public class MisRecorridosAction extends ActionSupport implements SessionAware{
 		HttpSession session = ServletActionContext.getRequest().getSession(false);  
 		if(session==null || session.getAttribute("usuario")==null){  
 			addFieldError("nologed", "Autentiquese para utilizar la pagina");
+			System.out.println("sa");
 			return "nologed";
 		}
 		

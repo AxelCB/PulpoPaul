@@ -40,7 +40,7 @@ public class Test6Recorrido {
 			recorrido.setLugares(5);
 			recorrido.setPrecio(10.0);
 			recorrido.setTipo(TipoViaje.DIARIO);
-			recorrido.setGoogleMapsRecorrido("una url");
+			//recorrido.setGoogleMapsRecorrido("una url");
 			recorrido.setPropietario(usuarioUno);
 			
 			recorrido = recorridoDao.guardar(recorrido);
@@ -52,7 +52,7 @@ public class Test6Recorrido {
 			recorrido.setLugares(2);
 			recorrido.setPrecio(20.0);
 			recorrido.setTipo(TipoViaje.DIARIO);
-			recorrido.setGoogleMapsRecorrido("una url");
+			//recorrido.setGoogleMapsRecorrido("una url");
 			recorrido.setPropietario(usuarioUno);
 			
 			recorrido = recorridoDao.guardar(recorrido);
@@ -79,7 +79,7 @@ public class Test6Recorrido {
 			usuarioUno = usuarioDao.traerRecorridos(usuarioUno);
 			
 			Recorrido recorrido = usuarioUno.getRecorridosMios().get(0);
-			recorrido.setGoogleMapsRecorrido("otra url");
+			//recorrido.setGoogleMapsRecorrido("otra url");
 			
 			recorridoDao.modificar(recorrido);
 			

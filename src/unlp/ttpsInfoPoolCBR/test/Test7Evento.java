@@ -58,7 +58,7 @@ public class Test7Evento {
 			usuarioUno = usuarioDao.traerRecorridos(usuarioUno);
 
 			Recorrido recorrido = usuarioUno.getRecorridosMios().get(0);
-			recorrido.setGoogleMapsRecorrido("otra url");
+			//recorrido.setGoogleMapsRecorrido("otra url");
 			
 			Evento evento = eventoDao.buscarPorNombre("JAIIO 2014");
 			Assert.assertNotNull(evento);

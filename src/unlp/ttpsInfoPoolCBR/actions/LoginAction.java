@@ -16,7 +16,7 @@ import java.util.Map;
 @Action(value = "login")
 @Results({
 	@Result(name = "viajero",
-			location = "viajero",
+			location = "misRecorridos",
 			type = "redirect"),
 	@Result(name = "administrador",
 			location = "administrador",
@@ -79,7 +79,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		if(user == null){
 			addFieldError("loginError", "Usuario o clave incorrectos");
 		}

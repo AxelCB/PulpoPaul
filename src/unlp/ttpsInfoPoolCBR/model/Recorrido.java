@@ -44,9 +44,18 @@ public class Recorrido extends AbstractEntity{
     @Column(nullable = false)
     private TipoViaje tipo;
 
+    /*@Column(nullable = false)
+    private String googleMapsRecorrido;*/
+    
+    @OneToMany(mappedBy="recorrido")
+    private List<Punto> puntos = new ArrayList<Punto>();
+    
     @Column(nullable = false)
-    private String googleMapsRecorrido;
-
+    private Punto inicio;
+    
+    @Column(nullable = false)
+    private Punto fin;
+    
     @ManyToOne(optional = true)
     private Evento evento;
     
@@ -194,19 +203,43 @@ public class Recorrido extends AbstractEntity{
         this.pasajeros = pasajeros;
     }
     
-    public String getGoogleMapsRecorrido() {
+/*    public String getGoogleMapsRecorrido() {
         return googleMapsRecorrido;
     }
 
     public void setGoogleMapsRecorrido(String googleMapsRecorrido) {
         this.googleMapsRecorrido = googleMapsRecorrido;
-    }
+    }*/
+
+    public List<Punto> getPuntos() {
+		return puntos;
+	}
+
+	public void setPuntos(List<Punto> puntos) {
+		this.puntos = puntos;
+	}
+
+	public Punto getInicio() {
+		return inicio;
+	}
+
+	public void setInicio(Punto inicio) {
+		this.inicio = inicio;
+	}
+
+	public Punto getFin() {
+		return fin;
+	}
+
+	public void setFin(Punto fin) {
+		this.fin = fin;
+	}
 
     public List<Viaje> getViajes() {
         return viajes;
     }
-
-    public void setViajes(List<Viaje> viajes) {
+	
+	public void setViajes(List<Viaje> viajes) {
         this.viajes = viajes;
     }
 
