@@ -4,6 +4,4 @@
 
 <script src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/datepicker/js/bootstrap-datepicker.js"></script>
-
-<script src="https://maps.googleapis.com/maps/api/js"></script>
-   <script src="${pageContext.request.contextPath}/resources/customJS/googleMapsInitialization.js"></script>
+<script src="${pageContext.request.contextPath}/resources/bootstrapformhelpers/js/bootstrap-formhelpers.js"></script>

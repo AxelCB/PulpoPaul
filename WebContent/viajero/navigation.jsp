@@ -11,7 +11,7 @@
 				<li class="dropdown">
 		        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Recorridos Propios<span class="caret"></span></a>
 		       		<ul class="dropdown-menu" role="menu">
-			            <li><a href="/PulpoPaul/viajero/nuevoRecorrido.jsp">Nuevo</a></li>
+			            <li><a href="recorridoNuevoInit">Nuevo</a></li>
 			            <li><a href="/PulpoPaul/viajero/misRecorridos.jsp">Ver</a></li>
 			    	</ul>
 		        </li>

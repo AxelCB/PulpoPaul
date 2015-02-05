@@ -17,98 +17,193 @@
 	<!-- Comienzo de pagina -->
 	<div class="container">
 		<div class="jumbotron">	
-			<h2>Agregando recorrido</h2>
+			<h2>Nuevo recorrido</h2>
+			<div class="row">	
+				<form class="form-horizontal col-sm-6" method="post" action="recorridoNuevoAgregar">
 				
-			<form class="form-horizontal" method="post">
-				<div class="form-group">
-					<label class="col-sm-2 control-label" for="rolViaje">Seleccione una de las opciones:</label>
-				  	<div class="col-sm-4">
-				  		<select name="rolViaje" class="form-control" id="rolViaje" onchange="cambiarRolViaje();">
-				  			<option value="pasajero">Pasajero</option>
-				  			<option value="conductor">Conductor</option>
-				  			<option value="ambos">Ambos</option>
-				  		</select>
-				  	</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label" for="frecuenciaViaje">Seleccione:</label>
-				  	<div class="col-sm-4">
-				  		<select name="frecuenciaViaje" class="form-control" id="frecuenciaViaje" onchange="cambiarFrecuencia();">
-				  			<option value="diario" selected="selected">Diario</option>
-				  			<option value="periodico">Peri&oacute;dico</option>
-				  			<option value="puntual">Puntual</option>
-				  		</select>
-				  	</div>
-				</div>
-				<div class="form-group periodico">
-					<label class="col-sm-2 control-label" for="dias">Elija los d&iacute;as:</label>
-				  	<div class="col-sm-4">
-				  		<div class="row">
-				  			<div class="col-sm-3">Lunes</div>
-				  			<div class="col-sm-1"><input type="checkbox" name="dias" value="Lunes"></div>
-				  		</div>
-				  		<div class="row">
-				  			<div class="col-sm-3">Martes</div>
-				  			<div class="col-sm-1"><input type="checkbox" name="dias" value="Martes"></div>
-				  		</div>
-					    <div class="row">
-				  			<div class="col-sm-3">Miercoles</div>
-				  			<div class="col-sm-1"><input type="checkbox" name="dias" value="Miercoles"></div>
-				  		</div> 
-						<div class="row">
-				  			<div class="col-sm-3">Jueves</div>
-				  			<div class="col-sm-1"><input type="checkbox" name="dias" value="Jueves"></div>
-				  		</div>
-				  		<div class="row">
-				  			<div class="col-sm-3">Viernes</div>
-				  			<div class="col-sm-1"><input type="checkbox" name="dias" value="Viernes"></div>
-				  		</div>			     	
+					<div class="form-group">
+						<label class="col-sm-6 control-label" for="nombre">Nombre:</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" name="nombre" required>
+						</div>
 					</div>
-				</div>
-				<div class="form-group puntual">
-					<label class="col-sm-2 control-label" for="fechaPuntual">Fecha:</label>
-				  	<div class="col-sm-4">
-						<div class="input-append date" id="fechaPuntual" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-							<input class="span2" size="16" type="text" value="12-02-2012">
-							<span class="add-on"><i class="icon-th"></i></span>
+					
+					<div class="form-group">
+						<label class="col-sm-6 control-label" for="destino">Destino:</label>
+						<div class="col-sm-6">
+							<select name="destino" class="form-control" id="destino" onchange="cambiarDestino();" required>
+								<option value="facultad">FI - UNLP</option>
+								<option value="evento">Evento</option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="form-group evento invi">
+						<label class="col-sm-6 control-label" for="evento">Evento:</label>
+					  	<div class="col-sm-6">
+					  		<select name="evento" class="form-control" id="evento">
+					  			<option value="0">Seleccionar</option>
+					  			<option value="1">Un Evento</option>
+					  			<option value="2">Otro Evento</option>
+					  			<option value="3">Mas Eventos</option>
+					  		</select>
+					  	</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-6 control-label" for="frecuencia">Frecuencia:</label>
+					  	<div class="col-sm-6">
+					  		<select name="frecuencia" class="form-control" id="frecuencia" onchange="cambiarFrecuencia();" required>
+					  			<option value="diario">Diario</option>
+					  			<option value="periodico">Peri&oacute;dico</option>
+					  			<option value="puntual">Puntual</option>
+					  		</select>
+					  	</div>
+					</div>
+					
+					<div class="form-group periodico invi">
+						<label class="col-sm-6 control-label" for="dias">Elija los d&iacute;as:</label>
+					  	<div class="col-sm-6">
+					  		<div class="row">
+					  			<div class="col-sm-6">Lunes</div>
+					  			<div class="col-sm-1"><input type="checkbox" name="dias" value="Lunes"></div>
+					  		</div>
+					  		<div class="row">
+					  			<div class="col-sm-6">Martes</div>
+					  			<div class="col-sm-1"><input type="checkbox" name="dias" value="Martes"></div>
+					  		</div>
+						    <div class="row">
+					  			<div class="col-sm-6">Miercoles</div>
+					  			<div class="col-sm-1"><input type="checkbox" name="dias" value="Miercoles"></div>
+					  		</div> 
+							<div class="row">
+					  			<div class="col-sm-6">Jueves</div>
+					  			<div class="col-sm-1"><input type="checkbox" name="dias" value="Jueves"></div>
+					  		</div>
+					  		<div class="row">
+					  			<div class="col-sm-6">Viernes</div>
+					  			<div class="col-sm-1"><input type="checkbox" name="dias" value="Viernes"></div>
+					  		</div>			     	
+						</div>
+					</div>
+					
+					<div class="form-group puntual invi">
+						<label class="col-sm-6 control-label" for="fechaPuntual">Fecha:</label>
+					  	<div class="col-sm-6">
+							<div class="input-group">
+							  <input type="text" class="form-control" id="fechaPuntual" name="fecha" value='<s:date name="fechaActual" format="dd-MM-yyy"/>'>
+							  <span class="input-group-addon">
+							  	<span class="glyphicon glyphicon-calendar"></span>
+							  </span>							
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-6 control-label" for="idaOVuelta">Tramos:</label>
+					  	<div class="col-sm-6">
+					  		<select name="idaOVuelta" class="form-control" id="idaOVuelta" onchange="cambiarIdaOVuelta();">
+					  			<option value="ida">Ida</option>
+					  			<option value="vuelta">Vuelta</option>
+					  			<option value="idaYVuelta">Ida y vuelta</option>
+					  		</select>
+					  	</div>
+					</div>
+					
+					<div class="form-group ida">
+						<label class="col-sm-6 control-label" for="partida">Hora de Partida:</label>
+					  	<div class="col-sm-6">
+					  		<input type="text" name="partida" class="form-control" id="partida">
+					  	</div>
+					</div>
+
+<!-- 					<div class="form-group ida"> -->
+<!-- 						<label class="col-sm-6 control-label" for="partida">Hora de Partida:</label> -->
+<!-- 						<div class="bfh-timepicker col-sm-6" data-time="now"> -->
+<!-- 							<div class="input-group bfh-timepicker-toggle" data-toggle="bfh-timepicker"> -->
+<%-- 								<span class="input-group-addon"> --%>
+<!-- 									<i class="glyphicon glyphicon-time"></i> -->
+<%-- 								</span> --%>
+<!-- 								<input type="text" name="partida" class="form-control"> -->
+<!-- 							</div> -->
+<!-- 							<div class="bfh-timepicker-popover"> -->
+<!-- 								<table class="table"> -->
+<!-- 									<tbody> -->
+<!-- 										<tr> -->
+<!-- 											<td class="hour"> -->
+<!-- 												<div class="input-group"> -->
+<!-- 													<input type="text" class="form-control bfh-number" data-min="0" data-max="23" data-zeros="true" data-wrap="true"> -->
+<%-- 													<span class="input-group-addon bfh-number-btn inc"> --%>
+<%-- 														<span class="glyphicon glyphicon-chevron-up"></span> --%>
+<%-- 													</span> --%>
+<%-- 													<span class="input-group-addon bfh-number-btn dec"> --%>
+<%-- 														<span class="glyphicon glyphicon-chevron-down"></span> --%>
+<%-- 													</span> --%>
+<!-- 												</div> -->
+<!-- 											</td> -->
+<!-- 											<td class="separator">:</td> -->
+<!-- 											<td class="minute"> -->
+<!-- 												<div class="input-group"> -->
+<!-- 													<input type="text" class="form-control bfh-number" data-min="0" data-max="59" data-zeros="true" data-wrap="true"> -->
+<%-- 													<span class="input-group-addon bfh-number-btn inc"> --%>
+<%-- 														<span class="glyphicon glyphicon-chevron-up"></span> --%>
+<%-- 													</span> --%>
+<%-- 													<span class="input-group-addon bfh-number-btn dec"> --%>
+<%-- 														<span class="glyphicon glyphicon-chevron-down"></span> --%>
+<%-- 													</span> --%>
+<!-- 												</div> -->
+<!-- 											</td> -->
+<!-- 										</tr> -->
+<!-- 									</tbody> -->
+<!-- 								</table> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+					
+					<div class="form-group vuelta invi">
+						<label class="col-sm-6 control-label" for="regreso">Hora de Regreso:</label>
+					  	<div class="col-sm-6">
+					  		<input type="text" name="regreso" class="form-control" id="regreso">
+					  	</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-6 control-label" for="asientos">Asientos:</label>
+					  	<div class="col-sm-6">
+					  		<input type="number" name="asientos" class="form-control" required>
+				  		</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-6 control-label" for="precio">Precio por Persona:</label>
+						<div class="col-sm-6">
+							<input type="number" name="precio" class="form-control" step="0.1" required>
+						</div> 
+					</div>
+					
+					<div class="invi" id="puntos"></div>
+					
+					<div class="row">
+						<input type="submit" class="btn btn-default col-sm-4 col-sm-offset-8" id="agregar" value="Agregar">
+					</div>
+				</form>
+				
+				<div class="col-sm-6">
+					<div id="map" class="col-sm-6" style="width: 500px;height: 400px;"></div>
+					<div class="row">
+						<div class="form-group">
+							<input type="submit" class="btn btn-default col-sm-4 col-sm-offset-8" value="Borrar último punto" onClick="removeHito();">
 						</div>
 					</div>
 				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label" for="idaOVuelta">Seleccione:</label>
-				  	<div class="col-sm-4">
-				  		<select name="idaOVuelta" class="form-control" id="idaOVuelta" onchange="cambiarIdaOVuelta();">
-				  			<option value="ida">Ida</option>
-				  			<option value="vuelta">Vuelta</option>
-				  			<option value="idaYVuelta">Ida y vuelta</option>
-				  		</select>
-				  	</div>
-				</div>
-				<div class="form-group ida">
-					<label class="col-sm-2 control-label" for="partida">Hora de Partida:</label>
-				  	<div class="col-sm-4">
-				  		<input type="time" name="partida" class="form-control" required>
-				  	</div>
-				</div>
-				<div class="form-group vuelta">
-					<label class="col-sm-2 control-label" for="regreso">Hora de Regreso:</label>
-				  	<div class="col-sm-4">
-				  		<input type="time" name="regreso" class="form-control" required>
-				  	</div>
-				</div>
-				<div class="form-group asientos">
-					<label class="col-sm-2 control-label" for="asientos">Cantidad de asientos disponibles:</label>
-				  	<div class="col-sm-4">
-				  		<input type="number" name="asientos" class="form-control" required>
-				  	</div>
-				</div>
-				<div id="map_canvas" style="width: 500px;height: 400px;"></div>
-			</form>
+				
+			</div>
 		</div>
 	</div>
 	
 	<jsp:include page="scripts.jsp"/>
-	<script src="${pageContext.request.contextPath}/resources/customJS/nuevoRecorridoSelects.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+	<script src="${pageContext.request.contextPath}/resources/customJS/nuevoRecorrido.js"></script>
 	
 </body>
 </html>

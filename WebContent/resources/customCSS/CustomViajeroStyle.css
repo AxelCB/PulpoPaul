@@ -1,6 +1,10 @@
 @CHARSET "UTF-8";
 
-.periodico, .vuelta, .asientos, .puntual, #parametros{
+#parametros{
+	display:none;
+}
+
+.invi{
 	display:none;
 }
 
