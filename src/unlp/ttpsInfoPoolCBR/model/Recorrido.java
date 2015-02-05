@@ -19,7 +19,23 @@ public class Recorrido extends AbstractEntity{
     		unique = true)
     private String nombre;
     
+    @ManyToOne(optional = true)
+    private Evento evento;
+    
+    @ElementCollection
+    @CollectionTable
+    private List<String> puntos = new ArrayList<String>();
+    
+    @Column
+    private String inicio;
+    
+    @Column
+    private String fin;
+    
     @Column(nullable = false)
+    private TramoViaje tramo;
+    
+    @Column
     private Time horaSalida;
     
     @Column
@@ -28,36 +44,18 @@ public class Recorrido extends AbstractEntity{
     @Column(nullable = false)
     private Integer lugares;
     
-    @Column
-    private Boolean idaYVuelta;
+    @Column(nullable = false)
+    private TipoViaje tipo;
     
     @Column
     private Date puntual;
 
     @ElementCollection
     @CollectionTable
-    private List<Integer> dias = new ArrayList<Integer>();
+    private List<String> dias = new ArrayList<String>();
     
     @Column(nullable = false)
     private Double precio;
-    
-    @Column(nullable = false)
-    private TipoViaje tipo;
-
-    /*@Column(nullable = false)
-    private String googleMapsRecorrido;*/
-    
-    @OneToMany(mappedBy="recorrido")
-    private List<Punto> puntos = new ArrayList<Punto>();
-    
-    @Column(nullable = false)
-    private Punto inicio;
-    
-    @Column(nullable = false)
-    private Punto fin;
-    
-    @ManyToOne(optional = true)
-    private Evento evento;
     
     @OneToMany(mappedBy="recorrido"/*, cascade=CascadeType.ALL*/)
     private List<Viaje> viajes = new ArrayList<Viaje>();
@@ -78,25 +76,6 @@ public class Recorrido extends AbstractEntity{
     public Recorrido(){
     	super();
     }
-    
-    /*public Recorrido(String nombre, Time horaSalida, Time horaVuelta,
-			Integer lugares, Boolean idaYVuelta, Date puntual,
-			List<Integer> dias, Double precio, TipoViaje tipo,
-			String googleMapsRecorrido, Evento evento, Usuario propietario) {
-		super();
-		this.nombre = nombre;
-		this.horaSalida = horaSalida;
-		this.horaVuelta = horaVuelta;
-		this.lugares = lugares;
-		this.idaYVuelta = idaYVuelta;
-		this.puntual = puntual;
-		this.dias = dias;
-		this.precio = precio;
-		this.tipo = tipo;
-		this.googleMapsRecorrido = googleMapsRecorrido;
-		this.evento = evento;
-		this.propietario = propietario;
-	}*/
 
     public Usuario agregarPasajero(Usuario usuario){
     	this.pasajeros.add(usuario);
@@ -139,14 +118,6 @@ public class Recorrido extends AbstractEntity{
         this.lugares = lugares;
     }
 
-    public Boolean getIdaYVuelta() {
-        return idaYVuelta;
-    }
-
-    public void setIdaYVuelta(Boolean idaYVuelta) {
-        this.idaYVuelta = idaYVuelta;
-    }
-
     public Date getPuntual() {
         return puntual;
     }
@@ -155,11 +126,11 @@ public class Recorrido extends AbstractEntity{
         this.puntual = puntual;
     }
 
-    public List<Integer> getDias() {
+    public List<String> getDias() {
         return dias;
     }
 
-    public void setDias(List<Integer> dias) {
+    public void setDias(List<String> dias) {
         this.dias = dias;
     }
 
@@ -202,36 +173,28 @@ public class Recorrido extends AbstractEntity{
     public void setPasajeros(List<Usuario> pasajeros) {
         this.pasajeros = pasajeros;
     }
-    
-/*    public String getGoogleMapsRecorrido() {
-        return googleMapsRecorrido;
-    }
 
-    public void setGoogleMapsRecorrido(String googleMapsRecorrido) {
-        this.googleMapsRecorrido = googleMapsRecorrido;
-    }*/
-
-    public List<Punto> getPuntos() {
+    public List<String> getPuntos() {
 		return puntos;
 	}
 
-	public void setPuntos(List<Punto> puntos) {
+	public void setPuntos(List<String> puntos) {
 		this.puntos = puntos;
 	}
 
-	public Punto getInicio() {
+	public String getInicio() {
 		return inicio;
 	}
 
-	public void setInicio(Punto inicio) {
+	public void setInicio(String inicio) {
 		this.inicio = inicio;
 	}
 
-	public Punto getFin() {
+	public String getFin() {
 		return fin;
 	}
 
-	public void setFin(Punto fin) {
+	public void setFin(String fin) {
 		this.fin = fin;
 	}
 
