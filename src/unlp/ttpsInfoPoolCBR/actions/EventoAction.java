@@ -40,8 +40,7 @@ public class EventoAction extends ActionSupport{
     private String fecha;
     private String horaComienzo;
     private String horaFin;
-//    private String longitud;
-//    private String latitud;
+    private String latLng;
 
     @Action(value="guardar", results={
             @Result(name="exito", location="/admin/abmEventos.jsp"),
@@ -63,8 +62,7 @@ public class EventoAction extends ActionSupport{
             evento.setFecha(fecha);
             evento.setHoraComienzo(Time.valueOf(this.getHoraComienzo()+":00"));
             evento.setHoraFin(Time.valueOf(this.getHoraFin()+":00"));
-//            evento.setLatitud(Double.parseDouble(this.getLatitud()));
-//            evento.setLongitud(Double.parseDouble(this.getLongitud()));
+            evento.setLatLng(this.getLatLng());
             eventoDao.guardar(evento);
         }catch(Exception e){
             e.printStackTrace();
@@ -76,7 +74,6 @@ public class EventoAction extends ActionSupport{
                 e.printStackTrace();
                 return "input";
             }
-
         }
         return "exito";
     }
@@ -133,14 +130,10 @@ public class EventoAction extends ActionSupport{
             addFieldError("horaFinError","Campo obligatorio. Elija una hora valida(HH:MM)");
         }
 
-//        if((this.getLatitud()==null)
-//                || (this.getLatitud().equals(""))){
-//            addFieldError("latitudError", "Campo Obligatorio");
-//        }
-//        if((this.getLongitud()==null)
-//                || (this.getLongitud().equals(""))){
-//            addFieldError("longitudError ", "Campo Obligatorio");
-//        }
+        if((this.getLatLng()==null)
+                || (this.getLatLng().equals(""))){
+            addFieldError("latLngError", "Campo Obligatorio");
+        }
     }
 
     public List<Evento> getEventos() {
@@ -198,19 +191,11 @@ public class EventoAction extends ActionSupport{
         this.horaFin = horaFin;
     }
 
-//    public String getLongitud() {
-//        return longitud;
-//    }
-//
-//    public void setLongitud(String longitud) {
-//        this.longitud = longitud;
-//    }
-//
-//    public String getLatitud() {
-//        return latitud;
-//    }
-//
-//    public void setLatitud(String latitud) {
-//        this.latitud = latitud;
-//    }
+    public String getLatLng() {
+        return latLng;
+    }
+
+    public void setLatLng(String latLng) {
+        this.latLng = latLng;
+    }
 }

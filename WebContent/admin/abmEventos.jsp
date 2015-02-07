@@ -72,7 +72,7 @@
                     <td><s:date name="%{#evento.getFecha()}" format="EEEE yyyy-MM-dd" /><hr> </td>
                     <td><s:property value="%{#evento.getHoraComienzo()}" /></td>
                     <td><s:property value="%{#evento.getHoraFin()}" /></td>
-                    <td><a href="#" onclick="mostrarModalMapa(<s:property value="%{#evento.getLatitud()}" />,<s:property value="%{#evento.getLongitud()}" />);"><span class="glyphicon glyphicon-map-marker"></span></a>
+                    <td><a href="#" onclick="mostrarModalMapa(<s:property value="%{#evento.getLatLng()}"/>);"><span class="glyphicon glyphicon-map-marker"></span></a>
                     </td>
                     <td><a href="#" onclick="mostrarModalNuevoEvento();"><span
                             class="glyphicon glyphicon-pencil"></span></a>

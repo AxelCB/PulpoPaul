@@ -13,7 +13,7 @@ import unlp.ttpsInfoPoolCBR.model.Recorrido;
 import com.google.gson.Gson;
 
 @RestController
-@RequestMapping(value="/recorrido",produces="application/json",method=RequestMethod.GET)
+@RequestMapping(value="/rest/recorrido",produces="application/json",method=RequestMethod.GET)
 public class RecorridoCtrl {
 	
 	@Autowired

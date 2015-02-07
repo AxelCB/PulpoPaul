@@ -35,4 +35,4 @@ local.properties
 test-output
 
 #Persistence
-src/META-INF/persistence.xml
+/src/META-INF/persistence.xml

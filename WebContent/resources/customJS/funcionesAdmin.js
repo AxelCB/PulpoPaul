@@ -10,7 +10,12 @@ var mostrarModalEliminar= function(){
 	$('#eliminar-elemento').modal('show');
 }
 
-var mostrarModalMapa = function(latitud,longitud){
+var mostrarModalMapa = function(latLng){
+	var latitud="",longitud="",stringArray=[];
+	stringArray = latLng.split(',');
+	latitud = stringArray[0].slice(1);
+	longitud = stringArray[1].slice(0,stringArray[1].length);
+	//TODO parse LatLng into latitud and longitud
 	$('#latitudModal').val(latitud);
 	$('#longitudModal').val(longitud);
 	$('#detalle-mapa').modal('show');
