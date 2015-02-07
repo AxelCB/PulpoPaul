@@ -57,4 +57,12 @@ public class EventoDaoJPAImpl extends GenericDaoJPAImpl<Evento,Evento> implement
     	}
     	return eventos;
     }
+    
+    @Override
+    public Evento cargarRecorridos(Evento evento) throws Exception{
+    	this.getEm();
+    	evento.getRecorridos();
+    	this.getEm().close();
+    	return evento;
+    }
 }

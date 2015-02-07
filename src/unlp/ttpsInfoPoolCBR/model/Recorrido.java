@@ -16,8 +16,7 @@ public class Recorrido extends AbstractEntity{
 
     private static final long serialVersionUID = -7094909164595425984L;
 
-    @Column(nullable = false,
-    		unique = true)
+    @Column(nullable = false)
     private String nombre;
     
     @ManyToOne(optional = true)

@@ -34,10 +34,10 @@ public class RecorridoNuevoAction extends ActionSupport{
     private static final long serialVersionUID = 1L;
 
     @Autowired
-    IRecorridoDao recorridoDao;    
+    private IRecorridoDao recorridoDao;    
     
     @Autowired
-    IEventoDao eventoDao;
+    private IEventoDao eventoDao;
 
     //Variables entrada
     private String nombre;
@@ -135,7 +135,8 @@ public class RecorridoNuevoAction extends ActionSupport{
         	}
         	else{
         		tipoViaje = TipoViaje.PUNTUAL;
-        		fecha = (Date) evento.getFecha();
+        		java.util.Date aux = (java.util.Date) evento.getFecha();
+        		fecha = new java.sql.Date(aux.getTime());
         	}
         	
         	TramoViaje tramoViaje = null;
@@ -203,15 +204,16 @@ public class RecorridoNuevoAction extends ActionSupport{
 				e.printStackTrace();
 				return "input";
 			}
-        	if(evento != null){
-        		evento.agregarRecorrido(recorrido);
+        	/*if(evento != null){
         		try {
+        			evento = eventoDao.cargarRecorridos(evento);
+        			evento.agregarRecorrido(recorrido);
 					eventoDao.guardar(evento);
 				} catch (Exception e) {
 					e.printStackTrace();
 					return "input";
 				}
-        	}
+        	}*/
         	
         	return "exito";
         }

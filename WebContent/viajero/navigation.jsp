@@ -7,7 +7,7 @@
     	</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="/PulpoPaul/viajero/buscarRecorridos.jsp">Buscar Recorridos</a></li>
+				<li><a href="buscarRecorridos">Buscar Recorridos</a></li>
 				<li class="dropdown">
 		        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Recorridos Propios<span class="caret"></span></a>
 		       		<ul class="dropdown-menu" role="menu">

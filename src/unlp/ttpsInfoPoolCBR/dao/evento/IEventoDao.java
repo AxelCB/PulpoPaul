@@ -11,4 +11,5 @@ import unlp.ttpsInfoPoolCBR.model.Evento;
 public interface IEventoDao extends IGenericDao<Evento,Evento> {
 	public Evento buscarPorNombre(String nombre) throws Exception;
 	public List<Evento> getAll() throws Exception;
+	public Evento cargarRecorridos(Evento evento) throws Exception;
 }
