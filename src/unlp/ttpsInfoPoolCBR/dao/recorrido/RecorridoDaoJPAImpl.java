@@ -23,8 +23,8 @@ public class RecorridoDaoJPAImpl extends GenericDaoJPAImpl<Recorrido,Recorrido> 
         try{
             TypedQuery<Recorrido> jpaql = this.getEm().createQuery("select r from " + persistentClass.getSimpleName() + " r "
             		+ "WHERE r.lugares > ("
-            			+ "SELECT count(*) FROM Recorrido rec"
-            			+ "INNER JOIN Usuario_Recorrido_Viajo urv ON (rec.id = urv.recorrido_id)"
+            			+ "SELECT count(*) FROM Recorrido rec "
+            			+ "INNER JOIN rec.pasajeros " //Usuario_Recorrido_Viajo urv ON (rec.id = urv.recorrido_id)
             			+ "GROUP BY rec.id)",persistentClass);
             listaRecorrido = jpaql.getResultList();
         }catch(Exception ex){
