@@ -42,5 +42,8 @@
     <bean id="rolDao" class="unlp.ttpsInfoPoolCBR.dao.rol.RolDaoJPAImpl" scope="prototype"/>
     <bean id="usuarioDao" class="unlp.ttpsInfoPoolCBR.dao.usuario.UsuarioDaoJPAImpl" scope="prototype"/>
     <bean id="viajeDao" class="unlp.ttpsInfoPoolCBR.dao.viaje.ViajeDaoJPAImpl" scope="prototype"/>
+    
+    <!-- Json Utilities -->
+	<bean id="gson" class="unlp.ttpsInfoPoolCBR.util.GsonSpringFactoryBean" scope="singleton" />
 
 </beans>
