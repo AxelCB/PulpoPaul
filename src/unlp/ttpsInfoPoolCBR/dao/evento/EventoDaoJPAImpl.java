@@ -5,6 +5,9 @@ import unlp.ttpsInfoPoolCBR.dao.GenericDaoJPAImpl;
 import unlp.ttpsInfoPoolCBR.model.Evento;
 
 import javax.persistence.TypedQuery;
+
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -31,5 +34,27 @@ public class EventoDaoJPAImpl extends GenericDaoJPAImpl<Evento,Evento> implement
     		throw ex;
     	}
     	return evento;
+    }
+    
+    @Override
+    public List<Evento> getAll() throws Exception{
+    	List<Evento> eventos = null;
+    	try{
+    		String query = "select e "
+    					+ "		from Evento e "
+    					+ "	where "
+    					+ "		e.fecha >= :hoy"
+    					+ "		and e.borrado = 0";
+    		TypedQuery jpaql = this.getEm().createQuery(query, Evento.class);
+    		
+    		Calendar cal = Calendar.getInstance();
+    		jpaql.setParameter("hoy", new Date(cal.getTimeInMillis()));
+    		eventos = jpaql.getResultList();
+    		this.getEm().close();
+    	}
+    	catch(Exception ex){
+    		throw ex;
+    	}
+    	return eventos;
     }
 }

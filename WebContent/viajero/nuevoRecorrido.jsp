@@ -41,16 +41,18 @@
 					<div class="form-group evento invi">
 						<label class="col-sm-6 control-label" for="evento">Evento:</label>
 					  	<div class="col-sm-6">
-					  		<select name="evento" class="form-control" id="evento">
-					  			<option value="0">Seleccionar</option>
-					  			<option value="1">Un Evento</option>
-					  			<option value="2">Otro Evento</option>
-					  			<option value="3">Mas Eventos</option>
+					  		<select name="evento" class="form-control" id="evento" onchange="cambiarEvento();">
+					  			<option value="" data-latlng="">Seleccionar</option>
+							<s:iterator value="eventos">
+								<option value="<s:property value='id'/>" data-latlng="<s:property value='latLng'/>">
+									<s:property value='nombre'/>
+								</option>
+							</s:iterator>
 					  		</select>
 					  	</div>
 					</div>
 					
-					<div class="form-group">
+					<div class="form-group frecuencia">
 						<label class="col-sm-6 control-label" for="frecuencia">Frecuencia:</label>
 					  	<div class="col-sm-6">
 					  		<select name="frecuencia" class="form-control" id="frecuencia" onchange="cambiarFrecuencia();" required>
@@ -102,7 +104,7 @@
 					<div class="form-group">
 						<label class="col-sm-6 control-label" for="idaOVuelta">Tramos:</label>
 					  	<div class="col-sm-6">
-					  		<select name="idaOVuelta" class="form-control" id="idaOVuelta" onchange="cambiarIdaOVuelta();">
+					  		<select name="idaOVuelta" class="form-control" id="idaOVuelta" onchange="cambiarIdaOVuelta();" required>
 					  			<option value="ida">Ida</option>
 					  			<option value="vuelta">Vuelta</option>
 					  			<option value="idaYVuelta">Ida y vuelta</option>
@@ -113,7 +115,7 @@
 					<div class="form-group ida">
 						<label class="col-sm-6 control-label" for="partida">Hora de Partida:</label>
 					  	<div class="col-sm-6">
-					  		<input type="text" name="partida" class="form-control" id="partida">
+					  		<input type="text" name="partida" class="form-control" id="partida" required>
 					  	</div>
 					</div>
 

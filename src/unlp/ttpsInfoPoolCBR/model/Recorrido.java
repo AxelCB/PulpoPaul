@@ -1,6 +1,7 @@
 package unlp.ttpsInfoPoolCBR.model;
 
 import javax.persistence.*;
+
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -73,7 +74,33 @@ public class Recorrido extends AbstractEntity{
     			//fetch = FetchType.EAGER)
     private List<Usuario> pasajerosHistorial = new ArrayList<Usuario>();
 
-    public Recorrido(){
+    public Recorrido(String nombre, Evento evento, List<String> puntos,
+			String inicio, String fin, TramoViaje tramo, Time horaSalida,
+			Time horaVuelta, Integer lugares, TipoViaje tipo, Date puntual,
+			List<String> dias, Double precio, List<Viaje> viajes,
+			Usuario propietario, List<Usuario> pasajeros,
+			List<Usuario> pasajerosHistorial) {
+		super();
+		this.nombre = nombre;
+		this.evento = evento;
+		this.puntos = puntos;
+		this.inicio = inicio;
+		this.fin = fin;
+		this.tramo = tramo;
+		this.horaSalida = horaSalida;
+		this.horaVuelta = horaVuelta;
+		this.lugares = lugares;
+		this.tipo = tipo;
+		this.puntual = puntual;
+		this.dias = dias;
+		this.precio = precio;
+		this.viajes = viajes;
+		this.propietario = propietario;
+		this.pasajeros = pasajeros;
+		this.pasajerosHistorial = pasajerosHistorial;
+	}
+
+	public Recorrido(){
     	super();
     }
 

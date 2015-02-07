@@ -35,10 +35,7 @@ public class Evento extends AbstractEntity{
     private Time horaFin;
     
     @Column(nullable = false)
-    private Double latitud;
-    
-    @Column(nullable = false)
-    private Double longitud;
+    private String latLng;
 
     @OneToMany(	mappedBy="evento",
     			cascade = CascadeType.ALL)
@@ -58,14 +55,14 @@ public class Evento extends AbstractEntity{
 		this.horaFin = horaFin;
 	}
     
-    /*public Recorrido agregarRecorrido(Recorrido recorrido){
+    public Recorrido agregarRecorrido(Recorrido recorrido){
     	this.recorridos.add(recorrido);
     	return recorrido;
     }
     
     public Boolean eliminarRecorrido(Recorrido recorrido){
     	return this.recorridos.remove(recorrido);
-    }*/
+    }
 
 	public String getNombre() {
         return nombre;
@@ -115,15 +112,15 @@ public class Evento extends AbstractEntity{
         this.recorridos = recorridos;
     }
 
-    public Double getLatitud() {return latitud;}
+    public String getLatLng() {
+		return latLng;
+	}
 
-    public void setLatitud(Double latitud) {this.latitud = latitud;}
+	public void setLatLng(String latLng) {
+		this.latLng = latLng;
+	}
 
-    public Double getLongitud() {return longitud;}
-
-    public void setLongitud(Double longitud) {this.longitud = longitud;}
-
-    public String getLugar() {return lugar;}
+	public String getLugar() {return lugar;}
 
     public void setLugar(String lugar) {this.lugar = lugar;}
 }
