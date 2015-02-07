@@ -16,3 +16,7 @@ LOG DE COSAS PARA HACER
 ->Traer info del recorrido mediante AJAX (investigar?)
 
 ->Solicitud de participación en un recorrido(Santi)
+
+->hacer la mascara para los imputs de horas
+
+->arreglar el registrar usuario
