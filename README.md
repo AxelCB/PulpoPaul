@@ -7,11 +7,11 @@ LOG DE COSAS PARA HACER
 =======================
 ->Corregir lo hecho para la entrega anterior (ABM Evento) (Santi)
 
-->Alta del recorrido (Ya está X)
+->Alta del recorrido (Ya está)
 
 ->Envio de mail para las denuncias (Está a medias, revisar, Axel)
 
-->Listado de recorridos, solo disponibles(revisar query,Axel)
+->Listado de recorridos, solo disponibles(Ya esta)
 
 ->Traer info del recorrido mediante AJAX (investigar?)
 
