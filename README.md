@@ -15,8 +15,12 @@ LOG DE COSAS PARA HACER
 
 ->Traer info del recorrido mediante AJAX (investigar?)
 
-->Solicitud de participación en un recorrido(Santi)
+->Solicitud de participación en un recorrido(Santi o Axel)
 
-->hacer la mascara para los imputs de horas
+->Armar layout de ver mis recorridos y ver recorridos en los que paritcipo(historial) (Santi)
 
-->arreglar el registrar usuario
+->Alta de denuncias(Axel)
+
+->hacer la mascara para los inputs de horas(Axel)
+
+->arreglar el registrar usuario(??)
