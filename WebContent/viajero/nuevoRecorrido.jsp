@@ -118,49 +118,6 @@
 					  		<input type="text" name="partida" class="form-control" id="partida" required>
 					  	</div>
 					</div>
-
-<!-- 					<div class="form-group ida"> -->
-<!-- 						<label class="col-sm-6 control-label" for="partida">Hora de Partida:</label> -->
-<!-- 						<div class="bfh-timepicker col-sm-6" data-time="now"> -->
-<!-- 							<div class="input-group bfh-timepicker-toggle" data-toggle="bfh-timepicker"> -->
-<%-- 								<span class="input-group-addon"> --%>
-<!-- 									<i class="glyphicon glyphicon-time"></i> -->
-<%-- 								</span> --%>
-<!-- 								<input type="text" name="partida" class="form-control"> -->
-<!-- 							</div> -->
-<!-- 							<div class="bfh-timepicker-popover"> -->
-<!-- 								<table class="table"> -->
-<!-- 									<tbody> -->
-<!-- 										<tr> -->
-<!-- 											<td class="hour"> -->
-<!-- 												<div class="input-group"> -->
-<!-- 													<input type="text" class="form-control bfh-number" data-min="0" data-max="23" data-zeros="true" data-wrap="true"> -->
-<%-- 													<span class="input-group-addon bfh-number-btn inc"> --%>
-<%-- 														<span class="glyphicon glyphicon-chevron-up"></span> --%>
-<%-- 													</span> --%>
-<%-- 													<span class="input-group-addon bfh-number-btn dec"> --%>
-<%-- 														<span class="glyphicon glyphicon-chevron-down"></span> --%>
-<%-- 													</span> --%>
-<!-- 												</div> -->
-<!-- 											</td> -->
-<!-- 											<td class="separator">:</td> -->
-<!-- 											<td class="minute"> -->
-<!-- 												<div class="input-group"> -->
-<!-- 													<input type="text" class="form-control bfh-number" data-min="0" data-max="59" data-zeros="true" data-wrap="true"> -->
-<%-- 													<span class="input-group-addon bfh-number-btn inc"> --%>
-<%-- 														<span class="glyphicon glyphicon-chevron-up"></span> --%>
-<%-- 													</span> --%>
-<%-- 													<span class="input-group-addon bfh-number-btn dec"> --%>
-<%-- 														<span class="glyphicon glyphicon-chevron-down"></span> --%>
-<%-- 													</span> --%>
-<!-- 												</div> -->
-<!-- 											</td> -->
-<!-- 										</tr> -->
-<!-- 									</tbody> -->
-<!-- 								</table> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
 					
 					<div class="form-group vuelta invi">
 						<label class="col-sm-6 control-label" for="regreso">Hora de Regreso:</label>
