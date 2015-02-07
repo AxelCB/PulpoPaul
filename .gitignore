@@ -33,3 +33,6 @@ local.properties
 
 #Test
 test-output
+
+#Persistence
+src/META-INF/persistence.xml
