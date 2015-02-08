@@ -60,8 +60,11 @@ public class RegistrarUsuarioAction extends ActionSupport{
 
 		try {
 			usuario.setRol(rolDao.buscarPorNombre("viajero"));
-			//debe pasarse a array de bytes
-			usuario.setFoto(IOUtils.toByteArray(new FileInputStream(foto)));
+			
+			if(this.getFoto()!=null){
+				//Se pasa a un array de bytes
+				usuario.setFoto(IOUtils.toByteArray(new FileInputStream(this.getFoto())));
+			}
 
 		} catch (Exception e1) {
 			e1.printStackTrace();
