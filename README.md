@@ -21,7 +21,7 @@ LOG DE COSAS PARA HACER
 
 ->Alta de denuncias(Axel)
 
-->hacer la mascara para los inputs de horas(Ya está en eventos, habría que copypastearlo al resto)
+->hacer la mascara para los inputs de horas(Revisar)
 
 ->Arreglar el alta de eventos(parece q anda pero ni lista ni agrega, me salió esto
 09:30:52,703  WARN http-nio-8080-exec-8 components.ServletUrlRenderer:56 - No configuration found for the specified action: 'eventos/guardar' in namespace: '/eventos/eventos'. Form action defaulting to 'action' attribute's literal value.
