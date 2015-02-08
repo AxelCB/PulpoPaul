@@ -100,7 +100,7 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <s:form action="eventos/guardar" method="post" theme="simple" cssClass="form-horizontal" enctype="multipart/form-data">
+                    <s:form action="eventos/guardar" method="post" theme="simple" cssClass="form-horizontal" enctype="multipart/form-data" onsubmit="validateEventoForm();">
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="col-sm-4 control-label" for="nombre">Nombre:</label>
@@ -137,14 +137,14 @@
                             <div class="form-group">
                                 <label class="col-sm-4 control-label control-label" for="horaComienzo">Hora comienzo</label>
                                 <div class="col-sm-7">
-                                    <s:textfield name="horaComienzo" theme="simple" cssClass="form-control"/>
+                                    <s:textfield id="comienzo" name="horaComienzo" theme="simple" cssClass="form-control" onchange="formatTime(this)"/>
                                     <s:fielderror fieldName="horaComienzoError"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-4 control-label control-label" for="horaFin">Hora fin</label>
                                 <div class="col-sm-7">
-                                    <s:textfield name="horaFin" theme="simple" cssClass="form-control" id="fin"/>
+                                    <s:textfield name="horaFin" theme="simple" cssClass="form-control" id="fin" onchange="formatTime(this)"/>
                                     <s:fielderror fieldName="horaFinError"/>
                                 </div>
                             </div>
