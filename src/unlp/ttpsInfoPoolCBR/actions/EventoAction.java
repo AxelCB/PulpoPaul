@@ -1,16 +1,21 @@
 package unlp.ttpsInfoPoolCBR.actions;
 
 import com.opensymphony.xwork2.ActionSupport;
+
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import unlp.ttpsInfoPoolCBR.dao.evento.IEventoDao;
 import unlp.ttpsInfoPoolCBR.model.Evento;
+import unlp.ttpsInfoPoolCBR.util.Utils;
 
 import javax.servlet.http.HttpSession;
+
 import java.sql.Time;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,9 +30,6 @@ public class EventoAction extends ActionSupport{
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * Evento DAO
-     */
     @Autowired
     IEventoDao eventoDao;
 
@@ -42,19 +44,20 @@ public class EventoAction extends ActionSupport{
     private String horaFin;
     private String latLng;
 
-    @Action(value="guardar", results={
-            @Result(name="exito", location="/admin/abmEventos.jsp"),
-            @Result(name="input", location="/admin/abmEventos.jsp"),
-            @Result(name = "nologed",location = "index",type = "chain")})
+    @Action(value="nuevoEvento", results={
+            @Result(name="exito", location="listarEventos", type="chain"),
+            @Result(name="input", location="listarEventos", type="chain"),
+            @Result(name = "nologed", location = "index", type = "chain")})
     public String guardarEvento(){
-        try{
-            HttpSession session = ServletActionContext.getRequest().getSession(false);
-            if(session==null || session.getAttribute("usuario")==null){
-                addFieldError("nologed", "Autentiquese para utilizar la pagina");
-                return "nologed";
-            }
+        if(Utils.checkLogin()){
             SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
-            Date fecha =  formatter.parse(this.getFecha());
+            Date fecha;
+			try {
+				fecha = formatter.parse(this.getFecha());
+			} catch (ParseException e1) {
+				e1.printStackTrace();
+				return "input";
+			}
             Evento evento = new Evento();
             evento.setNombre(this.getNombre());
             evento.setDescripcion(this.getDescripcion());
@@ -63,41 +66,54 @@ public class EventoAction extends ActionSupport{
             evento.setHoraComienzo(Time.valueOf(this.getHoraComienzo()+":00"));
             evento.setHoraFin(Time.valueOf(this.getHoraFin()+":00"));
             evento.setLatLng(this.getLatLng());
-            eventoDao.guardar(evento);
-        }catch(Exception e){
-            e.printStackTrace();
-            return "input";
-        }finally{
-            try{
-                this.setEventos(eventoDao.listar());
-            }catch(Exception e){
-                e.printStackTrace();
-                return "input";
-            }
-        }
+            try {
+				eventoDao.guardar(evento);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return "input";
+			}
+
         return "exito";
+        }
+        else{
+        	addFieldError("nologed", "Autentiquese para utilizar la pagina");
+        	return "nologed";
+        }
     }
 
-    @Action(value="listar", results={
+    @Action(value="listarEventos", results={
             @Result(name="input", location="/admin/abmEventos.jsp"),
             @Result(name="exito", location="/admin/abmEventos.jsp"),
             @Result(name ="nologed",location = "index",type = "chain")})
     @SkipValidation
     public String listarEvento(){
-        try {
-            HttpSession session = ServletActionContext.getRequest().getSession(false);
-            if(session==null || session.getAttribute("usuario")==null){
-                addFieldError("nologed", "Autentiquese para utilizar la pagina");
-                return "nologed";
-            }
-                this.setEventos(eventoDao.listar());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "input";
+        if(Utils.checkLogin()){
+        	try {
+				this.setEventos(eventoDao.listar());
+			} catch (Exception e) {
+				e.printStackTrace();
+				return "input";
+			}
+        	return "exito";
         }
-        return "exito";
+        else{
+        	addFieldError("nologed", "Autentiquese para utilizar la pagina");
+        	return "nologed";
+        }
     }
+    
     public void validate(){
+    	
+    	System.out.println("nombre: " + this.getNombre());
+    	System.out.println("lugar: " + this.getLugar());
+    	System.out.println("descripcion: " + this.getDescripcion());
+    	System.out.println("fecha: " + this.getFecha());
+    	System.out.println("hora comienzo: " + this.getHoraComienzo());
+    	System.out.println("hora fin: " + this.getHoraFin());
+    	System.out.println("latLng: " + this.getLatLng());
+    	
+    	
+    	
         if((this.getNombre()==null)
                 || (getNombre().equals(""))){
             addFieldError("nombreError","Campo obligatorio");

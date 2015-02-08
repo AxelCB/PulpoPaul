@@ -6,7 +6,7 @@
 <html>
 
 <jsp:include page="header.jsp">
-	<jsp:param value="Bandeja de Entrada" name="titulo"/>
+	<jsp:param value="Bandeja Entrada" name="titulo"/>
 </jsp:include>
 
 <body>

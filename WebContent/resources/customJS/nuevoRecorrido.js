@@ -95,8 +95,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 // CALENDARIO /////////
 ///////////////////////
 $('#fechaPuntual').datepicker({
-	format: 'dd-mm-yyyy',
-	language: 'es'
+	format: 'dd-mm-yyyy'
 });
 
 ///////////////////////

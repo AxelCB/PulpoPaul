@@ -15,8 +15,7 @@ public class Evento extends AbstractEntity{
 
     private static final long serialVersionUID = 8431112769010964265L;
 
-    @Column(nullable = false,
-    		unique = true)
+    @Column(nullable = false)
     private String nombre;
     
     @Column(length = 1023)

@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <jsp:include page="header.jsp">
-	<jsp:param value="Agregar Recorrido" name="titulo"/>
+	<jsp:param value="Buscar Recorridos" name="titulo"/>
 </jsp:include>
 <link href="${pageContext.request.contextPath}/resources/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 <body>

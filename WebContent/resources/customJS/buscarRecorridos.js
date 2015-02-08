@@ -39,3 +39,7 @@ $(document).ready(function() {
       });
       
 });
+
+$("#detalleRecorrido").on("shown.bs.modal", function () {
+    google.maps.event.trigger(map, "resize");
+});

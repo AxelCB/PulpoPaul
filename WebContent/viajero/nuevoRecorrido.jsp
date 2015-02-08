@@ -9,6 +9,7 @@
 <jsp:include page="header.jsp">
 	<jsp:param value="Agregar Recorrido" name="titulo"/>
 </jsp:include>
+	<link href="${pageContext.request.contextPath}/resources/datepicker/css/datepicker.css" rel="stylesheet">
 
 <body>
 
@@ -148,7 +149,7 @@
 				</form>
 				
 				<div class="col-sm-6">
-					<div id="map" class="col-sm-6" style="width: 500px;height: 400px;"></div>
+					<div id="map" style="width: 500px;height: 400px;"></div>
 					<div class="row">
 						<div class="form-group">
 							<input type="submit" class="btn btn-default col-sm-4 col-sm-offset-8" value="Borrar último punto" onClick="removeHito();">
@@ -162,6 +163,7 @@
 	
 	<jsp:include page="scripts.jsp"/>
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+	<script src="${pageContext.request.contextPath}/resources/datepicker/js/bootstrap-datepicker.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/customJS/nuevoRecorrido.js"></script>
 	
 </body>

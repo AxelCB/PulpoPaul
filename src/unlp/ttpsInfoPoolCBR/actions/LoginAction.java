@@ -19,7 +19,7 @@ import java.util.Map;
 			location = "misRecorridos",
 			type = "redirect"),
 	@Result(name = "administrador",
-			location = "administrador",
+			location = "listarEventos",
 			type = "redirect"),
 	@Result(name = "input",
 			location = "index",

@@ -7,7 +7,7 @@
 <head>
 
 <jsp:include page="header.jsp">
-	<jsp:param value="Enviar Mensaje" name="titulo"/>
+	<jsp:param value="Bandeja Salida" name="titulo"/>
 </jsp:include>
 
 </head>
