@@ -23,4 +23,4 @@ LOG DE COSAS PARA HACER
 
 ->hacer la mascara para los inputs de horas(Axel)
 
-->arreglar el registrar usuario(??)
+->arreglar el registrar usuario(Ya está)
