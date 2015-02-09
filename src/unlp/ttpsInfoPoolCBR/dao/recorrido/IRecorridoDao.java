@@ -11,4 +11,5 @@ import unlp.ttpsInfoPoolCBR.model.Recorrido;
 public interface IRecorridoDao extends IGenericDao<Recorrido,Recorrido> {
 	
 	public List<Recorrido> listarDisponibles() throws Exception;
+	
 }

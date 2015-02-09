@@ -111,6 +111,11 @@ public class Usuario extends AbstractEntity{
     	return this.misViajes.remove(viaje);
     }
     
+    public Recorrido agregarRecorridosMios(Recorrido recorrido){
+    	this.getRecorridosMios().add(recorrido);
+    	return recorrido;
+    }
+    
     public String getNombres() {
         return nombres;
     }

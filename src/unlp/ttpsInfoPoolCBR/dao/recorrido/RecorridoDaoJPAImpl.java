@@ -32,4 +32,5 @@ public class RecorridoDaoJPAImpl extends GenericDaoJPAImpl<Recorrido,Recorrido> 
         }
         return listaRecorrido;
     }
+    
 }

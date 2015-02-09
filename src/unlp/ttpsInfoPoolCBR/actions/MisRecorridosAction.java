@@ -1,5 +1,6 @@
 package unlp.ttpsInfoPoolCBR.actions;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -10,42 +11,55 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
+import unlp.ttpsInfoPoolCBR.model.Recorrido;
+import unlp.ttpsInfoPoolCBR.model.Usuario;
+import unlp.ttpsInfoPoolCBR.util.Utils;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 @Action(value = "misRecorridos")
 @Results({
-	@Result(name = "exito",
-			location = "/viajero/misRecorridos.jsp"),
-	@Result(name = "nologed",
-			location = "index",
-			type = "chain")
+	@Result(name = "exito",	location = "/viajero/misRecorridos.jsp"),
+	@Result(name = "input",	location = "/viajero/misRecorridos.jsp"),
+	@Result(name = "nologed", location = "index", type = "chain")
 })
-
-public class MisRecorridosAction extends ActionSupport implements SessionAware{
+public class MisRecorridosAction extends ActionSupport{
 
 	private static final long serialVersionUID = 1L;
 
-	private SessionMap<String, Object> sessionMap;
+	@Autowired
+	private IUsuarioDao usuarioDao;
+	
+	private List<Recorrido> recorridos = null;
 	
 	public String execute(){
-		HttpSession session = ServletActionContext.getRequest().getSession(false);  
-		if(session==null || session.getAttribute("usuario")==null){  
-			addFieldError("nologed", "Autentiquese para utilizar la pagina");
-			System.out.println("sa");
+		if(Utils.checkLogin()){
+			HttpSession session = ServletActionContext.getRequest().getSession(false);
+			Usuario usuario = (Usuario)session.getAttribute("usuario");
+			try {
+				usuario = usuarioDao.traerMisRecorridos(usuario);				
+				recorridos = usuario.getRecorridosMios();
+			} catch (Exception e) {
+				e.printStackTrace();
+				return "input";
+			}
+
+			return "exito";
+		}
+		else{
 			return "nologed";
 		}
-		
-		return "exito";
 	}
-	
-	public void validate(){
 
+	public List<Recorrido> getRecorridos() {
+		return recorridos;
 	}
-	
-	@Override
-	public void setSession(Map<String, Object> map) {
-		sessionMap = (SessionMap)map;
-	}
+
+	public void setRecorridos(List<Recorrido> recorridos) {
+		this.recorridos = recorridos;
+	}	
 	
 }

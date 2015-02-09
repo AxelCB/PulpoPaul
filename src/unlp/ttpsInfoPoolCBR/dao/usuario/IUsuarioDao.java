@@ -13,4 +13,5 @@ public interface IUsuarioDao extends IGenericDao<Usuario,Usuario>{
 	public Usuario traerCalificaciones(Usuario usuario) throws Exception;
 	public Usuario traerRecorridos(Usuario usuario) throws Exception;
 	public Usuario login(String email,String password) throws Exception;
+	public Usuario traerMisRecorridos(Usuario usuario) throws Exception;
 }

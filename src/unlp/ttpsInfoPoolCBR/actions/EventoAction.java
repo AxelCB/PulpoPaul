@@ -50,7 +50,7 @@ public class EventoAction extends ActionSupport{
             @Result(name = "nologed", location = "index", type = "chain")})
     public String guardarEvento(){
         if(Utils.checkLogin()){
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy");
             Date fecha;
 			try {
 				fecha = formatter.parse(this.getFecha());
