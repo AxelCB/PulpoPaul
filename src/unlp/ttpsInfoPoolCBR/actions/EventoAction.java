@@ -112,8 +112,6 @@ public class EventoAction extends ActionSupport{
     	System.out.println("hora fin: " + this.getHoraFin());
     	System.out.println("latLng: " + this.getLatLng());
     	
-    	
-    	
         if((this.getNombre()==null)
                 || (getNombre().equals(""))){
             addFieldError("nombreError","Campo obligatorio");

@@ -19,7 +19,7 @@
 		        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Mensajes<span class="caret"></span></a>
 		       		<ul class="dropdown-menu" role="menu">
 			            <li><a href="/PulpoPaul/viajero/enviarMensaje.jsp">Enviar</a></li>
-			            <li><a href="/PulpoPaul/viajero/verMensajes.jsp">Bandeja de entrada</a></li>
+			            <li><a href="bandejaEntrada">Bandeja de entrada</a></li>
 			    	</ul>
 		    	</li>
 		    	<li><a href="/PulpoPaul/viajero/historial.jsp">Historial</a></li>

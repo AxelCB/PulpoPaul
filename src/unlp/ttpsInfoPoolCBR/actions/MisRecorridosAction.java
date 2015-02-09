@@ -37,8 +37,7 @@ public class MisRecorridosAction extends ActionSupport{
 	
 	public String execute(){
 		if(Utils.checkLogin()){
-			HttpSession session = ServletActionContext.getRequest().getSession(false);
-			Usuario usuario = (Usuario)session.getAttribute("usuario");
+			Usuario usuario = Utils.getUsuario();
 			try {
 				usuario = usuarioDao.traerMisRecorridos(usuario);				
 				recorridos = usuario.getRecorridosMios();

@@ -20,4 +20,10 @@ VALUES
 (0, 'reunion info-familiar', '2015-10-01', '12:00:00', '17:30:00', '(-34.9270629, -57.949481)', 'el quinchito papa', 'JAIIO'),
 (0, 'muy divertido', '2015-10-01', '12:00:00', '17:30:00', '(-34.9245066, -57.9478665)', 'ese lugar', 'Otro evento');
 
+INSERT INTO
+Mensaje(borrado, asunto, contenido, fecha, leido, emisor_id, receptor_id)
+VALUES
+(0,'probando 1', 'La persona remitente esta solicitando por favor ser parte de su recorrido zzzz. Presione aceptar si desea
+que sea llevar a esta persona sino presione rechazar', NOW(), 0, 3, 4);
+
 $$
