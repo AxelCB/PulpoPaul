@@ -11,7 +11,7 @@ LOG DE COSAS PARA HACER
 
 ->Envio de mail para las denuncias (Está a medias, revisar, Axel)
 
-->Listado de recorridos, solo disponibles(Ya esta)
+->Listado de recorridos, solo disponibles(Revisar query, Axel)
 
 ->Traer info del recorrido mediante AJAX (investigar?)
 
