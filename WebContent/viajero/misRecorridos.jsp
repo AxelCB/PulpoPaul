@@ -1,168 +1,83 @@
+<%@page import="org.apache.struts2.components.Include"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
 <!DOCTYPE html>
 <html>
-<head>
-
 <jsp:include page="header.jsp">
-	<jsp:param value="Mis Recorridos" name="titulo"/>
+	<jsp:param value="Buscar Recorridos" name="titulo"/>
 </jsp:include>
-
-</head>
+<link href="${pageContext.request.contextPath}/resources/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 <body>
-
+	
 	<jsp:include page="navigation.jsp"/>
 	
-	<!-- Comienzo de pagina -->
 	<div class="container">
 		<div class="jumbotron">
-			<h2>Mis recorridos</h2>
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<div class="row">
-						<div class="col-md-11">
-							<span class="glyphicon gliphicon-star"></span>
-							<span class="glyphicon glyphicon-star"></span>
-							<span class="glyphicon glyphicon-star"></span>
-							<span class="glyphicon glyphicon-star-empty"></span>
-							<span class="glyphicon glyphicon-star-empty"></span>
-							Un recorrido
-						</div>
-						<div class="col-md-1">
-							<span class="glyphicon glyphicon-pencil"></span>
-							<span class="glyphicon glyphicon-trash"></span>
-						</div>
-					</div>
-				</div>
-				<div class="panel panel-body">
-					<div class="row">
-						<div class="col-cm-6">
-							<div id="map_canvas" style="width: 400px;height: 300px;"></div>
-						</div>
-						<div class="col-sm-6">
-							<p>Informacion del viaje</p>
-							<h4>Desde: Un lado</h4>
-							<h4>Hasta: La facu</h4>
-							<h4>Tipo: Diario - Ida y vuelta</h4>
-							<h4>Hora ida: 08:00hs</h4>
-							<h4>Hora vuelta: 14:00hs</h4>
-							<br>
-							<p>Viajeros</p>
-							<div class="list-group">
-								<a href="#" class="list-group-item">
-									<div class="row">
-										<div class="col-md-9">
-											<span class="glyphicon glyphicon-star"></span>
-											<span class="glyphicon glyphicon-star"></span>
-											<span class="glyphicon glyphicon-star"></span>
-											<span class="glyphicon glyphicon-star-empty"></span>
-											<span class="glyphicon glyphicon-star-empty"></span>
-											Juan
-										</div>
-										<div class="col-md-3">
-											<span class="glyphicon glyphicon-star-empty"></span>
-											<span class="glyphicon glyphicon-trash"></span>
-											<span class="glyphicon glyphicon-warning-sign"></span>
-										</div>
-									</div>
-								</a>
-								<a href="#" class="list-group-item">
-									<div class="row">
-										<div class="col-md-9">
-											<span class="glyphicon glyphicon-star"></span>
-											<span class="glyphicon glyphicon-star"></span>
-											<span class="glyphicon glyphicon-star"></span>
-											<span class="glyphicon glyphicon-star-empty"></span>
-											<span class="glyphicon glyphicon-star-empty"></span>
-											Juan
-										</div>
-										<div class="col-md-3">
-											<span class="glyphicon glyphicon-star-empty"></span>
-											<span class="glyphicon glyphicon-trash"></span>
-											<span class="glyphicon glyphicon-warning-sign"></span>
-										</div>
-									</div>
-								</a>
-								<a href="#" class="list-group-item">
-									<div class="row">
-										<div class="col-md-9">
-											<span class="glyphicon glyphicon-star"></span>
-											<span class="glyphicon glyphicon-star"></span>
-											<span class="glyphicon glyphicon-star"></span>
-											<span class="glyphicon glyphicon-star-empty"></span>
-											<span class="glyphicon glyphicon-star-empty"></span>
-											Juan
-										</div>
-										<div class="col-md-3">
-											<span class="glyphicon glyphicon-star-empty"></span>
-											<span class="glyphicon glyphicon-trash"></span>
-											<span class="glyphicon glyphicon-warning-sign"></span>
-										</div>
-									</div>
-								</a>
-								<a href="#" class="list-group-item">
-									<div class="row">
-										<div class="col-md-9">
-											<span class="glyphicon glyphicon-star"></span>
-											<span class="glyphicon glyphicon-star"></span>
-											<span class="glyphicon glyphicon-star"></span>
-											<span class="glyphicon glyphicon-star-empty"></span>
-											<span class="glyphicon glyphicon-star-empty"></span>
-											Juan
-										</div>
-										<div class="col-md-3">
-											<span class="glyphicon glyphicon-star-empty"></span>
-											<span class="glyphicon glyphicon-trash"></span>
-											<span class="glyphicon glyphicon-warning-sign"></span>
-										</div>
-									</div>
-								</a>
-							</div>
-						</div>
-					</div>				
-				</div>
-			</div>
-			<div class="list-group">
-					<a href="#" class="list-group-item active">
-						<div class="row">
-							<div class="col-md-11">
-								<span class="glyphicon glyphicon-star"></span>
-								<span class="glyphicon glyphicon-star"></span>
-								<span class="glyphicon glyphicon-star-empty"></span>
-								<span class="glyphicon glyphicon-star-empty"></span>
-								<span class="glyphicon glyphicon-star-empty"></span>
-								Un recorrido
-							</div>
-							<div class="col-md-1">
-								<span class="glyphicon glyphicon-pencil"></span>
-								<span class="glyphicon glyphicon-trash"></span>
-							</div>
-						</div>
-					</a>
-					<a href="#" class="list-group-item active">
-						<div class="row">
-							<div class="col-md-11">
-								<span class="glyphicon glyphicon-star"></span>
-								<span class="glyphicon glyphicon-star"></span>
-								<span class="glyphicon glyphicon-star-empty"></span>
-								<span class="glyphicon glyphicon-star-empty"></span>
-								<span class="glyphicon glyphicon-star-empty"></span>
-								Un recorrido
-							</div>
-							<div class="col-md-1">
-								<span class="glyphicon glyphicon-pencil"></span>
-								<span class="glyphicon glyphicon-trash"></span>
-							</div>
-						</div>
-					</a>	
-				</div>
+			<h2>Mis Recorridos</h2>
+			<table id="recorridosTable">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>Nombre</th>
+						<th>Destino</th>
+						<th>Frecuencia</th>
+						<th>Tramos</th>
+						<th>Lugares</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				
+				<tbody>
+				<s:if test="%{!recorridos.isEmpty()}">
+				<s:iterator value="recorridos">
+					<tr data-toogle="modal" data-target="#detalleRecorrido">
+						<td><s:property value='id'/></td>
+						<td><s:property value='nombre'/></td>
+						<td><s:property value='evento == null?"FI - UNLP":evento.getNombre()'/></td>
+						<td><s:property value='tipo'/></td>
+						<td><s:property value='tramo'/></td>
+						<td><s:property value='lugares'/></td>
+	                    <td>
+	                    	<a href="#">
+	                    		<span class="glyphicon glyphicon-pencil"></span>
+	                    	</a>
+	                    </td>
+	                    <td>
+	                    	<a href="#">
+	                    		<span class="glyphicon glyphicon-trash"></span>
+	                    	</a>
+	                    </td>
+					</tr>
+				</s:iterator>
+				</s:if>
+				</tbody>
+				
+				<tfoot>
+					<tr>
+						<th>id</th>
+						<th>Nombre</th>
+						<th>Destino</th>
+						<th>Frecuencia</th>
+						<th>Tramos</th>
+						<th>Lugares</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</tfoot>
+			</table>
+			
 		</div>
 	</div>
-	<!-- Fin de pagina -->
-
-	<jsp:include page="scripts.jsp"/>
 	
+	
+	<jsp:include page="scripts.jsp"/>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>   
+	<script src="${pageContext.request.contextPath}/resources/customJS/misRecorridos.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/datatables/media/js/jquery.dataTables.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/datatables/media/js/dataTables.bootstrap.min.js"></script>
+	 
+    
 </body>
-</html>

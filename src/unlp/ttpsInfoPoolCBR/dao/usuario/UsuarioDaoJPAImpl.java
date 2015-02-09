@@ -3,7 +3,10 @@ package unlp.ttpsInfoPoolCBR.dao.usuario;
 import unlp.ttpsInfoPoolCBR.dao.GenericDaoJPAImpl;
 import unlp.ttpsInfoPoolCBR.model.Usuario;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
+
 import java.util.List;
 
 /**
@@ -84,7 +87,7 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,Usuario> implem
 	public Usuario traerRecorridos(Usuario usuario) throws Exception {
 		try{
 			usuario = this.getEm().find(Usuario.class, usuario.getId());
-
+			
 			usuario.getRecorridosMios().size();
 			usuario.getRecorridosViajo().size();
 			usuario.getHistorial().size();
@@ -106,6 +109,23 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,Usuario> implem
 			}
 		}
     	return usuario;
+	}
+	
+	@Override
+	public Usuario traerMisRecorridos(Usuario usuario) throws Exception{
+		try{
+			TypedQuery<Usuario> jpaql = this.getEm().createQuery("select u from Usuario u join fetch u.recorridosMios where u.id = :id", Usuario.class);
+			jpaql.setParameter("id", usuario.getId());
+			List<Usuario> usuarios = jpaql.getResultList();
+			if(!usuarios.isEmpty()){
+				usuario = usuarios.get(0);
+			}
+			this.getEm().close();
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return usuario;
 	}
 
 }

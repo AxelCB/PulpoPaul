@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import unlp.ttpsInfoPoolCBR.dao.evento.IEventoDao;
 import unlp.ttpsInfoPoolCBR.dao.recorrido.IRecorridoDao;
+import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
 import unlp.ttpsInfoPoolCBR.model.Evento;
 import unlp.ttpsInfoPoolCBR.model.Recorrido;
 import unlp.ttpsInfoPoolCBR.model.TipoViaje;
@@ -38,6 +39,9 @@ public class RecorridoNuevoAction extends ActionSupport{
     
     @Autowired
     private IEventoDao eventoDao;
+    
+     @Autowired
+     private IUsuarioDao usuarioDao;
 
     //Variables entrada
     private String nombre;
@@ -87,7 +91,7 @@ public class RecorridoNuevoAction extends ActionSupport{
 
     @Action(value="recorridoNuevoAgregar", results={
             @Result(name = "input", location = "recorridoNuevoInit", type = "chain"),
-            @Result(name = "exito", location = "/viajero/misRecorridos.jsp"),
+            @Result(name = "exito", location = "misRecorridos", type = "chain"),
             @Result(name = "nologed", location = "index", type = "chain")})
     public String recorridoNuevoAgregar(){
         if(Utils.checkLogin()){
@@ -204,6 +208,16 @@ public class RecorridoNuevoAction extends ActionSupport{
 				e.printStackTrace();
 				return "input";
 			}
+        	
+        	/*try{
+        		usuario = usuarioDao.traerMisRecorridos(usuario);
+        		usuario.agregarRecorridosMios(recorrido);
+        		usuario = usuarioDao.guardar(usuario);
+        	}
+        	catch(Exception e){
+        		e.printStackTrace();
+        		return "input";
+        	}*/
         	/*if(evento != null){
         		try {
         			evento = eventoDao.cargarRecorridos(evento);

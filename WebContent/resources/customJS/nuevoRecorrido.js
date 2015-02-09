@@ -169,7 +169,8 @@ var cambiarEvento = function(){
 	reset();
 	if($('#evento').val() != ''){
 		var str = $('#evento').find(':selected').data('latlng');
-		var  latlng = str.split(',');
+		str = str.substring(1, str.length - 1);
+		var latlng = str.split(',');
 		end = new google.maps.LatLng(parseFloat(latlng[0]), parseFloat(latlng[1]));
 		if(start != null){
 			calcRoute();
@@ -209,10 +210,7 @@ $('#agregar').click(function(event){
 		else{
 			$(this).unbind('submit').submit();
 			
-			while ($('#puntos').firstChild) {
-			    myNode.removeChild($('#puntos').firstChild);
-			}
-			
+			$('#puntos').html('');
 			var input = '';
 			input = '<input type="text" name="start" value="' + start +'">';
 			$('#puntos').append(input);

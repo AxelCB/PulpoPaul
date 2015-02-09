@@ -239,6 +239,13 @@ public class Recorrido extends AbstractEntity{
 	public void setPasajerosHistorial(List<Usuario> pasajerosHistorial) {
 		this.pasajerosHistorial = pasajerosHistorial;
 	}
-    
+
+	public TramoViaje getTramo() {
+		return tramo;
+	}
+
+	public void setTramo(TramoViaje tramo) {
+		this.tramo = tramo;
+	}
 
 }
