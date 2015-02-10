@@ -33,10 +33,11 @@ public class Test3Mensaje {
 			Usuario usuarioDos = usuarioDao.buscarPorEmail("noadmin@noadmin");
 			Assert.assertNotNull(usuarioDos);
 			
-			Mensaje mensaje = new Mensaje(	"Probando",
-											"Que lindo dia",
-											usuarioUno,
-											usuarioDos);
+			Mensaje mensaje = new Mensaje();
+//											"Probando",
+//											"Que lindo dia",
+//											usuarioUno,
+//											usuarioDos);
 			
 			mensaje = mensajeDao.guardar(mensaje);
 			

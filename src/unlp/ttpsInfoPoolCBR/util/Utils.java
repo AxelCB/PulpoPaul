@@ -4,6 +4,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
+import unlp.ttpsInfoPoolCBR.model.Usuario;
+
 public class Utils{
 	
 	public static boolean checkLogin(){
@@ -14,4 +16,9 @@ public class Utils{
         return true;
 	}
 	
+	
+	public static Usuario getUsuario(){
+		HttpSession session = ServletActionContext.getRequest().getSession(false);
+		return((Usuario)session.getAttribute("usuario"));
+	}
 }

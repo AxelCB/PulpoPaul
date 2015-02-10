@@ -116,6 +116,11 @@ public class Usuario extends AbstractEntity{
     	return recorrido;
     }
     
+    public Mensaje agregarBandejaEntrada(Mensaje mensaje){
+    	this.getBandejaEntrada().add(mensaje);
+    	return mensaje;
+    }
+    
     public String getNombres() {
         return nombres;
     }

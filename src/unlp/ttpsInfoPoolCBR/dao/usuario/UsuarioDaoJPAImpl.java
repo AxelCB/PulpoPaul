@@ -140,5 +140,23 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,Usuario> implem
 	        }
 	        return listaUsuario;
 	}
+	
+	@Override
+	public Usuario traerBandejaEntrada(Usuario usuario) throws Exception{
+		try{
+			TypedQuery<Usuario> jpaql = this.getEm().createQuery("select u from Usuario u join fetch u.bandejaEntrada where u.id = :id", Usuario.class);
+			jpaql.setParameter("id", usuario.getId());
+			List<Usuario> usuarios = jpaql.getResultList();
+			if(!usuarios.isEmpty()){
+				usuario = usuarios.get(0);
+			}
+			this.getEm().close();
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+		}
+				
+		return usuario;
+	}
 
 }

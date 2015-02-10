@@ -18,4 +18,5 @@ public interface IUsuarioDao extends IGenericDao<Usuario,Usuario>{
 	public Usuario login(String email,String password) throws Exception;
 	public Usuario traerMisRecorridos(Usuario usuario) throws Exception;
 	public List<Usuario> listarDeRol(Rol rol) throws Exception;
+	public Usuario traerBandejaEntrada(Usuario usuario) throws Exception;
 }

@@ -1,5 +1,8 @@
 package unlp.ttpsInfoPoolCBR.model;
 
+import java.sql.Date;
+import java.util.Calendar;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -20,6 +23,12 @@ public class Mensaje extends AbstractEntity{
     @Column(length = 1023,
     		nullable = false)
     private String contenido;
+    
+    @Column
+    private Boolean leido;
+    
+    @Column
+    private Date fecha;
 
     @ManyToOne(optional = false)
     private Usuario emisor;
@@ -31,11 +40,13 @@ public class Mensaje extends AbstractEntity{
     	super();
     }
     
-    public Mensaje(String asunto, String contenido, Usuario emisor,
-			Usuario receptor) {
+	public Mensaje(String asunto, String contenido, Boolean leido, 
+			Usuario emisor, Usuario receptor) {
 		super();
 		this.asunto = asunto;
 		this.contenido = contenido;
+		this.leido = leido;
+		this.fecha = new Date(Calendar.getInstance().getTimeInMillis());
 		this.emisor = emisor;
 		this.receptor = receptor;
 	}
@@ -71,4 +82,25 @@ public class Mensaje extends AbstractEntity{
     public void setReceptor(Usuario receptor) {
         this.receptor = receptor;
     }
+
+
+	public Boolean getLeido() {
+		return leido;
+	}
+
+
+	public void setLeido(Boolean leido) {
+		this.leido = leido;
+	}
+
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+    
 }
