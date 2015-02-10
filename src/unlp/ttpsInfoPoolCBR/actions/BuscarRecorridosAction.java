@@ -30,7 +30,7 @@ public class BuscarRecorridosAction extends ActionSupport{
 	public String execute(){
 		
 		try {
-			recorridos = recorridoDao.listarDisponibles();
+			recorridos = recorridoDao.listar();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -29,6 +29,9 @@ public class Mensaje extends AbstractEntity{
     
     @Column
     private Date fecha;
+    
+    @Column
+    private Recorrido recorrido;
 
     @ManyToOne(optional = false)
     private Usuario emisor;
