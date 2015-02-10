@@ -10,4 +10,10 @@ public class DenunciaDaoJPAImpl extends GenericDaoJPAImpl<Denuncia,Denuncia> imp
     public DenunciaDaoJPAImpl() {
         super(Denuncia.class, Denuncia.class);
     }
+    
+    @Override
+    public Denuncia guardar(Denuncia objetoVO) throws Exception {
+    	//TODO poner la denuncia en la session (como agarro la sessión acá?)
+    	return super.guardar(objetoVO);
+    }
 }

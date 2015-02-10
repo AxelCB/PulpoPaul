@@ -1,13 +1,13 @@
 package unlp.ttpsInfoPoolCBR.dao.usuario;
 
-import unlp.ttpsInfoPoolCBR.dao.GenericDaoJPAImpl;
-import unlp.ttpsInfoPoolCBR.model.Usuario;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 
-import java.util.List;
+import unlp.ttpsInfoPoolCBR.dao.GenericDaoJPAImpl;
+import unlp.ttpsInfoPoolCBR.model.Rol;
+import unlp.ttpsInfoPoolCBR.model.Usuario;
 
 /**
  * Created by Axel on 22/11/2014.
@@ -126,6 +126,19 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,Usuario> implem
 			ex.printStackTrace();
 		}
 		return usuario;
+	}
+	
+	@Override
+	public List<Usuario> listarDeRol(Rol rol) throws Exception {
+		 List<Usuario> listaUsuario = new ArrayList<Usuario>();
+	        try{
+	            TypedQuery<Usuario> jpaql = this.getEm().createQuery("select u from " + persistentClass.getSimpleName() + " u where rol_id = :idRol",persistentClass);
+	            jpaql.setParameter("idRol", rol.getId());
+	            listaUsuario = jpaql.getResultList();
+	        }catch(Exception ex){
+	            throw ex;
+	        }
+	        return listaUsuario;
 	}
 
 }
