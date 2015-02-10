@@ -1,95 +1,44 @@
-package unlp.ttpsInfoPoolCBR.model;
+package unlp.ttpsInfoPoolCBR.vo;
 
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import unlp.ttpsInfoPoolCBR.model.TipoViaje;
+import unlp.ttpsInfoPoolCBR.model.TramoViaje;
 
 /**
  * Created by axel on 05/11/14.
  */
-@Entity
-@Table
-public class Recorrido extends AbstractEntity{
+public class RecorridoVo extends AbstractVo{
 
     private static final long serialVersionUID = -7094909164595425984L;
-
-    @Column(nullable = false)
+    
     private String nombre;
-    
-    @ManyToOne(optional = true)
-//    @JoinColumn(name="evento_id")
-    private Evento evento;
-    
-    @ElementCollection
-    @CollectionTable
+    private EventoVo evento;
     private List<String> puntos = new ArrayList<String>();
-    
-    @Column
     private String inicio;
-    
-    @Column
     private String fin;
-    
-    @Column(nullable = false)
     private TramoViaje tramo;
-    
-    @Column
     private Time horaSalida;
-    
-    @Column
     private Time horaVuelta;
-    
-    @Column(nullable = false)
     private Integer lugares;
-    
-    @Column(nullable = false)
     private TipoViaje tipo;
-    
-    @Column
     private Date puntual;
-
-    @ElementCollection
-    @CollectionTable
     private List<String> dias = new ArrayList<String>();
-    
-    @Column(nullable = false)
     private Double precio;
-    
-    @OneToMany(mappedBy="recorrido"/*, cascade=CascadeType.ALL*/)
-    private List<Viaje> viajes = new ArrayList<Viaje>();
-    
-    @ManyToOne(optional = false)
-//    @JoinColumn(name="propietario_id")
-    private Usuario propietario;
-    
-    @ManyToMany(mappedBy="recorridosViajo",
-    			fetch = FetchType.EAGER,
-    			cascade={CascadeType.PERSIST,CascadeType.MERGE})
-    private List<Usuario> pasajeros = new ArrayList<Usuario>();
-    
-    @ManyToMany(mappedBy="historial")
-    		//,
-    			//fetch = FetchType.EAGER)
-    private List<Usuario> pasajerosHistorial = new ArrayList<Usuario>();
+    private List<ViajeVo> viajes = new ArrayList<ViajeVo>();
+    private UsuarioVo propietario;
+    private List<UsuarioVo> pasajeros = new ArrayList<UsuarioVo>();
+    private List<UsuarioVo> pasajerosHistorial = new ArrayList<UsuarioVo>();
 
-    public Recorrido(String nombre, Evento evento, List<String> puntos,
+    public RecorridoVo(String nombre, EventoVo evento, List<String> puntos,
 			String inicio, String fin, TramoViaje tramo, Time horaSalida,
 			Time horaVuelta, Integer lugares, TipoViaje tipo, Date puntual,
-			List<String> dias, Double precio, List<Viaje> viajes,
-			Usuario propietario, List<Usuario> pasajeros,
-			List<Usuario> pasajerosHistorial) {
+			List<String> dias, Double precio, List<ViajeVo> viajes,
+			UsuarioVo propietario, List<UsuarioVo> pasajeros,
+			List<UsuarioVo> pasajerosHistorial) {
 		super();
 		this.nombre = nombre;
 		this.evento = evento;
@@ -110,16 +59,16 @@ public class Recorrido extends AbstractEntity{
 		this.pasajerosHistorial = pasajerosHistorial;
 	}
 
-	public Recorrido(){
+	public RecorridoVo(){
     	super();
     }
 
-    public Usuario agregarPasajero(Usuario usuario){
+    public UsuarioVo agregarPasajero(UsuarioVo usuario){
     	this.pasajeros.add(usuario);
     	return usuario;
     }
     
-    public Boolean eliminarPasajero(Usuario usuario){
+    public Boolean eliminarPasajero(UsuarioVo usuario){
     	return this.pasajeros.remove(usuario);
     }
     
@@ -187,27 +136,27 @@ public class Recorrido extends AbstractEntity{
         this.tipo = tipo;
     }
 
-    public Evento getEvento() {
+    public EventoVo getEvento() {
         return evento;
     }
 
-    public void setEvento(Evento evento) {
+    public void setEvento(EventoVo evento) {
         this.evento = evento;
     }
 
-    public Usuario getPropietario() {
+    public UsuarioVo getPropietario() {
         return propietario;
     }
 
-    public void setPropietario(Usuario propietario) {
+    public void setPropietario(UsuarioVo propietario) {
         this.propietario = propietario;
     }
 
-    public List<Usuario> getPasajeros() {
+    public List<UsuarioVo> getPasajeros() {
         return pasajeros;
     }
     
-    public void setPasajeros(List<Usuario> pasajeros) {
+    public void setPasajeros(List<UsuarioVo> pasajeros) {
         this.pasajeros = pasajeros;
     }
 
@@ -235,19 +184,19 @@ public class Recorrido extends AbstractEntity{
 		this.fin = fin;
 	}
 
-    public List<Viaje> getViajes() {
+    public List<ViajeVo> getViajes() {
         return viajes;
     }
 	
-	public void setViajes(List<Viaje> viajes) {
+	public void setViajes(List<ViajeVo> viajes) {
         this.viajes = viajes;
     }
 
-	public List<Usuario> getPasajerosHistorial() {
+	public List<UsuarioVo> getPasajerosHistorial() {
 		return pasajerosHistorial;
 	}
 
-	public void setPasajerosHistorial(List<Usuario> pasajerosHistorial) {
+	public void setPasajerosHistorial(List<UsuarioVo> pasajerosHistorial) {
 		this.pasajerosHistorial = pasajerosHistorial;
 	}
 

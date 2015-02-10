@@ -1,17 +1,19 @@
 package unlp.ttpsInfoPoolCBR.actions;
 
-import com.opensymphony.xwork2.ActionSupport;
+import java.io.File;
+import java.io.FileInputStream;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import unlp.ttpsInfoPoolCBR.dao.rol.IRolDao;
 import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
-import unlp.ttpsInfoPoolCBR.model.Usuario;
+import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
 
-import java.io.File;
-import java.io.FileInputStream;
+import com.opensymphony.xwork2.ActionSupport;
 
 @Action(value = "registrarUsuario")
 @Results({
@@ -49,8 +51,9 @@ public class RegistrarUsuarioAction extends ActionSupport{
 	private String repetirClave;
 	private File foto;
 	
+	@Override
 	public String execute(){
-		Usuario usuario = new Usuario();
+		UsuarioVo usuario = new UsuarioVo();
 		
 		usuario.setNombres(this.getNombre());
 		usuario.setApellido(this.getApellido());
@@ -81,6 +84,7 @@ public class RegistrarUsuarioAction extends ActionSupport{
 		return "exito";
 	}
 	
+	@Override
 	public void validate(){
 		if((getNombre()==null)
 			|| (getNombre().equals(""))){

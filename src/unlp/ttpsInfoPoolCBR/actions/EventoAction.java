@@ -1,25 +1,22 @@
 package unlp.ttpsInfoPoolCBR.actions;
 
-import com.opensymphony.xwork2.ActionSupport;
-
-import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Result;
-import org.apache.struts2.interceptor.validation.SkipValidation;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import unlp.ttpsInfoPoolCBR.dao.evento.IEventoDao;
-import unlp.ttpsInfoPoolCBR.model.Evento;
-import unlp.ttpsInfoPoolCBR.util.Utils;
-
-import javax.servlet.http.HttpSession;
-
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.interceptor.validation.SkipValidation;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import unlp.ttpsInfoPoolCBR.dao.evento.IEventoDao;
+import unlp.ttpsInfoPoolCBR.util.Utils;
+import unlp.ttpsInfoPoolCBR.vo.EventoVo;
+
+import com.opensymphony.xwork2.ActionSupport;
 
 /**
  * Created by Axel on 19/12/2014.
@@ -33,7 +30,7 @@ public class EventoAction extends ActionSupport{
     @Autowired
     IEventoDao eventoDao;
 
-    private List<Evento> eventos = new ArrayList<Evento>();
+    private List<EventoVo> eventos = new ArrayList<EventoVo>();
 
     //Entrada agregar evento
     private String nombre;
@@ -58,7 +55,7 @@ public class EventoAction extends ActionSupport{
 				e1.printStackTrace();
 				return "input";
 			}
-            Evento evento = new Evento();
+            EventoVo evento = new EventoVo();
             evento.setNombre(this.getNombre());
             evento.setDescripcion(this.getDescripcion());
             evento.setLugar(this.getLugar());
@@ -102,7 +99,8 @@ public class EventoAction extends ActionSupport{
         }
     }
     
-    public void validate(){
+    @Override
+	public void validate(){
     	
     	System.out.println("nombre: " + this.getNombre());
     	System.out.println("lugar: " + this.getLugar());
@@ -150,10 +148,10 @@ public class EventoAction extends ActionSupport{
         }
     }
 
-    public List<Evento> getEventos() {
+    public List<EventoVo> getEventos() {
         return eventos;
     }
-    public void setEventos(List<Evento> eventos) {
+    public void setEventos(List<EventoVo> eventos) {
         this.eventos = eventos;
     }
     public IEventoDao getEventoDao() {

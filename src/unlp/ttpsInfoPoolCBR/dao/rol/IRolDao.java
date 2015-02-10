@@ -2,13 +2,12 @@ package unlp.ttpsInfoPoolCBR.dao.rol;
 
 import unlp.ttpsInfoPoolCBR.dao.IGenericDao;
 import unlp.ttpsInfoPoolCBR.model.Rol;
-
-import java.util.List;
+import unlp.ttpsInfoPoolCBR.vo.RolVo;
 
 /**
  * Created by Axel on 23/11/2014.
  */
-public interface IRolDao extends IGenericDao<Rol,Rol> {
+public interface IRolDao extends IGenericDao<Rol,RolVo> {
 
-    public Rol buscarPorNombre(String nombre)throws Exception;
+    public RolVo buscarPorNombre(String nombre)throws Exception;
 }

@@ -1,49 +1,28 @@
-package unlp.ttpsInfoPoolCBR.model;
+package unlp.ttpsInfoPoolCBR.vo;
 
 import java.sql.Date;
 import java.util.Calendar;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 /**
  * Created by axel on 05/11/14.
  */
-@Entity
-@Table
-public class Mensaje extends AbstractEntity{
+public class MensajeVo extends AbstractVo{
 
     private static final long serialVersionUID = -6523492302813042450L;
-
-    @Column(nullable = false)
+    
     private String asunto;
-
-    @Column(length = 1023,
-    		nullable = false)
     private String contenido;
-    
-    @Column
     private Boolean leido;
-    
-    @Column
     private Date fecha;
+    private UsuarioVo emisor;
+    private UsuarioVo receptor;
 
-    @ManyToOne(optional = false)
-//    @JoinColumn(name="emisor_id")
-    private Usuario emisor;
-    
-    @ManyToOne(optional = false)
-//    @JoinColumn(name="receptor_id")
-    private Usuario receptor;
-
-    public Mensaje(){
+    public MensajeVo(){
     	super();
     }
     
-	public Mensaje(String asunto, String contenido, Boolean leido, 
-			Usuario emisor, Usuario receptor) {
+	public MensajeVo(String asunto, String contenido, Boolean leido, 
+			UsuarioVo emisor, UsuarioVo receptor) {
 		super();
 		this.asunto = asunto;
 		this.contenido = contenido;
@@ -69,19 +48,19 @@ public class Mensaje extends AbstractEntity{
         this.contenido = contenido;
     }
 
-    public Usuario getEmisor() {
+    public UsuarioVo getEmisor() {
         return emisor;
     }
 
-    public void setEmisor(Usuario emisor) {
+    public void setEmisor(UsuarioVo emisor) {
         this.emisor = emisor;
     }
 
-    public Usuario getReceptor() {
+    public UsuarioVo getReceptor() {
         return receptor;
     }
 
-    public void setReceptor(Usuario receptor) {
+    public void setReceptor(UsuarioVo receptor) {
         this.receptor = receptor;
     }
 

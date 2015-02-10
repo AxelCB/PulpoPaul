@@ -8,7 +8,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import unlp.ttpsInfoPoolCBR.dao.recorrido.IRecorridoDao;
-import unlp.ttpsInfoPoolCBR.model.Recorrido;
+import unlp.ttpsInfoPoolCBR.vo.RecorridoVo;
 
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
@@ -34,7 +34,7 @@ public class RecorridoBuscarAction extends ActionSupport{
     		HttpServletRequest request = ServletActionContext.getRequest();
     		idRecorrido= Integer.valueOf(request.getParameter("idRecorrido"));
     		
-			Recorrido recorrido = recorridoDao.encontrar(idRecorrido);
+			RecorridoVo recorrido = recorridoDao.encontrar(idRecorrido);
 			HttpServletResponse response = ServletActionContext.getResponse();
 			response.setContentType("application/json");
 		    response.getWriter().write(gson.toJson(recorrido));

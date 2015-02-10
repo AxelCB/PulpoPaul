@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -18,12 +19,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import unlp.ttpsInfoPoolCBR.dao.evento.IEventoDao;
 import unlp.ttpsInfoPoolCBR.dao.recorrido.IRecorridoDao;
 import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
-import unlp.ttpsInfoPoolCBR.model.Evento;
-import unlp.ttpsInfoPoolCBR.model.Recorrido;
 import unlp.ttpsInfoPoolCBR.model.TipoViaje;
 import unlp.ttpsInfoPoolCBR.model.TramoViaje;
-import unlp.ttpsInfoPoolCBR.model.Usuario;
 import unlp.ttpsInfoPoolCBR.util.Utils;
+import unlp.ttpsInfoPoolCBR.vo.EventoVo;
+import unlp.ttpsInfoPoolCBR.vo.RecorridoVo;
+import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -48,7 +49,7 @@ public class RecorridoNuevoAction extends ActionSupport{
     private String destino;
     private Integer evento;
     private String frecuencia;
-    private List<String> dias;
+    private List<String> dias = new ArrayList<String>();
     private String fecha;
     private String idaOVuelta;
     private String partida;
@@ -58,11 +59,11 @@ public class RecorridoNuevoAction extends ActionSupport{
     
     private String start;
     private String end;
-    private List<String> waypoints;
+    private List<String> waypoints = new ArrayList<String>();
     
     //Variables
     private Date fechaActual;
-    private List<Evento> eventos;
+    private List<EventoVo> eventos = new ArrayList<EventoVo>();
 
     @Action(value="recorridoNuevoInit", results={
             @Result(name = "exito", location="/viajero/nuevoRecorrido.jsp"),
@@ -96,7 +97,7 @@ public class RecorridoNuevoAction extends ActionSupport{
     public String recorridoNuevoAgregar(){
         if(Utils.checkLogin()){
         	
-        	Evento evento = null;
+        	EventoVo evento = null;
         	if(this.getDestino().equals("facultad")){
         		this.setEvento(0);
         	}
@@ -124,7 +125,7 @@ public class RecorridoNuevoAction extends ActionSupport{
         			tipoViaje = TipoViaje.PUNTUAL;
         			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 					try {
-						java.util.Date aux = (java.util.Date) formatter.parse(this.getFecha()); 
+						java.util.Date aux = formatter.parse(this.getFecha()); 
 						fecha = new java.sql.Date(aux.getTime());
 					} catch (ParseException e) {
 						e.printStackTrace();
@@ -139,7 +140,7 @@ public class RecorridoNuevoAction extends ActionSupport{
         	}
         	else{
         		tipoViaje = TipoViaje.PUNTUAL;
-        		java.util.Date aux = (java.util.Date) evento.getFecha();
+        		java.util.Date aux = evento.getFecha();
         		fecha = new java.sql.Date(aux.getTime());
         	}
         	
@@ -181,9 +182,9 @@ public class RecorridoNuevoAction extends ActionSupport{
         	}
         	
         	HttpSession session = ServletActionContext.getRequest().getSession(false);
-        	Usuario usuario = (Usuario) session.getAttribute("usuario");
+        	UsuarioVo usuario = (UsuarioVo) session.getAttribute("usuario");
         	
-        	Recorrido recorrido = new Recorrido(
+        	RecorridoVo recorrido = new RecorridoVo(
         							this.getNombre(), 
         							evento, 
         							this.getWaypoints(), 
@@ -237,7 +238,8 @@ public class RecorridoNuevoAction extends ActionSupport{
         }
     }
     
-    public void validate(){
+    @Override
+	public void validate(){
         System.out.println("nombre: " + this.getNombre());
         
         System.out.println("destino: " + this.getDestino());
@@ -389,11 +391,11 @@ public class RecorridoNuevoAction extends ActionSupport{
 		this.waypoints = waypoints;
 	}
 
-	public List<Evento> getEventos() {
+	public List<EventoVo> getEventos() {
 		return eventos;
 	}
 
-	public void setEventos(List<Evento> eventos) {
+	public void setEventos(List<EventoVo> eventos) {
 		this.eventos = eventos;
 	}
 

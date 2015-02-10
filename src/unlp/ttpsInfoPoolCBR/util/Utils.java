@@ -4,7 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
-import unlp.ttpsInfoPoolCBR.model.Usuario;
+import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
 
 public class Utils{
 	
@@ -17,8 +17,8 @@ public class Utils{
 	}
 	
 	
-	public static Usuario getUsuario(){
+	public static UsuarioVo getUsuario(){
 		HttpSession session = ServletActionContext.getRequest().getSession(false);
-		return((Usuario)session.getAttribute("usuario"));
+		return((UsuarioVo)session.getAttribute("usuario"));
 	}
 }

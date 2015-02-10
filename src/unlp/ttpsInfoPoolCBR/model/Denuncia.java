@@ -22,9 +22,11 @@ public class Denuncia extends AbstractEntity {
     private String contenido;
 
     @ManyToOne(optional = false)
+//    @JoinColumn(name="denunciante_id")
     private Usuario denunciante;
     
     @ManyToOne(optional = false)
+//    @JoinColumn(name="denunciado_id")
     private Usuario denunciado;
 
     public Denuncia(){

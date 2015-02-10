@@ -18,9 +18,11 @@ public class CalificacionRecorrido extends AbstractEntity {
     private Integer calificacion;
 
     @ManyToOne(optional = false)
+//    @JoinColumn(name="calificado_id")
     private Viaje calificado;
 
     @ManyToOne(optional = false)
+//    @JoinColumn(name="calificador_id")
     private Usuario calificador;
 
     public CalificacionRecorrido(){

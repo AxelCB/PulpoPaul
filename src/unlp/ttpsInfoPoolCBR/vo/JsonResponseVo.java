@@ -1,12 +1,12 @@
-package unlp.ttpsInfoPoolCBR.model;
+package unlp.ttpsInfoPoolCBR.vo;
 
-public class JsonResponse {
+public class JsonResponseVo {
 	
 	private Boolean ok;
 	private String data;
 	private String message;
 	
-	public JsonResponse(){
+	public JsonResponseVo(){
 		
 	}
 	

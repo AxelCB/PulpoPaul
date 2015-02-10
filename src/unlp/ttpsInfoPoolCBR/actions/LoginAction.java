@@ -1,17 +1,19 @@
 package unlp.ttpsInfoPoolCBR.actions;
 
-import com.opensymphony.xwork2.ActionSupport;
+import java.util.Map;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.beans.factory.annotation.Autowired;
-import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
-import unlp.ttpsInfoPoolCBR.model.Rol;
-import unlp.ttpsInfoPoolCBR.model.Usuario;
 
-import java.util.Map;
+import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
+import unlp.ttpsInfoPoolCBR.vo.RolVo;
+import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
+
+import com.opensymphony.xwork2.ActionSupport;
 
 @Action(value = "login")
 @Results({
@@ -39,15 +41,16 @@ public class LoginAction extends ActionSupport implements SessionAware{
 	private String usuario;
 	private String clave;
 	
-	private Usuario user = null;
+	private UsuarioVo user = null;
 	private SessionMap<String, Object> sessionMap;
 	
+	@Override
 	public String execute(){
 		String resultado = "";
 		
 		sessionMap.put("usuario", user);
 		
-		Rol rol = user.getRol();
+		RolVo rol = user.getRol();
 		if(rol.getNombre().equals("administrador")){
 			resultado = "administrador";
 		}
@@ -58,6 +61,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 		return resultado;
 	}
 	
+	@Override
 	public void validate(){
 		//NINGUNO DE ESTOS ERRORES FUNCIONA PORQUE A DONDE SE VA
 		//ES OTRO ACTION (index) Y ESTE NO LOS MUESTRA

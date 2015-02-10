@@ -4,12 +4,13 @@ import java.util.List;
 
 import unlp.ttpsInfoPoolCBR.dao.IGenericDao;
 import unlp.ttpsInfoPoolCBR.model.Recorrido;
+import unlp.ttpsInfoPoolCBR.vo.RecorridoVo;
 
 /**
  * Created by Axel on 23/11/2014.
  */
-public interface IRecorridoDao extends IGenericDao<Recorrido,Recorrido> {
+public interface IRecorridoDao extends IGenericDao<Recorrido,RecorridoVo> {
 	
-	public List<Recorrido> listarDisponibles() throws Exception;
+	public List<RecorridoVo> listarDisponibles() throws Exception;
 	
 }

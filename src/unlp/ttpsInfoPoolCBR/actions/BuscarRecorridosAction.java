@@ -2,15 +2,15 @@ package unlp.ttpsInfoPoolCBR.actions;
 
 import java.util.List;
 
-import com.opensymphony.xwork2.ActionSupport;
-
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import unlp.ttpsInfoPoolCBR.dao.recorrido.IRecorridoDao;
-import unlp.ttpsInfoPoolCBR.model.Recorrido;
+import unlp.ttpsInfoPoolCBR.vo.RecorridoVo;
+
+import com.opensymphony.xwork2.ActionSupport;
 
 @Action(value = "buscarRecorridos")
 @Results({
@@ -25,8 +25,9 @@ public class BuscarRecorridosAction extends ActionSupport{
 	private IRecorridoDao recorridoDao;
 	
 	//Variables
-	private List<Recorrido> recorridos;
+	private List<RecorridoVo> recorridos;
 	
+	@Override
 	public String execute(){
 		
 		try {
@@ -37,11 +38,11 @@ public class BuscarRecorridosAction extends ActionSupport{
 		return "exito";
 	}
 
-	public List<Recorrido> getRecorridos() {
+	public List<RecorridoVo> getRecorridos() {
 		return recorridos;
 	}
 
-	public void setRecorridos(List<Recorrido> recorridos) {
+	public void setRecorridos(List<RecorridoVo> recorridos) {
 		this.recorridos = recorridos;
 	}
 	

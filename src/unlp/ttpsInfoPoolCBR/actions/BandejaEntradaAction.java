@@ -1,5 +1,6 @@
 package unlp.ttpsInfoPoolCBR.actions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -9,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import unlp.ttpsInfoPoolCBR.dao.mensaje.IMensajeDao;
 import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
-import unlp.ttpsInfoPoolCBR.model.Mensaje;
-import unlp.ttpsInfoPoolCBR.model.Usuario;
 import unlp.ttpsInfoPoolCBR.util.Utils;
+import unlp.ttpsInfoPoolCBR.vo.MensajeVo;
+import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
 
 @Action(value = "bandejaEntrada")
 @Results({
@@ -27,18 +28,18 @@ public class BandejaEntradaAction {
 	@Autowired
 	IMensajeDao mensajeDao;
 	
-	private List<Mensaje> mensajes;
+	private List<MensajeVo> mensajes = new ArrayList<MensajeVo>();
 	
 	public String execute(){
 		if(Utils.checkLogin()){
-			Usuario usuario = Utils.getUsuario();
-			Usuario remitente = null;
+			UsuarioVo usuario = Utils.getUsuario();
+			UsuarioVo remitente = null;
 			try {
 				remitente = usuarioDao.buscarPorEmail("viajero@viajero");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			Mensaje mensaje = new Mensaje(
+			MensajeVo mensaje = new MensajeVo(
 											"hola que tal", 
 											"quisiera que me lleves en tu triciclo", 
 											Boolean.FALSE,

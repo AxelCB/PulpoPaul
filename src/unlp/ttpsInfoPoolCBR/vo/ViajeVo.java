@@ -1,61 +1,32 @@
-package unlp.ttpsInfoPoolCBR.model;
+package unlp.ttpsInfoPoolCBR.vo;
 
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
 /**
  * Created by Axel on 22/11/2014.
  */
-@Entity
-@Table
-public class Viaje extends AbstractEntity{
+public class ViajeVo extends AbstractVo{
 
     private static final long serialVersionUID = 6117161171462567210L;
 
-    @Column(nullable = false)
     private String nombre;
-   
-    @Column(length = 1023)
     private String descripcion;
-    
-    @Column(nullable = false)
     private Time horaSalida;
-    
-    @Column
     private Time horaVuelta;
-    
-    @Column(nullable = false)
     private Integer lugares;
-    
-    @Column
     private Date dia;
-    
-    @ManyToOne(optional = false)
-    //TODO
-    private Recorrido recorrido;
+    private RecorridoVo recorrido;
+    private List<CalificacionRecorridoVo> calificaciones= new ArrayList<CalificacionRecorridoVo>();
+    private List<UsuarioVo> viajeros = new ArrayList<UsuarioVo>();
 
-    @OneToMany(mappedBy="calificado")
-    private List<CalificacionRecorrido> calificaciones= new ArrayList<CalificacionRecorrido>();
-    
-    @ManyToMany(mappedBy="misViajes"
-    		/*,fetch = FetchType.EAGER,
-    			cascade={CascadeType.PERSIST,CascadeType.MERGE}*/)
-    private List<Usuario> viajeros = new ArrayList<Usuario>();
-
-    public Viaje(){
+    public ViajeVo(){
     	super();
     }
     
-    public Viaje(Recorrido recorrido, String descripcion, Date dia){
+    public ViajeVo(RecorridoVo recorrido, String descripcion, Date dia){
     	super();
     	this.setDescripcion(descripcion);
         this.setNombre(recorrido.getNombre());
@@ -67,9 +38,9 @@ public class Viaje extends AbstractEntity{
         this.setRecorrido(recorrido);
     }
     
-    public Viaje(String nombre, String descripcion, Time horaSalida,
-			Integer lugares, Date dia, Recorrido recorrido,
-			List<Usuario> viajeros) {
+    public ViajeVo(String nombre, String descripcion, Time horaSalida,
+			Integer lugares, Date dia, RecorridoVo recorrido,
+			List<UsuarioVo> viajeros) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -80,10 +51,10 @@ public class Viaje extends AbstractEntity{
 		this.viajeros = viajeros;
 	}
 
-	public Recorrido getRecorrido() {
+	public RecorridoVo getRecorrido() {
         return recorrido;
     }
-    public void setRecorrido(Recorrido recorrido) {
+    public void setRecorrido(RecorridoVo recorrido) {
         this.recorrido = recorrido;
     }
     public String getNombre() {
@@ -122,28 +93,17 @@ public class Viaje extends AbstractEntity{
     public void setDia(Date dia) {
         this.dia = dia;
     }
-    public List<CalificacionRecorrido> getCalificaciones() {
+    public List<CalificacionRecorridoVo> getCalificaciones() {
         return calificaciones;
     }
-    public void setCalificaciones(List<CalificacionRecorrido> calificaciones) {
+    public void setCalificaciones(List<CalificacionRecorridoVo> calificaciones) {
         this.calificaciones = calificaciones;
     }
-    public List<Usuario> getViajeros() {
+    public List<UsuarioVo> getViajeros() {
         return viajeros;
     }
-    public void setViajeros(List<Usuario> viajeros) {
+    public void setViajeros(List<UsuarioVo> viajeros) {
         this.viajeros = viajeros;
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (!(o instanceof Viaje)) return false;
-//
-//        Viaje viaje = (Viaje) o;
-//
-//        if (id != null ? !id.equals(viaje.id) : viaje.id != null) return false;
-//
-//        return true;
-//    }
 }

@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import unlp.ttpsInfoPoolCBR.dao.recorrido.IRecorridoDao;
-import unlp.ttpsInfoPoolCBR.model.JsonResponse;
-import unlp.ttpsInfoPoolCBR.model.Recorrido;
+import unlp.ttpsInfoPoolCBR.vo.JsonResponseVo;
+import unlp.ttpsInfoPoolCBR.vo.RecorridoVo;
 
 import com.google.gson.Gson;
 
@@ -24,10 +24,10 @@ public class RecorridoCtrl {
 
 	@RequestMapping(value="/buscar")
 	public String buscar(@RequestParam("idRecorrido") String idRecorridoJson){
-		JsonResponse response = new JsonResponse();
+		JsonResponseVo response = new JsonResponseVo();
 		try{
 			Integer idRecorrido = Integer.valueOf(idRecorridoJson);
-			Recorrido recorrido = recorridoDao.encontrar(idRecorrido);
+			RecorridoVo recorrido = recorridoDao.encontrar(idRecorrido);
 			
 			response.setOk(Boolean.TRUE);
 			response.setData(gson.toJson(recorrido));

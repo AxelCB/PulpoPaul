@@ -1,36 +1,42 @@
 package unlp.ttpsInfoPoolCBR.dao.rol;
 
 
-import unlp.ttpsInfoPoolCBR.dao.GenericDaoJPAImpl;
-import unlp.ttpsInfoPoolCBR.model.Rol;
+import java.util.List;
 
 import javax.persistence.TypedQuery;
-import java.util.List;
+
+import unlp.ttpsInfoPoolCBR.dao.GenericDaoJPAImpl;
+import unlp.ttpsInfoPoolCBR.model.Rol;
+import unlp.ttpsInfoPoolCBR.util.MapperUtils;
+import unlp.ttpsInfoPoolCBR.vo.RolVo;
 
 /**
  * Created by Axel on 23/11/2014.
  */
-public class RolDaoJPAImpl extends GenericDaoJPAImpl<Rol,Rol> implements IRolDao {
+public class RolDaoJPAImpl extends GenericDaoJPAImpl<Rol,RolVo> implements IRolDao {
     public RolDaoJPAImpl() {
-        super(Rol.class, Rol.class);
+        super(Rol.class, RolVo.class);
     }
 
 
     @Override
-    public Rol buscarPorNombre(String nombre) throws Exception {
+    public RolVo buscarPorNombre(String nombre) throws Exception {
         Rol rol = null;
+        RolVo rolVo = null;
         try{
-            TypedQuery jpaql = this.getEm().createQuery("select r from Rol r where r.nombre = :nombre", Rol.class);
+            TypedQuery<Rol> jpaql = this.getEm().createQuery("select r from Rol r where r.nombre = :nombre", Rol.class);
             jpaql.setParameter("nombre",nombre);
             
             List<Rol> listaRol = jpaql.getResultList();
             if(!listaRol.isEmpty()){
             	rol = listaRol.get(0);
+            	rolVo = MapperUtils.map(rol, RolVo.class);
             }
-            this.getEm().close();
         }catch(Exception ex){
             throw ex;
+        }finally{
+        	this.getEm().close();
         }
-        return rol;
+        return rolVo;
     }
 }

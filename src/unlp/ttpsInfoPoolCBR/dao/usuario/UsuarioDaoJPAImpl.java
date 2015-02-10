@@ -6,157 +6,179 @@ import java.util.List;
 import javax.persistence.TypedQuery;
 
 import unlp.ttpsInfoPoolCBR.dao.GenericDaoJPAImpl;
-import unlp.ttpsInfoPoolCBR.model.Rol;
 import unlp.ttpsInfoPoolCBR.model.Usuario;
+import unlp.ttpsInfoPoolCBR.util.MapperUtils;
+import unlp.ttpsInfoPoolCBR.vo.RolVo;
+import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
 
 /**
  * Created by Axel on 22/11/2014.
  */
-public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,Usuario> implements IUsuarioDao{
+public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,UsuarioVo> implements IUsuarioDao{
     public UsuarioDaoJPAImpl() {
-        super(Usuario.class, Usuario.class);
+        super(Usuario.class, UsuarioVo.class);
     }
     
     @Override
-    public Usuario buscarPorEmail(String email) throws Exception{
+    public UsuarioVo buscarPorEmail(String email) throws Exception{
     	Usuario usuario = null;
+    	UsuarioVo usuarioVo = null;
     	try{
 	    	TypedQuery<Usuario> jpaql = this.getEm().createQuery("select u from Usuario u where u.email = :email", Usuario.class);
 	    	jpaql.setParameter("email", email);
 	    	List<Usuario> listaUsuario = jpaql.getResultList();
 	    	if(!listaUsuario.isEmpty()){
 	    		usuario = listaUsuario.get(0);
+	    		usuarioVo = MapperUtils.map(usuario, UsuarioVo.class);
 	    	}
-	    	this.getEm().close();
     	}
     	catch(Exception ex){
     		throw ex;
-    	}
-    	return usuario;
+    	}finally{
+        	this.getEm().close();
+        }
+    	return usuarioVo;
     }
 
 	@Override
-	public Usuario traerMensajes(Usuario usuario) throws Exception {
+	public UsuarioVo traerMensajes(UsuarioVo usuarioVo) throws Exception {
+		Usuario usuario = null;
 		try{
-			usuario = this.getEm().find(Usuario.class, usuario.getId());
+			usuario = this.getEm().find(Usuario.class, usuarioVo.getId());
 			
 			usuario.getBandejaEntrada().size();
 			usuario.getBandejaSalida().size();
 
-			this.getEm().close();
-			
+			usuarioVo = MapperUtils.map(usuario, UsuarioVo.class);
 		}catch(Exception ex){
 			ex.printStackTrace();
-		}
-		return usuario;
+		}finally{
+        	this.getEm().close();
+        }
+		return usuarioVo;
 	}
 
 	@Override
-	public Usuario traerDenuncias(Usuario usuario) throws Exception {
+	public UsuarioVo traerDenuncias(UsuarioVo usuarioVo) throws Exception {
+		Usuario usuario = null;
 		try{
-			usuario = this.getEm().find(Usuario.class, usuario.getId());
+			usuario = this.getEm().find(Usuario.class, usuarioVo.getId());
 
 			usuario.getDenunciasHechas().size();
 			usuario.getMisDenuncias().size();
 
-			this.getEm().close();
-
+			usuarioVo = MapperUtils.map(usuario, UsuarioVo.class);
 		}catch(Exception ex){
 			ex.printStackTrace();
-		}
-		return usuario;
+		}finally{
+        	this.getEm().close();
+        }
+		return usuarioVo;
 	}
 
 	@Override
-	public Usuario traerCalificaciones(Usuario usuario) throws Exception {
+	public UsuarioVo traerCalificaciones(UsuarioVo usuarioVo) throws Exception {
+		Usuario usuario = null;
 		try{
-			usuario = this.getEm().find(Usuario.class, usuario.getId());
+			usuario = this.getEm().find(Usuario.class, usuarioVo.getId());
 
 			usuario.getCalificacionesHechas().size();
 			usuario.getMisCalificaciones().size();
 
-			this.getEm().close();
-
+			usuarioVo = MapperUtils.map(usuario, UsuarioVo.class);
 		}catch(Exception ex){
 			ex.printStackTrace();
-		}
-		return usuario;
+		}finally{
+        	this.getEm().close();
+        }
+		return usuarioVo;
 	}
 
 	@Override
-	public Usuario traerRecorridos(Usuario usuario) throws Exception {
+	public UsuarioVo traerRecorridos(UsuarioVo usuarioVo) throws Exception {
+		Usuario usuario = null;
 		try{
-			usuario = this.getEm().find(Usuario.class, usuario.getId());
+			usuario = this.getEm().find(Usuario.class, usuarioVo.getId());
 			
 			usuario.getRecorridosMios().size();
 			usuario.getRecorridosViajo().size();
 			usuario.getHistorial().size();
 
-			this.getEm().close();
-
+			usuarioVo = MapperUtils.map(usuario, UsuarioVo.class);
 		}catch(Exception ex){
 			ex.printStackTrace();
-		}
-		return usuario;
+		}finally{
+        	this.getEm().close();
+        }
+		return usuarioVo;
 	}
 
 	@Override
-	public Usuario login(String email, String password) throws Exception {
-		Usuario usuario = this.buscarPorEmail(email);
-		if(usuario != null){
-			if(!usuario.getClave().equals(password)){
-				usuario = null;
+	public UsuarioVo login(String email, String password) throws Exception {
+		UsuarioVo usuarioVo = this.buscarPorEmail(email);
+		if(usuarioVo != null){
+			if(!usuarioVo.getClave().equals(password)){
+				usuarioVo = null;
 			}
 		}
-    	return usuario;
+    	return usuarioVo;
 	}
 	
 	@Override
-	public Usuario traerMisRecorridos(Usuario usuario) throws Exception{
+	public UsuarioVo traerMisRecorridos(UsuarioVo usuarioVo) throws Exception{
+		Usuario usuario = null;
 		try{
 			TypedQuery<Usuario> jpaql = this.getEm().createQuery("select u from Usuario u join fetch u.recorridosMios where u.id = :id", Usuario.class);
-			jpaql.setParameter("id", usuario.getId());
+			jpaql.setParameter("id", usuarioVo.getId());
 			List<Usuario> usuarios = jpaql.getResultList();
 			if(!usuarios.isEmpty()){
 				usuario = usuarios.get(0);
+				usuarioVo = MapperUtils.map(usuario, UsuarioVo.class);
 			}
-			this.getEm().close();
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
-		}
-		return usuario;
+		}finally{
+        	this.getEm().close();
+        }
+		return usuarioVo;
 	}
 	
 	@Override
-	public List<Usuario> listarDeRol(Rol rol) throws Exception {
+	public List<UsuarioVo> listarDeRol(RolVo rol) throws Exception {
 		 List<Usuario> listaUsuario = new ArrayList<Usuario>();
+		 List<UsuarioVo> listaUsuarioVo = new ArrayList<UsuarioVo>();
 	        try{
 	            TypedQuery<Usuario> jpaql = this.getEm().createQuery("select u from " + persistentClass.getSimpleName() + " u where rol_id = :idRol",persistentClass);
 	            jpaql.setParameter("idRol", rol.getId());
 	            listaUsuario = jpaql.getResultList();
+	            listaUsuarioVo = MapperUtils.map(listaUsuario,UsuarioVo.class);
 	        }catch(Exception ex){
 	            throw ex;
+	        }finally{
+	        	this.getEm().close();
 	        }
-	        return listaUsuario;
+	        return listaUsuarioVo;
 	}
 	
 	@Override
-	public Usuario traerBandejaEntrada(Usuario usuario) throws Exception{
+	public UsuarioVo traerBandejaEntrada(UsuarioVo usuarioVo) throws Exception{
+		Usuario usuario = null;
 		try{
 			TypedQuery<Usuario> jpaql = this.getEm().createQuery("select u from Usuario u join fetch u.bandejaEntrada where u.id = :id", Usuario.class);
-			jpaql.setParameter("id", usuario.getId());
+			jpaql.setParameter("id", usuarioVo.getId());
 			List<Usuario> usuarios = jpaql.getResultList();
 			if(!usuarios.isEmpty()){
 				usuario = usuarios.get(0);
+				usuarioVo = MapperUtils.map(usuario, UsuarioVo.class);
 			}
-			this.getEm().close();
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
-		}
-				
-		return usuario;
+		}finally{
+        	this.getEm().close();
+        }
+		return usuarioVo;
 	}
 
 }

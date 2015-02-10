@@ -1,22 +1,16 @@
 package unlp.ttpsInfoPoolCBR.actions;
 
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
-import org.apache.struts2.dispatcher.SessionMap;
-import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
-import unlp.ttpsInfoPoolCBR.model.Recorrido;
-import unlp.ttpsInfoPoolCBR.model.Usuario;
 import unlp.ttpsInfoPoolCBR.util.Utils;
+import unlp.ttpsInfoPoolCBR.vo.RecorridoVo;
+import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -33,11 +27,12 @@ public class MisRecorridosAction extends ActionSupport{
 	@Autowired
 	private IUsuarioDao usuarioDao;
 	
-	private List<Recorrido> recorridos = null;
+	private List<RecorridoVo> recorridos = null;
 	
+	@Override
 	public String execute(){
 		if(Utils.checkLogin()){
-			Usuario usuario = Utils.getUsuario();
+			UsuarioVo usuario = Utils.getUsuario();
 			try {
 				usuario = usuarioDao.traerMisRecorridos(usuario);				
 				recorridos = usuario.getRecorridosMios();
@@ -53,11 +48,11 @@ public class MisRecorridosAction extends ActionSupport{
 		}
 	}
 
-	public List<Recorrido> getRecorridos() {
+	public List<RecorridoVo> getRecorridos() {
 		return recorridos;
 	}
 
-	public void setRecorridos(List<Recorrido> recorridos) {
+	public void setRecorridos(List<RecorridoVo> recorridos) {
 		this.recorridos = recorridos;
 	}	
 	

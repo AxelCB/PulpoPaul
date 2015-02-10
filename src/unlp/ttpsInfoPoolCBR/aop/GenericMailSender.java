@@ -11,8 +11,8 @@ import org.springframework.mail.SimpleMailMessage;
 
 import unlp.ttpsInfoPoolCBR.dao.rol.IRolDao;
 import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
-import unlp.ttpsInfoPoolCBR.model.Rol;
-import unlp.ttpsInfoPoolCBR.model.Usuario;
+import unlp.ttpsInfoPoolCBR.vo.RolVo;
+import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
 
 
 /**
@@ -47,13 +47,13 @@ public class GenericMailSender {
 		SimpleMailMessage message = new SimpleMailMessage();
 		
 		try {
-			Rol rolAdmin = rolDao.buscarPorNombre("administrador");
-			List<Usuario> admins = usuarioDao.listarDeRol(rolAdmin);
+			RolVo rolAdmin = rolDao.buscarPorNombre("administrador");
+			List<UsuarioVo> admins = usuarioDao.listarDeRol(rolAdmin);
 			
 			String mailText="";
 			//TODO poner el contenido del mail desde el contenido de la denuncia
 			
-			for (Usuario admin : admins) {
+			for (UsuarioVo admin : admins) {
 				message.setFrom("InfoPool@gmail.com");
 				message.setTo(admin.getEmail());
 				message.setSubject("Nueva Denuncia");
