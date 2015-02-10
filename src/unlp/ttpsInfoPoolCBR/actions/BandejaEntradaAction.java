@@ -33,25 +33,6 @@ public class BandejaEntradaAction {
 	public String execute(){
 		if(Utils.checkLogin()){
 			UsuarioVo usuario = Utils.getUsuario();
-			UsuarioVo remitente = null;
-			try {
-				remitente = usuarioDao.buscarPorEmail("viajero@viajero");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			MensajeVo mensaje = new MensajeVo(
-											"hola que tal", 
-											"quisiera que me lleves en tu triciclo", 
-											Boolean.FALSE,
-											usuario,
-											remitente
-										);
-			try {
-				mensajeDao.guardar(mensaje);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			
 			try{
 				usuario = usuarioDao.traerBandejaEntrada(usuario);
@@ -70,12 +51,12 @@ public class BandejaEntradaAction {
 		
 	}
 
-	public IUsuarioDao getUsuarioDao() {
-		return usuarioDao;
+	public List<MensajeVo> getMensajes() {
+		return mensajes;
 	}
 
-	public void setUsuarioDao(IUsuarioDao usuarioDao) {
-		this.usuarioDao = usuarioDao;
-	}
+	public void setMensajes(List<MensajeVo> mensajes) {
+		this.mensajes = mensajes;
+	}	
 	
 }

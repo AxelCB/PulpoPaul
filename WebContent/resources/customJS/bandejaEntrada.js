@@ -18,7 +18,7 @@ $(document).ready(function() {
          	'sortable' : false
          },
          {
-        	 'targets' : [6],
+        	 'targets' : [6, 7],
         	 'searchable' : false,
         	 'sortables' : false,
         	 'className' : 'invi'
@@ -26,4 +26,18 @@ $(document).ready(function() {
          ]
       });
       
+   $('.glyphicon-eye-open').click(function(){
+	  var row = $(this).parents('tr').children('td');
+	  $('#asunto').text($(row[3]).text());
+	  $('#remitente').text($(row[2]).text());
+	  $('#fecha').text($(row[1]).text());
+	  $('#contenido').text($(row[7]).text());
+	  
+	  if($(row[6]).text() != '0'){
+		  var str = '<br>';
+		  str += '<a href="/PulpoPaul/recorrido/aceptarParticipante?idMensaje=' + $(row[0]).text() + '&aceptar=true" class="btn btn-success">Aceptar</a>'
+		  str += '<a href="/PulpoPaul/recorrido/aceptarParticipante?idMensaje=' + $(row[0]).text() + '?aceptar=false" class="btn btn-danger">Rechazar</a>';
+		  $('#contenido').append(str);
+	  }
+   });
 });

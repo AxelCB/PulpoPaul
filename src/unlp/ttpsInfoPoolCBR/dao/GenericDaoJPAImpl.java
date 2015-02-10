@@ -41,16 +41,19 @@ public class GenericDaoJPAImpl<M extends AbstractEntity,VO extends AbstractVo> i
     }
 
     @Override
-    @Transactional
+//    @Transactional
     public VO guardar(VO objetoVO) throws Exception {
         try{
+        	EntityManagerFactoryHolder.beginTransaction(this.getEm());
         	M objeto = MapperUtils.map(objetoVO, this.getPersistentClass());
             objeto = this.getEm().merge(objeto);
             objetoVO = MapperUtils.map(objeto,this.getVoClass());
+            EntityManagerFactoryHolder.commitTransaction(this.getEm());
         }catch(Exception ex){
+        	EntityManagerFactoryHolder.rollbackTransaction(this.getEm());
             throw ex;
         }finally{
-        	this.getEm().close();
+//        	this.getEm().close();
         }
         return objetoVO;
     }
@@ -59,10 +62,13 @@ public class GenericDaoJPAImpl<M extends AbstractEntity,VO extends AbstractVo> i
     @Transactional
     public VO modificar(VO objetoVO) throws Exception {
         try{
+        	EntityManagerFactoryHolder.beginTransaction(this.getEm());
         	M objeto = MapperUtils.map(objetoVO, this.getPersistentClass());
             objeto = this.getEm().merge(objeto);
             objetoVO = MapperUtils.map(objeto,this.getVoClass());
+            EntityManagerFactoryHolder.commitTransaction(this.getEm());
         }catch(Exception ex){
+        	EntityManagerFactoryHolder.rollbackTransaction(this.getEm());
             throw ex;
         }finally{
         	this.getEm().close();
@@ -74,11 +80,14 @@ public class GenericDaoJPAImpl<M extends AbstractEntity,VO extends AbstractVo> i
     @Transactional
     public void borrar(Integer idObjetoVO) throws Exception {
         try{
+        	EntityManagerFactoryHolder.beginTransaction(this.getEm());
             M objetoM = this.getEm().find(persistentClass,idObjetoVO);
             if(!objetoM.equals(null)){
                 this.getEm().remove(objetoM);
-            } 
+            }
+            EntityManagerFactoryHolder.commitTransaction(this.getEm());
         }catch(Exception ex){
+        	EntityManagerFactoryHolder.rollbackTransaction(this.getEm());
             throw ex;
         }finally{
         	this.getEm().close();
@@ -103,7 +112,8 @@ public class GenericDaoJPAImpl<M extends AbstractEntity,VO extends AbstractVo> i
     public VO encontrar(Integer id) throws Exception {
         VO objetoVO;
         try{
-            objetoVO = this.getEm().find(voClass,id);
+        	M objeto = this.getEm().find(this.getPersistentClass(),id);
+            objetoVO = MapperUtils.map(objeto, this.getVoClass()); 
         }catch(Exception ex){
             throw ex;
         }finally{
@@ -117,13 +127,16 @@ public class GenericDaoJPAImpl<M extends AbstractEntity,VO extends AbstractVo> i
 	public void drop() throws Exception {
         List<M> listaM = new ArrayList<M>();
         try{
+        	EntityManagerFactoryHolder.beginTransaction(this.getEm());
             TypedQuery<M> jpaql = this.getEm().createQuery("select o from " + persistentClass.getSimpleName() + " o",persistentClass);
             listaM = jpaql.getResultList();
             
             for(int i = 0; i < listaM.size(); i++){
                 this.getEm().remove(listaM.get(i));
             }
+            EntityManagerFactoryHolder.commitTransaction(this.getEm());
         }catch(Exception ex){
+        	EntityManagerFactoryHolder.rollbackTransaction(this.getEm());
             throw ex;
         }finally{
         	this.getEm().close();

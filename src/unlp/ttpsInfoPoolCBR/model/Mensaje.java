@@ -29,13 +29,14 @@ public class Mensaje extends AbstractEntity{
     
     @Column
     private Date fecha;
+    
+    @Column
+    private Recorrido recorrido;
 
     @ManyToOne(optional = false)
-//    @JoinColumn(name="emisor_id")
     private Usuario emisor;
     
     @ManyToOne(optional = false)
-//    @JoinColumn(name="receptor_id")
     private Usuario receptor;
 
     public Mensaje(){
@@ -104,5 +105,12 @@ public class Mensaje extends AbstractEntity{
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-    
+
+	public Recorrido getRecorrido() {
+		return recorrido;
+	}
+
+	public void setRecorrido(Recorrido recorrido) {
+		this.recorrido = recorrido;
+	}
 }

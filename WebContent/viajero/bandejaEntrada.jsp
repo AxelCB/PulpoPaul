@@ -26,6 +26,7 @@
 						<th></th>
 						<th></th>
 						<th></th>
+						<th></th>
 					</tr>
 				</thead>
 				
@@ -48,9 +49,46 @@
 	                    	</a>
 	                    </td>
 	                    <td><s:property value="contenido"/></td>
+	                    <td><s:property value="recorrido == null?0:recorrido.getId()"/></td>
 					</tr>
 				</s:iterator>
 				</s:if>
+				<tr>
+					<td>5</td>
+					<td>01-01-2010</td>
+					<td>Maria Pepita Reverte</td>
+					<td>Quiero ser tu amiga</td>
+                    <td>
+                    	<a href="#">
+                    		<span class="glyphicon glyphicon-eye-open" data-toggle="modal" data-target="#contenidoMensaje"></span>
+                    	</a>
+                    </td>
+                    <td>
+                    	<a href="#">
+                    		<span class="glyphicon glyphicon-trash"></span>
+                    	</a>
+                    </td>
+                    <td>0</td>
+                    <td>Este usuario quiere ser parte de tu recorrido "Vamos todos felices a la facu". Si desea aceptarlo presione "aceptar" sino "rechazar".</td>					
+				</tr>
+				<tr>
+					<td>5</td>
+					<td>01-01-2010</td>
+					<td>Maria Pepita Reverte</td>
+					<td>Quiero ser tu amiga</td>
+                    <td>
+                    	<a href="#">
+                    		<span class="glyphicon glyphicon-eye-open" data-toggle="modal" data-target="#contenidoMensaje"></span>
+                    	</a>
+                    </td>
+                    <td>
+                    	<a href="#">
+                    		<span class="glyphicon glyphicon-trash"></span>
+                    	</a>
+                    </td>
+                    <td>2</td>
+                    <td>Este usuario quiere ser parte de tu recorrido "Vamos todos felices a la facu". Si desea aceptarlo presione "aceptar" sino "rechazar".</td>					
+				</tr>
 				</tbody>
 				
 				<tfoot>
@@ -62,13 +100,38 @@
 						<th></th>
 						<th></th>
 						<th></th>
+						<th></th>
 					</tr>
 				</tfoot>
 			</table>
 			
+			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#contenidoMensaje" ">
+			  Launch demo modal
+			</button>
+			
 		</div>
 	</div>
 	
+	
+	<div class="modal fade" id="contenidoMensaje" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  	<div class="modal-dialog modal-lg">
+	    	<div class="modal-content">
+	      		<div class="modal-header">
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        		<h4 class="modal-title" id="asunto"></h4>
+	      		</div>
+	      		<div class="modal-body">
+					<p><b>Remitente:</b> <span id="remitente"></span></p>
+					<p><b>Fecha:</b> <span id="fecha"></span></p>
+					<p><b>Mensaje:</b> </p>
+					<p id="contenido"></p>
+				</div>
+	      		<div class="modal-footer">
+	        		<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+	      		</div>
+	    	</div>
+	  	</div>
+	</div>
 	
 	<jsp:include page="scripts.jsp"/>
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>   

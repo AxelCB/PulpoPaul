@@ -16,7 +16,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 
 @Action(value = "recorrido")
-public class RecorridoBuscarAction extends ActionSupport{
+public class RecorridoAction extends ActionSupport{
 
     private static final long serialVersionUID = 1L;
 

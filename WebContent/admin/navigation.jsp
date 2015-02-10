@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Nombre Admin</a>
+                <a class="navbar-brand" href="#">${usuario.getNombres()}</a>
             </div>
             <ul class="nav navbar-nav">
                 <li class="dropdown">

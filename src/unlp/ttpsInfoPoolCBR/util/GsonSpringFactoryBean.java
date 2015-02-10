@@ -2,6 +2,8 @@ package unlp.ttpsInfoPoolCBR.util;
 
 import org.springframework.beans.factory.FactoryBean;
 
+import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -30,7 +32,17 @@ public class GsonSpringFactoryBean implements FactoryBean<Gson> {
 			GsonBuilder gsb = new GsonBuilder();
 
 			gsb.setDateFormat("dd/MM/yyyy HH:mm:ss.SSS");
-			//gsb.addSerializationExclusionStrategy(new CustomExclusionStrategy(VOInternoOficina.class, false, "usuario"));
+			gsb.addSerializationExclusionStrategy(new CustomExclusionStrategy(UsuarioVo.class, false, "misCalificaciones"));
+			gsb.addSerializationExclusionStrategy(new CustomExclusionStrategy(UsuarioVo.class, false, "calificacionesHechas"));
+			gsb.addSerializationExclusionStrategy(new CustomExclusionStrategy(UsuarioVo.class, false, "recorridosCalificados"));
+			gsb.addSerializationExclusionStrategy(new CustomExclusionStrategy(UsuarioVo.class, false, "misDenuncias"));
+			gsb.addSerializationExclusionStrategy(new CustomExclusionStrategy(UsuarioVo.class, false, "denunciasHechas"));
+			gsb.addSerializationExclusionStrategy(new CustomExclusionStrategy(UsuarioVo.class, false, "bandejaEntrada"));
+			gsb.addSerializationExclusionStrategy(new CustomExclusionStrategy(UsuarioVo.class, false, "bandejaSalida"));
+			gsb.addSerializationExclusionStrategy(new CustomExclusionStrategy(UsuarioVo.class, false, "recorridosMios"));
+			gsb.addSerializationExclusionStrategy(new CustomExclusionStrategy(UsuarioVo.class, false, "recorridosViajo"));
+			gsb.addSerializationExclusionStrategy(new CustomExclusionStrategy(UsuarioVo.class, false, "historial"));
+			gsb.addSerializationExclusionStrategy(new CustomExclusionStrategy(UsuarioVo.class, false, "misViajes"));
 
 			// returns the created builder
 			this.singleton = gsb.create();

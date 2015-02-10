@@ -14,6 +14,7 @@ public class MensajeVo extends AbstractVo{
     private String contenido;
     private Boolean leido;
     private Date fecha;
+    private RecorridoVo recorrido;
     private UsuarioVo emisor;
     private UsuarioVo receptor;
 
@@ -64,24 +65,29 @@ public class MensajeVo extends AbstractVo{
         this.receptor = receptor;
     }
 
-
 	public Boolean getLeido() {
 		return leido;
 	}
-
 
 	public void setLeido(Boolean leido) {
 		this.leido = leido;
 	}
 
-
 	public Date getFecha() {
 		return fecha;
 	}
 
-
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
+
+	public RecorridoVo getRecorrido() {
+		return recorrido;
+	}
+
+	public void setRecorrido(RecorridoVo recorrido) {
+		this.recorrido = recorrido;
+	}
+	
     
 }
