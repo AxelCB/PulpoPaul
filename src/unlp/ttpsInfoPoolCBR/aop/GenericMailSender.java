@@ -2,6 +2,8 @@ package unlp.ttpsInfoPoolCBR.aop;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -11,6 +13,7 @@ import org.springframework.mail.SimpleMailMessage;
 
 import unlp.ttpsInfoPoolCBR.dao.rol.IRolDao;
 import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
+import unlp.ttpsInfoPoolCBR.util.EntityManagerFactoryHolder;
 import unlp.ttpsInfoPoolCBR.vo.RolVo;
 import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
 
@@ -45,10 +48,13 @@ public class GenericMailSender {
 	@After("execution(* unlp.ttpsInfoPoolCBR.dao.denuncia.DenunciaDaoJPAImpl.guardar(..)")
 	public void sendEmailAfterNewDenuncia(JoinPoint joinPoint){
 		SimpleMailMessage message = new SimpleMailMessage();
-		
+		EntityManager em = null;
 		try {
-			RolVo rolAdmin = rolDao.buscarPorNombre("administrador");
-			List<UsuarioVo> admins = usuarioDao.listarDeRol(rolAdmin);
+			em = EntityManagerFactoryHolder.getEntityManager();
+			RolVo rolAdmin = rolDao.buscarPorNombre(em,"administrador");
+			List<UsuarioVo> admins = usuarioDao.listarDeRol(em,rolAdmin);
+			
+			em.close();
 			
 			String mailText="";
 			//TODO poner el contenido del mail desde el contenido de la denuncia
@@ -62,6 +68,8 @@ public class GenericMailSender {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally{
+			em.close();
 		}
 		
 	}

@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import unlp.ttpsInfoPoolCBR.dao.GenericDaoJPAImpl;
@@ -21,10 +22,10 @@ public class EventoDaoJPAImpl extends GenericDaoJPAImpl<Evento,EventoVo> impleme
     }
     
     @Override
-    public EventoVo buscarPorNombre(String nombre) throws Exception{
+    public EventoVo buscarPorNombre(EntityManager em,String nombre) throws Exception{
     	EventoVo eventoVo = null;
     	try{
-	    	TypedQuery<Evento> jpaql = this.getEm().createQuery("select e from Evento e where e.nombre = :nombre", Evento.class);
+	    	TypedQuery<Evento> jpaql = em.createQuery("select e from Evento e where e.nombre = :nombre", Evento.class);
 	    	jpaql.setParameter("nombre", nombre);
 	    	List<Evento> listaEvento = jpaql.getResultList();
 	    	if(!listaEvento.isEmpty()){
@@ -33,14 +34,12 @@ public class EventoDaoJPAImpl extends GenericDaoJPAImpl<Evento,EventoVo> impleme
     	}
     	catch(Exception ex){
     		throw ex;
-    	}finally{
-        	this.getEm().close();
-        }
+    	}
     	return eventoVo;
     }
     
     @Override
-    public List<EventoVo> getAll() throws Exception{
+    public List<EventoVo> getAll(EntityManager em) throws Exception{
     	List<EventoVo> eventos = null;
     	try{
     		String query = "select e "
@@ -48,7 +47,7 @@ public class EventoDaoJPAImpl extends GenericDaoJPAImpl<Evento,EventoVo> impleme
     					+ "	where "
     					+ "		e.fecha >= :hoy"
     					+ "		and e.borrado = 0";
-    		TypedQuery<Evento> jpaql = this.getEm().createQuery(query, Evento.class);
+    		TypedQuery<Evento> jpaql = em.createQuery(query, Evento.class);
     		
     		Calendar cal = Calendar.getInstance();
     		jpaql.setParameter("hoy", new Date(cal.getTimeInMillis()));
@@ -56,24 +55,19 @@ public class EventoDaoJPAImpl extends GenericDaoJPAImpl<Evento,EventoVo> impleme
     	}
     	catch(Exception ex){
     		throw ex;
-    	}finally{
-        	this.getEm().close();
-        }
+    	}
     	return eventos;
     }
     
     @Override
-    public EventoVo cargarRecorridos(EventoVo eventoVo) throws Exception{
+    public EventoVo cargarRecorridos(EntityManager em,EventoVo eventoVo) throws Exception{
     	Evento evento = MapperUtils.map(eventoVo,Evento.class);
     	try{
-    		this.getEm();
     		evento.getRecorridos();
     		eventoVo = MapperUtils.map(evento,EventoVo.class);
     	}catch(Exception ex){
     		throw ex;
-    	}finally{
-        	this.getEm().close();
-        }
+    	}
     	return eventoVo;
     }
 }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
@@ -21,7 +22,8 @@ import unlp.ttpsInfoPoolCBR.dao.recorrido.IRecorridoDao;
 import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
 import unlp.ttpsInfoPoolCBR.model.TipoViaje;
 import unlp.ttpsInfoPoolCBR.model.TramoViaje;
-import unlp.ttpsInfoPoolCBR.util.Utils;
+import unlp.ttpsInfoPoolCBR.util.EntityManagerFactoryHolder;
+import unlp.ttpsInfoPoolCBR.util.SessionUtils;
 import unlp.ttpsInfoPoolCBR.vo.EventoVo;
 import unlp.ttpsInfoPoolCBR.vo.RecorridoVo;
 import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
@@ -70,18 +72,20 @@ public class RecorridoNuevoAction extends ActionSupport{
             @Result(name = "nologed", location = "index", type = "chain")})
     @SkipValidation
     public String recorridoNuevoInit(){
-    	if(Utils.checkLogin()){
+    	EntityManager em = null;
+    	if(SessionUtils.checkLogin()){
     		Calendar cal = Calendar.getInstance();
     		this.fechaActual = new Date(cal.getTimeInMillis());
     		
     		eventos = null;
     		try {
-				eventos = eventoDao.getAll();
+    			em = EntityManagerFactoryHolder.getEntityManager();
+				eventos = eventoDao.getAll(em);
 			} catch (Exception e) {
 				e.printStackTrace();
+			}finally{
+				em.close();
 			}
-    		
-    		
     		return "exito";
     	}
     	else{
@@ -95,8 +99,8 @@ public class RecorridoNuevoAction extends ActionSupport{
             @Result(name = "exito", location = "misRecorridos", type = "chain"),
             @Result(name = "nologed", location = "index", type = "chain")})
     public String recorridoNuevoAgregar(){
-        if(Utils.checkLogin()){
-        	
+    	EntityManager em = null;
+        if(SessionUtils.checkLogin()){
         	EventoVo evento = null;
         	if(this.getDestino().equals("facultad")){
         		this.setEvento(0);
@@ -104,9 +108,11 @@ public class RecorridoNuevoAction extends ActionSupport{
         	else{
         		//es "evento"
         		try {
-					evento = eventoDao.encontrar(this.getEvento());
+        			em = EntityManagerFactoryHolder.getEntityManager();
+					evento = eventoDao.encontrar(em,this.getEvento());
 				} catch (Exception e) {
 					e.printStackTrace();
+					em.close();
 					return "input";
 				}
         	}
@@ -202,10 +208,12 @@ public class RecorridoNuevoAction extends ActionSupport{
         							usuario,
         							null,
         							null);
-	        
         	try {
-				recorrido = recorridoDao.guardar(recorrido);
+        		EntityManagerFactoryHolder.beginTransaction(em);
+				recorrido = recorridoDao.guardar(em,recorrido);
+				EntityManagerFactoryHolder.commitTransaction(em);
 			} catch (Exception e) {
+				EntityManagerFactoryHolder.rollbackTransaction(em);
 				e.printStackTrace();
 				return "input";
 			}

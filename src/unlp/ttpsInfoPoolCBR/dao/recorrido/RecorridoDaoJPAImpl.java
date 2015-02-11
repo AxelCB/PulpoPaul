@@ -4,6 +4,7 @@ package unlp.ttpsInfoPoolCBR.dao.recorrido;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import unlp.ttpsInfoPoolCBR.dao.GenericDaoJPAImpl;
@@ -20,11 +21,11 @@ public class RecorridoDaoJPAImpl extends GenericDaoJPAImpl<Recorrido,RecorridoVo
     }
     
     @Override
-    public List<RecorridoVo> listarDisponibles() throws Exception {
+    public List<RecorridoVo> listarDisponibles(EntityManager em) throws Exception {
         List<Recorrido> listaRecorrido = new ArrayList<Recorrido>();
         List<RecorridoVo> listaRecorridoVo = new ArrayList<RecorridoVo>();
         try{
-            TypedQuery<Recorrido> jpaql = this.getEm().createQuery("select r from " + persistentClass.getSimpleName() + " r "
+            TypedQuery<Recorrido> jpaql = em.createQuery("select r from " + persistentClass.getSimpleName() + " r "
             		+ "WHERE r.lugares > ("
             			+ "SELECT count(*) FROM Recorrido rec "
             			+ "INNER JOIN rec.pasajeros " //Usuario_Recorrido_Viajo urv ON (rec.id = urv.recorrido_id)
@@ -33,8 +34,6 @@ public class RecorridoDaoJPAImpl extends GenericDaoJPAImpl<Recorrido,RecorridoVo
             listaRecorridoVo = MapperUtils.map(listaRecorrido,RecorridoVo.class);
         }catch(Exception ex){
             throw ex;
-        }finally{
-        	this.getEm().close();
         }
         return listaRecorridoVo;
     }

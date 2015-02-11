@@ -9,7 +9,6 @@ import javax.persistence.TypedQuery;
 import org.springframework.transaction.annotation.Transactional;
 
 import unlp.ttpsInfoPoolCBR.model.AbstractEntity;
-import unlp.ttpsInfoPoolCBR.util.EntityManagerFactoryHolder;
 import unlp.ttpsInfoPoolCBR.util.MapperUtils;
 import unlp.ttpsInfoPoolCBR.vo.AbstractVo;
 
@@ -19,7 +18,7 @@ import unlp.ttpsInfoPoolCBR.vo.AbstractVo;
 public class GenericDaoJPAImpl<M extends AbstractEntity,VO extends AbstractVo> implements IGenericDao<M,VO>{
 
 //    @PersistenceContext
-    private EntityManager em;
+//    private EntityManager em;
 
     protected Class<M> persistentClass;
     protected Class<VO> voClass;
@@ -29,117 +28,92 @@ public class GenericDaoJPAImpl<M extends AbstractEntity,VO extends AbstractVo> i
         this.voClass = voClass;
     }
 
-    protected EntityManager getEm() {
-    	if(em==null){
-    		em = EntityManagerFactoryHolder.getEntityManager();
-    	}
-        return em;
-    }
+//    protected EntityManager getEm() {
+// 
+//        return em;
+//    }
+//
+//    protected void setEm(EntityManager em) {
+//        this.em = em;
+//    }
 
-    protected void setEm(EntityManager em) {
-        this.em = em;
+    @Override
+//    @Transactional
+    public VO guardar(EntityManager em,VO objetoVO) throws Exception {
+        try{
+        	M objeto = MapperUtils.map(objetoVO, this.getPersistentClass());
+            objeto = em.merge(objeto);
+            objetoVO = MapperUtils.map(objeto,this.getVoClass());
+        }catch(Exception ex){
+            throw ex;
+        }
+        return objetoVO;
     }
 
     @Override
 //    @Transactional
-    public VO guardar(VO objetoVO) throws Exception {
+    public VO modificar(EntityManager em,VO objetoVO) throws Exception {
         try{
-        	EntityManagerFactoryHolder.beginTransaction(this.getEm());
         	M objeto = MapperUtils.map(objetoVO, this.getPersistentClass());
-            objeto = this.getEm().merge(objeto);
+            objeto = em.merge(objeto);
             objetoVO = MapperUtils.map(objeto,this.getVoClass());
-            EntityManagerFactoryHolder.commitTransaction(this.getEm());
         }catch(Exception ex){
-        	EntityManagerFactoryHolder.rollbackTransaction(this.getEm());
             throw ex;
-        }finally{
-//        	this.getEm().close();
         }
         return objetoVO;
     }
 
     @Override
     @Transactional
-    public VO modificar(VO objetoVO) throws Exception {
+    public void borrar(EntityManager em,Integer idObjetoVO) throws Exception {
         try{
-        	EntityManagerFactoryHolder.beginTransaction(this.getEm());
-        	M objeto = MapperUtils.map(objetoVO, this.getPersistentClass());
-            objeto = this.getEm().merge(objeto);
-            objetoVO = MapperUtils.map(objeto,this.getVoClass());
-            EntityManagerFactoryHolder.commitTransaction(this.getEm());
-        }catch(Exception ex){
-        	EntityManagerFactoryHolder.rollbackTransaction(this.getEm());
-            throw ex;
-        }finally{
-        	this.getEm().close();
-        }
-        return objetoVO;
-    }
-
-    @Override
-    @Transactional
-    public void borrar(Integer idObjetoVO) throws Exception {
-        try{
-        	EntityManagerFactoryHolder.beginTransaction(this.getEm());
-            M objetoM = this.getEm().find(persistentClass,idObjetoVO);
+            M objetoM = em.find(persistentClass,idObjetoVO);
             if(!objetoM.equals(null)){
-                this.getEm().remove(objetoM);
+                em.remove(objetoM);
             }
-            EntityManagerFactoryHolder.commitTransaction(this.getEm());
         }catch(Exception ex){
-        	EntityManagerFactoryHolder.rollbackTransaction(this.getEm());
             throw ex;
-        }finally{
-        	this.getEm().close();
         }
     }
 
     @Override
-    public List<VO> listar() throws Exception {
+    public List<VO> listar(EntityManager em) throws Exception {
         List<M> listaM = new ArrayList<M>();
         try{
-            TypedQuery<M> jpaql = this.getEm().createQuery("select o from " + persistentClass.getSimpleName() + " o",persistentClass);
+            TypedQuery<M> jpaql = em.createQuery("select o from " + persistentClass.getSimpleName() + " o",persistentClass);
             listaM = jpaql.getResultList();
             return MapperUtils.map(listaM, this.getVoClass());
         }catch(Exception ex){
             throw ex;
-        }finally{
-        	this.getEm().close();
         }
     }
 
     @Override
-    public VO encontrar(Integer id) throws Exception {
+    public VO encontrar(EntityManager em,Integer id) throws Exception {
         VO objetoVO;
         try{
-        	M objeto = this.getEm().find(this.getPersistentClass(),id);
+        	M objeto = em.find(this.getPersistentClass(),id);
             objetoVO = MapperUtils.map(objeto, this.getVoClass()); 
         }catch(Exception ex){
             throw ex;
-        }finally{
-        	this.getEm().close();
         }
         return objetoVO;
     }
 
 	@Override
-    @Transactional
-	public void drop() throws Exception {
+//    @Transactional
+	public void drop(EntityManager em) throws Exception {
         List<M> listaM = new ArrayList<M>();
         try{
-        	EntityManagerFactoryHolder.beginTransaction(this.getEm());
-            TypedQuery<M> jpaql = this.getEm().createQuery("select o from " + persistentClass.getSimpleName() + " o",persistentClass);
+        	
+            TypedQuery<M> jpaql = em.createQuery("select o from " + persistentClass.getSimpleName() + " o",persistentClass);
             listaM = jpaql.getResultList();
             
             for(int i = 0; i < listaM.size(); i++){
-                this.getEm().remove(listaM.get(i));
+                em.remove(listaM.get(i));
             }
-            EntityManagerFactoryHolder.commitTransaction(this.getEm());
         }catch(Exception ex){
-        	EntityManagerFactoryHolder.rollbackTransaction(this.getEm());
             throw ex;
-        }finally{
-        	this.getEm().close();
         }
         
 	}

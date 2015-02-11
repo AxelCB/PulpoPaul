@@ -1,7 +1,7 @@
 package unlp.ttpsInfoPoolCBR.vo;
 
-import java.sql.Date;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by axel on 05/11/14.
@@ -12,8 +12,8 @@ public class MensajeVo extends AbstractVo{
     
     private String asunto;
     private String contenido;
-    private Boolean leido;
-    private Date fecha;
+    private Boolean leido = Boolean.FALSE;
+    private Date fecha = new Date(Calendar.getInstance().getTimeInMillis());
     private RecorridoVo recorrido;
     private UsuarioVo emisor;
     private UsuarioVo receptor;

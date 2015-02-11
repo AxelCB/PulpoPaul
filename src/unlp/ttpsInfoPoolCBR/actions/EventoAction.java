@@ -7,13 +7,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.interceptor.validation.SkipValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import unlp.ttpsInfoPoolCBR.dao.evento.IEventoDao;
-import unlp.ttpsInfoPoolCBR.util.Utils;
+import unlp.ttpsInfoPoolCBR.util.EntityManagerFactoryHolder;
+import unlp.ttpsInfoPoolCBR.util.SessionUtils;
 import unlp.ttpsInfoPoolCBR.vo.EventoVo;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -46,7 +49,8 @@ public class EventoAction extends ActionSupport{
             @Result(name="input", location="listarEventos", type="chain"),
             @Result(name = "nologed", location = "index", type = "chain")})
     public String guardarEvento(){
-        if(Utils.checkLogin()){
+    	EntityManager em = null;
+        if(SessionUtils.checkLogin()){
             SimpleDateFormat formatter = new SimpleDateFormat("dd-mm-yyyy");
             Date fecha;
 			try {
@@ -64,8 +68,12 @@ public class EventoAction extends ActionSupport{
             evento.setHoraFin(Time.valueOf(this.getHoraFin()+":00"));
             evento.setLatLng(this.getLatLng());
             try {
-				eventoDao.guardar(evento);
+            	em = EntityManagerFactoryHolder.getEntityManager();
+            	EntityManagerFactoryHolder.beginTransaction(em);
+            	eventoDao.guardar(em,evento);
+            	EntityManagerFactoryHolder.commitTransaction(em);
 			} catch (Exception e) {
+				EntityManagerFactoryHolder.rollbackTransaction(em);
 				e.printStackTrace();
 				return "input";
 			}
@@ -84,13 +92,17 @@ public class EventoAction extends ActionSupport{
             @Result(name ="nologed",location = "index",type = "chain")})
     @SkipValidation
     public String listarEvento(){
-        if(Utils.checkLogin()){
+    	EntityManager em = null;
+        if(SessionUtils.checkLogin()){
         	try {
-				this.setEventos(eventoDao.listar());
+        		em = EntityManagerFactoryHolder.getEntityManager();
+				this.setEventos(eventoDao.listar(em));
 			} catch (Exception e) {
 				e.printStackTrace();
 				return "input";
-			}
+			}finally{
+    			em.close();
+    		}
         	return "exito";
         }
         else{

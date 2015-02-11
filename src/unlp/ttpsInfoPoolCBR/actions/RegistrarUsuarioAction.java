@@ -3,6 +3,8 @@ package unlp.ttpsInfoPoolCBR.actions;
 import java.io.File;
 import java.io.FileInputStream;
 
+import javax.persistence.EntityManager;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import unlp.ttpsInfoPoolCBR.dao.rol.IRolDao;
 import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
+import unlp.ttpsInfoPoolCBR.util.EntityManagerFactoryHolder;
 import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -53,6 +56,7 @@ public class RegistrarUsuarioAction extends ActionSupport{
 	
 	@Override
 	public String execute(){
+		EntityManager em = null;
 		UsuarioVo usuario = new UsuarioVo();
 		
 		usuario.setNombres(this.getNombre());
@@ -62,7 +66,8 @@ public class RegistrarUsuarioAction extends ActionSupport{
 		usuario.setClave(this.getClave());
 
 		try {
-			usuario.setRol(rolDao.buscarPorNombre("viajero"));
+			em = EntityManagerFactoryHolder.getEntityManager();
+			usuario.setRol(rolDao.buscarPorNombre(em,"viajero"));
 			
 			if(this.getFoto()!=null){
 				//Se pasa a un array de bytes
@@ -71,12 +76,15 @@ public class RegistrarUsuarioAction extends ActionSupport{
 
 		} catch (Exception e1) {
 			e1.printStackTrace();
+			em.close();
 			return "input";
 		}
-		
 		try {
-			usuarioDao.guardar(usuario);
+			EntityManagerFactoryHolder.beginTransaction(em);			
+			usuarioDao.guardar(em,usuario);
+			EntityManagerFactoryHolder.commitTransaction(em);
 		} catch (Exception e) {
+			EntityManagerFactoryHolder.rollbackTransaction(em);
 			e.printStackTrace();
 			return "input";
 		}

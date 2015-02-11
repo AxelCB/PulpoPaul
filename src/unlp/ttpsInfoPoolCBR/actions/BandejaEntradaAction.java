@@ -3,6 +3,8 @@ package unlp.ttpsInfoPoolCBR.actions;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
@@ -10,7 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import unlp.ttpsInfoPoolCBR.dao.mensaje.IMensajeDao;
 import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
-import unlp.ttpsInfoPoolCBR.util.Utils;
+import unlp.ttpsInfoPoolCBR.util.EntityManagerFactoryHolder;
+import unlp.ttpsInfoPoolCBR.util.SessionUtils;
 import unlp.ttpsInfoPoolCBR.vo.MensajeVo;
 import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
 
@@ -31,18 +34,20 @@ public class BandejaEntradaAction {
 	private List<MensajeVo> mensajes = new ArrayList<MensajeVo>();
 	
 	public String execute(){
-		if(Utils.checkLogin()){
-			UsuarioVo usuario = Utils.getUsuario();
-			
+		EntityManager em = null;
+		if(SessionUtils.checkLogin()){
+			em = EntityManagerFactoryHolder.getEntityManager();
+			UsuarioVo usuario = SessionUtils.getUsuario();
 			try{
-				usuario = usuarioDao.traerBandejaEntrada(usuario);
+				usuario = usuarioDao.traerBandejaEntrada(em,usuario);
 				mensajes = usuario.getBandejaEntrada();
 			}
 			catch(Exception ex){
 				ex.printStackTrace();
 				return "input";
+			}finally{
+				em.close();
 			}
-			
 			return "exito";
 		}
 		else{

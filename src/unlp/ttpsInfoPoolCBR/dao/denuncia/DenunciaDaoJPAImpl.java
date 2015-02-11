@@ -1,5 +1,7 @@
 package unlp.ttpsInfoPoolCBR.dao.denuncia;
 
+import javax.persistence.EntityManager;
+
 import unlp.ttpsInfoPoolCBR.dao.GenericDaoJPAImpl;
 import unlp.ttpsInfoPoolCBR.model.Denuncia;
 import unlp.ttpsInfoPoolCBR.vo.DenunciaVo;
@@ -13,8 +15,8 @@ public class DenunciaDaoJPAImpl extends GenericDaoJPAImpl<Denuncia,DenunciaVo> i
     }
     
     @Override
-    public DenunciaVo guardar(DenunciaVo objetoVO) throws Exception {
+    public DenunciaVo guardar(EntityManager em,DenunciaVo objetoVO) throws Exception {
     	//TODO poner la denuncia en la session (como agarro la sessión acá?)
-    	return super.guardar(objetoVO);
+    	return super.guardar(em,objetoVO);
     }
 }

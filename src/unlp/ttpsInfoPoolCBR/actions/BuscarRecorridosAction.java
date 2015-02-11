@@ -2,12 +2,15 @@ package unlp.ttpsInfoPoolCBR.actions;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import unlp.ttpsInfoPoolCBR.dao.recorrido.IRecorridoDao;
+import unlp.ttpsInfoPoolCBR.util.EntityManagerFactoryHolder;
 import unlp.ttpsInfoPoolCBR.vo.RecorridoVo;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -29,11 +32,14 @@ public class BuscarRecorridosAction extends ActionSupport{
 	
 	@Override
 	public String execute(){
-		
+		EntityManager em = null;
 		try {
-			recorridos = recorridoDao.listar();
+			em = EntityManagerFactoryHolder.getEntityManager();		
+			recorridos = recorridoDao.listar(em);
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally{
+			em.close();
 		}
 		return "exito";
 	}

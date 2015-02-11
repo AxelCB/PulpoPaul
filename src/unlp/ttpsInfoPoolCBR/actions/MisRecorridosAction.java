@@ -2,13 +2,16 @@ package unlp.ttpsInfoPoolCBR.actions;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
-import unlp.ttpsInfoPoolCBR.util.Utils;
+import unlp.ttpsInfoPoolCBR.util.EntityManagerFactoryHolder;
+import unlp.ttpsInfoPoolCBR.util.SessionUtils;
 import unlp.ttpsInfoPoolCBR.vo.RecorridoVo;
 import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
 
@@ -31,16 +34,19 @@ public class MisRecorridosAction extends ActionSupport{
 	
 	@Override
 	public String execute(){
-		if(Utils.checkLogin()){
-			UsuarioVo usuario = Utils.getUsuario();
+		EntityManager em = null;
+		if(SessionUtils.checkLogin()){
+			UsuarioVo usuario = SessionUtils.getUsuario();
 			try {
-				usuario = usuarioDao.traerMisRecorridos(usuario);				
+				em = EntityManagerFactoryHolder.getEntityManager();
+				usuario = usuarioDao.traerMisRecorridos(em,usuario);				
 				recorridos = usuario.getRecorridosMios();
 			} catch (Exception e) {
 				e.printStackTrace();
 				return "input";
+			}finally{
+				em.close();
 			}
-
 			return "exito";
 		}
 		else{

@@ -2,6 +2,8 @@ package unlp.ttpsInfoPoolCBR.dao;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import unlp.ttpsInfoPoolCBR.model.AbstractEntity;
 import unlp.ttpsInfoPoolCBR.vo.AbstractVo;
 
@@ -10,12 +12,12 @@ import unlp.ttpsInfoPoolCBR.vo.AbstractVo;
  */
 public interface IGenericDao<M extends AbstractEntity,VO extends AbstractVo> {
 
-    public VO guardar(VO objetoVO)throws Exception;
-    public VO modificar(VO objetoVO)throws Exception;
-    public void borrar(Integer idObjetoVO) throws Exception;
+    public VO guardar(EntityManager em,VO objetoVO)throws Exception;
+    public VO modificar(EntityManager em,VO objetoVO)throws Exception;
+    public void borrar(EntityManager em,Integer idObjetoVO) throws Exception;
 
-    public List<VO> listar()throws Exception;
-    public VO encontrar(Integer id) throws Exception;
+    public List<VO> listar(EntityManager em)throws Exception;
+    public VO encontrar(EntityManager em,Integer id) throws Exception;
     
-    public void drop()throws Exception;
+    public void drop(EntityManager em)throws Exception;
 }

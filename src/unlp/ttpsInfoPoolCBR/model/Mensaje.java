@@ -30,7 +30,7 @@ public class Mensaje extends AbstractEntity{
     @Column
     private Date fecha;
     
-    @Column
+    @ManyToOne(optional = true)
     private Recorrido recorrido;
 
     @ManyToOne(optional = false)

@@ -6,7 +6,7 @@ import org.apache.struts2.ServletActionContext;
 
 import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
 
-public class Utils{
+public class SessionUtils{
 	
 	public static boolean checkLogin(){
         HttpSession session = ServletActionContext.getRequest().getSession(false);

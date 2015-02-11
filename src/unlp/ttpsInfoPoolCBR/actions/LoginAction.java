@@ -2,6 +2,8 @@ package unlp.ttpsInfoPoolCBR.actions;
 
 import java.util.Map;
 
+import javax.persistence.EntityManager;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
@@ -10,6 +12,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
+import unlp.ttpsInfoPoolCBR.util.EntityManagerFactoryHolder;
 import unlp.ttpsInfoPoolCBR.vo.RolVo;
 import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
 
@@ -76,12 +79,16 @@ public class LoginAction extends ActionSupport implements SessionAware{
 			addFieldError("claveError","Campo obligatorio");
 		}
 		
+		EntityManager em = null;
 		//Validacion de exisitencia
 
 		try {
-			user = usuarioDao.login(usuario, clave);
+			em = EntityManagerFactoryHolder.getEntityManager();
+			user = usuarioDao.login(em,usuario, clave);
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally{
+			em.close();
 		}
 
 		if(user == null){

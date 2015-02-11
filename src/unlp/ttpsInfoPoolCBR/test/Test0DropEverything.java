@@ -1,8 +1,8 @@
 package unlp.ttpsInfoPoolCBR.test;
 
-import junit.framework.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
 import unlp.ttpsInfoPoolCBR.dao.calificacionRecorrido.CalificacionRecorridoDaoJPAImpl;
 import unlp.ttpsInfoPoolCBR.dao.calificacionRecorrido.ICalificacionRecorridoDao;
 import unlp.ttpsInfoPoolCBR.dao.calificacionUsuario.CalificacionUsuarioDaoJPAImpl;
@@ -54,24 +54,24 @@ public class Test0DropEverything {
 	@Test(groups = "DropTest" )
 	public void shouldDeleteAll(){
         try {
-        	califRecorridoDao.drop();
-        	Assert.assertEquals(califRecorridoDao.listar().size(), 0);
-        	viajeDao.drop();
-        	Assert.assertEquals(viajeDao.listar().size(), 0);
-        	recorridoDao.drop();
-        	Assert.assertEquals(recorridoDao.listar().size(), 0);
-        	eventoDao.drop();
-        	Assert.assertEquals(eventoDao.listar().size(), 0);
-        	califUsuarioDao.drop();
-        	Assert.assertEquals(califUsuarioDao.listar().size(), 0);
-        	denunciaDao.drop();
-        	Assert.assertEquals(denunciaDao.listar().size(), 0);
-        	mensajeDao.drop();
-        	Assert.assertEquals(mensajeDao.listar().size(), 0);
-        	usuarioDao.drop();
-        	Assert.assertEquals(usuarioDao.listar().size(), 0);
-			rolDao.drop();
-			Assert.assertEquals(rolDao.listar().size(), 0);
+//        	califRecorridoDao.drop();
+//        	Assert.assertEquals(califRecorridoDao.listar().size(), 0);
+//        	viajeDao.drop();
+//        	Assert.assertEquals(viajeDao.listar().size(), 0);
+//        	recorridoDao.drop();
+//        	Assert.assertEquals(recorridoDao.listar().size(), 0);
+//        	eventoDao.drop();
+//        	Assert.assertEquals(eventoDao.listar().size(), 0);
+//        	califUsuarioDao.drop();
+//        	Assert.assertEquals(califUsuarioDao.listar().size(), 0);
+//        	denunciaDao.drop();
+//        	Assert.assertEquals(denunciaDao.listar().size(), 0);
+//        	mensajeDao.drop();
+//        	Assert.assertEquals(mensajeDao.listar().size(), 0);
+//        	usuarioDao.drop();
+//        	Assert.assertEquals(usuarioDao.listar().size(), 0);
+//			rolDao.drop();
+//			Assert.assertEquals(rolDao.listar().size(), 0);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

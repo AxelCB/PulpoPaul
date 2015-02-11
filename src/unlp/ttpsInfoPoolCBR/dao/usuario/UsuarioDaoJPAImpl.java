@@ -3,6 +3,7 @@ package unlp.ttpsInfoPoolCBR.dao.usuario;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import unlp.ttpsInfoPoolCBR.dao.GenericDaoJPAImpl;
@@ -20,11 +21,11 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,UsuarioVo> impl
     }
     
     @Override
-    public UsuarioVo buscarPorEmail(String email) throws Exception{
+    public UsuarioVo buscarPorEmail(EntityManager em,String email) throws Exception{
     	Usuario usuario = null;
     	UsuarioVo usuarioVo = null;
     	try{
-	    	TypedQuery<Usuario> jpaql = this.getEm().createQuery("select u from Usuario u where u.email = :email", Usuario.class);
+	    	TypedQuery<Usuario> jpaql = em.createQuery("select u from Usuario u where u.email = :email", Usuario.class);
 	    	jpaql.setParameter("email", email);
 	    	List<Usuario> listaUsuario = jpaql.getResultList();
 	    	if(!listaUsuario.isEmpty()){
@@ -34,17 +35,15 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,UsuarioVo> impl
     	}
     	catch(Exception ex){
     		throw ex;
-    	}finally{
-        	this.getEm().close();
-        }
+    	}
     	return usuarioVo;
     }
 
 	@Override
-	public UsuarioVo traerMensajes(UsuarioVo usuarioVo) throws Exception {
+	public UsuarioVo traerMensajes(EntityManager em,UsuarioVo usuarioVo) throws Exception {
 		Usuario usuario = null;
 		try{
-			usuario = this.getEm().find(Usuario.class, usuarioVo.getId());
+			usuario = em.find(Usuario.class, usuarioVo.getId());
 			
 			usuario.getBandejaEntrada().size();
 			usuario.getBandejaSalida().size();
@@ -52,17 +51,15 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,UsuarioVo> impl
 			usuarioVo = MapperUtils.map(usuario, UsuarioVo.class);
 		}catch(Exception ex){
 			ex.printStackTrace();
-		}finally{
-        	this.getEm().close();
-        }
+		}
 		return usuarioVo;
 	}
 
 	@Override
-	public UsuarioVo traerDenuncias(UsuarioVo usuarioVo) throws Exception {
+	public UsuarioVo traerDenuncias(EntityManager em,UsuarioVo usuarioVo) throws Exception {
 		Usuario usuario = null;
 		try{
-			usuario = this.getEm().find(Usuario.class, usuarioVo.getId());
+			usuario = em.find(Usuario.class, usuarioVo.getId());
 
 			usuario.getDenunciasHechas().size();
 			usuario.getMisDenuncias().size();
@@ -70,17 +67,15 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,UsuarioVo> impl
 			usuarioVo = MapperUtils.map(usuario, UsuarioVo.class);
 		}catch(Exception ex){
 			ex.printStackTrace();
-		}finally{
-        	this.getEm().close();
-        }
+		}
 		return usuarioVo;
 	}
 
 	@Override
-	public UsuarioVo traerCalificaciones(UsuarioVo usuarioVo) throws Exception {
+	public UsuarioVo traerCalificaciones(EntityManager em,UsuarioVo usuarioVo) throws Exception {
 		Usuario usuario = null;
 		try{
-			usuario = this.getEm().find(Usuario.class, usuarioVo.getId());
+			usuario = em.find(Usuario.class, usuarioVo.getId());
 
 			usuario.getCalificacionesHechas().size();
 			usuario.getMisCalificaciones().size();
@@ -88,17 +83,15 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,UsuarioVo> impl
 			usuarioVo = MapperUtils.map(usuario, UsuarioVo.class);
 		}catch(Exception ex){
 			ex.printStackTrace();
-		}finally{
-        	this.getEm().close();
-        }
+		}
 		return usuarioVo;
 	}
 
 	@Override
-	public UsuarioVo traerRecorridos(UsuarioVo usuarioVo) throws Exception {
+	public UsuarioVo traerRecorridos(EntityManager em,UsuarioVo usuarioVo) throws Exception {
 		Usuario usuario = null;
 		try{
-			usuario = this.getEm().find(Usuario.class, usuarioVo.getId());
+			usuario = em.find(Usuario.class, usuarioVo.getId());
 			
 			usuario.getRecorridosMios().size();
 			usuario.getRecorridosViajo().size();
@@ -107,15 +100,13 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,UsuarioVo> impl
 			usuarioVo = MapperUtils.map(usuario, UsuarioVo.class);
 		}catch(Exception ex){
 			ex.printStackTrace();
-		}finally{
-        	this.getEm().close();
-        }
+		}
 		return usuarioVo;
 	}
 
 	@Override
-	public UsuarioVo login(String email, String password) throws Exception {
-		UsuarioVo usuarioVo = this.buscarPorEmail(email);
+	public UsuarioVo login(EntityManager em,String email, String password) throws Exception {
+		UsuarioVo usuarioVo = this.buscarPorEmail(em,email);
 		if(usuarioVo != null){
 			if(!usuarioVo.getClave().equals(password)){
 				usuarioVo = null;
@@ -125,10 +116,10 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,UsuarioVo> impl
 	}
 	
 	@Override
-	public UsuarioVo traerMisRecorridos(UsuarioVo usuarioVo) throws Exception{
+	public UsuarioVo traerMisRecorridos(EntityManager em,UsuarioVo usuarioVo) throws Exception{
 		Usuario usuario = null;
 		try{
-			TypedQuery<Usuario> jpaql = this.getEm().createQuery("select u from Usuario u join fetch u.recorridosMios where u.id = :id", Usuario.class);
+			TypedQuery<Usuario> jpaql = em.createQuery("select u from Usuario u join fetch u.recorridosMios where u.id = :id", Usuario.class);
 			jpaql.setParameter("id", usuarioVo.getId());
 			List<Usuario> usuarios = jpaql.getResultList();
 			if(!usuarios.isEmpty()){
@@ -138,34 +129,30 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,UsuarioVo> impl
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
-		}finally{
-        	this.getEm().close();
-        }
+		}
 		return usuarioVo;
 	}
 	
 	@Override
-	public List<UsuarioVo> listarDeRol(RolVo rol) throws Exception {
+	public List<UsuarioVo> listarDeRol(EntityManager em,RolVo rol) throws Exception {
 		 List<Usuario> listaUsuario = new ArrayList<Usuario>();
 		 List<UsuarioVo> listaUsuarioVo = new ArrayList<UsuarioVo>();
 	        try{
-	            TypedQuery<Usuario> jpaql = this.getEm().createQuery("select u from " + persistentClass.getSimpleName() + " u where rol_id = :idRol",persistentClass);
+	            TypedQuery<Usuario> jpaql = em.createQuery("select u from " + persistentClass.getSimpleName() + " u where rol_id = :idRol",persistentClass);
 	            jpaql.setParameter("idRol", rol.getId());
 	            listaUsuario = jpaql.getResultList();
 	            listaUsuarioVo = MapperUtils.map(listaUsuario,UsuarioVo.class);
 	        }catch(Exception ex){
 	            throw ex;
-	        }finally{
-	        	this.getEm().close();
 	        }
 	        return listaUsuarioVo;
 	}
 	
 	@Override
-	public UsuarioVo traerBandejaEntrada(UsuarioVo usuarioVo) throws Exception{
+	public UsuarioVo traerBandejaEntrada(EntityManager em,UsuarioVo usuarioVo) throws Exception{
 		Usuario usuario = null;
 		try{
-			TypedQuery<Usuario> jpaql = this.getEm().createQuery("select u from Usuario u join fetch u.bandejaEntrada where u.id = :id", Usuario.class);
+			TypedQuery<Usuario> jpaql = em.createQuery("select u from Usuario u join fetch u.bandejaEntrada where u.id = :id", Usuario.class);
 			jpaql.setParameter("id", usuarioVo.getId());
 			List<Usuario> usuarios = jpaql.getResultList();
 			if(!usuarios.isEmpty()){
@@ -175,9 +162,7 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,UsuarioVo> impl
 		}
 		catch(Exception ex){
 			ex.printStackTrace();
-		}finally{
-        	this.getEm().close();
-        }
+		}
 		return usuarioVo;
 	}
 
