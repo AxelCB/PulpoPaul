@@ -74,8 +74,8 @@ public class RecorridoAction extends ActionSupport{
 				MensajeVo respuesta = new MensajeVo();
 				respuesta.setEmisor(SessionUtils.getUsuario());
 				respuesta.setReceptor(solicitud.getEmisor());
-				respuesta.setAsunto("Respuesta a solicitud de participación");
 				RecorridoVo recorridoVo = solicitud.getRecorrido();
+				respuesta.setAsunto("Respuesta a solicitud de participación en " + recorridoVo.getNombre());
 				if(aceptar){
 					solicitud.setContenido(solicitud.getContenido()+" Usted ha aceptado a este participante.");
 					recorridoVo.getPasajeros().add(solicitud.getEmisor());

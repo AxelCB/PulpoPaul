@@ -78,6 +78,7 @@
 						<div class="col-sm-6">
 							<p><b>Propietario:</b> <span id="propietario"></span></p>
 							<p><b>Destino:</b> <span id="destino"></span></p>
+							<p><b>Lugares:</b> <span id="lugares"></span></p>
 							<p><b>Tipo:</b> <span id="tipo"></span></p>
 							<p class="fecha"><b>Fecha:</b> <span id="fecha"></span></p>
 							<p class="dias"><b>Dias:</b> <span id="dias"></span></p>

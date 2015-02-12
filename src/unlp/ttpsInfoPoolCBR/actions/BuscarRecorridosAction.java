@@ -36,7 +36,7 @@ public class BuscarRecorridosAction extends ActionSupport{
 		EntityManager em = null;
 		try {
 			em = EntityManagerFactoryHolder.getEntityManager();		
-			recorridos = recorridoDao.listarDisponibles(em,SessionUtils.getUsuario());
+			recorridos = recorridoDao.listar(em);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{

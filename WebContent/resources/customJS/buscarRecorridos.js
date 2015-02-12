@@ -69,6 +69,7 @@ $(document).ready(function() {
     	$("#nombre").text('');
     	$("#propietario").text('');
     	$("#destino").text('');
+    	$("#lugares").text('');
     	$("#tipo").text('');
     	$("#tramos").text('');
     	$("#fecha").text('');
@@ -81,6 +82,7 @@ $(document).ready(function() {
     	$(".horaVuelta").css('display', 'none');
     	$("#precio").text('');
     	$("#participar").html('');
+    	$("#nombre").html('');
     	directionsDisplay.setMap(null);
     	waypoints = [];
     	start = null;
@@ -99,6 +101,7 @@ $(document).ready(function() {
     		console.log(json);
     		$("#nombre").text(json.nombre);
     		$("#propietario").text(json.propietario.nombres);
+    		$("#lugares").text(json.lugares);
     		if(json.evento){
     			$("#destino").text(json.evento.nombre);
     		}
@@ -126,6 +129,13 @@ $(document).ready(function() {
     		$("#horaIda").text(json.horaSalida);
     		
     		$("#precio").text('$' + json.precio);
+    		if(json.pasajeros.length > 0){
+    			var str = '';
+    			for(i in json.pasajeros){
+    				str += '<p><span class="glyphicon glyphicon-warning-sign" data-id="' + json.pasajeros[i].id + '"></span>  ' + json.pasajeros[i].nombres +'</p>'
+    			}
+    			$('#pasajeros').append(str);
+    		}
 	  
     		var str = '<a href="/PulpoPaul/recorrido/participar?idRecorrido=' + $(row[0]).text() + '" class="btn btn-default col-sm-offset-8 col-sm-3">Participar!</a>';
     		$("#participar").append(str);
