@@ -23,13 +23,16 @@ import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
 	@Result(name = "input", location = "/viajero/bandejaEntrada.jsp"),
 	@Result(name = "nologed", location = "index", type = "chain")
 })
-public class BandejaEntradaAction {
+public class BandejaEntradaAction implements IMensajesVista{
 
 	@Autowired
 	IUsuarioDao usuarioDao;
 	
 	@Autowired
 	IMensajeDao mensajeDao;
+	
+	private String mensajeError="";
+    private String mensajeOk="";
 	
 	private List<MensajeVo> mensajes = new ArrayList<MensajeVo>();
 	
@@ -59,9 +62,23 @@ public class BandejaEntradaAction {
 	public List<MensajeVo> getMensajes() {
 		return mensajes;
 	}
-
 	public void setMensajes(List<MensajeVo> mensajes) {
 		this.mensajes = mensajes;
+	}
+	@Override
+	public String getMensajeError() {
+		return mensajeError;
+	}
+	@Override
+	public void setMensajeError(String mensajeError) {
+		this.mensajeError = mensajeError;
+	}
+	@Override
+	public String getMensajeOk() {
+		return mensajeOk;
+	}
+	@Override
+	public void setMensajeOk(String mensajeOk) {
+		this.mensajeOk = mensajeOk;
 	}	
-	
 }

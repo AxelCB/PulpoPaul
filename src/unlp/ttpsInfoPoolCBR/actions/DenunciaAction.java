@@ -30,7 +30,7 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 
 @Action(value = "denuncia")
-public class DenunciaAction extends ActionSupport{
+public class DenunciaAction extends ActionSupport implements IMensajesVista{
 
 	/**
 	 * 
@@ -131,73 +131,71 @@ public class DenunciaAction extends ActionSupport{
 	public IDenunciaDao getDenunciaDao() {
 		return denunciaDao;
 	}
-
 	public void setDenunciaDao(IDenunciaDao denunciaDao) {
 		this.denunciaDao = denunciaDao;
 	}
-
 	public List<DenunciaVo> getDenuncias() {
 		return denuncias;
 	}
-
 	public void setDenuncias(List<DenunciaVo> denuncias) {
 		this.denuncias = denuncias;
 	}
-
 	public Integer getIdDenunciado() {
 		return idDenunciado;
 	}
-
 	public void setIdDenunciado(Integer idDenunciado) {
 		this.idDenunciado = idDenunciado;
 	}
-
 	public String getMotivo() {
 		return motivo;
 	}
-
 	public void setMotivo(String motivo) {
 		this.motivo = motivo;
 	}
-
 	public Integer getIdRecorrido() {
 		return idRecorrido;
 	}
-
 	public void setIdRecorrido(Integer idRecorrido) {
 		this.idRecorrido = idRecorrido;
 	}
-
 	public Logger getLogger() {
 		return logger;
 	}
-
 	public void setLogger(Logger logger) {
 		this.logger = logger;
 	}
-
 	public IUsuarioDao getUsuarioDao() {
 		return usuarioDao;
 	}
-
 	public void setUsuarioDao(IUsuarioDao usuarioDao) {
 		this.usuarioDao = usuarioDao;
 	}
-
 	public IRecorridoDao getRecorridoDao() {
 		return recorridoDao;
 	}
-
 	public void setRecorridoDao(IRecorridoDao recorridoDao) {
 		this.recorridoDao = recorridoDao;
 	}
-
 	public IRolDao getRolDao() {
 		return rolDao;
 	}
-
 	public void setRolDao(IRolDao rolDao) {
 		this.rolDao = rolDao;
 	}
-	
+	@Override
+	public String getMensajeError() {
+		return mensajeError;
+	}
+	@Override
+	public void setMensajeError(String mensajeError) {
+		this.mensajeError = mensajeError;
+	}
+	@Override
+	public String getMensajeOk() {
+		return mensajeOk;
+	}
+	@Override
+	public void setMensajeOk(String mensajeOk) {
+		this.mensajeOk = mensajeOk;
+	}
 }

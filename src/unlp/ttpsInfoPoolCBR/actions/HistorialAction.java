@@ -2,8 +2,6 @@ package unlp.ttpsInfoPoolCBR.actions;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
@@ -32,7 +30,6 @@ public class HistorialAction extends ActionSupport{
 	
 	@Override
 	public String execute(){
-		EntityManager em = null;
 		try {
 			//TODO Refresh user
 			recorridos = SessionUtils.getUsuario().getRecorridosViajo();

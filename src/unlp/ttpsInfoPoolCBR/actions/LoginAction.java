@@ -30,7 +30,7 @@ import com.opensymphony.xwork2.ActionSupport;
 			location = "index",
 			type = "redirect")
 })
-public class LoginAction extends ActionSupport implements SessionAware{
+public class LoginAction extends ActionSupport implements SessionAware,IMensajesVista{
 
 	private static final long serialVersionUID = 1L;
 
@@ -46,6 +46,9 @@ public class LoginAction extends ActionSupport implements SessionAware{
 	
 	private UsuarioVo user = null;
 	private SessionMap<String, Object> sessionMap;
+	
+	private String mensajeError="";
+    private String mensajeOk="";
 	
 	@Override
 	public String execute(){
@@ -112,5 +115,27 @@ public class LoginAction extends ActionSupport implements SessionAware{
 	}
 	public void setClave(String clave) {
 		this.clave = clave;
+	}
+	public IUsuarioDao getUsuarioDao() {
+		return usuarioDao;
+	}
+	public void setUsuarioDao(IUsuarioDao usuarioDao) {
+		this.usuarioDao = usuarioDao;
+	}
+	@Override
+	public String getMensajeError() {
+		return mensajeError;
+	}
+	@Override
+	public void setMensajeError(String mensajeError) {
+		this.mensajeError = mensajeError;
+	}
+	@Override
+	public String getMensajeOk() {
+		return mensajeOk;
+	}
+	@Override
+	public void setMensajeOk(String mensajeOk) {
+		this.mensajeOk = mensajeOk;
 	}
 }

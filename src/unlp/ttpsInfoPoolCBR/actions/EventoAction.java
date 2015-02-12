@@ -26,12 +26,15 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 
 @Action(value = "eventos")
-public class EventoAction extends ActionSupport{
+public class EventoAction extends ActionSupport implements IMensajesVista{
 
     private static final long serialVersionUID = 1L;
 
     @Autowired
     IEventoDao eventoDao;
+    
+    private String mensajeError="";
+    private String mensajeOk="";
 
     private List<EventoVo> eventos = new ArrayList<EventoVo>();
 
@@ -190,36 +193,44 @@ public class EventoAction extends ActionSupport{
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
     public String getFecha() {
         return fecha;
     }
-
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
-
     public String getHoraComienzo() {
         return horaComienzo;
     }
-
     public void setHoraComienzo(String horaComienzo) {
         this.horaComienzo = horaComienzo;
     }
-
     public String getHoraFin() {
         return horaFin;
     }
-
     public void setHoraFin(String horaFin) {
         this.horaFin = horaFin;
     }
-
     public String getLatLng() {
         return latLng;
     }
-
     public void setLatLng(String latLng) {
         this.latLng = latLng;
     }
+	@Override
+	public String getMensajeError() {
+		return mensajeError;
+	}
+	@Override
+	public void setMensajeError(String mensajeError) {
+		this.mensajeError = mensajeError;
+	}
+	@Override
+	public String getMensajeOk() {
+		return mensajeOk;
+	}
+	@Override
+	public void setMensajeOk(String mensajeOk) {
+		this.mensajeOk = mensajeOk;
+	}
 }

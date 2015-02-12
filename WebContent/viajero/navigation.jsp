@@ -36,17 +36,21 @@
 
 <s:if test="%{mensajeError!=''}">
 	<div class="row">
-		<h2>Error</h2>
-		<div class="alert alert-danger" role="alert">
-			<s:property value="mensajeError"></s:property>
+		<div class="col-sm-8 col-sm-offset-1">
+			<h2>Error</h2>
+			<div class="alert alert-danger" role="alert">
+				<s:property value="mensajeError"></s:property>
+			</div>
 		</div>
 	</div>
 </s:if>
 <s:if test="%{mensajeOk!=''}">
 	<div class="row">
-		<h2>Operación exitosa</h2>
-		<div class="alert alert-success" role="alert">
-			<s:property value="mensajeOk"></s:property>
+		<div class="col-sm-8 col-sm-offset-1">
+			<h2>Operación exitosa</h2>
+			<div class="alert alert-success" role="alert">
+				<s:property value="mensajeOk"></s:property>
+			</div>
 		</div>
 	</div>
 </s:if>

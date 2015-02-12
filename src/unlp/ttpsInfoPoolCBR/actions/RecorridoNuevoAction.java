@@ -63,6 +63,9 @@ public class RecorridoNuevoAction extends ActionSupport{
     private String end;
     private List<String> waypoints = new ArrayList<String>();
     
+    private String mensajeError="";
+    private String mensajeOk="";
+    
     //Variables
     private Date fechaActual;
     private List<EventoVo> eventos = new ArrayList<EventoVo>();
@@ -384,29 +387,34 @@ public class RecorridoNuevoAction extends ActionSupport{
 	public void setStart(String start) {
 		this.start = start;
 	}
-
 	public String getEnd() {
 		return end;
 	}
-
 	public void setEnd(String end) {
 		this.end = end;
 	}
-
 	public List<String> getWaypoints() {
 		return waypoints;
 	}
-
 	public void setWaypoints(List<String> waypoints) {
 		this.waypoints = waypoints;
 	}
-
 	public List<EventoVo> getEventos() {
 		return eventos;
 	}
-
 	public void setEventos(List<EventoVo> eventos) {
 		this.eventos = eventos;
 	}
-
+	public String getMensajeError() {
+		return mensajeError;
+	}
+	public void setMensajeError(String mensajeError) {
+		this.mensajeError = mensajeError;
+	}
+	public String getMensajeOk() {
+		return mensajeOk;
+	}
+	public void setMensajeOk(String mensajeOk) {
+		this.mensajeOk = mensajeOk;
+	}
 }

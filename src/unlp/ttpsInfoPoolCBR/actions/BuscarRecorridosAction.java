@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import unlp.ttpsInfoPoolCBR.dao.recorrido.IRecorridoDao;
 import unlp.ttpsInfoPoolCBR.util.EntityManagerFactoryHolder;
+import unlp.ttpsInfoPoolCBR.util.SessionUtils;
 import unlp.ttpsInfoPoolCBR.vo.RecorridoVo;
 
 import com.opensymphony.xwork2.ActionSupport;

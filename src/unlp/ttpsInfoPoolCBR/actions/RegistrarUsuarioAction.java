@@ -54,6 +54,9 @@ public class RegistrarUsuarioAction extends ActionSupport{
 	private String repetirClave;
 	private File foto;
 	
+	private String mensajeError="";
+    private String mensajeOk="";
+	
 	@Override
 	public String execute(){
 		EntityManager em = null;
@@ -176,5 +179,16 @@ public class RegistrarUsuarioAction extends ActionSupport{
 	public void setFoto(File foto) {
 		this.foto = foto;
 	}
-	
+	public String getMensajeError() {
+		return mensajeError;
+	}
+	public void setMensajeError(String mensajeError) {
+		this.mensajeError = mensajeError;
+	}
+	public String getMensajeOk() {
+		return mensajeOk;
+	}
+	public void setMensajeOk(String mensajeOk) {
+		this.mensajeOk = mensajeOk;
+	}
 }
