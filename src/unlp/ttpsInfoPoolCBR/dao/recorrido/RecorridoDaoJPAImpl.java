@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 
 import unlp.ttpsInfoPoolCBR.dao.GenericDaoJPAImpl;
 import unlp.ttpsInfoPoolCBR.model.Recorrido;
+import unlp.ttpsInfoPoolCBR.model.Usuario;
 import unlp.ttpsInfoPoolCBR.util.MapperUtils;
 import unlp.ttpsInfoPoolCBR.vo.RecorridoVo;
 import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
@@ -22,14 +23,15 @@ public class RecorridoDaoJPAImpl extends GenericDaoJPAImpl<Recorrido,RecorridoVo
     }
     
     @Override
-    public List<RecorridoVo> listarDisponibles(EntityManager em,UsuarioVo usuario) throws Exception {
+    public List<RecorridoVo> listarDisponibles(EntityManager em,UsuarioVo usuarioVo) throws Exception {
         List<Recorrido> listaRecorrido = new ArrayList<Recorrido>();
         List<RecorridoVo> listaRecorridoVo = new ArrayList<RecorridoVo>();
-        try{
+        try{ 
+        	Usuario usuario = MapperUtils.map(usuarioVo, Usuario.class);
             TypedQuery<Recorrido> jpaql = em.createQuery(
-            		"SELECT r FROM Recorrido r WHERE r.propietario!=:admin"
+            		"SELECT r FROM Recorrido r WHERE r.propietario!=:usuario AND :usuario NOT MEMBER OF r.pasajeros"
             		,persistentClass);
-            jpaql.setParameter("admin", usuario);
+            jpaql.setParameter("usuario", usuario);
 //            		"select r from " + persistentClass.getSimpleName() + " r "
 //            		+ "WHERE r.lugares > ("
 //            			+ "SELECT count(*) FROM Recorrido rec "

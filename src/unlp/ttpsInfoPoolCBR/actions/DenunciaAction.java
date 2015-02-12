@@ -56,7 +56,6 @@ public class DenunciaAction extends ActionSupport{
 	
 	private List<DenunciaVo> denuncias = new ArrayList<DenunciaVo>();
 	
-    private String asunto;
     private Integer idDenunciado;
     private String motivo;
     private Integer idRecorrido;
@@ -74,17 +73,18 @@ public class DenunciaAction extends ActionSupport{
     			List<UsuarioVo> admins = this.getUsuarioDao().listarDeRol(em, rolAdmin);
     			UsuarioVo denunciante = SessionUtils.getUsuario();
     			DenunciaVo denunciaVo = new DenunciaVo();
-    			denunciaVo.setAsunto(this.getAsunto());
     			denunciaVo.setDenunciante(denunciante);
     			if(this.getIdRecorrido()!=null){
     				RecorridoVo recorrido = this.getRecorridoDao().encontrar(em,idRecorrido);
     				denunciaVo.setContenido("El usuario "+denunciante.getNombres()+" "+denunciante.getApellido()
         					+"ha denunciado al recorrido "+recorrido.getNombre()+" de "+recorrido.getPropietario().getNombres()
         					+" "+recorrido.getPropietario().getApellido()+"por el siguiente motivo: "+this.getMotivo());
+    				denunciaVo.setAsunto("Denuncia al recorrido "+recorrido.getNombre());
     			}else{
     				UsuarioVo denunciado = this.getUsuarioDao().encontrar(em,idDenunciado);
     				denunciaVo.setContenido("El usuario "+denunciante.getNombres()+" "+denunciante.getApellido()
     						+"ha denunciado a "+denunciado.getNombres()+" "+denunciado.getApellido()+"por el siguiente motivo: "+this.getMotivo());
+    				denunciaVo.setAsunto("Denuncia al usuario "+denunciante.getNombres()+" "+denunciante.getApellido());
     			}
     			EntityManagerFactoryHolder.beginTransaction(em);
     			for (UsuarioVo adminVo : admins) {
@@ -139,14 +139,6 @@ public class DenunciaAction extends ActionSupport{
 
 	public void setDenuncias(List<DenunciaVo> denuncias) {
 		this.denuncias = denuncias;
-	}
-
-	public String getAsunto() {
-		return asunto;
-	}
-
-	public void setAsunto(String asunto) {
-		this.asunto = asunto;
 	}
 
 	public Integer getIdDenunciado() {

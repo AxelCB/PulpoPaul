@@ -23,7 +23,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 
 @Action(value = "recorrido")
-public class RecorridoAction extends ActionSupport{
+public class RecorridoAction extends ActionSupport implements IMensajesVista{
 
     private static final long serialVersionUID = 1L;
 
@@ -39,6 +39,8 @@ public class RecorridoAction extends ActionSupport{
     @Autowired
     Gson gson;
     
+    private String mensajeError;
+    private String mensajeOk;
     private Integer idRecorrido;
     private Integer idMensaje;
     private Boolean aceptar;
@@ -62,6 +64,7 @@ public class RecorridoAction extends ActionSupport{
     
     @Action(value="aceptarParticipante",results={
             @Result(name = "exito", location = "misRecorridos", type = "chain"),
+            @Result(name = "input", location = "/viajero/error.jsp", type = "chain"),
             @Result(name = "nologed", location = "index", type = "chain")})
     public String aceptarParticipante(){
 		EntityManager em = null;
@@ -103,6 +106,7 @@ public class RecorridoAction extends ActionSupport{
     
     @Action(value="participar",results={
             @Result(name = "exito", location = "misRecorridos", type = "chain"),
+            @Result(name = "error", location = "/viajero/error.jsp"),
             @Result(name = "nologed", location = "index", type = "chain")})
     public String participar(){
 		EntityManager em = null;
@@ -113,6 +117,10 @@ public class RecorridoAction extends ActionSupport{
 				RecorridoVo recorridoVo = recorridoDao.encontrar(em, idRecorrido);
 				MensajeVo mensajeVo = new MensajeVo();
 				UsuarioVo usuarioVo = SessionUtils.getUsuario();
+				if(recorridoVo.getPasajeros().contains(usuarioVo)){
+					this.setMensajeError("Usted ya forma parte de este recorrido!");
+					return "error";
+				}
 				mensajeVo.setReceptor(recorridoVo.getPropietario());
 				mensajeVo.setEmisor(usuarioVo);
 				mensajeVo.setContenido(usuarioVo.getNombres()+""+usuarioVo.getApellido()
@@ -169,12 +177,27 @@ public class RecorridoAction extends ActionSupport{
 	public void setMensajeDao(IMensajeDao mensajeDao) {
 		this.mensajeDao = mensajeDao;
 	}
-
 	public IUsuarioDao getUsuarioDao() {
 		return usuarioDao;
 	}
-
 	public void setUsuarioDao(IUsuarioDao usuarioDao) {
 		this.usuarioDao = usuarioDao;
 	}
+	@Override
+	public String getMensajeError() {
+		return mensajeError;
+	}
+	@Override
+	public void setMensajeError(String mensajeError) {
+		this.mensajeError = mensajeError;
+	}
+	@Override
+	public String getMensajeOk() {
+		return mensajeOk;
+	}
+	@Override
+	public void setMensajeOk(String mensajeOK) {
+		this.mensajeOk = mensajeOK;
+	}
+	
 }
