@@ -53,6 +53,9 @@ public class DenunciaAction extends ActionSupport{
 	
 	@Autowired
 	GenericMailSender mail ;
+
+	private String mensajeError="";
+    private String mensajeOk="";
 	
 	private List<DenunciaVo> denuncias = new ArrayList<DenunciaVo>();
 	

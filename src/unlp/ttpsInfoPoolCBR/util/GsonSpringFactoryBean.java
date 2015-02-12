@@ -2,6 +2,7 @@ package unlp.ttpsInfoPoolCBR.util;
 
 import org.springframework.beans.factory.FactoryBean;
 
+import unlp.ttpsInfoPoolCBR.vo.EventoVo;
 import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
 
 import com.google.gson.Gson;
@@ -10,7 +11,7 @@ import com.google.gson.GsonBuilder;
 /**
  * Factory Bean for Gson Serializer/Deserializer
  * 
- * @author fgonzalez
+ * @author acollardbovy
  * 
  */
 public class GsonSpringFactoryBean implements FactoryBean<Gson> {
@@ -43,6 +44,9 @@ public class GsonSpringFactoryBean implements FactoryBean<Gson> {
 			gsb.addSerializationExclusionStrategy(new CustomExclusionStrategy(UsuarioVo.class, false, "recorridosViajo"));
 			gsb.addSerializationExclusionStrategy(new CustomExclusionStrategy(UsuarioVo.class, false, "historial"));
 			gsb.addSerializationExclusionStrategy(new CustomExclusionStrategy(UsuarioVo.class, false, "misViajes"));
+			gsb.addSerializationExclusionStrategy(new CustomExclusionStrategy(EventoVo.class, false, "recorridos"));
+//			gsb.addSerializationExclusionStrategy(new CustomExclusionStrategy(RecorridoVo.class, false, "pasajerosHistorial"));
+//			gsb.addSerializationExclusionStrategy(new CustomExclusionStrategy(RecorridoVo.class, false, "propietario"));
 
 			// returns the created builder
 			this.singleton = gsb.create();

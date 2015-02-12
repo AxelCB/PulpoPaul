@@ -36,7 +36,7 @@
 					<tr>
 						<td><s:property value='id'/></td>
 						<td><s:property value='fecha'/></td>
-						<td><s:property value='emisor'/></td>
+						<td><s:property value='emisor.getNombres()'/></td>
 						<td><s:property value='asunto'/></td>
 	                    <td>
 	                    	<a href="#">
@@ -53,42 +53,6 @@
 					</tr>
 				</s:iterator>
 				</s:if>
-				<tr>
-					<td>5</td>
-					<td>01-01-2010</td>
-					<td>Maria Pepita Reverte</td>
-					<td>Quiero ser tu amiga</td>
-                    <td>
-                    	<a href="#">
-                    		<span class="glyphicon glyphicon-eye-open" data-toggle="modal" data-target="#contenidoMensaje"></span>
-                    	</a>
-                    </td>
-                    <td>
-                    	<a href="#">
-                    		<span class="glyphicon glyphicon-trash"></span>
-                    	</a>
-                    </td>
-                    <td>0</td>
-                    <td>Este usuario quiere ser parte de tu recorrido "Vamos todos felices a la facu". Si desea aceptarlo presione "aceptar" sino "rechazar".</td>					
-				</tr>
-				<tr>
-					<td>5</td>
-					<td>01-01-2010</td>
-					<td>Maria Pepita Reverte</td>
-					<td>Quiero ser tu amiga</td>
-                    <td>
-                    	<a href="#">
-                    		<span class="glyphicon glyphicon-eye-open" data-toggle="modal" data-target="#contenidoMensaje"></span>
-                    	</a>
-                    </td>
-                    <td>
-                    	<a href="#">
-                    		<span class="glyphicon glyphicon-trash"></span>
-                    	</a>
-                    </td>
-                    <td>2</td>
-                    <td>Este usuario quiere ser parte de tu recorrido "Vamos todos felices a la facu". Si desea aceptarlo presione "aceptar" sino "rechazar".</td>					
-				</tr>
 				</tbody>
 				
 				<tfoot>

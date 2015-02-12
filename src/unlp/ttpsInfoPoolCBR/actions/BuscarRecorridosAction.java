@@ -21,7 +21,7 @@ import com.opensymphony.xwork2.ActionSupport;
 	@Result(name = "exito", location = "/viajero/buscarRecorridos.jsp"),
 	@Result(name = "nologed", location = "index", type = "chain")
 })
-public class BuscarRecorridosAction extends ActionSupport{
+public class BuscarRecorridosAction extends ActionSupport implements IMensajesVista{
 
 	private static final long serialVersionUID = 1L;
 
@@ -31,12 +31,15 @@ public class BuscarRecorridosAction extends ActionSupport{
 	//Variables
 	private List<RecorridoVo> recorridos;
 	
+	private String mensajeError="";
+    private String mensajeOk="";
+	
 	@Override
 	public String execute(){
 		EntityManager em = null;
 		try {
 			em = EntityManagerFactoryHolder.getEntityManager();		
-			recorridos = recorridoDao.listarDisponibles(em,SessionUtils.getUsuario());
+			recorridos = this.getRecorridoDao().listarDisponibles(em,SessionUtils.getUsuario());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
@@ -52,5 +55,35 @@ public class BuscarRecorridosAction extends ActionSupport{
 	public void setRecorridos(List<RecorridoVo> recorridos) {
 		this.recorridos = recorridos;
 	}
+
+	public IRecorridoDao getRecorridoDao() {
+		return recorridoDao;
+	}
+
+	public void setRecorridoDao(IRecorridoDao recorridoDao) {
+		this.recorridoDao = recorridoDao;
+	}
+
+	@Override
+	public String getMensajeError() {
+		return mensajeError;
+	}
+
+	@Override
+	public void setMensajeError(String mensajeError) {
+		this.mensajeError = mensajeError;
+	}
+
+	@Override
+	public String getMensajeOk() {
+		return mensajeOk;
+	}
+
+	@Override
+	public void setMensajeOk(String mensajeOk) {
+		this.mensajeOk = mensajeOk;
+	}
+	
+	
 	
 }

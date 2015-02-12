@@ -34,17 +34,19 @@
 	</div>
 </nav>
 
-<s:if test="%{#mensajeError!=''}">
-	<h2>Error</h2>
-	<br>
-	<div class="alert alert-danger" role="alert">
-		<s:property value="mensajeError"></s:property>
+<s:if test="%{mensajeError!=''}">
+	<div class="row">
+		<h2>Error</h2>
+		<div class="alert alert-danger" role="alert">
+			<s:property value="mensajeError"></s:property>
+		</div>
 	</div>
 </s:if>
-<s:if test="%{#mensajeOk!=''}">
-	<h2>Operación exitosa</h2>
-	<br>
-	<div class="alert alert-success" role="alert">
-		<s:property value="mensajeOk"></s:property>
+<s:if test="%{mensajeOk!=''}">
+	<div class="row">
+		<h2>Operación exitosa</h2>
+		<div class="alert alert-success" role="alert">
+			<s:property value="mensajeOk"></s:property>
+		</div>
 	</div>
 </s:if>

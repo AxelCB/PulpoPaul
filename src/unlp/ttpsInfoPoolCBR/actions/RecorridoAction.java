@@ -39,8 +39,8 @@ public class RecorridoAction extends ActionSupport implements IMensajesVista{
     @Autowired
     Gson gson;
     
-    private String mensajeError;
-    private String mensajeOk;
+    private String mensajeError="";
+    private String mensajeOk="";
     private Integer idRecorrido;
     private Integer idMensaje;
     private Boolean aceptar;
@@ -64,7 +64,8 @@ public class RecorridoAction extends ActionSupport implements IMensajesVista{
     
     @Action(value="aceptarParticipante",results={
             @Result(name = "exito", location = "misRecorridos", type = "chain"),
-            @Result(name = "input", location = "/viajero/error.jsp", type = "chain"),
+            @Result(name = "error", location = "/viajero/error.jsp", type = "chain"),
+            @Result(name = "input", location = "bandejaEntrada", type = "chain"),
             @Result(name = "nologed", location = "index", type = "chain")})
     public String aceptarParticipante(){
 		EntityManager em = null;
@@ -76,8 +77,8 @@ public class RecorridoAction extends ActionSupport implements IMensajesVista{
 				MensajeVo respuesta = new MensajeVo();
 				respuesta.setEmisor(SessionUtils.getUsuario());
 				respuesta.setReceptor(solicitud.getEmisor());
-				respuesta.setAsunto("Respuesta a solicitud de participación");
 				RecorridoVo recorridoVo = solicitud.getRecorrido();
+				respuesta.setAsunto("Respuesta a solicitud de participación en " + recorridoVo.getNombre());
 				if(aceptar){
 					solicitud.setContenido(solicitud.getContenido()+" Usted ha aceptado a este participante.");
 					recorridoVo.getPasajeros().add(solicitud.getEmisor());
@@ -106,7 +107,8 @@ public class RecorridoAction extends ActionSupport implements IMensajesVista{
     
     @Action(value="participar",results={
             @Result(name = "exito", location = "misRecorridos", type = "chain"),
-            @Result(name = "error", location = "/viajero/error.jsp"),
+            @Result(name = "error", location = "buscarRecorridos",type ="chain"),
+            @Result(name = "input", location = "misRecorridos", type = "chain"),
             @Result(name = "nologed", location = "index", type = "chain")})
     public String participar(){
 		EntityManager em = null;
@@ -123,7 +125,8 @@ public class RecorridoAction extends ActionSupport implements IMensajesVista{
 				}
 				mensajeVo.setReceptor(recorridoVo.getPropietario());
 				mensajeVo.setEmisor(usuarioVo);
-				mensajeVo.setContenido(usuarioVo.getNombres()+""+usuarioVo.getApellido()
+				mensajeVo.setAsunto("Participacion en " + recorridoVo.getNombre());
+				mensajeVo.setContenido(usuarioVo.getNombres()+" "+usuarioVo.getApellido()
 						+" desea participar en su recorrido "+recorridoVo.getNombre()
 						+". Si desea aceptarlo presione 'aceptar' sino 'rechazar'.");
 				mensajeVo.setRecorrido(recorridoVo);

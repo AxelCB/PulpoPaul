@@ -23,7 +23,7 @@ import com.opensymphony.xwork2.ActionSupport;
 	@Result(name = "input",	location = "/viajero/misRecorridos.jsp"),
 	@Result(name = "nologed", location = "index", type = "chain")
 })
-public class MisRecorridosAction extends ActionSupport{
+public class MisRecorridosAction extends ActionSupport implements IMensajesVista{
 
 	private static final long serialVersionUID = 1L;
 
@@ -32,6 +32,9 @@ public class MisRecorridosAction extends ActionSupport{
 	
 	private List<RecorridoVo> recorridos = null;
 	
+	private String mensajeError;
+    private String mensajeOk;
+	
 	@Override
 	public String execute(){
 		EntityManager em = null;
@@ -39,7 +42,7 @@ public class MisRecorridosAction extends ActionSupport{
 			UsuarioVo usuario = SessionUtils.getUsuario();
 			try {
 				em = EntityManagerFactoryHolder.getEntityManager();
-				usuario = usuarioDao.traerMisRecorridos(em,usuario);				
+				usuario = this.getUsuarioDao().traerMisRecorridos(em,usuario);				
 				recorridos = usuario.getRecorridosMios();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -60,6 +63,33 @@ public class MisRecorridosAction extends ActionSupport{
 
 	public void setRecorridos(List<RecorridoVo> recorridos) {
 		this.recorridos = recorridos;
+	}
+
+	public IUsuarioDao getUsuarioDao() {
+		return usuarioDao;
+	}
+
+	public void setUsuarioDao(IUsuarioDao usuarioDao) {
+		this.usuarioDao = usuarioDao;
+	}
+
+	@Override
+	public String getMensajeError() {
+		return mensajeError;
+	}
+
+	@Override
+	public void setMensajeError(String mensajeError) {
+		this.mensajeError = mensajeError;
+	}
+
+	@Override
+	public String getMensajeOk() {
+		return mensajeOk;
+	}
+
+	@Override
+	public void setMensajeOk(String mensajeOk) {
+		this.mensajeOk = mensajeOk;
 	}	
-	
 }

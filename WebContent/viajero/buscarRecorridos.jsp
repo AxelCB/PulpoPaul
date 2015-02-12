@@ -78,11 +78,13 @@
 						<div class="col-sm-6">
 							<p><b>Propietario:</b> <span id="propietario"></span></p>
 							<p><b>Destino:</b> <span id="destino"></span></p>
+							<p><b>Lugares:</b> <span id="lugares"></span></p>
 							<p><b>Tipo:</b> <span id="tipo"></span></p>
-							<p class="invi"><b>Fecha:</b> <span id="fecha"></span></p>
-							<p class="invi"><b>Dias:</b> <span id="dias"></span></p>
-							<p class="invi"><b>Hora ida:</b> <span id="horaIda"></span></p>
-							<p class="invi"><b>Hora vuelta:</b> <span id="horaVuelta"></span></p>
+							<p class="fecha"><b>Fecha:</b> <span id="fecha"></span></p>
+							<p class="dias"><b>Dias:</b> <span id="dias"></span></p>
+							<p><b>Tramos:</b> <span id="tramos"></span></p>
+							<p class="horaIda"><b>Hora ida:</b> <span id="horaIda"></span></p>
+							<p class="horaVuelta"><b>Hora vuelta:</b> <span id="horaVuelta"></span></p>
 							<p><b>Precio:</b> <span id="precio"></span></p>
 							<div class="row" id="participar">
 							</div>

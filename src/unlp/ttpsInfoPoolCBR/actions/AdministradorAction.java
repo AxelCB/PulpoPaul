@@ -22,12 +22,16 @@ import com.opensymphony.xwork2.ActionSupport;
 			type = "chain")
 })
 
-public class AdministradorAction extends ActionSupport implements SessionAware{
+public class AdministradorAction extends ActionSupport implements SessionAware,IMensajesVista{
 
 	private static final long serialVersionUID = 1L;
 
 	private SessionMap<String, Object> sessionMap;
 	
+	private String mensajeError;
+    private String mensajeOk;
+	
+	@Override
 	public String execute(){
 		HttpSession session = ServletActionContext.getRequest().getSession(false);  
 		if(session==null || session.getAttribute("usuario")==null){  
@@ -38,6 +42,7 @@ public class AdministradorAction extends ActionSupport implements SessionAware{
 		return "exito";
 	}
 	
+	@Override
 	public void validate(){
 		
 	}
@@ -46,5 +51,23 @@ public class AdministradorAction extends ActionSupport implements SessionAware{
 	public void setSession(Map<String, Object> map) {
 		sessionMap = (SessionMap)map;		
 	}
+
+	@Override
+	public String getMensajeError() {
+		return mensajeError;
+	}
+	@Override
+	public void setMensajeError(String mensajeError) {
+		this.mensajeError = mensajeError;
+	}
+	@Override
+	public String getMensajeOk() {
+		return mensajeOk;
+	}
+	@Override
+	public void setMensajeOk(String mensajeOk) {
+		this.mensajeOk = mensajeOk;
+	}
+	
 	
 }
