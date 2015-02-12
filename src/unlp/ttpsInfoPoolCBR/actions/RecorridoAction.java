@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import unlp.ttpsInfoPoolCBR.dao.mensaje.IMensajeDao;
 import unlp.ttpsInfoPoolCBR.dao.recorrido.IRecorridoDao;
+import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
 import unlp.ttpsInfoPoolCBR.util.EntityManagerFactoryHolder;
 import unlp.ttpsInfoPoolCBR.util.SessionUtils;
 import unlp.ttpsInfoPoolCBR.vo.MensajeVo;
@@ -30,7 +31,10 @@ public class RecorridoAction extends ActionSupport{
     IRecorridoDao recorridoDao;
     
     @Autowired
-    IMensajeDao mensajeDao; 
+    IMensajeDao mensajeDao;
+    
+    @Autowired
+    IUsuarioDao usuarioDao;
     
     @Autowired
     Gson gson;
@@ -75,6 +79,8 @@ public class RecorridoAction extends ActionSupport{
 				if(aceptar){
 					solicitud.setContenido(solicitud.getContenido()+" Usted ha aceptado a este participante.");
 					recorridoVo.getPasajeros().add(solicitud.getEmisor());
+					solicitud.getEmisor().agregarRecorridoViajo(recorridoVo);
+					this.getUsuarioDao().modificar(em,solicitud.getEmisor());
 					this.getRecorridoDao().modificar(em,recorridoVo);
 					respuesta.setContenido("Su solicitud al recorrido "+recorridoVo.getNombre()+" ha sido aceptada.");
 				}else{
@@ -165,5 +171,13 @@ public class RecorridoAction extends ActionSupport{
 	}
 	public void setMensajeDao(IMensajeDao mensajeDao) {
 		this.mensajeDao = mensajeDao;
+	}
+
+	public IUsuarioDao getUsuarioDao() {
+		return usuarioDao;
+	}
+
+	public void setUsuarioDao(IUsuarioDao usuarioDao) {
+		this.usuarioDao = usuarioDao;
 	}
 }
