@@ -53,5 +53,24 @@
     
     <!-- Json Utilities -->
 	<bean id="gson" class="unlp.ttpsInfoPoolCBR.util.GsonSpringFactoryBean" scope="singleton" />
+	
+	<!-- Mail Sender -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="axelcollardbovy" />
+		<property name="password" value="MartinaTrinidadPueblas" />
+	 
+		<property name="javaMailProperties">
+		   <props>
+	       	      <prop key="mail.smtp.auth">true</prop>
+	       	      <prop key="mail.smtp.starttls.enable">true</prop>
+	       	   </props>
+		</property>
+	</bean>
+	 
+	<bean id="genericMailSender" class="unlp.ttpsInfoPoolCBR.aop.GenericMailSender">
+		<property name="mailSender" ref="mailSender" />
+	</bean>
 
 </beans>

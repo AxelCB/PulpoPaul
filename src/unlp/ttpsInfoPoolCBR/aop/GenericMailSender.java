@@ -3,8 +3,9 @@ package unlp.ttpsInfoPoolCBR.aop;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpSession;
 
-import org.aspectj.lang.JoinPoint;
+import org.apache.struts2.ServletActionContext;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.mail.SimpleMailMessage;
 import unlp.ttpsInfoPoolCBR.dao.rol.IRolDao;
 import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
 import unlp.ttpsInfoPoolCBR.util.EntityManagerFactoryHolder;
+import unlp.ttpsInfoPoolCBR.vo.DenunciaVo;
 import unlp.ttpsInfoPoolCBR.vo.RolVo;
 import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
 
@@ -46,7 +48,7 @@ public class GenericMailSender {
 	}
 
 	@After("execution(* unlp.ttpsInfoPoolCBR.dao.denuncia.DenunciaDaoJPAImpl.guardar(..)")
-	public void sendEmailAfterNewDenuncia(JoinPoint joinPoint){
+	public void sendEmailAfterNewDenuncia(){//JoinPoint joinPoint
 		SimpleMailMessage message = new SimpleMailMessage();
 		EntityManager em = null;
 		try {
@@ -54,10 +56,10 @@ public class GenericMailSender {
 			RolVo rolAdmin = rolDao.buscarPorNombre(em,"administrador");
 			List<UsuarioVo> admins = usuarioDao.listarDeRol(em,rolAdmin);
 			
-			em.close();
 			
-			String mailText="";
-			//TODO poner el contenido del mail desde el contenido de la denuncia
+			HttpSession session = ServletActionContext.getRequest().getSession(false);
+			DenunciaVo denuncia=((DenunciaVo)session.getAttribute("denuncia"));
+			String mailText=denuncia.getContenido();
 			
 			for (UsuarioVo admin : admins) {
 				message.setFrom("InfoPool@gmail.com");

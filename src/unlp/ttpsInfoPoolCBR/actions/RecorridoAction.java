@@ -92,6 +92,7 @@ public class RecorridoAction extends ActionSupport{
 		}else{
 			return "nologed";
 		}
+		//TODO create action for result = input
     	return "input";
     }
     
