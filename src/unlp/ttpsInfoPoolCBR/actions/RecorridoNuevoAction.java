@@ -209,6 +209,8 @@ public class RecorridoNuevoAction extends ActionSupport{
         							null,
         							null);
         	try {
+        		if(em==null)
+        			em = EntityManagerFactoryHolder.getEntityManager();
         		EntityManagerFactoryHolder.beginTransaction(em);
 				recorrido = recorridoDao.guardar(em,recorrido);
 				EntityManagerFactoryHolder.commitTransaction(em);
