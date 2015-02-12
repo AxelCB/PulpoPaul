@@ -57,7 +57,8 @@ public class RecorridoAction extends ActionSupport{
     }
     
     @Action(value="aceptarParticipante",results={
-            @Result(name = "exito", location = "misRecorridos", type = "chain"),
+            @Result(name = "exito", location = "bandejaEntrada", type = "chain"),
+            @Result(name = "input", location = "bandejaEntrada", type = "chain"),
             @Result(name = "nologed", location = "index", type = "chain")})
     public String aceptarParticipante(){
 		EntityManager em = null;
@@ -84,6 +85,7 @@ public class RecorridoAction extends ActionSupport{
 				this.getMensajeDao().guardar(em, respuesta);
 				this.getMensajeDao().modificar(em,solicitud);
 				EntityManagerFactoryHolder.commitTransaction(em);
+				return "exito";
 			}catch(Exception ex){
 				EntityManagerFactoryHolder.rollbackTransaction(em);
 				ex.printStackTrace();
@@ -92,12 +94,11 @@ public class RecorridoAction extends ActionSupport{
 		}else{
 			return "nologed";
 		}
-		//TODO create action for result = input
-    	return "input";
     }
     
     @Action(value="participar",results={
             @Result(name = "exito", location = "misRecorridos", type = "chain"),
+            @Result(name = "input", location = "misRecorridos", type = "chain"),
             @Result(name = "nologed", location = "index", type = "chain")})
     public String participar(){
 		EntityManager em = null;
@@ -110,7 +111,8 @@ public class RecorridoAction extends ActionSupport{
 				UsuarioVo usuarioVo = SessionUtils.getUsuario();
 				mensajeVo.setReceptor(recorridoVo.getPropietario());
 				mensajeVo.setEmisor(usuarioVo);
-				mensajeVo.setContenido(usuarioVo.getNombres()+""+usuarioVo.getApellido()
+				mensajeVo.setAsunto("Participacion en " + recorridoVo.getNombre());
+				mensajeVo.setContenido(usuarioVo.getNombres()+" "+usuarioVo.getApellido()
 						+" desea participar en su recorrido "+recorridoVo.getNombre()
 						+". Si desea aceptarlo presione 'aceptar' sino 'rechazar'.");
 				mensajeVo.setRecorrido(recorridoVo);

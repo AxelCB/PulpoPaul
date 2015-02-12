@@ -65,58 +65,91 @@ $(document).ready(function() {
          ]
       });
     
-//    $('.glyphicon-plus').click(function(){    	
-//    	$("nombre").text('');
-//    	$("propietario").text('');
-//    	$("destino").text('');
-//    	$("tipo").text('');
-//    	$("fecha").text('');
-//    	$("dias").text('');
-//    	$("horaIda").text('');
-//    	$("horaVuelta").text('');
-//    	$("precio").text('');
-//    	$("participar").html('');
-//    	directionsDisplay.setMap(null);
-//    	waypoints = [];
-//    	start = null;
-//    	end = null;
-//
-//    	var row = $(this).parents('tr').children('td');
-//    	$.ajax({
-//    		  type: "GET",
-//    		  url: "/recorrido/buscar",
-//    		  data: { idRecorrido: $(row[0]).text() }
-//    	})
-//    	.fail(function() {
-//    		alert('Se ha producido un error al traer los datos del servidor');
-//    	})
-//    	.success(function(json){
-//    		$("nombre").text();
-//    		$("propietario").text();
-//    		$("destino").text();
-//    		$("tipo").text();
-//    		$("fecha").text();
-//    		$("dias").text();
-//    		$("horaIda").text();
-//    		$("horaVuelta").text();
-//    		$("precio").text('$');
-//	  
-//    		var str = '<a href="/recorrido/agregarViajero?idViajero=' + $('#idUsuario').text() + '&idRecorrido=' + $(row[0]).text() + '" class="btn btn-default col-sm-offset-8 col-sm-3">Participar!</a>';
-//    		$("participar").append(str);
-//	  
-//    		waypoints = 'los waypoints que devuelve';
-//    		start = 'el punto de partida que devuelve';
-//    		if(true){
-//    			end = facultad;
-//    		}
-//    		else{
-//    			end = 'la location del evento';
-//    		}
-//    		calcRoute();
-//	  
-//    		$('#detalleRecorrido').modal();
-//    	})
-//    });
+    $('.glyphicon-plus').click(function(){    	
+    	$("#nombre").text('');
+    	$("#propietario").text('');
+    	$("#destino").text('');
+    	$("#tipo").text('');
+    	$("#tramos").text('');
+    	$("#fecha").text('');
+    	$(".fecha").css('display', 'none');
+    	$("#dias").text('');
+    	$(".dias").css('display', 'none');
+    	$("#horaIda").text('');
+    	$(".horaIda").css('display', 'none');
+    	$("#horaVuelta").text('');
+    	$(".horaVuelta").css('display', 'none');
+    	$("#precio").text('');
+    	$("#participar").html('');
+    	directionsDisplay.setMap(null);
+    	waypoints = [];
+    	start = null;
+    	end = null;
+
+    	var row = $(this).parents('tr').children('td');
+    	$.ajax({
+    		  type: "GET",
+    		  url: "/PulpoPaul/recorrido/buscar",
+    		  data: { idRecorrido: $(row[0]).text() }
+    	})
+    	.fail(function() {
+    		alert('Se ha producido un error al traer los datos del servidor');
+    	})
+    	.success(function(json){
+    		console.log(json);
+    		$("#nombre").text(json.nombre);
+    		$("#propietario").text(json.propietario.nombres);
+    		if(json.evento){
+    			$("#destino").text(json.evento.nombre);
+    		}
+    		else{
+    			$("#destino").text('FI - UNLP');
+    		}
+    		$("#tipo").text(json.tipo);
+    		$("#tramos").text(json.tramo);
+    		if(json.puntual){
+    			$("#fecha").text(json.puntual);
+    			$(".fecha").css('display', 'inline');
+    		}
+    		if(json.dias.length > 0){
+    			$("#dias").text(json.dias);
+    			$(".dias").css('display', 'inline');
+    		}
+    		if(json.horaSalida){
+    			$("#horaIda").text(json.horaSalida);
+    			$(".horaIda").css('display', 'inline');
+    		}
+    		if(json.horaVuelta){
+    			$("#horaVuelta").text(json.horaVuelta);
+    			$(".horaVuelta").css('display', 'inline');
+    		}
+    		$("#horaIda").text(json.horaSalida);
+    		
+    		$("#precio").text('$' + json.precio);
+	  
+    		var str = '<a href="/PulpoPaul/recorrido/participar?idRecorrido=' + $(row[0]).text() + '" class="btn btn-default col-sm-offset-8 col-sm-3">Participar!</a>';
+    		$("#participar").append(str);
+    		
+    		$('#detalleRecorrido').modal();
+    		
+    		for(i in json.puntos){
+    			var str = json.puntos[i].substring(1, str.length - 1);
+    			var latlng = str.split(',');
+    			waypoints.push({
+    				location: new google.maps.LatLng(parseFloat(latlng[0]), parseFloat(latlng[1])),
+    				stopover: true
+    			});
+    		}
+    		start = json.inicio;
+    		if(typeof(json.evento) == 'object'){
+    			end = json.fin;
+    		}
+    		else{
+    			end = facultad;
+    		}
+    		calcRoute();
+    	})
+    });
 });
 
 $("#detalleRecorrido").on("shown.bs.modal", function () {
