@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <jsp:include page="header.jsp">
-	<jsp:param value="Buscar Recorridos" name="titulo"/>
+	<jsp:param value="Mis Recorridos" name="titulo"/>
 </jsp:include>
 <link href="${pageContext.request.contextPath}/resources/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 <body>
@@ -106,15 +106,14 @@
 							<p class="horaVuelta"><b>Hora vuelta:</b> <span id="horaVuelta"></span></p>
 							<p><b>Precio:</b> <span id="precio"></span></p>
 							<p><b>Participantes:</b><br><span id="pasajeros"></span></p>
-							</div>
 						</div>
 					</div>
 				</div>
-	      		<div class="modal-footer">
+				<div class="modal-footer">
 	        		<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
 	      		</div>
-	    	</div>
-	  	</div>
+			</div>
+	    </div>
 	</div>
 	
 	<jsp:include page="scripts.jsp"/>

@@ -23,7 +23,7 @@
 			            <li><a href="bandejaEntrada">Bandeja de entrada</a></li>
 			    	</ul>
 		    	</li>
-		    	<li><a href="/PulpoPaul/viajero/historial.jsp">Historial</a></li>
+		    	<li><a href="historial">Historial</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li>
