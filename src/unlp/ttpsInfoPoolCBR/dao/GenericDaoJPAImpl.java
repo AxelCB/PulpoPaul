@@ -17,9 +17,6 @@ import unlp.ttpsInfoPoolCBR.vo.AbstractVo;
  */
 public class GenericDaoJPAImpl<M extends AbstractEntity,VO extends AbstractVo> implements IGenericDao<M,VO>{
 
-//    @PersistenceContext
-//    private EntityManager em;
-
     protected Class<M> persistentClass;
     protected Class<VO> voClass;
 
@@ -28,17 +25,7 @@ public class GenericDaoJPAImpl<M extends AbstractEntity,VO extends AbstractVo> i
         this.voClass = voClass;
     }
 
-//    protected EntityManager getEm() {
-// 
-//        return em;
-//    }
-//
-//    protected void setEm(EntityManager em) {
-//        this.em = em;
-//    }
-
     @Override
-//    @Transactional
     public VO guardar(EntityManager em,VO objetoVO) throws Exception {
         try{
         	M objeto = MapperUtils.map(objetoVO, this.getPersistentClass());
@@ -51,7 +38,6 @@ public class GenericDaoJPAImpl<M extends AbstractEntity,VO extends AbstractVo> i
     }
 
     @Override
-//    @Transactional
     public VO modificar(EntityManager em,VO objetoVO) throws Exception {
         try{
         	M objeto = MapperUtils.map(objetoVO, this.getPersistentClass());
@@ -101,7 +87,6 @@ public class GenericDaoJPAImpl<M extends AbstractEntity,VO extends AbstractVo> i
     }
 
 	@Override
-//    @Transactional
 	public void drop(EntityManager em) throws Exception {
         List<M> listaM = new ArrayList<M>();
         try{

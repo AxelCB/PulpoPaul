@@ -105,13 +105,16 @@ public class DenunciaAction extends ActionSupport{
     }
     
     //TODO definir results para este action
-    @Action(value="listar")
+    @Action(value="listar",results={
+    		@Result(name = "exito", location = "denuncias", type = "chain"),
+            @Result(name = "nologed", location = "index", type = "chain")})
     public String listar(){
     	if(SessionUtils.checkLogin()){
     		EntityManager em = null;
     		try{
     			em = EntityManagerFactoryHolder.getEntityManager();
-    			denuncias = this.getDenunciaDao().listar(em);
+    			UsuarioVo loggedAdmin = SessionUtils.getUsuario();
+    			denuncias = this.getDenunciaDao().listarDeAdmin(em,loggedAdmin);
     			return "exito";
     		}catch(Exception e){
     			this.getLogger().error(e.getMessage(),e);
