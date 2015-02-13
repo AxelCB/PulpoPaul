@@ -18,7 +18,7 @@ import com.opensymphony.xwork2.ActionSupport;
 	@Result(name = "exito", location = "/viajero/historial.jsp"),
 	@Result(name = "nologed", location = "index", type = "chain")
 })
-public class HistorialAction extends ActionSupport{
+public class HistorialAction extends ActionSupport implements IMensajesVista{
 
 	private static final long serialVersionUID = 1L;
 
@@ -28,15 +28,27 @@ public class HistorialAction extends ActionSupport{
 	//Variables
 	private List<RecorridoVo> recorridos;
 	
+	private String mensajeError="";
+	private String mensajeOk="";
+	
 	@Override
 	public String execute(){
 		try {
-			//TODO Refresh user
-			recorridos = SessionUtils.getUsuario().getRecorridosViajo();
+			if(SessionUtils.checkLogin()){
+				//TODO Refresh user
+				recorridos = SessionUtils.getUsuario().getRecorridosViajo();
+				return "exito";
+			}else{
+				this.setMensajeError("Autentiquese para utilizar la pagina");
+	        	this.setMensajeOk("");
+				return "nologed";
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+			this.setMensajeOk("");
+			return "error";
 		}
-		return "exito";
 	}
 
 	public List<RecorridoVo> getRecorridos() {
@@ -45,6 +57,26 @@ public class HistorialAction extends ActionSupport{
 
 	public void setRecorridos(List<RecorridoVo> recorridos) {
 		this.recorridos = recorridos;
+	}
+
+	@Override
+	public String getMensajeError() {
+		return mensajeError;
+	}
+
+	@Override
+	public void setMensajeError(String mensajeError) {
+		this.mensajeError = mensajeError;
+	}
+
+	@Override
+	public String getMensajeOk() {
+		return mensajeOk;
+	}
+
+	@Override
+	public void setMensajeOk(String mensajeOk) {
+		this.mensajeOk = mensajeOk;
 	}
 	
 }

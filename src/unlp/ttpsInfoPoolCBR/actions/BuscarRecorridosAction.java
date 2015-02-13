@@ -19,6 +19,7 @@ import com.opensymphony.xwork2.ActionSupport;
 @Action(value = "buscarRecorridos")
 @Results({
 	@Result(name = "exito", location = "/viajero/buscarRecorridos.jsp"),
+	@Result(name = "error", location = "/viajero/buscarRecorridos.jsp"),
 	@Result(name = "nologed", location = "index", type = "chain")
 })
 public class BuscarRecorridosAction extends ActionSupport implements IMensajesVista{
@@ -42,6 +43,9 @@ public class BuscarRecorridosAction extends ActionSupport implements IMensajesVi
 			recorridos = this.getRecorridoDao().listarDisponibles(em,SessionUtils.getUsuario());
 		} catch (Exception e) {
 			e.printStackTrace();
+			this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+			this.setMensajeOk("");
+			return "error";
 		}finally{
 			em.close();
 		}

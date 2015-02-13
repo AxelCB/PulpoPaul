@@ -60,7 +60,9 @@ public class EventoAction extends ActionSupport implements IMensajesVista{
 				fecha = formatter.parse(this.getFecha());
 			} catch (ParseException e1) {
 				e1.printStackTrace();
-				return "input";
+				this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+				this.setMensajeOk("");
+				return "error";
 			}
             EventoVo evento = new EventoVo();
             evento.setNombre(this.getNombre());
@@ -78,13 +80,16 @@ public class EventoAction extends ActionSupport implements IMensajesVista{
 			} catch (Exception e) {
 				EntityManagerFactoryHolder.rollbackTransaction(em);
 				e.printStackTrace();
-				return "input";
+				this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+				this.setMensajeOk("");
+				return "error";
 			}
-
+        this.setMensajeOk("Evento creado exitosamente");
         return "exito";
         }
         else{
-        	addFieldError("nologed", "Autentiquese para utilizar la pagina");
+        	this.setMensajeError("Autentiquese para utilizar la pagina");
+        	this.setMensajeOk("");
         	return "nologed";
         }
     }
@@ -102,14 +107,17 @@ public class EventoAction extends ActionSupport implements IMensajesVista{
 				this.setEventos(eventoDao.listar(em));
 			} catch (Exception e) {
 				e.printStackTrace();
-				return "input";
+				this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+				this.setMensajeOk("");
+				return "error";
 			}finally{
     			em.close();
     		}
         	return "exito";
         }
         else{
-        	addFieldError("nologed", "Autentiquese para utilizar la pagina");
+        	this.setMensajeError("Autentiquese para utilizar la pagina");
+        	this.setMensajeOk("");
         	return "nologed";
         }
     }

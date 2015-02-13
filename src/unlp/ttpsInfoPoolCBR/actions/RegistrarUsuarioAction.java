@@ -80,7 +80,9 @@ public class RegistrarUsuarioAction extends ActionSupport{
 		} catch (Exception e1) {
 			e1.printStackTrace();
 			em.close();
-			return "input";
+			this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+			this.setMensajeOk("");
+			return "error";
 		}
 		try {
 			EntityManagerFactoryHolder.beginTransaction(em);			
@@ -89,9 +91,11 @@ public class RegistrarUsuarioAction extends ActionSupport{
 		} catch (Exception e) {
 			EntityManagerFactoryHolder.rollbackTransaction(em);
 			e.printStackTrace();
-			return "input";
+			this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+			this.setMensajeOk("");
+			return "error";
 		}
-		
+		this.setMensajeOk("Usuario registrado correctamente");
 		return "exito";
 	}
 	

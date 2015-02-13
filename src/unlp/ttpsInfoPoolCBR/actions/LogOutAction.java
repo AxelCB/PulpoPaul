@@ -27,7 +27,7 @@ public class LogOutAction extends ActionSupport implements SessionAware,IMensaje
 		if(sessionMap != null){
 			sessionMap.invalidate();
 		}
-		
+		this.setMensajeOk("Usuario deslogueado correctamente.");
 		return "exito";
 	}
 	

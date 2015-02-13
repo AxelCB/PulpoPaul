@@ -56,6 +56,8 @@ public class RecorridoAction extends ActionSupport implements IMensajesVista{
 		    response.getWriter().write(this.getGson().toJson(recorrido));
 		} catch (Exception e) {
 			e.printStackTrace();
+			this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+			return "error";
 		}finally{
 			em.close();
 		}
@@ -86,9 +88,11 @@ public class RecorridoAction extends ActionSupport implements IMensajesVista{
 					this.getUsuarioDao().modificar(em,solicitud.getEmisor());
 					this.getRecorridoDao().modificar(em,recorridoVo);
 					respuesta.setContenido("Su solicitud al recorrido "+recorridoVo.getNombre()+" ha sido aceptada.");
+					this.setMensajeOk("Participante aceptado correctamente");
 				}else{
 					solicitud.setContenido(solicitud.getContenido()+" Usted ha rechazado a este participante.");
 					respuesta.setContenido("Su solicitud al recorrido "+recorridoVo.getNombre()+" ha sido rechazada.");
+					this.setMensajeOk("Participante rechazado correctamente");
 				}
 				solicitud.setRecorrido(null);
 				this.getMensajeDao().guardar(em, respuesta);
@@ -98,9 +102,13 @@ public class RecorridoAction extends ActionSupport implements IMensajesVista{
 			}catch(Exception ex){
 				EntityManagerFactoryHolder.rollbackTransaction(em);
 				ex.printStackTrace();
-				return "input";
+				this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+				this.setMensajeOk("");
+				return "error";
 			}
 		}else{
+			this.setMensajeError("Autentiquese para utilizar la pagina");
+			this.setMensajeOk("");
 			return "nologed";
 		}
     }
@@ -121,6 +129,7 @@ public class RecorridoAction extends ActionSupport implements IMensajesVista{
 				UsuarioVo usuarioVo = SessionUtils.getUsuario();
 				if(recorridoVo.getPasajeros().contains(usuarioVo)){
 					this.setMensajeError("Usted ya forma parte de este recorrido!");
+					this.setMensajeOk("");
 					return "error";
 				}
 				mensajeVo.setReceptor(recorridoVo.getPropietario());
@@ -135,9 +144,13 @@ public class RecorridoAction extends ActionSupport implements IMensajesVista{
 			}catch(Exception ex){
 				EntityManagerFactoryHolder.rollbackTransaction(em);
 				ex.printStackTrace();
-				return "input";
+				this.setMensajeError("Usted ya forma parte de este recorrido!");
+				this.setMensajeOk("");
+				return "error";
 			}
 		}else{
+			this.setMensajeError("Autentiquese para utilizar la pagina");
+			this.setMensajeOk("");
 			return "nologed";
 		}
     	return "input";

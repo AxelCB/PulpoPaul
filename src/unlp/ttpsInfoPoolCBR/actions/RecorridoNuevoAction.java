@@ -86,13 +86,17 @@ public class RecorridoNuevoAction extends ActionSupport{
 				eventos = eventoDao.getAll(em);
 			} catch (Exception e) {
 				e.printStackTrace();
+				this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+				this.setMensajeOk("");
+				return "error";
 			}finally{
 				em.close();
 			}
     		return "exito";
     	}
     	else{
-    		addFieldError("nologed", "Autentiquese para utilizar la pagina");
+    		this.setMensajeError("Autentiquese para utilizar la pagina");
+    		this.setMensajeOk("");
     		return "nologed";
     	}
     }
@@ -116,7 +120,9 @@ public class RecorridoNuevoAction extends ActionSupport{
 				} catch (Exception e) {
 					e.printStackTrace();
 					em.close();
-					return "input";
+					this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+					this.setMensajeOk("");
+					return "error";
 				}
         	}
         	
@@ -138,7 +144,9 @@ public class RecorridoNuevoAction extends ActionSupport{
 						fecha = new java.sql.Date(aux.getTime());
 					} catch (ParseException e) {
 						e.printStackTrace();
-						return "input";
+						this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+						this.setMensajeOk("");
+						return "error";
 					}
         			break;
         			
@@ -164,7 +172,9 @@ public class RecorridoNuevoAction extends ActionSupport{
 						partida = new Time(formatter.parse(this.getPartida()).getTime());
 					} catch (ParseException e) {
 						e.printStackTrace();
-						return "input";
+						this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+						this.setMensajeOk("");
+						return "error";
 					}
         			break;
 
@@ -173,7 +183,9 @@ public class RecorridoNuevoAction extends ActionSupport{
 						regreso = new Time(formatter.parse(this.getRegreso()).getTime());
 					} catch (ParseException e) {
 						e.printStackTrace();
-						return "input";
+						this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+						this.setMensajeOk("");
+						return "error";
 					}
         			tramoViaje = TramoViaje.VUELTA;
         			break;
@@ -184,7 +196,9 @@ public class RecorridoNuevoAction extends ActionSupport{
 						regreso = new Time(formatter.parse(this.getRegreso()).getTime());
 					} catch (ParseException e) {
 						e.printStackTrace();
-						return "input";
+						this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+						this.setMensajeOk("");
+						return "error";
 					}
         			tramoViaje = TramoViaje.IDAYVUELTA;
         			break;
@@ -220,7 +234,9 @@ public class RecorridoNuevoAction extends ActionSupport{
 			} catch (Exception e) {
 				EntityManagerFactoryHolder.rollbackTransaction(em);
 				e.printStackTrace();
-				return "input";
+				this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+				this.setMensajeOk("");
+				return "error";
 			}
         	
         	/*try{
@@ -242,11 +258,12 @@ public class RecorridoNuevoAction extends ActionSupport{
 					return "input";
 				}
         	}*/
-        	
+        	this.setMensajeOk("Recorrido agregado correctamente");
         	return "exito";
         }
         else{
-    		addFieldError("nologed", "Autentiquese para utilizar la pagina");
+        	this.setMensajeError("Autentiquese para utilizar la pagina");
+        	this.setMensajeOk("");
     		return "nologed";        	
         }
     }

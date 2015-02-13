@@ -32,8 +32,8 @@ public class MisRecorridosAction extends ActionSupport implements IMensajesVista
 	
 	private List<RecorridoVo> recorridos = null;
 	
-	private String mensajeError;
-    private String mensajeOk;
+	private String mensajeError="";
+    private String mensajeOk="";
 	
 	@Override
 	public String execute(){
@@ -46,13 +46,17 @@ public class MisRecorridosAction extends ActionSupport implements IMensajesVista
 				recorridos = usuario.getRecorridosMios();
 			} catch (Exception e) {
 				e.printStackTrace();
-				return "input";
+				this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+				this.setMensajeOk("");
+				return "error";
 			}finally{
 				em.close();
 			}
 			return "exito";
 		}
 		else{
+			this.setMensajeError("Autentiquese para utilizar la pagina");
+			this.setMensajeOk("");
 			return "nologed";
 		}
 	}

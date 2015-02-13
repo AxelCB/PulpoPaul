@@ -47,13 +47,17 @@ public class BandejaEntradaAction implements IMensajesVista{
 			}
 			catch(Exception ex){
 				ex.printStackTrace();
-				return "input";
+				this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+				this.setMensajeOk("");
+				return "error";
 			}finally{
 				em.close();
 			}
 			return "exito";
 		}
 		else{
+			this.setMensajeError("Autentiquese para utilizar la pagina");
+			this.setMensajeOk("");
 			return "nologed";
 		}
 		
