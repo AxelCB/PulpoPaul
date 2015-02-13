@@ -17,3 +17,5 @@ LOG DE COSAS PARA HACER
 ->todos los mensajes de error y de exito
 
 ->validar lugar en el recorrido
+
+->ocultar los alerts en enviar mensaje
