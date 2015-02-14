@@ -3,9 +3,8 @@ package unlp.ttpsInfoPoolCBR.aop;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.servlet.http.HttpSession;
 
-import org.apache.struts2.ServletActionContext;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,18 +46,16 @@ public class GenericMailSender {
 		this.usuarioDao = usuarioDao;
 	}
 
-	@After("execution(* unlp.ttpsInfoPoolCBR.dao.denuncia.DenunciaDaoJPAImpl.guardar(..)")
-	public void sendEmailAfterNewDenuncia(){//JoinPoint joinPoint
+	@After("execution(* unlp.ttpsInfoPoolCBR.dao.denuncia.DenunciaDaoJPAImpl.guardar(..))")
+	public void sendEmailAfterNewDenuncia(JoinPoint joinPoint){
 		SimpleMailMessage message = new SimpleMailMessage();
+		Object[] args = joinPoint.getArgs();
 		EntityManager em = null;
 		try {
 			em = EntityManagerFactoryHolder.getEntityManager();
 			RolVo rolAdmin = rolDao.buscarPorNombre(em,"administrador");
 			List<UsuarioVo> admins = usuarioDao.listarDeRol(em,rolAdmin);
-			
-			
-			HttpSession session = ServletActionContext.getRequest().getSession(false);
-			DenunciaVo denuncia=((DenunciaVo)session.getAttribute("denuncia"));
+			DenunciaVo denuncia = (DenunciaVo)args[1];
 			String mailText=denuncia.getContenido();
 			
 			for (UsuarioVo admin : admins) {
@@ -73,6 +70,5 @@ public class GenericMailSender {
 		}finally{
 			em.close();
 		}
-		
 	}
 }

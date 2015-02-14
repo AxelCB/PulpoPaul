@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import unlp.ttpsInfoPoolCBR.aop.GenericMailSender;
 import unlp.ttpsInfoPoolCBR.dao.denuncia.IDenunciaDao;
 import unlp.ttpsInfoPoolCBR.dao.recorrido.IRecorridoDao;
 import unlp.ttpsInfoPoolCBR.dao.rol.IRolDao;
@@ -51,9 +50,6 @@ public class DenunciaAction extends ActionSupport implements IMensajesVista{
 	@Autowired
 	IRecorridoDao recorridoDao;
 	
-	@Autowired
-	GenericMailSender mail ;
-
 	private String mensajeError="";
     private String mensajeOk="";
 	
@@ -95,7 +91,6 @@ public class DenunciaAction extends ActionSupport implements IMensajesVista{
     				this.getDenunciaDao().guardar(em, denunciaVo);
 				}
     			EntityManagerFactoryHolder.commitTransaction(em);
-    			mail.sendEmailAfterNewDenuncia();
     			this.setMensajeOk("Denuncia enviada correctamente.");
     			return "exito";
     		}catch(Exception e){

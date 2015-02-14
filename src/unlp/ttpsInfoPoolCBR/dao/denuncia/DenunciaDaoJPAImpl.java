@@ -5,9 +5,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.servlet.http.HttpSession;
-
-import org.apache.struts2.ServletActionContext;
 
 import unlp.ttpsInfoPoolCBR.dao.GenericDaoJPAImpl;
 import unlp.ttpsInfoPoolCBR.model.Denuncia;
@@ -24,13 +21,6 @@ public class DenunciaDaoJPAImpl extends GenericDaoJPAImpl<Denuncia,DenunciaVo> i
         super(Denuncia.class, DenunciaVo.class);
     }
     
-    @Override
-    public DenunciaVo guardar(EntityManager em,DenunciaVo objetoVO) throws Exception {
-    	HttpSession session = ServletActionContext.getRequest().getSession(false);
-		session.setAttribute("denuncia", objetoVO);
-    	return super.guardar(em,objetoVO);
-    }
-
 	@Override
 	public List<DenunciaVo> listarDeAdmin(EntityManager em, UsuarioVo adminVo)
 			throws Exception {
