@@ -28,7 +28,10 @@ import com.opensymphony.xwork2.ActionSupport;
 			type = "redirect"),
 	@Result(name = "input",
 			location = "index",
-			type = "redirect")
+			type = "redirect"),
+	@Result(name = "error",
+			location = "index",
+			type = "chain")
 })
 public class LoginAction extends ActionSupport implements SessionAware,IMensajesVista{
 
@@ -54,17 +57,44 @@ public class LoginAction extends ActionSupport implements SessionAware,IMensajes
 	public String execute(){
 		String resultado = "";
 		
-		sessionMap.put("usuario", user);
-		
-		RolVo rol = user.getRol();
-		if(rol.getNombre().equals("administrador")){
-			resultado = "administrador";
-		}
-		else{
-			resultado = "viajero";
-		}
+		EntityManager em = null;
+		try {
+			em = EntityManagerFactoryHolder.getEntityManager();
+			if(this.getUsuario()==null || this.getUsuario().equals("")){
+				this.setMensajeOk("");
+				this.setMensajeError("Debe ingresar un nombre de usuario.");
+				return "error";
+			}
+			if(this.getClave()==null || this.getClave().equals("")){
+				this.setMensajeOk("");
+				this.setMensajeError("Debe ingresar su clave.");
+				return "error";
+			}
+			user = usuarioDao.login(em,usuario, clave);
+			if(user==null){
+				this.setMensajeOk("");
+				this.setMensajeError("No existe el usuario/clave ingresado, intente nuevamente.");
+				return "error";
+			}
+			sessionMap.put("usuario", user);
+			
+			RolVo rol = user.getRol();
+			if(rol.getNombre().equals("administrador")){
+				resultado = "administrador";
+			}
+			else{
+				resultado = "viajero";
+			}
 
-		return resultado;
+			return resultado;
+		} catch (Exception e) {
+			e.printStackTrace();
+			this.setMensajeOk("");
+			this.setMensajeError("Ocurrió un error en el servidor, intente nuevamente más tarde.");
+			return "error";
+		}finally{
+			em.close();
+		}
 	}
 	
 	@Override
@@ -72,31 +102,19 @@ public class LoginAction extends ActionSupport implements SessionAware,IMensajes
 		//NINGUNO DE ESTOS ERRORES FUNCIONA PORQUE A DONDE SE VA
 		//ES OTRO ACTION (index) Y ESTE NO LOS MUESTRA
 		
-		if((getUsuario()==null)
-			|| (getUsuario().trim().equals(""))){
-			addFieldError("usuarioError","Campo obligatorio");
-		}
-		
-		if((getClave()==null)
-			|| (getClave().trim().equals(""))){
-			addFieldError("claveError","Campo obligatorio");
-		}
-		
-		EntityManager em = null;
-		//Validacion de exisitencia
-
-		try {
-			em = EntityManagerFactoryHolder.getEntityManager();
-			user = usuarioDao.login(em,usuario, clave);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally{
-			em.close();
-		}
-
-		if(user == null){
-			addFieldError("loginError", "Usuario o clave incorrectos");
-		}
+//		if((getUsuario()==null)
+//			|| (getUsuario().trim().equals(""))){
+//			addFieldError("usuarioError","Campo obligatorio");
+//		}
+//		
+//		if((getClave()==null)
+//			|| (getClave().trim().equals(""))){
+//			addFieldError("claveError","Campo obligatorio");
+//		}
+//		
+//		if(user == null){
+//			addFieldError("loginError", "Usuario o clave incorrectos");
+//		}
 	}
 	
 	@Override

@@ -25,6 +25,25 @@
 			<h2 class="col-sm-offset-2 col-sm-10">Login</h2>
 		</div>
 		<br>
+		
+		<s:if test="%{mensajeError!=''}">
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-1">
+					<div class="alert alert-danger" role="alert">
+						<s:property value="mensajeError"></s:property>
+					</div>
+				</div>
+			</div>
+		</s:if>
+		<s:if test="%{mensajeOk!=''}">
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-1">
+					<div class="alert alert-success" role="alert">
+						<s:property value="mensajeOk"></s:property>
+					</div>
+				</div>
+			</div>
+		</s:if>
 
 		<s:fielderror fieldName="nologedError"/>		
 		<s:fielderror fieldName="loginError"/>
@@ -59,7 +78,15 @@
 	
 	<a href="viajero/registrar.jsp" class="col-sm-offset-3 col-sm-9">¿No esta registrado? Registrese aqui­.</a>
 	<br>
-	<p>Para activar los usuarios ejecute las consultas presentes en el archivo WEB-INF/SQL/script_inicial.sql</p>
+	<br>
+	<br>
+	<div class="row">
+		<div class="col-sm-10 col-sm-offset-1">
+			<div class="alert alert-danger" role="alert">
+				<h3>Antes de hacer cualquier cosa, lea <a href="https://github.com/AxelCB/PulpoPaul">este readme.</a></h3>
+			</div>
+		</div>
+	</div>
 		
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>

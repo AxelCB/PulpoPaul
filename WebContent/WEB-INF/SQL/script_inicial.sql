@@ -9,9 +9,8 @@ VALUES
 INSERT INTO 
 Usuario(borrado, apellido, clave, email, nombres, telefono, rol_id)
 VALUES
-(0,'Perez', '1', 'plokioRS@gmail.com', 'adminNumero1', 12341234, 1),
-(0,'Gomez', 'adminpassw', 'admin@admin.com', 'adminNumero2', 29384742, 1),
-(0, 'Diaz', '2', '2', 'viajeroNumero2', 43214321, 2),
+(0,'Perez', '1', 'plokioRS@gmail.com', 'nombreAdmin', 12341234, 1),
+(0, 'Diaz', '2', '2', 'viajeroNumero1', 43214321, 2),
 (0, 'Rodriguez', 'viajeropassw', 'viajero@viajero', 'viajeroNumero2', 43214321, 2);
 
 INSERT INTO

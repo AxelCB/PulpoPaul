@@ -21,6 +21,12 @@ public class DenunciaDaoJPAImpl extends GenericDaoJPAImpl<Denuncia,DenunciaVo> i
         super(Denuncia.class, DenunciaVo.class);
     }
     
+    @Override
+    public DenunciaVo guardar(EntityManager em, DenunciaVo objetoVO)
+    		throws Exception {
+    	return super.guardar(em, objetoVO);
+    }
+    
 	@Override
 	public List<DenunciaVo> listarDeAdmin(EntityManager em, UsuarioVo adminVo)
 			throws Exception {
