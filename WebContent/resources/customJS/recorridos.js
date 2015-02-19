@@ -58,7 +58,7 @@ $(document).ready(function() {
             'searchable' : false
          },
          {
-        	 'targets' : 6,
+        	 'targets' : [6, 7, 8, 9],
         	 'searchable' : false,
         	 'sortable' : false
          }
@@ -83,6 +83,7 @@ $(document).ready(function() {
     	$("#precio").text('');
     	$("#participar").html('');
     	$("#nombre").html('');
+    	$('#pasajeros').html('');
     	directionsDisplay.setMap(null);
     	waypoints = [];
     	start = null;
@@ -132,7 +133,7 @@ $(document).ready(function() {
     		if(json.pasajeros.length > 0){
     			var str = '';
     			for(i in json.pasajeros){
-    				str += '<p><span class="glyphicon glyphicon-warning-sign" data-id="' + json.pasajeros[i].id + '"></span>  ' + json.pasajeros[i].nombres +'</p>'
+    				str += '<p><span class="glyphicon glyphicon-warning-sign" data-tipo="pasajero" data-id="' + json.pasajeros[i].id + '"></span>  ' + json.pasajeros[i].nombres +'</p>'
     			}
     			$('#pasajeros').append(str);
     		}
@@ -159,6 +160,45 @@ $(document).ready(function() {
     		}
     		calcRoute();
     	})
+    });
+    
+    var idDenunciado;
+    var tipoDenunciado;
+    $('#pasajeros').delegate('.glyphicon-warning-sign', 'click', function(){
+    	iniciarDenuncia(this);
+    });
+    
+    $('.glyphicon-warning-sign').click(function(){
+    	iniciarDenuncia(this)
+    });
+    
+    var iniciarDenuncia = function(elemento){
+    	idDenunciado = $(elemento).data('id');
+    	tipoDenunciado = $(elemento).data('tipo');
+    	if(tipoDenunciado == 'pasajero' && idDenunciado == $('#idUsuario').text()){
+    		alert('No te podes denunciar a vos mismo');
+    	}
+    	else{
+        	$('#tipoDenuncia').text(tipoDenunciado);
+        	$('#denuncia').modal();
+    	}
+    };
+    
+    $('#denunciar').click(function(){
+    	var motivo = $('#motivo').val();
+    	if(motivo != ''){
+    		var  string = '/PulpoPaul/denuncia/nueva?motivo=' + motivo;
+    		if(tipoDenunciado == 'recorrido'){
+    			string += '&idRecorrido=';
+    		}
+    		else{
+    			string += '&idDenunciado=';
+    		}
+    		window.location.href = string + idDenunciado;
+    	}
+    	else{
+    		alert('Debe ingresar un motivo para la denuncia');
+    	}
     });
 });
 

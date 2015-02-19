@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">${usuario.getNombres()}</a>
+                <a class="navbar-brand" href="#">${usuario.getNombres()}, ${usuario.getApellido()}</a>
             </div>
             <ul class="nav navbar-nav">
                 <li class="dropdown">
@@ -19,7 +19,7 @@
                     </ul>
                 </li>
                 <li><a href="listarEventos">Eventos acad&eacute;micos</a></li>
-                <li><a href="/PulpoPaul/admin/denuncias.jsp">Denuncias</a></li>
+                <li><a href="denuncia/listar">Denuncias</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href='<s:url action="logout"/>'>Log Out</a></li>

@@ -82,12 +82,12 @@ public class DenunciaAction extends ActionSupport implements IMensajesVista{
     				RecorridoVo recorrido = this.getRecorridoDao().encontrar(em,idRecorrido);
     				denunciaVo.setContenido("El usuario "+denunciante.getNombres()+" "+denunciante.getApellido()
         					+"ha denunciado al recorrido "+recorrido.getNombre()+" de "+recorrido.getPropietario().getNombres()
-        					+" "+recorrido.getPropietario().getApellido()+"por el siguiente motivo: "+this.getMotivo());
+        					+" "+recorrido.getPropietario().getApellido()+" por el siguiente motivo: "+this.getMotivo());
     				denunciaVo.setAsunto("Denuncia al recorrido "+recorrido.getNombre());
     			}else{
     				UsuarioVo denunciado = this.getUsuarioDao().encontrar(em,idDenunciado);
     				denunciaVo.setContenido("El usuario "+denunciante.getNombres()+" "+denunciante.getApellido()
-    						+"ha denunciado a "+denunciado.getNombres()+" "+denunciado.getApellido()+"por el siguiente motivo: "+this.getMotivo());
+    						+"ha denunciado a "+denunciado.getNombres()+" "+denunciado.getApellido()+" por el siguiente motivo: "+this.getMotivo());
     				denunciaVo.setAsunto("Denuncia al usuario "+denunciante.getNombres()+" "+denunciante.getApellido());
     			}
     			EntityManagerFactoryHolder.beginTransaction(em);
@@ -114,7 +114,7 @@ public class DenunciaAction extends ActionSupport implements IMensajesVista{
     
     //TODO definir results para este action
     @Action(value="listar",results={
-    		@Result(name = "exito", location = "denuncias", type = "chain"),
+    		@Result(name = "exito", location = "/admin/denuncias.jsp"),
             @Result(name = "nologed", location = "index", type = "chain")})
     public String listar(){
     	if(SessionUtils.checkLogin()){

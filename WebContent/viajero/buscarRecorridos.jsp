@@ -26,6 +26,9 @@
 						<th>Frecuencia</th>
 						<th>Tramos</th>
 						<th></th>
+						<th class="invi"></th>
+						<th class="invi"></th>
+						<th class="invi"></th>
 					</tr>
 				</thead>
 				
@@ -43,6 +46,9 @@
 	                    		<span class="glyphicon glyphicon-plus"></span>
 	                    	</a>
 	                    </td>
+	                    <td class="invi"></td>
+	                    <td class="invi"></td>
+	                    <td class="invi"></td>
 						</tr>
 					</s:iterator>
 				</tbody>
@@ -55,7 +61,10 @@
 						<th>Destino</th>
 						<th>Frecuencia</th>
 						<th>Tramos</th>
-						<th></th>				
+						<th></th>
+						<th class="invi"></th>
+						<th class="invi"></th>
+						<th class="invi"></th>				
 					</tr>
 				</tfoot>
 			</table>
@@ -101,7 +110,7 @@
 	
 	<jsp:include page="scripts.jsp"/>
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>   
-	<script src="${pageContext.request.contextPath}/resources/customJS/buscarRecorridos.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/customJS/recorridos.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/datatables/media/js/jquery.dataTables.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/datatables/media/js/dataTables.bootstrap.min.js"></script>
 	 

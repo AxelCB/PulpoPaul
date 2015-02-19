@@ -8,112 +8,90 @@
 <jsp:include page="header.jsp">
 	<jsp:param value="Denuncias" name="titulo"/>
 </jsp:include>
+<link href="${pageContext.request.contextPath}/resources/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 
 <body>
 
 	<jsp:include page="navigation.jsp"/>
 	
-	<!-- Comienzo de pagina -->
 	<div class="container">
 		<div class="jumbotron">
-			<h2>Bandeja de Denuncias</h2>
-            <s:iterator value="denuncias">
-<!--               <tr> -->
-<%--                   <td><s:property value="nombre" /></td> --%>
-<%--                   <td><s:property value="lugar" /></td> --%>
-<%--                   <td><s:property value="descripcion" /></td> --%>
-<%--                   <td><s:date name="fecha" format="dd-MM-yyyy" /></td> --%>
-<%--                   <td><s:property value="horaComienzo"/></td> --%>
-<%--                   <td><s:property value="horaFin"/></td> --%>
-				<div class="panel panel-danger">
-					<div class="panel-heading">
-						<div class="row">
-							<div class="col-md-11">
-								Viaje: 'Un viaje' <br>
-								Mensaje de Pepe: 'Un desastre.'
-							</div>
-							<div class="col-md-1">
-								<span class="glyphicon glyphicon-remove"></span>
-								<span class="glyphicon glyphicon-envelope"></span>
-								<span class="glyphicon glyphicon-user"></span>
-							</div>
-						</div>
-					</div>
-				  	<div class="panel-body">
-				    	PasÃ³ a cualquier hora, y me dejÃ³ plantado a la vuelta. No lo recomiendo!
-				  	</div>
-				</div>
-			</s:iterator>
+			<h2>Denuncias</h2>
+			<table id="denuncias">
+				
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>Asunto</th>
+						<th>motivo</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
 			
-<!-- 			<div class="panel panel-warning"> -->
-<!-- 				<div class="panel-heading"> -->
-<!-- 					<div class="row"> -->
-<!-- 						<div class="col-md-11"> -->
-<!-- 							Viaje: 'Un viaje m&aacute;s' <br> -->
-<!-- 							Mensaje de Juana: 'Precio' -->
-<!-- 						</div> -->
-<!-- 						<div class="col-md-1"> -->
-<%-- 							<span class="glyphicon glyphicon-remove"></span> --%>
-<%-- 							<span class="glyphicon glyphicon-envelope"></span> --%>
-<%-- 							<span class="glyphicon glyphicon-user"></span> --%>
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			  	<div class="panel-body"> -->
-<!-- 			    	El viaje estuvo bastante bien, pero el precio resultÃ³ excesivo. No recomiendo para billeteras livianas. -->
-<!-- 			  	</div> -->
-<!-- 			</div> -->
+				<tbody>
+					<s:if test="%{!denuncias.isEmpty()}" >
+					<s:iterator value="denuncias">
+						<tr>
+							<td><s:property value="id"/></td>
+							<td><s:property value="asunto"/></td>
+							<td><s:property value="contenido"/></td>
+							<td>
+								<a href="#">
+	                    			<span class="glyphicon glyphicon-eye-open"></span>
+	                    		</a>
+	                    	</td>
+	                    	<td>
+								<a href="#">
+	                    			<span class="glyphicon glyphicon-trash"></span>
+	                    		</a>
+	                    	</td>													
+						</tr>
+					</s:iterator>				
+					</s:if>
+				</tbody>
 			
-<!-- 			<div class="panel panel-danger"> -->
-<!-- 				<div class="panel-heading"> -->
-<!-- 					<div class="row"> -->
-<!-- 						<div class="col-md-11"> -->
-<!-- 							Viaje: 'El super viaje' <br> -->
-<!-- 							Mensaje de Maria: 'Auto' -->
-<!-- 						</div> -->
-<!-- 						<div class="col-md-1"> -->
-<%-- 							<span class="glyphicon glyphicon-remove"></span> --%>
-<%-- 							<span class="glyphicon glyphicon-envelope"></span> --%>
-<%-- 							<span class="glyphicon glyphicon-user"></span> --%>
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			  	<div class="panel-body"> -->
-<!-- 			    	No suelo ser muy detallista, pero la verdad, que no recomiendo mucho este auto, por lo menos por ahora. El auto se parÃ³ varias veces, y un par de cuadras antes llegar se le rompiÃ³ algo y tuvimos que ir caminando! -->
-<!-- 			  	</div> -->
-<!-- 			</div> -->
-
-	
-<!-- 			<div class="panel panel-warning"> -->
-<!-- 				<div class="panel-heading"> -->
-<!-- 					<div class="row"> -->
-<!-- 						<div class="col-md-11"> -->
-<!-- 							Viaje: 'Mi ultimo viaje' <br> -->
-<!-- 							Mensaje de Hector: 'Espera' -->
-<!-- 						</div> -->
-<!-- 						<div class="col-md-1"> -->
-<%-- 							<span class="glyphicon glyphicon-remove"></span> --%>
-<%-- 							<span class="glyphicon glyphicon-envelope"></span> --%>
-<%-- 							<span class="glyphicon glyphicon-user"></span> --%>
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			  	<div class="panel-body"> -->
-<!-- 			    	Tuve que esperar un rato largo antes de volver, pero el resto del viaje estuvo bastante aceptable. -->
-<!-- 			  	</div> -->
-<!-- 			</div> -->
-			<div class="btn-toolbar" role="toolbar">
-	  			<div class="btn-group">
-	  				<button type="button" class="btn btn-default">1</button>
-	  				<button type="button" class="btn btn-default">2</button>
-	  				<button type="button" class="btn btn-default">3</button>	
-	  			</div>
-			</div>
+				<tfoot>
+					<tr>
+						<th>id</th>
+						<th>Asunto</th>
+						<th>motivo</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</tfoot>
+				
+			</table>
 		</div>
 	</div>
-	<!-- Fin de pagina -->
+	
+	
+	<div class="modal fade" id="denuncia" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  	<div class="modal-dialog modal-lg">
+	    	<div class="modal-content">
+	      		<div class="modal-header">
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        		<h4 class="modal-title">Detalle denuncia</h4>
+	      		</div>
+	      		<div class="modal-body">
+					<div class="row">
+						<div class="col-lg-12">
+							<p><b>Asunto:</b> <span id="asunto"></span></p>
+							<p><span id="motivo"></span></p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+	        		<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+	      		</div>
+			</div>
+	    </div>
+	</div>
 	
 	<jsp:include page="scripts.jsp"/>
+	<script src="${pageContext.request.contextPath}/resources/customJS/denuncias.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/datatables/media/js/jquery.dataTables.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/datatables/media/js/dataTables.bootstrap.min.js"></script>
 	
 </body>
 </html>
