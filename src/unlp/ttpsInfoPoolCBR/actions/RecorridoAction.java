@@ -66,7 +66,7 @@ public class RecorridoAction extends ActionSupport implements IMensajesVista{
     
     @Action(value="aceptarParticipante",results={
             @Result(name = "exito", location = "misRecorridos", type = "chain"),
-            @Result(name = "error", location = "/viajero/error.jsp", type = "chain"),
+            @Result(name = "error", location = "misRecorridos", type = "chain"),
             @Result(name = "input", location = "bandejaEntrada", type = "chain"),
             @Result(name = "nologed", location = "index", type = "chain")})
     public String aceptarParticipante(){
@@ -81,6 +81,26 @@ public class RecorridoAction extends ActionSupport implements IMensajesVista{
 				respuesta.setReceptor(solicitud.getEmisor());
 				RecorridoVo recorridoVo = solicitud.getRecorrido();
 				respuesta.setAsunto("Respuesta a solicitud de participación en " + recorridoVo.getNombre());
+				if(recorridoVo.getPasajeros().contains(solicitud.getEmisor())){
+					solicitud.setContenido(solicitud.getContenido()+" El viajero ya es participante del viaje.");
+					solicitud.setRecorrido(null);
+					this.getMensajeDao().modificar(em,solicitud);
+					EntityManagerFactoryHolder.commitTransaction(em);
+					this.setMensajeError("El pasajero ya es parte del recorrido.");
+					this.setMensajeOk("");
+					return "error";
+				}
+				if(recorridoVo.getPasajeros().size()+1>recorridoVo.getLugares()){
+					solicitud.setContenido("No habia más lugar en el recorrido.");
+					solicitud.setRecorrido(null);
+					respuesta.setContenido("Su solicitud al recorrido "+recorridoVo.getNombre()+" ha sido rechazada (no habia más lugar).");
+					this.getMensajeDao().guardar(em, respuesta);
+					this.getMensajeDao().modificar(em,solicitud);
+					EntityManagerFactoryHolder.commitTransaction(em);
+					this.setMensajeError("No hay más lugares en el recorrido.");
+					this.setMensajeOk("");
+					return "error";
+				}
 				if(aceptar){
 					solicitud.setContenido(solicitud.getContenido()+" Usted ha aceptado a este participante.");
 					recorridoVo.getPasajeros().add(solicitud.getEmisor());
