@@ -68,11 +68,7 @@
 					</tr>
 				</tfoot>
 			</table>
-			
-			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#contenidoMensaje" ">
-			  Launch demo modal
-			</button>
-			
+				
 		</div>
 	</div>
 	

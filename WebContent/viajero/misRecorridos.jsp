@@ -116,9 +116,32 @@
 	    </div>
 	</div>
 	
+	<div class="modal fade" id="denuncia" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  	<div class="modal-dialog modal-lg">
+	    	<div class="modal-content">
+	      		<div class="modal-header">
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        		<h4 class="modal-title">Denunciando a un <span id="tipoDenuncia"></span></h4>
+	      		</div>
+	      		<div class="modal-body">
+					<div class="row">
+						<div class="col-lg-12">
+							<p><b>Motivo:</b></p>
+							<p><textarea id="motivo" placeholder="Detalle el motivo de la denuncia" style="width: 100%;"></textarea></p>	
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" id="denunciar">Denunciar</button>
+	        		<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+	      		</div>
+			</div>
+	    </div>
+	</div>
+	
 	<jsp:include page="scripts.jsp"/>
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>  
-	<script src="${pageContext.request.contextPath}/resources/customJS/buscarRecorridos.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/customJS/recorridos.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/datatables/media/js/jquery.dataTables.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/datatables/media/js/dataTables.bootstrap.min.js"></script>
 	 

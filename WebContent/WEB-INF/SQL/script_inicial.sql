@@ -9,14 +9,14 @@ VALUES
 INSERT INTO 
 Usuario(borrado, apellido, clave, email, nombres, telefono, rol_id)
 VALUES
-(0,'unApellido', 'adminpassw', 'admin@admin', 'unNombre', 12341234, 1),
-(0, 'otroApellido', 'viajeropassw', 'viajero@viajero', 'otroNombre', 43214321, 2),
-(0, 'xx', '1','1','xx', 121212, 2),
-(0, 'admin', '2','2','admin',11221122,1);
+(0,'Perez', '1', '1', 'adminNumero1', 12341234, 1),
+(0,'Gomez', 'adminpassw', 'admin@admin', 'adminNumero2', 29384742, 1),
+(0, 'Diaz', '2', '2', 'viajeroNumero2', 43214321, 2),
+(0, 'Rodriguez', 'viajeropassw', 'viajero@viajero', 'viajeroNumero2', 43214321, 2);
 
 INSERT INTO
 Evento(borrado, descripcion, fecha, horaComienzo, horaFin, latLng, lugar, nombre)
 VALUES
-(0, 'reunion info-familiar', '2015-10-01', '12:00:00', '17:30:00', '(-34.9270629, -57.949481)', 'el quinchito papa', 'JAIIO'),
-(0, 'muy divertido', '2015-10-01', '12:00:00', '17:30:00', '(-34.9245066, -57.9478665)', 'ese lugar', 'Otro evento');
+(0, 'Evento anual que se hace una vez por año', '2015-05-01', '12:00:00', '17:30:00', '(-34.9270629, -57.949481)', 'Un Lugar', 'JAIIO'),
+(0, 'Lo mejor que podes pedir', '2015-10-01', '08:00:00', '12:00:00', '(-34.9245066, -57.9478665)', 'Otro Lugar', 'PHP Conference');
 $$
