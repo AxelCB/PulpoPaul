@@ -141,7 +141,7 @@
 	                            <div class="form-group">
 	                                <label class="col-sm-4 control-label control-label" for="horaComienzo">Hora comienzo:</label>
 	                                <div class="col-sm-7">
-	                                	<input type="text" id="comienzo" name="horaComienzo" class="form-control" onchange="formatTime(this)" required/>
+	                                	<input type="text" id="comienzo" name="horaComienzo" class="form-control" onchange="formatTime(this)" onblur="checkHora(this);" required/>
 	                                    <s:fielderror fieldName="horaComienzoError"/>
 	                                </div>
 	                            </div>
@@ -149,7 +149,7 @@
 	                            <div class="form-group">
 	                                <label class="col-sm-4 control-label control-label" for="horaFin">Hora fin:</label>
 	                                <div class="col-sm-7">
-	                                    <input type="text" id="fin" name="horaFin" class="form-control" onchange="formatTime(this)" required/>
+	                                    <input type="text" id="fin" name="horaFin" class="form-control" onchange="formatTime(this)" onblur="checkHora(this);" required/>
 	                                    <s:fielderror fieldName="horaFinError"/>
 	                                </div>
 	                            </div>

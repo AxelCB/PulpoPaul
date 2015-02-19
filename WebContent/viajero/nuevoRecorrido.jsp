@@ -116,14 +116,14 @@
 					<div class="form-group ida">
 						<label class="col-sm-6 control-label" for="partida">Hora de Partida:</label>
 					  	<div class="col-sm-6">
-					  		<input type="text" name="partida" class="form-control" id="partida" required>
+					  		<input type="text" name="partida" class="form-control" id="partida" required onchange="formatTime(this);" onblur="checkHora(this);">
 					  	</div>
 					</div>
 					
 					<div class="form-group vuelta invi">
 						<label class="col-sm-6 control-label" for="regreso">Hora de Regreso:</label>
 					  	<div class="col-sm-6">
-					  		<input type="text" name="regreso" class="form-control" id="regreso">
+					  		<input type="text" name="regreso" class="form-control" id="regreso" onchange="formatTime(this);" onblur="checkHora(this);">
 					  	</div>
 					</div>
 					
