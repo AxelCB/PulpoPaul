@@ -59,7 +59,7 @@
 	                    	</a>
 	                    </td>
 	                    <td>
-	                    	<a href="#" onclick="mostrarModalEliminar();">
+	                    	<a href="enConstruccion" onclick="mostrarModalEliminar();">
 	                    		<span class="glyphicon glyphicon-trash"></span>
 	                    	</a>
 	                    </td>

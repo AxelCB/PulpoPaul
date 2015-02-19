@@ -10,9 +10,12 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">ABMs <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="/PulpoPaul/admin/abmUsuarios.jsp">Usuarios</a></li>
-                        <li><a href="/PulpoPaul/admin/abmRecorridos.jsp">Recorridos</a></li>
-                        <li><a href="/PulpoPaul/admin/abmMensajes.jsp">Mensajes</a></li>
+                    	<li><a href="enConstruccion">Usuarios</a></li>
+                        <li><a href="enConstruccion">Recorridos</a></li>
+                        <li><a href="enConstruccion">Mensajes</a></li>
+<!--                         <li><a href="/PulpoPaul/admin/abmUsuarios.jsp">Usuarios</a></li> -->
+<!--                         <li><a href="/PulpoPaul/admin/abmRecorridos.jsp">Recorridos</a></li> -->
+<!--                         <li><a href="/PulpoPaul/admin/abmMensajes.jsp">Mensajes</a></li> -->
                     </ul>
                 </li>
                 <li><a href="listarEventos">Eventos acad&eacute;micos</a></li>

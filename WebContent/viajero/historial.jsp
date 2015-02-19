@@ -54,7 +54,7 @@
 	                    	</a>
 	                    </td>
 	                    <td>
-	                    	<a href="#">
+	                    	<a href="enConstruccion">
 	                    		<span class="glyphicon glyphicon-trash"></span>
 	                    	</a>
 	                    </td>

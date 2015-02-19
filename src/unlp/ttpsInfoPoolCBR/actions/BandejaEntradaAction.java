@@ -21,6 +21,7 @@ import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
 @Results({
 	@Result(name = "exito", location = "/viajero/bandejaEntrada.jsp"),
 	@Result(name = "input", location = "/viajero/bandejaEntrada.jsp"),
+	@Result(name = "error", location = "/viajero/bandejaEntrada.jsp"),
 	@Result(name = "nologed", location = "index", type = "chain")
 })
 public class BandejaEntradaAction implements IMensajesVista{
@@ -84,5 +85,6 @@ public class BandejaEntradaAction implements IMensajesVista{
 	@Override
 	public void setMensajeOk(String mensajeOk) {
 		this.mensajeOk = mensajeOk;
-	}	
+	}
+
 }

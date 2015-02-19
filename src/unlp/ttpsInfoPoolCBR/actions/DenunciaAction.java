@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpServletRequest;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.slf4j.Logger;
@@ -56,16 +58,19 @@ public class DenunciaAction extends ActionSupport implements IMensajesVista{
 	private List<DenunciaVo> denuncias = new ArrayList<DenunciaVo>();
 	
     private Integer idDenunciado;
-    private String motivo;
+    private String motivo="";
     private Integer idRecorrido;
+    private String referer="";
 
-    //TODO definir results para este action
     @Action(value="/nueva",results={
             @Result(name = "exito", location = "misRecorridos", type = "chain"),
+            @Result(name = "error", location = "${referer}"),
             @Result(name = "nologed", location = "index", type = "chain")})
     public String denunciar(){
     	if(SessionUtils.checkLogin()){
     		EntityManager em = null;
+    		HttpServletRequest request = ServletActionContext.getRequest();
+    		this.setReferer(request.getHeader("referer"));
     		try{
     			em = EntityManagerFactoryHolder.getEntityManager();
     			RolVo rolAdmin = this.getRolDao().buscarPorNombre(em, "administrador");
@@ -202,4 +207,13 @@ public class DenunciaAction extends ActionSupport implements IMensajesVista{
 	public void setMensajeOk(String mensajeOk) {
 		this.mensajeOk = mensajeOk;
 	}
+
+	public String getReferer() {
+		return referer;
+	}
+
+	public void setReferer(String referer) {
+		this.referer = referer;
+	}
+	
 }

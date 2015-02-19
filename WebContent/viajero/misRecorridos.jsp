@@ -49,12 +49,12 @@
 	                    	</a>
 	                    </td>
 	                    <td>
-	                    	<a href="#">
+	                    	<a href="enConstruccion">
 	                    		<span class="glyphicon glyphicon-pencil"></span>
 	                    	</a>
 	                    </td>
 	                    <td>
-	                    	<a href="#">
+	                    	<a href="enConstruccion">
 	                    		<span class="glyphicon glyphicon-trash"></span>
 	                    	</a>
 	                    </td>
