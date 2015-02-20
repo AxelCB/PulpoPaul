@@ -21,7 +21,6 @@ import unlp.ttpsInfoPoolCBR.util.EntityManagerFactoryHolder;
 import unlp.ttpsInfoPoolCBR.util.SessionUtils;
 import unlp.ttpsInfoPoolCBR.vo.DenunciaVo;
 import unlp.ttpsInfoPoolCBR.vo.RecorridoVo;
-import unlp.ttpsInfoPoolCBR.vo.RolVo;
 import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -64,7 +63,7 @@ public class DenunciaAction extends ActionSupport implements IMensajesVista{
 
     @Action(value="/nueva",results={
             @Result(name = "exito", location = "misRecorridos", type = "chain"),
-            @Result(name = "error", location = "${referer}"),
+            @Result(name = "error", location = "misRecorridos",type="chain"),
             @Result(name = "nologed", location = "index", type = "chain")})
     public String denunciar(){
     	if(SessionUtils.checkLogin()){
@@ -73,8 +72,6 @@ public class DenunciaAction extends ActionSupport implements IMensajesVista{
     		this.setReferer(request.getHeader("referer"));
     		try{
     			em = EntityManagerFactoryHolder.getEntityManager();
-    			RolVo rolAdmin = this.getRolDao().buscarPorNombre(em, "administrador");
-    			List<UsuarioVo> admins = this.getUsuarioDao().listarDeRol(em, rolAdmin);
     			UsuarioVo denunciante = SessionUtils.getUsuario();
     			DenunciaVo denunciaVo = new DenunciaVo();
     			denunciaVo.setDenunciante(denunciante);
@@ -84,17 +81,16 @@ public class DenunciaAction extends ActionSupport implements IMensajesVista{
         					+"ha denunciado al recorrido "+recorrido.getNombre()+" de "+recorrido.getPropietario().getNombres()
         					+" "+recorrido.getPropietario().getApellido()+" por el siguiente motivo: "+this.getMotivo());
     				denunciaVo.setAsunto("Denuncia al recorrido "+recorrido.getNombre());
+    				denunciaVo.setDenunciado(recorrido.getPropietario());
     			}else{
     				UsuarioVo denunciado = this.getUsuarioDao().encontrar(em,idDenunciado);
     				denunciaVo.setContenido("El usuario "+denunciante.getNombres()+" "+denunciante.getApellido()
     						+"ha denunciado a "+denunciado.getNombres()+" "+denunciado.getApellido()+" por el siguiente motivo: "+this.getMotivo());
     				denunciaVo.setAsunto("Denuncia al usuario "+denunciante.getNombres()+" "+denunciante.getApellido());
+    				denunciaVo.setDenunciado(denunciado);
     			}
     			EntityManagerFactoryHolder.beginTransaction(em);
-    			for (UsuarioVo adminVo : admins) {
-    				denunciaVo.setDenunciado(adminVo);
-    				this.getDenunciaDao().guardar(em, denunciaVo);
-				}
+    			this.getDenunciaDao().guardar(em, denunciaVo);
     			EntityManagerFactoryHolder.commitTransaction(em);
     			this.setMensajeOk("Denuncia enviada correctamente.");
     			return "exito";
@@ -115,20 +111,22 @@ public class DenunciaAction extends ActionSupport implements IMensajesVista{
     //TODO definir results para este action
     @Action(value="listar",results={
     		@Result(name = "exito", location = "/admin/denuncias.jsp"),
+    		@Result(name = "error", location = "/admin/denuncias.jsp"),
             @Result(name = "nologed", location = "index", type = "chain")})
     public String listar(){
     	if(SessionUtils.checkLogin()){
     		EntityManager em = null;
     		try{
     			em = EntityManagerFactoryHolder.getEntityManager();
-    			UsuarioVo loggedAdmin = SessionUtils.getUsuario();
-    			denuncias = this.getDenunciaDao().listarDeAdmin(em,loggedAdmin);
+    			denuncias = this.getDenunciaDao().listar(em);
     			return "exito";
     		}catch(Exception e){
     			this.getLogger().error(e.getMessage(),e);
     			this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
     			this.setMensajeOk("");
     			return "error";
+    		}finally{
+    			em.close();
     		}
     	}else{
     		this.setMensajeError("Autentiquese para utilizar la pagina");

@@ -135,7 +135,7 @@ public class RecorridoAction extends ActionSupport implements IMensajesVista{
     
     @Action(value="participar",results={
             @Result(name = "exito", location = "misRecorridos", type = "chain"),
-            @Result(name = "error", location = "buscarRecorridos",type ="chain"),
+            @Result(name = "error", location = "misRecorridos",type ="chain"),
             @Result(name = "input", location = "misRecorridos", type = "chain"),
             @Result(name = "nologed", location = "index", type = "chain")})
     public String participar(){

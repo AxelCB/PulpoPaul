@@ -50,6 +50,7 @@ public class EventoAction extends ActionSupport implements IMensajesVista{
     @Action(value="nuevoEvento", results={
             @Result(name="exito", location="listarEventos", type="chain"),
             @Result(name="input", location="listarEventos", type="chain"),
+            @Result(name = "error", location = "listarEventos",type="chain"),
             @Result(name = "nologed", location = "index", type = "chain")})
     public String guardarEvento(){
     	EntityManager em = null;
@@ -97,6 +98,7 @@ public class EventoAction extends ActionSupport implements IMensajesVista{
     @Action(value="listarEventos", results={
             @Result(name="input", location="/admin/abmEventos.jsp"),
             @Result(name="exito", location="/admin/abmEventos.jsp"),
+            @Result(name = "error", location = "/admin/abmEventos.jsp"),
             @Result(name ="nologed",location = "index",type = "chain")})
     @SkipValidation
     public String listarEvento(){

@@ -72,6 +72,7 @@ public class RecorridoNuevoAction extends ActionSupport{
 
     @Action(value="recorridoNuevoInit", results={
             @Result(name = "exito", location="/viajero/nuevoRecorrido.jsp"),
+            @Result(name = "error", location = "/viajero/nuevoRecorrido.jsp"),
             @Result(name = "nologed", location = "index", type = "chain")})
     @SkipValidation
     public String recorridoNuevoInit(){
@@ -104,6 +105,7 @@ public class RecorridoNuevoAction extends ActionSupport{
     @Action(value="recorridoNuevoAgregar", results={
             @Result(name = "input", location = "recorridoNuevoInit", type = "chain"),
             @Result(name = "exito", location = "misRecorridos", type = "chain"),
+            @Result(name = "error", location = "misRecorridos",type="chain"),
             @Result(name = "nologed", location = "index", type = "chain")})
     public String recorridoNuevoAgregar(){
     	EntityManager em = null;

@@ -22,6 +22,7 @@ import com.opensymphony.xwork2.ActionSupport;
 @Results({
 		@Result(name = "exito", 
 				location = "/viajero/misRecorridos.jsp"),
+		@Result(name = "error", location = "/viajero/registrar.jsp"),
 		//si hay algun error se busca el result input para ir
 		@Result(name = "input",
 				location = "/viajero/registrar.jsp")

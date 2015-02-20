@@ -16,7 +16,8 @@ import com.opensymphony.xwork2.ActionSupport;
 @Action(value = "historial")
 @Results({
 	@Result(name = "exito", location = "/viajero/historial.jsp"),
-	@Result(name = "nologed", location = "index", type = "chain")
+	@Result(name = "nologed", location = "index", type = "chain"),
+	@Result(name = "error", location = "/viajero/historial.jsp")
 })
 public class HistorialAction extends ActionSupport implements IMensajesVista{
 
@@ -35,7 +36,6 @@ public class HistorialAction extends ActionSupport implements IMensajesVista{
 	public String execute(){
 		try {
 			if(SessionUtils.checkLogin()){
-				//TODO Refresh user
 				recorridos = SessionUtils.getUsuario().getRecorridosViajo();
 				return "exito";
 			}else{

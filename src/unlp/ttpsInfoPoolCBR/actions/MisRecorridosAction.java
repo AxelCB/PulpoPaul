@@ -21,6 +21,7 @@ import com.opensymphony.xwork2.ActionSupport;
 @Results({
 	@Result(name = "exito",	location = "/viajero/misRecorridos.jsp"),
 	@Result(name = "input",	location = "/viajero/misRecorridos.jsp"),
+	@Result(name = "error", location = "/viajero/misRecorridos.jsp"),
 	@Result(name = "nologed", location = "index", type = "chain")
 })
 public class MisRecorridosAction extends ActionSupport implements IMensajesVista{
