@@ -1,0 +1,11 @@
+1)
+	A)
+		* Modificar y Borrar Eventos Académicos
+		* Administración de Viajeros
+	B)
+		* Modificar y Borrar Recorridos Propios (¿Que implica modificar o borrar un recorrido?
+			Que pasa con los viajeros?)
+		* Calificar a usuarios con los cuales se compartió un recorrido (Revisar el tema del historial)
+		* Envío de mensajes
+		
+2) Internacionalización

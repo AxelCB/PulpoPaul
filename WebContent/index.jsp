@@ -83,7 +83,7 @@
 	<div class="row">
 		<div class="col-sm-10 col-sm-offset-1">
 			<div class="alert alert-danger" role="alert">
-				<h3>Antes de hacer cualquier cosa, lea <a href="https://github.com/AxelCB/PulpoPaul">este readme.</a></h3>
+				<h3>Antes de hacer cualquier cosa,<s:property value="getText('mensaje1')"></s:property> lea <a href="https://github.com/AxelCB/PulpoPaul">este readme.</a></h3>
 			</div>
 		</div>
 	</div>
