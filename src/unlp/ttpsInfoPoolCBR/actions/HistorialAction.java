@@ -39,13 +39,13 @@ public class HistorialAction extends ActionSupport implements IMensajesVista{
 				recorridos = SessionUtils.getUsuario().getRecorridosViajo();
 				return "exito";
 			}else{
-				this.setMensajeError("Autentiquese para utilizar la pagina");
+				this.setMensajeError(this.getText("default.noLoggedError"));
 	        	this.setMensajeOk("");
 				return "nologed";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+			this.setMensajeError(this.getText("default.defaultError"));
 			this.setMensajeOk("");
 			return "error";
 		}

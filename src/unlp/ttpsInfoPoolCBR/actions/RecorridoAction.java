@@ -56,7 +56,7 @@ public class RecorridoAction extends ActionSupport implements IMensajesVista{
 		    response.getWriter().write(this.getGson().toJson(recorrido));
 		} catch (Exception e) {
 			e.printStackTrace();
-			this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+			this.setMensajeError(this.getText("default.defaultError"));
 			return "error";
 		}finally{
 			em.close();
@@ -122,12 +122,12 @@ public class RecorridoAction extends ActionSupport implements IMensajesVista{
 			}catch(Exception ex){
 				EntityManagerFactoryHolder.rollbackTransaction(em);
 				ex.printStackTrace();
-				this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+				this.setMensajeError(this.getText("default.defaultError"));
 				this.setMensajeOk("");
 				return "error";
 			}
 		}else{
-			this.setMensajeError("Autentiquese para utilizar la pagina");
+			this.setMensajeError(this.getText("default.noLoggedError"));
 			this.setMensajeOk("");
 			return "nologed";
 		}
@@ -169,7 +169,7 @@ public class RecorridoAction extends ActionSupport implements IMensajesVista{
 				return "error";
 			}
 		}else{
-			this.setMensajeError("Autentiquese para utilizar la pagina");
+			this.setMensajeError(this.getText("default.noLoggedError"));
 			this.setMensajeOk("");
 			return "nologed";
 		}

@@ -87,7 +87,7 @@ public class RecorridoNuevoAction extends ActionSupport{
 				eventos = eventoDao.getAll(em);
 			} catch (Exception e) {
 				e.printStackTrace();
-				this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+				this.setMensajeError(this.getText("default.defaultError"));
 				this.setMensajeOk("");
 				return "error";
 			}finally{
@@ -96,7 +96,7 @@ public class RecorridoNuevoAction extends ActionSupport{
     		return "exito";
     	}
     	else{
-    		this.setMensajeError("Autentiquese para utilizar la pagina");
+    		this.setMensajeError(this.getText("default.noLoggedError"));
     		this.setMensajeOk("");
     		return "nologed";
     	}
@@ -122,7 +122,7 @@ public class RecorridoNuevoAction extends ActionSupport{
 				} catch (Exception e) {
 					e.printStackTrace();
 					em.close();
-					this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+					this.setMensajeError(this.getText("default.defaultError"));
 					this.setMensajeOk("");
 					return "error";
 				}
@@ -146,7 +146,7 @@ public class RecorridoNuevoAction extends ActionSupport{
 						fecha = new java.sql.Date(aux.getTime());
 					} catch (ParseException e) {
 						e.printStackTrace();
-						this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+						this.setMensajeError(this.getText("default.defaultError"));
 						this.setMensajeOk("");
 						return "error";
 					}
@@ -174,7 +174,7 @@ public class RecorridoNuevoAction extends ActionSupport{
 						partida = new Time(formatter.parse(this.getPartida()).getTime());
 					} catch (ParseException e) {
 						e.printStackTrace();
-						this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+						this.setMensajeError(this.getText("default.defaultError"));
 						this.setMensajeOk("");
 						return "error";
 					}
@@ -185,7 +185,7 @@ public class RecorridoNuevoAction extends ActionSupport{
 						regreso = new Time(formatter.parse(this.getRegreso()).getTime());
 					} catch (ParseException e) {
 						e.printStackTrace();
-						this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+						this.setMensajeError(this.getText("default.defaultError"));
 						this.setMensajeOk("");
 						return "error";
 					}
@@ -198,7 +198,7 @@ public class RecorridoNuevoAction extends ActionSupport{
 						regreso = new Time(formatter.parse(this.getRegreso()).getTime());
 					} catch (ParseException e) {
 						e.printStackTrace();
-						this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+						this.setMensajeError(this.getText("default.defaultError"));
 						this.setMensajeOk("");
 						return "error";
 					}
@@ -236,7 +236,7 @@ public class RecorridoNuevoAction extends ActionSupport{
 			} catch (Exception e) {
 				EntityManagerFactoryHolder.rollbackTransaction(em);
 				e.printStackTrace();
-				this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+				this.setMensajeError(this.getText("default.defaultError"));
 				this.setMensajeOk("");
 				return "error";
 			}
@@ -264,7 +264,7 @@ public class RecorridoNuevoAction extends ActionSupport{
         	return "exito";
         }
         else{
-        	this.setMensajeError("Autentiquese para utilizar la pagina");
+        	this.setMensajeError(this.getText("default.noLoggedError"));
         	this.setMensajeOk("");
     		return "nologed";        	
         }

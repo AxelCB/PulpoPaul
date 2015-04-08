@@ -61,7 +61,7 @@ public class EventoAction extends ActionSupport implements IMensajesVista{
 				fecha = formatter.parse(this.getFecha());
 			} catch (ParseException e1) {
 				e1.printStackTrace();
-				this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+				this.setMensajeError(this.getText("default.defaultError"));
 				this.setMensajeOk("");
 				return "error";
 			}
@@ -81,7 +81,7 @@ public class EventoAction extends ActionSupport implements IMensajesVista{
 			} catch (Exception e) {
 				EntityManagerFactoryHolder.rollbackTransaction(em);
 				e.printStackTrace();
-				this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+				this.setMensajeError(this.getText("default.defaultError"));
 				this.setMensajeOk("");
 				return "error";
 			}
@@ -89,7 +89,7 @@ public class EventoAction extends ActionSupport implements IMensajesVista{
         return "exito";
         }
         else{
-        	this.setMensajeError("Autentiquese para utilizar la pagina");
+        	this.setMensajeError(this.getText("default.noLoggedError"));
         	this.setMensajeOk("");
         	return "nologed";
         }
@@ -109,7 +109,7 @@ public class EventoAction extends ActionSupport implements IMensajesVista{
 				this.setEventos(eventoDao.listar(em));
 			} catch (Exception e) {
 				e.printStackTrace();
-				this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+				this.setMensajeError(this.getText("default.defaultError"));
 				this.setMensajeOk("");
 				return "error";
 			}finally{
@@ -118,7 +118,7 @@ public class EventoAction extends ActionSupport implements IMensajesVista{
         	return "exito";
         }
         else{
-        	this.setMensajeError("Autentiquese para utilizar la pagina");
+        	this.setMensajeError(this.getText("default.noLoggedError"));
         	this.setMensajeOk("");
         	return "nologed";
         }

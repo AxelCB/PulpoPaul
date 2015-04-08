@@ -17,6 +17,8 @@ import unlp.ttpsInfoPoolCBR.util.SessionUtils;
 import unlp.ttpsInfoPoolCBR.vo.MensajeVo;
 import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
 
+import com.opensymphony.xwork2.ActionSupport;
+
 @Action(value = "bandejaEntrada")
 @Results({
 	@Result(name = "exito", location = "/viajero/bandejaEntrada.jsp"),
@@ -24,7 +26,12 @@ import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
 	@Result(name = "error", location = "/viajero/bandejaEntrada.jsp"),
 	@Result(name = "nologed", location = "index", type = "chain")
 })
-public class BandejaEntradaAction implements IMensajesVista{
+public class BandejaEntradaAction extends ActionSupport implements IMensajesVista {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8452507314848691719L;
 
 	@Autowired
 	IUsuarioDao usuarioDao;
@@ -37,6 +44,7 @@ public class BandejaEntradaAction implements IMensajesVista{
 	
 	private List<MensajeVo> mensajes = new ArrayList<MensajeVo>();
 	
+	@Override
 	public String execute(){
 		EntityManager em = null;
 		if(SessionUtils.checkLogin()){
@@ -48,7 +56,7 @@ public class BandejaEntradaAction implements IMensajesVista{
 			}
 			catch(Exception ex){
 				ex.printStackTrace();
-				this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+				this.setMensajeError(this.getText("default.defaultError"));
 				this.setMensajeOk("");
 				return "error";
 			}finally{
@@ -57,7 +65,7 @@ public class BandejaEntradaAction implements IMensajesVista{
 			return "exito";
 		}
 		else{
-			this.setMensajeError("Autentiquese para utilizar la pagina");
+			this.setMensajeError(this.getText("default.noLoggedError"));
 			this.setMensajeOk("");
 			return "nologed";
 		}

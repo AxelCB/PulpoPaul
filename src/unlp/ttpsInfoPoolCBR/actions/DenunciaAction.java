@@ -97,12 +97,12 @@ public class DenunciaAction extends ActionSupport implements IMensajesVista{
     		}catch(Exception e){
     			EntityManagerFactoryHolder.rollbackTransaction(em);
     			this.getLogger().error(e.getMessage(),e);
-    			this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+    			this.setMensajeError(this.getText("default.defaultError"));
     			this.setMensajeOk("");
     			return "error";
     		}
     	}else{
-    		this.setMensajeError("Autentiquese para utilizar la pagina");
+    		this.setMensajeError(this.getText("default.noLoggedError"));
     		this.setMensajeOk("");
     		return "nologed";
     	}
@@ -122,14 +122,14 @@ public class DenunciaAction extends ActionSupport implements IMensajesVista{
     			return "exito";
     		}catch(Exception e){
     			this.getLogger().error(e.getMessage(),e);
-    			this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+    			this.setMensajeError(this.getText("default.defaultError"));
     			this.setMensajeOk("");
     			return "error";
     		}finally{
     			em.close();
     		}
     	}else{
-    		this.setMensajeError("Autentiquese para utilizar la pagina");
+    		this.setMensajeError(this.getText("default.noLoggedError"));
     		this.setMensajeOk("");
     		return "nologed";
     	}

@@ -35,7 +35,7 @@ public class AdministradorAction extends ActionSupport implements SessionAware,I
 	public String execute(){
 		HttpSession session = ServletActionContext.getRequest().getSession(false);  
 		if(session==null || session.getAttribute("usuario")==null){  
-			addFieldError("nologed", "Autentiquese para utilizar la pagina");
+			addFieldError("nologed", this.getText("default.noLoggedError"));
 			return "nologed";
 		}  
 		

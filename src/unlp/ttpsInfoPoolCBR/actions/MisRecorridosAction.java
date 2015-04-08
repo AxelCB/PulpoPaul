@@ -47,7 +47,7 @@ public class MisRecorridosAction extends ActionSupport implements IMensajesVista
 				recorridos = usuario.getRecorridosMios();
 			} catch (Exception e) {
 				e.printStackTrace();
-				this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+				this.setMensajeError(this.getText("default.defaultError"));
 				this.setMensajeOk("");
 				return "error";
 			}finally{
@@ -56,7 +56,7 @@ public class MisRecorridosAction extends ActionSupport implements IMensajesVista
 			return "exito";
 		}
 		else{
-			this.setMensajeError("Autentiquese para utilizar la pagina");
+			this.setMensajeError(this.getText("default.noLoggedError"));
 			this.setMensajeOk("");
 			return "nologed";
 		}

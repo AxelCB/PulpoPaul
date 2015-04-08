@@ -81,7 +81,7 @@ public class RegistrarUsuarioAction extends ActionSupport{
 		} catch (Exception e1) {
 			e1.printStackTrace();
 			em.close();
-			this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+			this.setMensajeError(this.getText("default.defaultError"));
 			this.setMensajeOk("");
 			return "error";
 		}
@@ -92,7 +92,7 @@ public class RegistrarUsuarioAction extends ActionSupport{
 		} catch (Exception e) {
 			EntityManagerFactoryHolder.rollbackTransaction(em);
 			e.printStackTrace();
-			this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+			this.setMensajeError(this.getText("default.defaultError"));
 			this.setMensajeOk("");
 			return "error";
 		}

@@ -43,7 +43,7 @@ public class BuscarRecorridosAction extends ActionSupport implements IMensajesVi
 			recorridos = this.getRecorridoDao().listarDisponibles(em,SessionUtils.getUsuario());
 		} catch (Exception e) {
 			e.printStackTrace();
-			this.setMensajeError("Ocurrió un error en el servidor. Intente nuevamente más tarde");
+			this.setMensajeError(this.getText("default.defaultError"));
 			this.setMensajeOk("");
 			return "error";
 		}finally{
