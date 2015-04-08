@@ -24,6 +24,14 @@
   		<param-name>actionPackages</param-name>
   		<param-value>unlp.ttpsInfoPoolCBR.actions</param-value>
   	</init-param>
+  	<init-param>
+  		<param-name>struts.custom.i18n.resources</param-name>
+  		<param-value>META-INF.i18n.i18n</param-value>
+  	</init-param>
+  </filter>
+  <filter>
+  	<filter-name>org.apache.struts2.dispatcher.FilterDispatcher</filter-name>
+  	<filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class>
   </filter>
   <filter-mapping>
   	<filter-name>struts2</filter-name>

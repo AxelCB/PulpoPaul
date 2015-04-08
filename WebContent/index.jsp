@@ -17,12 +17,12 @@
 	rel="stylesheet">
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Inicio de PulpoPaul Infop@@l</title>
+<title><s:property value="getText('index.title')"/></title>
 </head>
 <body>
 	<div class="container">
 		<div class="row">
-			<h2 class="col-sm-offset-2 col-sm-10">Login</h2>
+			<h2 class="col-sm-offset-2 col-sm-10"><s:property value="getText('index.login')"/></h2>
 		</div>
 		<br>
 		
@@ -51,7 +51,7 @@
 		<s:form action="login" method="post" theme="simple" cssClass="form-horizontal">
 
 			<div class="form-group">
-				<label class="col-sm-2 control-label" for="usuario">Usuario</label>
+				<label class="col-sm-2 control-label" for="usuario"><s:property value="getText('index.user')"/></label>
 				<div class="col-sm-4">
 					<s:textfield name="usuario" theme="simple" cssClass="form-control" />
 					<s:fielderror fieldName="usuarioError"/>
@@ -59,7 +59,7 @@
 			</div>
 
 			<div class="form-group">
-				<label class="col-sm-2 control-label" for="usuario">Contrase&ntilde;a</label>
+				<label class="col-sm-2 control-label" for="usuario"><s:property value="getText('index.password')"/></label>
 				<div class="col-sm-4">
 					<s:password name="clave" theme="simple" cssClass="form-control"/>
 					<s:fielderror fieldName="claveError"/>
@@ -68,22 +68,23 @@
 
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<s:submit value="Acceder" theme="simple" cssClass="btn btn-default"/>
+					<s:submit value="Login" theme="simple" cssClass="btn btn-default">
+						<s:property value="getText('index.access')"/>
+					</s:submit>
 				</div>
 			</div>
-			
 		</s:form>
 
 	</div>
 	
-	<a href="viajero/registrar.jsp" class="col-sm-offset-3 col-sm-9">¿No esta registrado? Registrese aqui­.</a>
+	<a href="viajero/registrar.jsp" class="col-sm-offset-3 col-sm-9"><s:property value="getText('index.register')"/></a>
 	<br>
 	<br>
 	<br>
 	<div class="row">
 		<div class="col-sm-10 col-sm-offset-1">
 			<div class="alert alert-danger" role="alert">
-				<h3>Antes de hacer cualquier cosa,<s:property value="getText('mensaje1')"></s:property> lea <a href="https://github.com/AxelCB/PulpoPaul">este readme.</a></h3>
+				<h3><s:property value="getText('index.beforeAnything')"/><a href="https://github.com/AxelCB/PulpoPaul"><s:property value="getText('index.readReadme')"/></a></h3>
 			</div>
 		</div>
 	</div>

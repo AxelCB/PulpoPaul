@@ -57,6 +57,9 @@ public class LoginAction extends ActionSupport implements SessionAware,IMensajes
 	public String execute(){
 		String resultado = "";
 		
+		LOG.error(this.getText("mensaje1"));
+		LOG.error(this.getLocale().toString());
+		
 		EntityManager em = null;
 		try {
 			em = EntityManagerFactoryHolder.getEntityManager();
