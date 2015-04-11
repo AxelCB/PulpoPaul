@@ -49,7 +49,7 @@
 	                    	</a>
 	                    </td>
 	                    <td>
-	                    	<a href="enConstruccion">
+	                    	<a href="recorridoNuevoInit?idRecorrido=<s:property value='id'/>">
 	                    		<span class="glyphicon glyphicon-pencil"></span>
 	                    	</a>
 	                    </td>

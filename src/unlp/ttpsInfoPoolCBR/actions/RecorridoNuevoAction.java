@@ -47,17 +47,19 @@ public class RecorridoNuevoAction extends ActionSupport{
      private IUsuarioDao usuarioDao;
 
     //Variables entrada
-    private String nombre;
-    private String destino;
-    private Integer evento;
-    private String frecuencia;
+    private String nombre = "";
+    private String destino = "facultad";
+    private Integer evento = 0;
+    private String frecuencia = "diario";
     private List<String> dias = new ArrayList<String>();
-    private String fecha;
-    private String idaOVuelta;
-    private String partida;
-    private String regreso;
-    private Integer asientos;
-    private Double precio;
+    private String fecha = "";
+    private String idaOVuelta = "ida";
+    private String partida = "";
+    private String regreso = "";
+    private Integer asientos = 0;
+    private Double precio = 0.0;
+    
+    private Integer idRecorrido = 0;
     
     private String start;
     private String end;
@@ -85,6 +87,36 @@ public class RecorridoNuevoAction extends ActionSupport{
     		try {
     			em = EntityManagerFactoryHolder.getEntityManager();
 				eventos = eventoDao.getAll(em);
+				if(this.idRecorrido > 0){
+					RecorridoVo recorrido = recorridoDao.encontrar(em, idRecorrido);
+					if(!(recorrido).equals(null)){
+						this.setNombre(recorrido.getNombre());
+						this.setFrecuencia(recorrido.getTipo().toString());
+						this.setDias(recorrido.getDias());
+						this.setIdaOVuelta(recorrido.getTramo().toString());
+						this.setPrecio(recorrido.getPrecio());
+						this.setAsientos(recorrido.getLugares());
+						
+						this.setStart(recorrido.getInicio());
+						this.setEnd(recorrido.getFin());
+						this.setWaypoints(recorrido.getPuntos());
+						
+						if(null != recorrido.getHoraSalida()){
+							this.setPartida(recorrido.getHoraSalida().toString());
+						}
+						if(null != recorrido.getHoraVuelta()){
+							this.setRegreso(recorrido.getHoraVuelta().toString());
+						}
+						if(null != recorrido.getPuntual()){
+							this.setFecha(recorrido.getPuntual().toString());
+							this.fechaActual = recorrido.getPuntual();
+						}
+						if(null != recorrido.getEvento()){
+							this.setEvento(recorrido.getEvento().getId());
+							this.setDestino("evento");
+						}
+					}
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 				this.setMensajeError(this.getText("default.defaultError"));
@@ -93,6 +125,8 @@ public class RecorridoNuevoAction extends ActionSupport{
 			}finally{
 				em.close();
 			}
+    		
+    		
     		return "exito";
     	}
     	else{
@@ -227,6 +261,11 @@ public class RecorridoNuevoAction extends ActionSupport{
         							usuario,
         							null,
         							null);
+        	
+        	if(this.getIdRecorrido() > 0){
+        		recorrido.setId(this.getIdRecorrido());
+        	}
+        	
         	try {
         		if(em==null)
         			em = EntityManagerFactoryHolder.getEntityManager();
@@ -272,7 +311,9 @@ public class RecorridoNuevoAction extends ActionSupport{
     
     @Override
 	public void validate(){
-        System.out.println("nombre: " + this.getNombre());
+    	System.out.println("id: " + this.getIdRecorrido());
+    	
+    	System.out.println("nombre: " + this.getNombre());
         
         System.out.println("destino: " + this.getDestino());
 		System.out.println("evento: " + this.getEvento());
@@ -435,5 +476,11 @@ public class RecorridoNuevoAction extends ActionSupport{
 	}
 	public void setMensajeOk(String mensajeOk) {
 		this.mensajeOk = mensajeOk;
+	}
+	public void setIdRecorrido(Integer idRecorrido){
+		this.idRecorrido = idRecorrido;
+	}
+	public Integer getIdRecorrido(){
+		return idRecorrido;
 	}
 }

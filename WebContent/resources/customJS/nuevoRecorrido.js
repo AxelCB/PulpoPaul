@@ -6,8 +6,8 @@ var directionsService = new google.maps.DirectionsService();
 var map;
 var geocoder;
 var infowindow;
-var waypoints = [];
-var start = null;
+var waypoints;
+var start;
 var facultad = new google.maps.LatLng(-34.90364261359886, -57.93748378753662);
 var end;
 
@@ -22,10 +22,21 @@ function initialize(){
 		draggable: true
 	};
 	map = new google.maps.Map(document.getElementById('map'), mapOptions);
-	end = facultad;
 	google.maps.event.addListener(map, 'click', function(e){
 		addHito(e.latLng)
 	});
+	
+	cambiarFrecuencia();
+	cambiarIdaOVuelta();
+	cambiarDestino();
+	cambiarEvento();
+
+	waypoints = window.waypointsOints || new Array();
+	start = window.startPoint || null;
+	end = window.endPoint || facultad;
+	if(start){
+		calcRoute();
+	}
 }
 	
 function calcRoute(){
