@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <jsp:include page="header.jsp">
-	<jsp:param value="Buscar Recorridos" name="titulo"/>
+	<jsp:param value="searchTravels" name="titulo"/>
 </jsp:include>
 <link href="${pageContext.request.contextPath}/resources/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 <body>
@@ -15,16 +15,16 @@
 	
 	<div class="container">
 		<div class="jumbotron">
-			<h2>Buscar recorridos</h2>
+			<h2><s:property value="getText('searchTravels.title')"/></h2>
 			<table id="recorridosTable">
 				<thead>
 					<tr>
 						<th>id</th>
-						<th>Nombre</th>
-						<th>Propietario</th>
-						<th>Destino</th>
-						<th>Frecuencia</th>
-						<th>Tramos</th>
+						<th><s:property value="getText('default.name')"/></th>
+						<th><s:property value="getText('default.owner')"/></th>
+						<th><s:property value="getText('default.destination')"/></th>
+						<th><s:property value="getText('default.frequency')"/></th>
+						<th><s:property value="getText('default.sections')"/></th>
 						<th></th>
 						<th class="invi"></th>
 						<th class="invi"></th>
@@ -56,11 +56,11 @@
 				<tfoot>
 					<tr>
 						<th>id</th>
-						<th>Nombre</th>
-						<th>Propietario</th>
-						<th>Destino</th>
-						<th>Frecuencia</th>
-						<th>Tramos</th>
+						<th><s:property value="getText('default.name')"/></th>
+						<th><s:property value="getText('default.owner')"/></th>
+						<th><s:property value="getText('default.destination')"/></th>
+						<th><s:property value="getText('default.frequency')"/></th>
+						<th><s:property value="getText('default.sections')"/></th>
 						<th></th>
 						<th class="invi"></th>
 						<th class="invi"></th>
@@ -77,7 +77,7 @@
 	    	<div class="modal-content">
 	      		<div class="modal-header">
 	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        		<h4 class="modal-title" id="nombre">Detalle del Recorrido</h4>
+	        		<h4 class="modal-title" id="nombre"><s:property value="getText('default.travelDetails')"/></h4>
 	      		</div>
 	      		<div class="modal-body">
 					<div class="row">
@@ -85,23 +85,23 @@
 							<div id="map" style="width: 400px;height: 400px;"></div>
 						</div>
 						<div class="col-sm-6">
-							<p><b>Propietario:</b> <span id="propietario"></span></p>
-							<p><b>Destino:</b> <span id="destino"></span></p>
-							<p><b>Lugares:</b> <span id="lugares"></span></p>
-							<p><b>Tipo:</b> <span id="tipo"></span></p>
-							<p class="fecha"><b>Fecha:</b> <span id="fecha"></span></p>
-							<p class="dias"><b>Dias:</b> <span id="dias"></span></p>
-							<p><b>Tramos:</b> <span id="tramos"></span></p>
-							<p class="horaIda"><b>Hora ida:</b> <span id="horaIda"></span></p>
-							<p class="horaVuelta"><b>Hora vuelta:</b> <span id="horaVuelta"></span></p>
-							<p><b>Precio:</b> <span id="precio"></span></p>
+							<p><b><s:property value="getText('default.owner')"/>:</b> <span id="propietario"></span></p>
+							<p><b><s:property value="getText('default.destination')"/>:</b> <span id="destino"></span></p>
+							<p><b><s:property value="getText('default.places')"/>:</b> <span id="lugares"></span></p>
+							<p><b><s:property value="getText('default.type')"/>:</b> <span id="tipo"></span></p>
+							<p class="fecha"><b><s:property value="getText('default.date')"/>:</b> <span id="fecha"></span></p>
+							<p class="dias"><b><s:property value="getText('default.days')"/>:</b> <span id="dias"></span></p>
+							<p><b><s:property value="getText('default.sections')"/>:</b> <span id="tramos"></span></p>
+							<p class="horaIda"><b><s:property value="getText('default.departureTime')"/>:</b> <span id="horaIda"></span></p>
+							<p class="horaVuelta"><b><s:property value="getText('default.arrivalTime')"/>:</b> <span id="horaVuelta"></span></p>
+							<p><b><s:property value="getText('default.price')"/>:</b> <span id="precio"></span></p>
 							<div class="row" id="participar">
 							</div>
 						</div>
 					</div>
 				</div>
 	      		<div class="modal-footer">
-	        		<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+	        		<button type="button" class="btn btn-default" data-dismiss="modal"><s:property value="getText('default.close')"/></button>
 	      		</div>
 	    	</div>
 	  	</div>

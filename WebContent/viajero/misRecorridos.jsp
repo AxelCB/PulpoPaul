@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <jsp:include page="header.jsp">
-	<jsp:param value="Mis Recorridos" name="titulo"/>
+	<jsp:param value="%{getText('myTravels.title')}" name="titulo"/>
 </jsp:include>
 <link href="${pageContext.request.contextPath}/resources/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 <body>
@@ -21,11 +21,11 @@
 					<tr>
 						<th>id</th>
 						<th><s:property value="getText('default.name')"/></th>
-						<th class="invi"><s:property value="getText('myTravels.owner')"/></th>
-						<th><s:property value="getText('myTravels.destination')"/></th>
-						<th><s:property value="getText('myTravels.frequency')"/></th>
-						<th><s:property value="getText('myTravels.sections')"/></th>
-						<th><s:property value="getText('myTravels.places')"/></th>
+						<th class="invi"><s:property value="getText('default.owner')"/></th>
+						<th><s:property value="getText('default.destination')"/></th>
+						<th><s:property value="getText('default.frequency')"/></th>
+						<th><s:property value="getText('default.sections')"/></th>
+						<th><s:property value="getText('default.places')"/></th>
 						<th></th>
 						<th></th>
 						<th></th>
@@ -67,11 +67,11 @@
 					<tr>
 						<th>id</th>
 						<th><s:property value="getText('default.name')"/></th>
-						<th class="invi"><s:property value="getText('myTravels.owner')"/></th>
-						<th><s:property value="getText('myTravels.destination')"/></th>
-						<th><s:property value="getText('myTravels.frequency')"/></th>
-						<th><s:property value="getText('myTravels.sections')"/></th>
-						<th><s:property value="getText('myTravels.places')"/></th>
+						<th class="invi"><s:property value="getText('default.owner')"/></th>
+						<th><s:property value="getText('default.destination')"/></th>
+						<th><s:property value="getText('default.frequency')"/></th>
+						<th><s:property value="getText('default.sections')"/></th>
+						<th><s:property value="getText('default.places')"/></th>
 						<th></th>
 						<th></th>
 						<th></th>
@@ -87,7 +87,7 @@
 	    	<div class="modal-content">
 	      		<div class="modal-header">
 	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        		<h4 class="modal-title" id="nombre"><s:property value="getText('myTravels.travelDetails')"/></h4>
+	        		<h4 class="modal-title" id="nombre"><s:property value="getText('default.travelDetails')"/></h4>
 	      		</div>
 	      		<div class="modal-body">
 					<div class="row">
@@ -95,17 +95,17 @@
 							<div id="map" style="width: 400px;height: 400px;"></div>
 						</div>
 						<div class="col-sm-6">
-							<p><b><s:property value="getText('myTravels.owner')"/>:</b> <span id="propietario"></span></p>
-							<p><b><s:property value="getText('myTravels.destination')"/>:</b> <span id="destino"></span></p>
-							<p><b><s:property value="getText('myTravels.places')"/>:</b> <span id="lugares"></span></p>
+							<p><b><s:property value="getText('default.owner')"/>:</b> <span id="propietario"></span></p>
+							<p><b><s:property value="getText('default.destination')"/>:</b> <span id="destino"></span></p>
+							<p><b><s:property value="getText('default.places')"/>:</b> <span id="lugares"></span></p>
 							<p><b><s:property value="getText('default.type')"/>:</b> <span id="tipo"></span></p>
 							<p class="fecha"><b><s:property value="getText('default.date')"/>:</b> <span id="fecha"></span></p>
-							<p class="dias"><b><s:property value="getText('myTravels.days')"/>:</b> <span id="dias"></span></p>
-							<p><b><s:property value="getText('myTravels.sections')"/>:</b> <span id="tramos"></span></p>
-							<p class="horaIda"><b><s:property value="getText('myTravels.departureTime')"/>:</b> <span id="horaIda"></span></p>
-							<p class="horaVuelta"><b><s:property value="getText('myTravels.arrivalTime')"/>:</b> <span id="horaVuelta"></span></p>
-							<p><b><s:property value="getText('myTravels.price')"/>:</b> <span id="precio"></span></p>
-							<p><b><s:property value="getText('myTravels.participants')"/>:</b><br><span id="pasajeros"></span></p>
+							<p class="dias"><b><s:property value="getText('default.days')"/>:</b> <span id="dias"></span></p>
+							<p><b><s:property value="getText('default.sections')"/>:</b> <span id="tramos"></span></p>
+							<p class="horaIda"><b><s:property value="getText('default.departureTime')"/>:</b> <span id="horaIda"></span></p>
+							<p class="horaVuelta"><b><s:property value="getText('default.arrivalTime')"/>:</b> <span id="horaVuelta"></span></p>
+							<p><b><s:property value="getText('default.price')"/>:</b> <span id="precio"></span></p>
+							<p><b><s:property value="getText('default.participants')"/>:</b><br><span id="pasajeros"></span></p>
 						</div>
 					</div>
 				</div>

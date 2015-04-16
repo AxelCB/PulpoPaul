@@ -68,9 +68,7 @@
 
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<s:submit value="Login" theme="simple" cssClass="btn btn-default">
-						<s:property value="getText('index.access')"/>
-					</s:submit>
+					<s:submit value="%{getText('index.access')}" theme="simple" cssClass="btn btn-default"/>
 				</div>
 			</div>
 		</s:form>

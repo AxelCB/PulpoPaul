@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <jsp:include page="header.jsp">
-	<jsp:param value="Bandeja Entrada" name="titulo"/>
+	<jsp:param value="inbox" name="titulo"/>
 </jsp:include>
 <link href="${pageContext.request.contextPath}/resources/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 <body>
@@ -15,14 +15,14 @@
 	
 	<div class="container">
 		<div class="jumbotron">
-			<h2>Bandeja Entrada</h2>
+			<h2><s:property value="getText('inbox.title')"/></h2>
 			<table id="mensajesTable">
 				<thead>
 					<tr>
 						<th>id</th>
-						<th>Fecha</th>
-						<th>Remitente</th>
-						<th>Asunto</th>
+						<th><s:property value="getText('default.date')"/></th>
+						<th><s:property value="getText('inbox.sender')"/></th>
+						<th><s:property value="getText('inbox.subject')"/></th>
 						<th></th>
 						<th></th>
 						<th></th>
@@ -58,9 +58,9 @@
 				<tfoot>
 					<tr>
 						<th>id</th>
-						<th>Fecha</th>
-						<th>Remitente</th>
-						<th>Asunto</th>
+						<th><s:property value="getText('default.date')"/></th>
+						<th><s:property value="getText('inbox.sender')"/></th>
+						<th><s:property value="getText('inbox.subject')"/></th>
 						<th></th>
 						<th></th>
 						<th></th>
@@ -81,13 +81,13 @@
 	        		<h4 class="modal-title" id="asunto"></h4>
 	      		</div>
 	      		<div class="modal-body">
-					<p><b>Remitente:</b> <span id="remitente"></span></p>
-					<p><b>Fecha:</b> <span id="fecha"></span></p>
-					<p><b>Mensaje:</b> </p>
+					<p><b><s:property value="getText('inbox.sender')"/>:</b> <span id="remitente"></span></p>
+					<p><b><s:property value="getText('default.date')"/>:</b> <span id="fecha"></span></p>
+					<p><b><s:property value="getText('inbox.message')"/>:</b> </p>
 					<p id="contenido"></p>
 				</div>
 	      		<div class="modal-footer">
-	        		<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+	        		<button type="button" class="btn btn-default" data-dismiss="modal"><s:property value="getText('default.close')"/></button>
 	      		</div>
 	    	</div>
 	  	</div>
@@ -99,5 +99,4 @@
 	<script src="${pageContext.request.contextPath}/resources/datatables/media/js/jquery.dataTables.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/datatables/media/js/dataTables.bootstrap.min.js"></script>
 	 
-    
 </body>

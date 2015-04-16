@@ -42,6 +42,8 @@ public class UsuarioAction extends ActionSupport implements IMensajesVista{
 	@Autowired
 	IRolDao rolDao;
 	
+	Integer usuarioId;
+	
 	List<UsuarioVo> usuarios = new ArrayList<UsuarioVo>();
 	
 	@Action(value="/listar",results={
@@ -57,6 +59,36 @@ public class UsuarioAction extends ActionSupport implements IMensajesVista{
 				usuarios=usuarioDao.listar(em);
 				return "exito";
 			}catch(Exception ex){
+				this.getLogger().error(ex.getMessage(),ex);
+    			this.setMensajeError(this.getText("default.defaultError"));
+    			this.setMensajeOk("");
+    			return "error";
+			}finally{
+				em.close();
+			}
+		}else{
+    		this.setMensajeError(this.getText("default.noLoggedError"));
+    		this.setMensajeOk("");
+    		return "nologed";
+    	}
+	}
+	
+	@Action(value="/borrar",results={
+			@Result(name = "exito", location = "??", type = "chain"),
+	        @Result(name = "error", location = "??",type="chain"),
+	        @Result(name = "nologed", location = "index", type = "chain")}
+	)
+	public String borrarUsuario(){
+		if(SessionUtils.checkLogin()){
+			EntityManager em = null;
+			try{
+				em = EntityManagerFactoryHolder.getEntityManager();
+				EntityManagerFactoryHolder.beginTransaction(em);
+				this.usuarioDao.borrar(em, usuarioId);
+				EntityManagerFactoryHolder.commitTransaction(em);
+				return "exito";
+			}catch(Exception ex){
+				EntityManagerFactoryHolder.rollbackTransaction(em);
 				this.getLogger().error(ex.getMessage(),ex);
     			this.setMensajeError(this.getText("default.defaultError"));
     			this.setMensajeOk("");
@@ -92,5 +124,17 @@ public class UsuarioAction extends ActionSupport implements IMensajesVista{
 	}
 	public void setLogger(Logger logger) {
 		this.logger = logger;
+	}
+	public Integer getUsuarioId() {
+		return usuarioId;
+	}
+	public void setUsuarioId(Integer usuarioId) {
+		this.usuarioId = usuarioId;
+	}
+	public List<UsuarioVo> getUsuarios() {
+		return usuarios;
+	}
+	public void setUsuarios(List<UsuarioVo> usuarios) {
+		this.usuarios = usuarios;
 	}
 }

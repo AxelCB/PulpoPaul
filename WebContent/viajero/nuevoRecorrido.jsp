@@ -18,30 +18,30 @@
 	<!-- Comienzo de pagina -->
 	<div class="container">
 		<div class="jumbotron">	
-			<h2>Nuevo recorrido</h2>
+			<h2><s:property value="getText('newTravel.title')"/>Nuevo recorrido</h2>
 			<div class="row">	
 				<form class="form-horizontal col-sm-6" method="post" action="recorridoNuevoAgregar">
 					
 					<input type="text" class="invi" value="<s:property value='idRecorrido'/>" name="idRecorrido">
 				
 					<div class="form-group">
-						<label class="col-sm-6 control-label" for="nombre">Nombre:</label>
+						<label class="col-sm-6 control-label" for="nombre"><s:property value="getText('default.name')"/>:</label>
 						<div class="col-sm-6">
 							<input type="text" class="form-control" name="nombre" required value="<s:property value="nombre"></s:property>">
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="col-sm-6 control-label" for="destino">Destino:</label>
+						<label class="col-sm-6 control-label" for="destino"><s:property value="getText('default.destination')"/>:</label>
 						<div class="col-sm-6">
 							<select name="destino" class="form-control" id="destino" onchange="cambiarDestino();" required>
 								<s:if test="%{destino=='facultad'}">
 								<option value="facultad" selected>FI - UNLP</option>
-								<option value="evento">Evento</option>								
+								<option value="evento"><s:property value="getText('default.event')"/></option>								
 								</s:if>
 								<s:else>
 								<option value="facultad">FI - UNLP</option>
-								<option value="evento" selected>Evento</option>								
+								<option value="evento" selected><s:property value="getText('default.event')"/></option>								
 								</s:else>
 
 							</select>
@@ -49,10 +49,10 @@
 					</div>
 					
 					<div class="form-group evento invi">
-						<label class="col-sm-6 control-label" for="evento">Evento:</label>
+						<label class="col-sm-6 control-label" for="evento"><s:property value="getText('default.event')"/>:</label>
 					  	<div class="col-sm-6">
 					  		<select name="evento" class="form-control" id="evento" onchange="cambiarEvento();">
-					  			<option value="" data-latlng="">Seleccionar</option>
+					  			<option value="" data-latlng=""><s:property value="getText('default.choose')"/></option>
 							<s:iterator value="eventos">
 								<s:if test="%{evento==id}">
 								<option value="<s:property value='id'/>" data-latlng="<s:property value='latLng'/>" selected>
@@ -68,17 +68,17 @@
 					</div>
 					
 					<div class="form-group frecuencia">
-						<label class="col-sm-6 control-label" for="frecuencia">Frecuencia:</label>
+						<label class="col-sm-6 control-label" for="frecuencia"><s:property value="getText('default.frequency')"/>:</label>
 					  	<div class="col-sm-6">
 					  		<select name="frecuencia" class="form-control" id="frecuencia" onchange="cambiarFrecuencia();" required>
-					  			<s:if test="%{frecuencia=='DIARIO'}"><option value="diario" selected>Diario</option></s:if>
-					  			<s:else><option value="diario">Diario</option></s:else>
+					  			<s:if test="%{frecuencia=='DIARIO'}"><option value="diario" selected><s:property value="getText('default.daily')"/></option></s:if>
+					  			<s:else><option value="diario"><s:property value="getText('default.daily')"/></option></s:else>
 					  			
-					  			<s:if test="%{frecuencia=='PERIODICO'}"><option value="periodico" selected>Peri&oacute;dico</option></s:if>
-					  			<s:else><option value="periodico">Peri&oacute;dico</option></s:else>
+					  			<s:if test="%{frecuencia=='PERIODICO'}"><option value="periodico" selected><s:property value="getText('default.periodic')"/></option></s:if>
+					  			<s:else><option value="periodico"><s:property value="getText('default.periodic')"/></option></s:else>
 					  			
-					  			<s:if test="%{frecuencia=='PUNTUAL'}"><option value="puntual" selected>Puntual</option></s:if>
-					  			<s:else><option value="puntual">Puntual</option></s:else>
+					  			<s:if test="%{frecuencia=='PUNTUAL'}"><option value="puntual" selected><s:property value="getText('default.oneTime')"/></option></s:if>
+					  			<s:else><option value="puntual"><s:property value="getText('default.oneTime')"/></option></s:else>
 					  		</select>
 					  	</div>
 					</div>

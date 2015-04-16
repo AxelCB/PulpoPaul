@@ -12,6 +12,8 @@ import javax.persistence.EntityManager;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.interceptor.validation.SkipValidation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import unlp.ttpsInfoPoolCBR.dao.evento.IEventoDao;
@@ -28,10 +30,17 @@ import com.opensymphony.xwork2.ActionSupport;
 @Action(value = "eventos")
 public class EventoAction extends ActionSupport implements IMensajesVista{
 
-    private static final long serialVersionUID = 1L;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1521336176503501255L;
+
+	private Logger logger = LoggerFactory.getLogger(EventoAction.class);
 
     @Autowired
     IEventoDao eventoDao;
+    
+    Integer eventoId;
     
     private String mensajeError="";
     private String mensajeOk="";
@@ -123,6 +132,36 @@ public class EventoAction extends ActionSupport implements IMensajesVista{
         	return "nologed";
         }
     }
+    
+	@Action(value="/borrar",results={
+			@Result(name = "exito", location = "??", type = "chain"),
+	        @Result(name = "error", location = "??",type="chain"),
+	        @Result(name = "nologed", location = "index", type = "chain")}
+	)
+	public String borrarUsuario(){
+		if(SessionUtils.checkLogin()){
+			EntityManager em = null;
+			try{
+				em = EntityManagerFactoryHolder.getEntityManager();
+				EntityManagerFactoryHolder.beginTransaction(em);
+				this.eventoDao.borrar(em, eventoId);
+				EntityManagerFactoryHolder.commitTransaction(em);
+				return "exito";
+			}catch(Exception ex){
+				EntityManagerFactoryHolder.rollbackTransaction(em);
+				this.getLogger().error(ex.getMessage(),ex);
+    			this.setMensajeError(this.getText("default.defaultError"));
+    			this.setMensajeOk("");
+    			return "error";
+			}finally{
+				em.close();
+			}
+		}else{
+    		this.setMensajeError(this.getText("default.noLoggedError"));
+    		this.setMensajeOk("");
+    		return "nologed";
+    	}
+	}
     
     @Override
 	public void validate(){
@@ -242,5 +281,17 @@ public class EventoAction extends ActionSupport implements IMensajesVista{
 	@Override
 	public void setMensajeOk(String mensajeOk) {
 		this.mensajeOk = mensajeOk;
+	}
+	public Logger getLogger() {
+		return logger;
+	}
+	public void setLogger(Logger logger) {
+		this.logger = logger;
+	}
+	public Integer getEventoId() {
+		return eventoId;
+	}
+	public void setEventoId(Integer eventoId) {
+		this.eventoId = eventoId;
 	}
 }
