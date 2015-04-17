@@ -8,6 +8,7 @@
 <jsp:include page="header.jsp">
 	<jsp:param value="Usuarios" name="titulo"/>
 </jsp:include>
+	<link href="${pageContext.request.contextPath}/resources/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet">
 
 <body>
 
@@ -17,43 +18,39 @@
 	<div class="container">
 		<div class="jumbotron">
 			<h2>Gesti&oacute;n de Usuarios</h2>
-			<table class="table table-hover">
-				<thead><tr>
-					<th>Nombres</th>
-					<th>Apellido</th>
-					<th>Tel&eacute;fono</th>
-					<th>Email</th>
-					<th>Contrase&ntilde;a</th>
-					<th></th>
-					<th></th>
-					<th></th>
-				</tr></thead>
+			<table class="table table-hover" id="usuarios">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Nombres</th>
+						<th>Apellido</th>
+						<th>Tel&eacute;fono</th>
+						<th>Email</th>
+						<th></th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
 				<tbody>
+				<s:iterator value="usuarios">
 					<tr>
-						<td>Axel</td>
-						<td>Collard Bovy</td>
-						<td>2964 611519</td>
-						<td>axelcollardbovy@gmail.com</td>
-						<td>1234</td>
-						<td><a href="#" ><span class="glyphicon glyphicon-ban-circle"></span></a>
-						<td><a href="#" onclick="mostrarModalNuevoUsuario();"><span class="glyphicon glyphicon-pencil"></span></a>
-						<td><a href="#" onclick="mostrarModalEliminar();"><span class="glyphicon glyphicon-trash"></span></a>
+						<td><s:property value="id"/></td>
+						<td><s:property value="nombres"/></td>
+						<td><s:property value="apellido"/></td>
+						<td><s:property value="telefono"/></td>
+						<td><s:property value="email"/></td>
+						<td><a href="#" ><span class="glyphicon glyphicon-envelope"></span></a></td>
+						<td><a href="#" ><span class="glyphicon glyphicon-warning-sign"></span></a></td>
+						<td><a href="#" ><span class="glyphicon glyphicon-trash"></span></a></td>
 					</tr>
-					<tr>
-						<td>Santiago</td>
-						<td>Ruta</td>
-						<td>3401 2230456</td>
-						<td>santiagoruta@gmail.com</td>
-						<td>4321</td>
-						<td><a href="#" ><span class="glyphicon glyphicon-ban-circle"></span></a>
-						<td><a href="#" onclick="mostrarModalNuevoUsuario();"><span class="glyphicon glyphicon-pencil"></span></a>
-						<td><a href="#" onclick="mostrarModalEliminar();"><span class="glyphicon glyphicon-trash"></span></a>
-					</tr>
+				</s:iterator>
 				</tbody>
 			</table>
+<!-- 			
 			<div class="row">
 				<button class="btn btn-primary" onclick="mostrarModalNuevoUsuario();">Agregar nuevo</button>
-			</div>
+			</div> 
+-->
 		</div>
 	</div>
 	<!-- Fin de pagina -->
@@ -140,6 +137,9 @@
 	<!-- Fin Modal Eliminar -->
 	
 	<jsp:include page="scripts.jsp"/>
-
+	<script src="${pageContext.request.contextPath}/resources/customJS/usuarios.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/datatables/media/js/jquery.dataTables.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/datatables/media/js/dataTables.bootstrap.min.js"></script>
+	
 </body>
 </html>

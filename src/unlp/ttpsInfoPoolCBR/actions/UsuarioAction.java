@@ -46,9 +46,9 @@ public class UsuarioAction extends ActionSupport implements IMensajesVista{
 	
 	List<UsuarioVo> usuarios = new ArrayList<UsuarioVo>();
 	
-	@Action(value="/listar",results={
-		@Result(name = "exito", location = "??", type = "chain"),
-        @Result(name = "error", location = "??",type="chain"),
+	@Action(value="listar",results={
+		@Result(name = "exito", location = "/admin/abmUsuarios.jsp"),
+        @Result(name = "error", location = "/admin/abmUsuarios.jsp"),
         @Result(name = "nologed", location = "index", type = "chain")}
 	)
 	public String listarUsuarios(){
@@ -73,9 +73,9 @@ public class UsuarioAction extends ActionSupport implements IMensajesVista{
     	}
 	}
 	
-	@Action(value="/borrar",results={
-			@Result(name = "exito", location = "??", type = "chain"),
-	        @Result(name = "error", location = "??",type="chain"),
+	@Action(value="borrar",results={
+			@Result(name = "exito", location = "usuario/listar", type = "chain"),
+	        @Result(name = "error", location = "usuario/listar",type="chain"),
 	        @Result(name = "nologed", location = "index", type = "chain")}
 	)
 	public String borrarUsuario(){
@@ -86,6 +86,7 @@ public class UsuarioAction extends ActionSupport implements IMensajesVista{
 				EntityManagerFactoryHolder.beginTransaction(em);
 				this.usuarioDao.borrar(em, usuarioId);
 				EntityManagerFactoryHolder.commitTransaction(em);
+				this.setMensajeOk("El usuario se elimino correctamente");
 				return "exito";
 			}catch(Exception ex){
 				EntityManagerFactoryHolder.rollbackTransaction(em);
