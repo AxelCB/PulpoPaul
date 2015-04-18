@@ -167,7 +167,7 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,UsuarioVo> impl
 	}
 
 	@Override
-	public List<UsuarioVo> listarExceptoUno(EntityManager em, Long idUsuario)
+	public List<UsuarioVo> listarExceptoUno(EntityManager em, Integer idUsuario)
 			throws Exception {
 		 List<Usuario> listaUsuario = new ArrayList<Usuario>();
 		 List<UsuarioVo> listaUsuarioVo = new ArrayList<UsuarioVo>();

@@ -19,9 +19,9 @@
 				<li class="dropdown">
 		        	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><s:property value="getText('menu.messages.name')"/><span class="caret"></span></a>
 		       		<ul class="dropdown-menu" role="menu">
-						<li><a href="enConstruccion"><s:property value="getText('menu.messages.send')"/></a></li>
-<!-- 			            <li><a href="/PulpoPaul/viajero/enviarMensaje.jsp">Enviar</a></li> -->
+						<li><a href="redactarMensaje"><s:property value="getText('menu.messages.send')"/></a></li>
 			            <li><a href="bandejaEntrada"><s:property value="getText('menu.messages.inbox')"/></a></li>
+			            <li><a href="bandejaSalida"><s:property value="getText('menu.messages.outbox')"/></a></li>
 			    	</ul>
 		    	</li>
 		    	<li><a href="historial"><s:property value="getText('menu.historic')"/></a></li>

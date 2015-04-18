@@ -23,5 +23,5 @@ public interface IUsuarioDao extends IGenericDao<Usuario,UsuarioVo>{
 	public List<UsuarioVo> listarDeRol(EntityManager em,RolVo rol) throws Exception;
 	public UsuarioVo traerBandejaEntrada(EntityManager em,UsuarioVo usuario) throws Exception;
 	
-	public List<UsuarioVo> listarExceptoUno(EntityManager em,Long idUsuario) throws Exception;
+	public List<UsuarioVo> listarExceptoUno(EntityManager em,Integer idUsuario) throws Exception;
 }
