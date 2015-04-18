@@ -48,10 +48,11 @@ public class CorreoAction extends ActionSupport implements IMensajesVista{
     	if(SessionUtils.checkLogin()){
     		em = EntityManagerFactoryHolder.getEntityManager();
     		try {
-				usuarios = usuarioDao.listar(em);
+				usuarios = usuarioDao.listarExceptoUno(em,SessionUtils.getUsuario().getId());
 				return "exito";
 			} 
     		catch (Exception e) {
+    			e.printStackTrace();
     			this.setMensajeError(this.getText("default.defaultError"));
     			this.setMensajeOk("");
     			return "error";
