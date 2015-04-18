@@ -22,17 +22,17 @@
 
 	<div class="container">
 	    <div class="jumbotron">
-	        <h2>Gesti&oacute;n de Eventos Acad&eacute;micos</h2>
+	        <h2><s:property value="getText('event.title')"/></h2>
 	        
 	        <table id="eventosTable">
 	            <thead>
 		            <tr>
-		                <th>Nombre</th>
-		                <th>Lugar</th>
-		                <th>Descripci&oacute;n</th>
-		                <th>Fecha</th>
-		                <th>Hora comienzo</th>
-		                <th>Hora fin</th>
+		                <th><s:property value="getText('default.name')"/></th>
+		                <th><s:property value="getText('default.place')"/></th>
+		                <th><s:property value="getText('event.description')"/></th>
+		                <th><s:property value="getText('default.date')"/></th>
+		                <th><s:property value="getText('event.starttime')"/></th>
+		                <th><s:property value="getText('event.endtime')"/></th>
 		                <th></th>
 		                <th></th>
 		                <th></th>
@@ -69,12 +69,12 @@
 	            
 	            <tfoot>
 		            <tr>
-		                <th>Nombre</th>
-		                <th>Lugar</th>
-		                <th>Descripci&oacute;n</th>
-		                <th>Fecha</th>
-		                <th>Hora comienzo</th>
-		                <th>Hora fin</th>
+		                <th><s:property value="getText('default.name')"/></th>
+		                <th><s:property value="getText('default.place')"/></th>
+		                <th><s:property value="getText('event.description')"/></th>
+		                <th><s:property value="getText('default.date')"/></th>
+		                <th><s:property value="getText('event.starttime')"/></th>
+		                <th><s:property value="getText('event.endtime')"/></th>
 		                <th></th>
 		                <th></th>
 		                <th></th>
@@ -83,7 +83,7 @@
 	        </table>
 	        
 	        <div class="row">
-	            <button class="btn btn-primary" onclick="mostrarModalNuevoEvento();">Agregar nuevo</button>
+	            <button class="btn btn-primary" onclick="mostrarModalNuevoEvento();"><s:property value="getText('default.addNew')"/></button>
 	        </div>
 	        
 	    </div>
@@ -99,7 +99,7 @@
 	                	<span aria-hidden="true">&times;</span>
 	                	<span class="sr-only">Close</span>
 	                </button>
-	                <h4 class="modal-title" id="tituloModalNuevoEvento">Nuevo evento</h4>
+	                <h4 class="modal-title" id="tituloModalNuevoEvento"><s:property value="getText('event.new')"/></h4>
 	            </div>
 	            <div class="modal-body">
 	                <div class="row">
@@ -107,7 +107,7 @@
 	                        <div class="col-sm-6">
 	                        
 	                            <div class="form-group">
-	                                <label class="col-sm-4 control-label" for="nombre">Nombre:</label>
+	                                <label class="col-sm-4 control-label" for="nombre"><s:property value="getText('default.name')"/>:</label>
 	                                <div class="col-sm-7">
 	                                	<input type="text" name="nombre" class="form-control" required/>
 	                                    <s:fielderror fieldName="nombreError"/>
@@ -115,7 +115,7 @@
 	                            </div>
 	                            
 	                            <div class="form-group">
-	                                <label class="col-sm-4 control-label control-label" for="lugar">Lugar:</label>
+	                                <label class="col-sm-4 control-label control-label" for="lugar"><s:property value="getText('default.place')"/>:</label>
 	                                <div class="col-sm-7">
 	                                	<input type="text" id="lugar" name="lugar" class="form-control" required>
 	                                    <s:fielderror fieldName="lugarError"/>
@@ -123,7 +123,7 @@
 	                            </div>
 	                            
 	                            <div class="form-group">
-	                                <label class="col-sm-4 control-label control-label" for="descripcion">Descripci&oacute;n:</label>
+	                                <label class="col-sm-4 control-label control-label" for="descripcion"><s:property value="getText('event.description')"/>:</label>
 	                                <div class="col-sm-7">
 	                                	<input type="textarea" id="descripcion" class="form-control" cols="40" rows="3" name="descripcion"/>
 	                                    <s:fielderror fieldName="descripcionError"/>
@@ -131,7 +131,7 @@
 	                            </div>
 	                            
 	                            <div class="form-group">
-	                                <label class="col-sm-4 control-label control-label" for="fecha">Fecha:</label>
+	                                <label class="col-sm-4 control-label control-label" for="fecha"><s:property value="getText('default.date')"/>:</label>
 	                                <div class="col-sm-7">
 	                                	<input type="text" name="fecha" id="fecha" class="form-control" autocomplete="off" required/>
 	                                    <s:fielderror fieldName="fechaError"/>
@@ -139,7 +139,7 @@
 	                            </div>
 	                            
 	                            <div class="form-group">
-	                                <label class="col-sm-4 control-label control-label" for="horaComienzo">Hora comienzo:</label>
+	                                <label class="col-sm-4 control-label control-label" for="horaComienzo"><s:property value="getText('event.starttime')"/>:</label>
 	                                <div class="col-sm-7">
 	                                	<input type="text" id="comienzo" name="horaComienzo" class="form-control" onchange="formatTime(this)" onblur="checkHora(this);" required/>
 	                                    <s:fielderror fieldName="horaComienzoError"/>
@@ -147,7 +147,7 @@
 	                            </div>
 	                            
 	                            <div class="form-group">
-	                                <label class="col-sm-4 control-label control-label" for="horaFin">Hora fin:</label>
+	                                <label class="col-sm-4 control-label control-label" for="horaFin"><s:property value="getText('event.endtime')"/>:</label>
 	                                <div class="col-sm-7">
 	                                    <input type="text" id="fin" name="horaFin" class="form-control" onchange="formatTime(this)" onblur="checkHora(this);" required/>
 	                                    <s:fielderror fieldName="horaFinError"/>
@@ -156,8 +156,8 @@
 	                            
 	                            <div class="row">
 	                            	<div class="col-sm-offset-6 col.sm-6">
-	                            		<s:submit value="Guardar" theme="simple" cssClass="btn btn-primary" id="guardar"/>
-	                        			<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+	                            		<s:submit value="%{getText('default.save')}" theme="simple" cssClass="btn btn-primary" id="guardar"/>
+	                        			<button type="button" class="btn btn-default" data-dismiss="modal"><s:property value="getText('default.cancel')"/></button>
 	                            	</div>
 	                            </div>	                            
 	                        </div>
@@ -181,14 +181,15 @@
 	        <div class="modal-content">
 	            <div class="modal-header">
 	                <button aria-hidden="true" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">&times;</span></button>
-	                <h4 id="tituloModalEliminarEvento" class="modal-title">Eliminar</h4>
+	                <h4 id="tituloModalEliminarEvento" class="modal-title"><s:property value="getText('default.delete')"/></h4>
 	            </div>
-	            <div class="modal-body">¿Esta seguro de
-	                eliminar este elemento?
+	            <div class="modal-body"><s:property value="getText('default.confirmDelete')"/>
+<!-- 	            ¿Esta seguro de -->
+<!-- 	                eliminar este elemento? -->
 	            </div>
 	            <div class="modal-footer">
-	                <button data-dismiss="modal" class="btn btn-primary" type="button">Eliminar</button>
-	                <button data-dismiss="modal" class="btn btn-default" type="button">Cancelar</button>
+	                <button data-dismiss="modal" class="btn btn-primary" type="button"><s:property value="getText('default.delete')"/></button>
+	                <button data-dismiss="modal" class="btn btn-default" type="button"><s:property value="getText('default.cancel')"/></button>
 	            </div>
 	        </div>
 	    </div>
@@ -202,7 +203,7 @@
 	        <div class="modal-content">
 	            <div class="modal-header">
 	                <button aria-hidden="true" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">&times;</span></button>
-	                <h4 id="tituloModalDetalleMapa" class="modal-title">Ubicaci&oacute;n en Mapa</h4>
+	                <h4 id="tituloModalDetalleMapa" class="modal-title"><s:property value="getText('default.mapLocation')"/>Ubicaci&oacute;n en Mapa</h4>
 	            </div>
 	            <div class="modal-body">
 	               <div id="mapDetalle" style="width: 550px; height: 400px"></div>

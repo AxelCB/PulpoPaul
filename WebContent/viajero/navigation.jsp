@@ -8,27 +8,27 @@
     	</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="buscarRecorridos">Buscar Recorridos</a></li>
+				<li><a href="buscarRecorridos"><s:property value="getText('menu.searchTravels')"/></a></li>
 				<li class="dropdown">
-		        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Recorridos Propios<span class="caret"></span></a>
+		        	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><s:property value="getText('menu.myTravels.name')"/><span class="caret"></span></a>
 		       		<ul class="dropdown-menu" role="menu">
-			            <li><a href="recorridoNuevoInit">Nuevo</a></li>
-			            <li><a href="misRecorridos">Ver</a></li>
+			            <li><a href="recorridoNuevoInit"><s:property value="getText('menu.myTravels.new')"/></a></li>
+			            <li><a href="misRecorridos"><s:property value="getText('menu.myTravels.list')"/></a></li>
 			    	</ul>
 		        </li>
 				<li class="dropdown">
-		        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Mensajes<span class="caret"></span></a>
+		        	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><s:property value="getText('menu.messages.name')"/><span class="caret"></span></a>
 		       		<ul class="dropdown-menu" role="menu">
-						<li><a href="enConstruccion">Enviar</a></li>
+						<li><a href="enConstruccion"><s:property value="getText('menu.messages.send')"/></a></li>
 <!-- 			            <li><a href="/PulpoPaul/viajero/enviarMensaje.jsp">Enviar</a></li> -->
-			            <li><a href="bandejaEntrada">Bandeja de entrada</a></li>
+			            <li><a href="bandejaEntrada"><s:property value="getText('menu.messages.inbox')"/></a></li>
 			    	</ul>
 		    	</li>
-		    	<li><a href="historial">Historial</a></li>
+		    	<li><a href="historial"><s:property value="getText('menu.historic')"/></a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li>
-					<a href="<s:url action="logout"></s:url>">Log Out</a>
+					<a href="<s:url action="logout"></s:url>"><s:property value="getText('default.logout')"/></a>
 				</li>
 			</ul>
 		</div>
@@ -38,7 +38,7 @@
 <s:if test="%{mensajeError!=''}">
 	<div class="row">
 		<div class="col-sm-8 col-sm-offset-1">
-			<h2>Error</h2>
+			<h2><s:property value="getText('default.error')"/></h2>
 			<div class="alert alert-danger" role="alert">
 				<s:property value="mensajeError"></s:property>
 			</div>
@@ -48,7 +48,7 @@
 <s:if test="%{mensajeOk!=''}">
 	<div class="row">
 		<div class="col-sm-8 col-sm-offset-1">
-			<h2>Operación exitosa</h2>
+			<h2><s:property value="getText('default.success')"/></h2>
 			<div class="alert alert-success" role="alert">
 				<s:property value="mensajeOk"></s:property>
 			</div>

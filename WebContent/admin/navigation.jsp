@@ -18,12 +18,12 @@
 <!--                          <li><a href="/PulpoPaul/admin/abmMensajes.jsp">Mensajes</a></li> -->
 <!--                     </ul> -->
 <!--                 </li> -->
-                <li><a href="listarEventos">Eventos acad&eacute;micos</a></li>
-                <li><a href="usuario/listar">AB Usuarios</a></li>
-                <li><a href="denuncia/listar">Denuncias</a></li>
+                <li><a href="listarEventos"><s:property value="getText('menu.events')"/></a></li>
+                <li><a href="usuario/listar"><s:property value="getText('menu.users')"/></a></li>
+                <li><a href="denuncia/listar"><s:property value="getText('menu.complaints')"/></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href='<s:url action="logout"/>'>Log Out</a></li>
+                <li><a href='<s:url action="logout"/>'><s:property value="getText('default.logout')"/></a></li>
             </ul>
         </div>
     </div>
