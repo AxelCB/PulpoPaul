@@ -19,26 +19,32 @@
 	<div class="container">
 		<div class="jumbotron">
 			<h2>Nuevo mensaje</h2>
-			<form action="/PulpoPaul/viajero/enviarMensaje.jsp" method="post">
+			<form action="enviarMensaje" method="post">
 				<div class="input-group">
 					<span class="input-group-addon">
 						<span class="glyphicon glyphicon-user"></span>
 					</span>
-					<input type="text" class="form-control" placeholder="Destinatario" required>
+					<select class="form-control" name="idRemitente" required>
+					<s:if test="%{!usuarios.isEmpty()}" >
+					<s:iterator value="usuarios">
+						<option value='<s:property value="id"/>'><s:property value="nombres"/></option>
+					</s:iterator>				
+					</s:if>
+					</select>
 				</div>
 				<br>
 				<div class="input-group">
 					<span class="input-group-addon">
 						<span class="glyphicon glyphicon-info-sign"></span>
 					</span>
-					<input type="text" class="form-control" placeholder="Asunto" required>
+					<input type="text" class="form-control" placeholder="Asunto" name="asunto" required>
 				</div>
 				<br>
 				<div class="input-group">
 					<span class="input-group-addon">
 						<span class="glyphicon glyphicon-envelope"></span>
 					</span>
-					<input type="text" class="form-control" placeholder="Mensaje" required>
+					<input type="text" class="form-control" placeholder="Mensaje" name="mensaje" required>
 				</div>
 				<br>
 				<div class="row">

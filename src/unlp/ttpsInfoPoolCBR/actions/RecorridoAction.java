@@ -1,5 +1,8 @@
 package unlp.ttpsInfoPoolCBR.actions;
 
+import java.sql.Date;
+import java.util.Calendar;
+
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletResponse;
 
@@ -152,6 +155,7 @@ public class RecorridoAction extends ActionSupport implements IMensajesVista{
 					this.setMensajeOk("");
 					return "error";
 				}
+				mensajeVo.setFecha(new Date(Calendar.getInstance().getTimeInMillis()));
 				mensajeVo.setReceptor(recorridoVo.getPropietario());
 				mensajeVo.setEmisor(usuarioVo);
 				mensajeVo.setAsunto("Participacion en " + recorridoVo.getNombre());
