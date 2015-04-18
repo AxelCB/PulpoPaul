@@ -166,4 +166,20 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,UsuarioVo> impl
 		return usuarioVo;
 	}
 
+	@Override
+	public List<UsuarioVo> listarExceptoUno(EntityManager em, Long idUsuario)
+			throws Exception {
+		 List<Usuario> listaUsuario = new ArrayList<Usuario>();
+		 List<UsuarioVo> listaUsuarioVo = new ArrayList<UsuarioVo>();
+	        try{
+	            TypedQuery<Usuario> jpaql = em.createQuery("select u from " + persistentClass.getSimpleName() + " u where id != :idUsuario",persistentClass);
+	            jpaql.setParameter("idUsuario", idUsuario);
+	            listaUsuario = jpaql.getResultList();
+	            listaUsuarioVo = MapperUtils.map(listaUsuario,UsuarioVo.class);
+	        }catch(Exception ex){
+	            throw ex;
+	        }
+	        return listaUsuarioVo;
+	}
+
 }
