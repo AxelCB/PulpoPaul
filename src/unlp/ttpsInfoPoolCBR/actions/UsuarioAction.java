@@ -74,8 +74,8 @@ public class UsuarioAction extends ActionSupport implements IMensajesVista{
 	}
 	
 	@Action(value="borrarUsuario",results={
-			@Result(name = "exito", location = "usuario/listar", type = "chain"),
-	        @Result(name = "error", location = "usuario/listar",type="chain"),
+			@Result(name = "exito", location = "listarUsuarios", type = "chain"),
+	        @Result(name = "error", location = "listarUsuarios",type="chain"),
 	        @Result(name = "nologed", location = "index", type = "chain")}
 	)
 	public String borrarUsuario(){
@@ -94,8 +94,6 @@ public class UsuarioAction extends ActionSupport implements IMensajesVista{
     			this.setMensajeError(this.getText("default.defaultError"));
     			this.setMensajeOk("");
     			return "error";
-			}finally{
-				em.close();
 			}
 		}else{
     		this.setMensajeError(this.getText("default.noLoggedError"));

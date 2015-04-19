@@ -100,15 +100,22 @@ public class CorreoAction extends ActionSupport implements IMensajesVista{
 				this.setMensajeOk("");
 				return "error";
 			}
-			finally{
-				em.close();
-			}
     	}
     	else{
     		this.setMensajeError(this.getText("default.noLoggedError"));
     		this.setMensajeOk("");
     		return "nologed";
     	}
+    }
+    
+    //Para el admin
+    @Action(value="enviarDesdeAdmin", results={
+    		@Result(name="exito", location="listarUsuarios", type="chain"),
+    		@Result(name="error", location="listarUsuarios", type="chain"),
+    		@Result(name="nologed", location="index", type="chain")
+    })
+    public String EnviarDesdeAdmin(){
+    	return this.Enviar();
     }
     
 	public IMensajeDao getMensajeDao() {

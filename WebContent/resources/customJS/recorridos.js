@@ -92,7 +92,7 @@ $(document).ready(function() {
     	var row = $(this).parents('tr').children('td');
     	$.ajax({
     		  type: "GET",
-    		  url: "/PulpoPaul/recorrido/buscar",
+    		  url: "/PulpoPaul/buscarRecorrido",
     		  data: { idRecorrido: $(row[0]).text() }
     	})
     	.fail(function() {
@@ -138,7 +138,7 @@ $(document).ready(function() {
     			$('#pasajeros').append(str);
     		}
 	  
-    		var str = '<a href="/PulpoPaul/recorrido/participar?idRecorrido=' + $(row[0]).text() + '" class="btn btn-default col-sm-offset-8 col-sm-3">Participar!</a>';
+    		var str = '<a href="/PulpoPaul/participarEnRecorrido?idRecorrido=' + $(row[0]).text() + '" class="btn btn-default col-sm-offset-8 col-sm-3">Participar!</a>';
     		$("#participar").append(str);
     		
     		$('#detalleRecorrido').modal();
@@ -187,7 +187,7 @@ $(document).ready(function() {
     $('#denunciar').click(function(){
     	var motivo = $('#motivo').val();
     	if(motivo != ''){
-    		var  string = '/PulpoPaul/denuncia/nueva?motivo=' + motivo;
+    		var  string = '/PulpoPaul/nuevaDenuncia?motivo=' + motivo;
     		if(tipoDenunciado == 'recorrido'){
     			string += '&idRecorrido=';
     		}

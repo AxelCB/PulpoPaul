@@ -60,6 +60,7 @@ public class DenunciaAction extends ActionSupport implements IMensajesVista{
     private String motivo="";
     private Integer idRecorrido;
     private String referer="";
+    private UsuarioVo usuario;
 
     @Action(value="nuevaDenuncia",results={
             @Result(name = "exito", location = "misRecorridos", type = "chain"),
@@ -109,7 +110,7 @@ public class DenunciaAction extends ActionSupport implements IMensajesVista{
     }
     
     //TODO definir results para este action
-    @Action(value="listarDenuncias",results={
+    @Action(value="listarDenuncias", results={
     		@Result(name = "exito", location = "/admin/denuncias.jsp"),
     		@Result(name = "error", location = "/admin/denuncias.jsp"),
             @Result(name = "nologed", location = "index", type = "chain")})
@@ -118,10 +119,17 @@ public class DenunciaAction extends ActionSupport implements IMensajesVista{
     		EntityManager em = null;
     		try{
     			em = EntityManagerFactoryHolder.getEntityManager();
-    			denuncias = this.getDenunciaDao().listar(em);
+    			if(null == idDenunciado){
+    				denuncias = this.getDenunciaDao().listar(em);
+    			}
+    			else{
+    				usuario = usuarioDao.encontrar(em, idDenunciado);
+    				usuario = usuarioDao.traerDenuncias(em, usuario);
+    				denuncias = usuario.getMisDenuncias();
+    			}
     			return "exito";
     		}catch(Exception e){
-    			this.getLogger().error(e.getMessage(),e);
+    			e.printStackTrace();
     			this.setMensajeError(this.getText("default.defaultError"));
     			this.setMensajeOk("");
     			return "error";
@@ -212,6 +220,14 @@ public class DenunciaAction extends ActionSupport implements IMensajesVista{
 
 	public void setReferer(String referer) {
 		this.referer = referer;
+	}
+	
+	public UsuarioVo getUsuario(){
+		return usuario;
+	}
+	
+	public void setUsuario(UsuarioVo usuario){
+		this.usuario = usuario;
 	}
 	
 }

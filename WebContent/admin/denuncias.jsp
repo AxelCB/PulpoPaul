@@ -16,7 +16,12 @@
 	
 	<div class="container">
 		<div class="jumbotron">
+		<s:if test="%{usuario.equals(null)}" >
 			<h2><s:property value="getText('complaints.title')"/></h2>
+		</s:if>
+		<s:else>
+			<h2><s:property value="getText('complaints.alternativeTitle')"/> <s:property value="usuario.getNombres()"/>, <s:property value="usuario.getApellido()"/></h2>
+		</s:else>	
 			<table id="denuncias">
 				
 				<thead>
@@ -24,7 +29,6 @@
 						<th>id</th>
 						<th><s:property value="getText('complaints.subject')"/></th>
 						<th><s:property value="getText('default.reason')"/></th>
-						<th></th>
 						<th></th>
 					</tr>
 				</thead>
@@ -40,12 +44,7 @@
 								<a href="#">
 	                    			<span class="glyphicon glyphicon-eye-open"></span>
 	                    		</a>
-	                    	</td>
-	                    	<td>
-								<a href="enConstruccion">
-	                    			<span class="glyphicon glyphicon-trash"></span>
-	                    		</a>
-	                    	</td>													
+	                    	</td>												
 						</tr>
 					</s:iterator>				
 					</s:if>
@@ -56,7 +55,6 @@
 						<th>id</th>
 						<th><s:property value="getText('complaints.subject')"/></th>
 						<th><s:property value="getText('default.reason')"/></th>
-						<th></th>
 						<th></th>
 					</tr>
 				</tfoot>

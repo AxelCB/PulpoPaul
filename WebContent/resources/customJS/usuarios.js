@@ -24,7 +24,23 @@ $(document).ready(function(){
 		 var row = $(this).parents('tr').children('td');
 		 var usuarioId = $(row[0]).text();
 		 if(confirm('¿Seguro que desea eliminar el usuario seleccionado?')){
-			 window.location.href="usuario/borrar?usuarioId="+usuarioId;
+			 window.location.href="borrarUsuario?usuarioId="+usuarioId;
 		 }
 	 })
+	 
+	 $('.glyphicon-warning-sign').click(function(){
+		 var row = $(this).parents('tr').children('td');
+		 var usuarioId = $(row[0]).text();
+		 window.location.href="listarDenuncias?idDenunciado="+usuarioId;
+	 })
+	 
+	 $('.glyphicon-envelope').click(function(){
+		 var row = $(this).parents('tr').children('td');
+		 $('#idDestinatario').val($(row[0]).text());
+		 $('#nombreDestinatario').text($(row[1]).text()+', '+$(row[2]).text());
+		 
+		 $('#mensajeEnviar').modal();
+	 })
+	 
+	 
 });

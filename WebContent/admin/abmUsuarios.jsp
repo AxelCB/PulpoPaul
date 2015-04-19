@@ -135,6 +135,46 @@
 	</div>
 	<!-- Fin Modal Eliminar -->
 	
+	<!-- Comienzo Modal Enviar Mensaje -->
+	<div class="modal fade" id="mensajeEnviar" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  	<div class="modal-dialog modal-lg">
+	    	<div class="modal-content">
+	      		<div class="modal-header">
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        		<h4 class="modal-title"><s:property value="getText('outbox.receiver')"/>: <span id="nombreDestinatario"></span></h4>
+	      		</div>
+	      		<form action="enviarDesdeAdmin" method="post">
+		      		<div class="modal-body">
+						<div class="row">
+							<div class="col-lg-12">
+								<input type="text" class="invi" id="idDestinatario" name="idRemitente" required>
+								<div class="input-group">
+									<span class="input-group-addon">
+										<span class="glyphicon glyphicon-info-sign"></span>
+									</span>
+									<input type="text" class="form-control" placeholder="Asunto" name="asunto" required>
+								</div>
+								<br>
+								<div class="input-group">
+									<span class="input-group-addon">
+										<span class="glyphicon glyphicon-envelope"></span>
+									</span>
+									<input type="text" class="form-control" placeholder="Mensaje" name="mensaje" required>
+								</div>
+								<br>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<input type="submit" class="btn btn-default" value="<s:property value="getText('menu.messages.send')"/>"/>
+		        		<button type="button" class="btn btn-default" data-dismiss="modal"><s:property value="getText('default.close')"/></button>
+		      		</div>
+	      		</form>
+			</div>
+	    </div>
+	</div>
+	<!-- Fin Modal Enviar Mensaje -->
+	
 	<jsp:include page="scripts.jsp"/>
 	<script src="${pageContext.request.contextPath}/resources/customJS/usuarios.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/datatables/media/js/jquery.dataTables.min.js"></script>

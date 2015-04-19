@@ -13,7 +13,7 @@ $(document).ready(function(){
 	        'searchable' : false
 	     },
 	     {
-	    	 'targets' : [3, 4],
+	    	 'targets' : [3],
 	    	 'sortable' : false,
 	    	 'searchable' : false
 	     }
