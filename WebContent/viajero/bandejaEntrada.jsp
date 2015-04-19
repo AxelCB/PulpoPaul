@@ -26,7 +26,6 @@
 						<th></th>
 						<th></th>
 						<th></th>
-						<th></th>
 					</tr>
 				</thead>
 				
@@ -43,11 +42,6 @@
 	                    		<span class="glyphicon glyphicon-eye-open"></span>
 	                    	</a>
 	                    </td>
-	                    <td>
-	                    	<a href="enConstruccion">
-	                    		<span class="glyphicon glyphicon-trash"></span>
-	                    	</a>
-	                    </td>
 	                    <td><s:property value="contenido"/></td>
 	                    <td><s:property value="recorrido == null?0:recorrido.getId()"/></td>
 					</tr>
@@ -61,7 +55,6 @@
 						<th><s:property value="getText('default.date')"/></th>
 						<th><s:property value="getText('inbox.sender')"/></th>
 						<th><s:property value="getText('inbox.subject')"/></th>
-						<th></th>
 						<th></th>
 						<th></th>
 						<th></th>

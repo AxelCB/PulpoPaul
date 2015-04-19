@@ -94,8 +94,6 @@ public class UsuarioAction extends ActionSupport implements IMensajesVista{
     			this.setMensajeError(this.getText("default.defaultError"));
     			this.setMensajeOk("");
     			return "error";
-			}finally{
-				em.close();
 			}
 		}else{
     		this.setMensajeError(this.getText("default.noLoggedError"));

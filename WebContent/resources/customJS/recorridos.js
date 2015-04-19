@@ -92,7 +92,7 @@ $(document).ready(function() {
     	var row = $(this).parents('tr').children('td');
     	$.ajax({
     		  type: "GET",
-    		  url: "/PulpoPaul/recorrido/buscarRecorrido",
+    		  url: "/PulpoPaul/buscarRecorrido",
     		  data: { idRecorrido: $(row[0]).text() }
     	})
     	.fail(function() {

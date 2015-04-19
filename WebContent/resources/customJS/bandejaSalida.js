@@ -13,12 +13,12 @@ $(document).ready(function() {
             'searchable' : false
          },
          {
-        	'targets' : [4, 5],
+        	'targets' : [4],
          	'searchable' : false,
          	'sortable' : false
          },
          {
-        	 'targets' : [6],
+        	 'targets' : [5],
         	 'searchable' : false,
         	 'sortables' : false,
         	 'className' : 'invi'
@@ -31,7 +31,7 @@ $(document).ready(function() {
 	  $('#asunto').text($(row[3]).text());
 	  $('#remitente').text($(row[2]).text());
 	  $('#fecha').text($(row[1]).text());
-	  $('#contenido').text($(row[6]).text());
+	  $('#contenido').text($(row[5]).text());
 	  
 	  $('#contenidoMensaje').modal();
    });

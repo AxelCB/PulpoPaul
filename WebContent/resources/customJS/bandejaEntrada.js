@@ -13,12 +13,12 @@ $(document).ready(function() {
             'searchable' : false
          },
          {
-        	'targets' : [4, 5],
+        	'targets' : [4],
          	'searchable' : false,
          	'sortable' : false
          },
          {
-        	 'targets' : [6, 7],
+        	 'targets' : [5, 6],
         	 'searchable' : false,
         	 'sortables' : false,
         	 'className' : 'invi'
@@ -31,9 +31,9 @@ $(document).ready(function() {
 	  $('#asunto').text($(row[3]).text());
 	  $('#remitente').text($(row[2]).text());
 	  $('#fecha').text($(row[1]).text());
-	  $('#contenido').text($(row[6]).text());
+	  $('#contenido').text($(row[5]).text());
 	  
-	  if($(row[7]).text() != '0'){
+	  if($(row[6]).text() != '0'){
 		  var str = '<br>';
 		  str += '<a href="/PulpoPaul/recorrido/aceptarParticipante?idMensaje=' + $(row[0]).text() + '&aceptar=true" class="btn btn-success">Aceptar</a>'
 		  str += '<a href="/PulpoPaul/recorrido/aceptarParticipante?idMensaje=' + $(row[0]).text() + '&aceptar=false" class="btn btn-danger">Rechazar</a>';
