@@ -61,7 +61,7 @@ public class DenunciaAction extends ActionSupport implements IMensajesVista{
     private Integer idRecorrido;
     private String referer="";
 
-    @Action(value="/nueva",results={
+    @Action(value="nuevaDenuncia",results={
             @Result(name = "exito", location = "misRecorridos", type = "chain"),
             @Result(name = "error", location = "misRecorridos",type="chain"),
             @Result(name = "nologed", location = "index", type = "chain")})
@@ -109,7 +109,7 @@ public class DenunciaAction extends ActionSupport implements IMensajesVista{
     }
     
     //TODO definir results para este action
-    @Action(value="listar",results={
+    @Action(value="listarDenuncias",results={
     		@Result(name = "exito", location = "/admin/denuncias.jsp"),
     		@Result(name = "error", location = "/admin/denuncias.jsp"),
             @Result(name = "nologed", location = "index", type = "chain")})

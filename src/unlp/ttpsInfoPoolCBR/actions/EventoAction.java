@@ -133,7 +133,7 @@ public class EventoAction extends ActionSupport implements IMensajesVista{
         }
     }
     
-	@Action(value="/borrar",results={
+	@Action(value="borrarEvento",results={
 			@Result(name = "exito", location = "??", type = "chain"),
 	        @Result(name = "error", location = "??",type="chain"),
 	        @Result(name = "nologed", location = "index", type = "chain")}

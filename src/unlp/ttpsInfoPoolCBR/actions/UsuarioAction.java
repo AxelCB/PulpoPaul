@@ -46,7 +46,7 @@ public class UsuarioAction extends ActionSupport implements IMensajesVista{
 	
 	List<UsuarioVo> usuarios = new ArrayList<UsuarioVo>();
 	
-	@Action(value="listar",results={
+	@Action(value="listarUsuarios",results={
 		@Result(name = "exito", location = "/admin/abmUsuarios.jsp"),
         @Result(name = "error", location = "/admin/abmUsuarios.jsp"),
         @Result(name = "nologed", location = "index", type = "chain")}
@@ -73,7 +73,7 @@ public class UsuarioAction extends ActionSupport implements IMensajesVista{
     	}
 	}
 	
-	@Action(value="borrar",results={
+	@Action(value="borrarUsuario",results={
 			@Result(name = "exito", location = "usuario/listar", type = "chain"),
 	        @Result(name = "error", location = "usuario/listar",type="chain"),
 	        @Result(name = "nologed", location = "index", type = "chain")}
