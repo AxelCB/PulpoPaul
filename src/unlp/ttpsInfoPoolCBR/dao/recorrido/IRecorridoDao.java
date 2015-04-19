@@ -16,4 +16,6 @@ public interface IRecorridoDao extends IGenericDao<Recorrido,RecorridoVo> {
 	
 	public List<RecorridoVo> listarDisponibles(EntityManager em,UsuarioVo usuario) throws Exception;
 	
+	public RecorridoVo traerPasajeros(EntityManager em,RecorridoVo recorrido) throws Exception;
+	
 }

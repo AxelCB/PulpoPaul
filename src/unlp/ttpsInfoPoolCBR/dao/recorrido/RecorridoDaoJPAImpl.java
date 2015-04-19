@@ -44,5 +44,22 @@ public class RecorridoDaoJPAImpl extends GenericDaoJPAImpl<Recorrido,RecorridoVo
         }
         return listaRecorridoVo;
     }
+
+	@Override
+	public RecorridoVo traerPasajeros(EntityManager em, RecorridoVo recorridoVo)
+			throws Exception {
+		Recorrido recorrido = null;
+		try{
+			recorrido = em.find(Recorrido.class, recorridoVo.getId());
+			
+			recorrido.getPasajeros();
+			recorrido.getPasajerosHistorial();
+
+			recorridoVo = MapperUtils.map(recorrido, RecorridoVo.class);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return recorridoVo;
+	}
     
 }
