@@ -16,14 +16,14 @@
 	
 	<div class="container">
 		<div class="jumbotron">
-			<h2>Denuncias</h2>
+			<h2><s:property value="getText('complaints.title')"/></h2>
 			<table id="denuncias">
 				
 				<thead>
 					<tr>
 						<th>id</th>
-						<th>Asunto</th>
-						<th>motivo</th>
+						<th><s:property value="getText('complaints.subject')"/></th>
+						<th><s:property value="getText('default.reason')"/></th>
 						<th></th>
 						<th></th>
 					</tr>
@@ -54,8 +54,8 @@
 				<tfoot>
 					<tr>
 						<th>id</th>
-						<th>Asunto</th>
-						<th>motivo</th>
+						<th><s:property value="getText('complaints.subject')"/></th>
+						<th><s:property value="getText('default.reason')"/></th>
 						<th></th>
 						<th></th>
 					</tr>
@@ -71,18 +71,18 @@
 	    	<div class="modal-content">
 	      		<div class="modal-header">
 	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        		<h4 class="modal-title">Detalle denuncia</h4>
+	        		<h4 class="modal-title"><s:property value="getText('complaints.details')"/></h4>
 	      		</div>
 	      		<div class="modal-body">
 					<div class="row">
 						<div class="col-lg-12">
-							<p><b>Asunto:</b> <span id="asunto"></span></p>
+							<p><b><s:property value="getText('complaints.subject')"/>:</b> <span id="asunto"></span></p>
 							<p><span id="motivo"></span></p>
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
-	        		<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+	        		<button type="button" class="btn btn-default" data-dismiss="modal"><s:property value="getText('default.close')"/></button>
 	      		</div>
 			</div>
 	    </div>

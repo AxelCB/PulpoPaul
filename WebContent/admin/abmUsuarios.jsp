@@ -17,15 +17,15 @@
 	<!-- Comienzo de pagina -->
 	<div class="container">
 		<div class="jumbotron">
-			<h2>Gesti&oacute;n de Usuarios</h2>
+			<h2><s:property value="getText('user.title')"/></h2>
 			<table class="table table-hover" id="usuarios">
 				<thead>
 					<tr>
 						<th></th>
-						<th>Nombres</th>
-						<th>Apellido</th>
-						<th>Tel&eacute;fono</th>
-						<th>Email</th>
+						<th><s:property value="getText('user.names')"/></th>
+						<th><s:property value="getText('user.lastname')"/></th>
+						<th><s:property value="getText('user.telephone')"/></th>
+						<th><s:property value="getText('user.email')"/></th>
 						<th></th>
 						<th></th>
 						<th></th>
@@ -61,48 +61,48 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-	        <h4 class="modal-title" id="tituloModalNuevoUsuario">Nuevo usuario</h4>
+	        <h4 class="modal-title" id="tituloModalNuevoUsuario"><s:property value="getText('user.new')"/></h4>
 	      </div>
 	      <div class="modal-body">
 			<form method="post" class="form-horizontal" action="">
 					<div class="form-group">
-						<label class="col-sm-2 col-sm-offset-2 control-label" for="nombre">Nombre(s):</label>
+						<label class="col-sm-2 col-sm-offset-2 control-label" for="nombre"><s:property value="getText('user.names')"/>:</label>
 					  	<div class="col-sm-6">
 					  		<input type="text" name="nombre" class="form-control" placeholder="Nombre(s)" required>
 					  	</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 col-sm-offset-2 control-label control-label" for="apellido">Apellido</label>
+						<label class="col-sm-2 col-sm-offset-2 control-label control-label" for="apellido"><s:property value="getText('user.lastname')"/>:</label>
 					  	<div class="col-sm-6">
 					  		<input type="text" name="apellido" class="form-control" placeholder="Apellido" required>
 					  	</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 col-sm-offset-2 control-label control-label" for="telefono">Tel&eacute;fono</label>
+						<label class="col-sm-2 col-sm-offset-2 control-label control-label" for="telefono"><s:property value="getText('user.telephone')"/>:</label>
 					  	<div class="col-sm-6">
 					  		<input type="text" name="telefono" class="form-control" placeholder="N&uacute;mero de tel&eacute;fono" required>
 					  	</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 col-sm-offset-2 control-label control-label" for="telefono">E-mail</label>
+						<label class="col-sm-2 col-sm-offset-2 control-label control-label" for="telefono"><s:property value="getText('user.email')"/>:</label>
 					  	<div class="col-sm-6">
 					  		<input type="email" name="email" class="form-control" placeholder="Email" required>
 					  	</div>
 					</div>
 					<div class="form-group">
-					  <label class="col-sm-2 col-sm-offset-2 control-label control-label" for="clave">Contrase&ntilde;a</label>
+					  <label class="col-sm-2 col-sm-offset-2 control-label control-label" for="clave"><s:property value="getText('user.password')"/>:</label>
 					  <div class="col-sm-6">
 						  <input type="password" name="clave" class="form-control" placeholder="Contrase&ntilde;a" required>
 					  </div>
 					</div>
 					<div class="form-group">
-					  <label class="col-sm-2 col-sm-offset-2 control-label control-label" for="repetirClave">Repetir Contrase&ntilde;a</label>
+					  <label class="col-sm-2 col-sm-offset-2 control-label control-label" for="repetirClave"><s:property value="getText('user.repeatPassword')"/>:</label>
 					  <div class="col-sm-6">
 						  <input type="password" name="repetirClave" class="form-control" placeholder="Repita su Contrase&ntilde;a" required>
 					  </div>
 					</div>
 					<div class="form-group">
-					  <label class="col-sm-2 col-sm-offset-2 control-label control-label" for="foto">Foto de perfil</label>
+					  <label class="col-sm-2 col-sm-offset-2 control-label control-label" for="foto"><s:property value="getText('user.photo')"/>Foto de perfil</label>
 					  <div class="col-sm-6">
 						  <input type="file" name="foto">
 					  </div>
@@ -110,8 +110,8 @@
 				</form>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-	        <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal"><s:property value="getText('default.cancel')"/></button>
+	        <button type="button" class="btn btn-primary" data-dismiss="modal"><s:property value="getText('default.save')"/></button>
 	      </div>
 	    </div><!-- /.modal-content -->
 	  </div><!-- /.modal-dialog -->
@@ -123,13 +123,12 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button aria-hidden="true" data-dismiss="modal" class="close" type="button">Ã</button>
-					<h4 id="tituloModalEliminarUsuario" class="modal-title">Eliminar</h4>	
+					<h4 id="tituloModalEliminarUsuario" class="modal-title"><s:property value="getText('user.delete')"/>Eliminar</h4>	
 				</div>
-				<div class="modal-body">Â¿EstÃ¡ seguro de
-					eliminar este elemento?</div>
+				<div class="modal-body"><s:property value="getText('default.confirmDelete')"/></div>
 				<div class="modal-footer">
-					<button data-dismiss="modal" class="btn btn-primary" type="button">Eliminar</button>
-					<button data-dismiss="modal" class="btn btn-default" type="button">Cancelar</button>
+					<button data-dismiss="modal" class="btn btn-primary" type="button"><s:property value="getText('default.delete')"/></button>
+					<button data-dismiss="modal" class="btn btn-default" type="button"><s:property value="getText('default.cancel')"/></button>
 				</div>
 			</div>
 		</div>

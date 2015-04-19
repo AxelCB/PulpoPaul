@@ -125,7 +125,7 @@
 	                            <div class="form-group">
 	                                <label class="col-sm-4 control-label control-label" for="descripcion"><s:property value="getText('event.description')"/>:</label>
 	                                <div class="col-sm-7">
-	                                	<input type="textarea" id="descripcion" class="form-control" cols="40" rows="3" name="descripcion"/>
+	                                	<textarea id="descripcion" class="form-control" cols="40" rows="3" name="descripcion"></textarea>
 	                                    <s:fielderror fieldName="descripcionError"/>
 	                                </div>
 	                            </div>
@@ -203,7 +203,7 @@
 	        <div class="modal-content">
 	            <div class="modal-header">
 	                <button aria-hidden="true" data-dismiss="modal" class="close" type="button"><span aria-hidden="true">&times;</span></button>
-	                <h4 id="tituloModalDetalleMapa" class="modal-title"><s:property value="getText('default.mapLocation')"/>Ubicaci&oacute;n en Mapa</h4>
+	                <h4 id="tituloModalDetalleMapa" class="modal-title"><s:property value="getText('default.mapLocation')"/></h4>
 	            </div>
 	            <div class="modal-body">
 	               <div id="mapDetalle" style="width: 550px; height: 400px"></div>
