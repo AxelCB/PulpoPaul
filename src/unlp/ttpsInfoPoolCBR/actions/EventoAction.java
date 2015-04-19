@@ -138,7 +138,7 @@ public class EventoAction extends ActionSupport implements IMensajesVista{
 	        @Result(name = "error", location = "??",type="chain"),
 	        @Result(name = "nologed", location = "index", type = "chain")}
 	)
-	public String borrarUsuario(){
+	public String borrarEvento(){
 		if(SessionUtils.checkLogin()){
 			EntityManager em = null;
 			try{

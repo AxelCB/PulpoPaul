@@ -24,7 +24,7 @@ $(document).ready(function(){
 		 var row = $(this).parents('tr').children('td');
 		 var usuarioId = $(row[0]).text();
 		 if(confirm('¿Seguro que desea eliminar el usuario seleccionado?')){
-			 window.location.href="usuario/borrar?usuarioId="+usuarioId;
+			 window.location.href="usuario/borrarUsuario?usuarioId="+usuarioId;
 		 }
 	 })
 });
