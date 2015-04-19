@@ -123,7 +123,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button aria-hidden="true" data-dismiss="modal" class="close" type="button">Ã</button>
-					<h4 id="tituloModalEliminarUsuario" class="modal-title"><s:property value="getText('user.delete')"/>Eliminar</h4>	
+					<h4 id="tituloModalEliminarUsuario" class="modal-title"><s:property value="getText('default.delete')"/></h4>	
 				</div>
 				<div class="modal-body"><s:property value="getText('default.confirmDelete')"/></div>
 				<div class="modal-footer">
