@@ -48,7 +48,7 @@ public class RecorridoAction extends ActionSupport implements IMensajesVista{
     private Integer idMensaje;
     private Boolean aceptar;
 
-    @Action(value="buscar")
+    @Action(value="buscarRecorrido")
     public String buscar(){
     	EntityManager em=null;
     	try {
@@ -136,7 +136,7 @@ public class RecorridoAction extends ActionSupport implements IMensajesVista{
 		}
     }
     
-    @Action(value="participar",results={
+    @Action(value="participarEnRecorrido",results={
             @Result(name = "exito", location = "misRecorridos", type = "chain"),
             @Result(name = "error", location = "misRecorridos",type ="chain"),
             @Result(name = "input", location = "misRecorridos", type = "chain"),
