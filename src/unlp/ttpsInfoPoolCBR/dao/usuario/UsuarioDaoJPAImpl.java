@@ -6,9 +6,15 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+
 import unlp.ttpsInfoPoolCBR.dao.GenericDaoJPAImpl;
+import unlp.ttpsInfoPoolCBR.dao.recorrido.IRecorridoDao;
+import unlp.ttpsInfoPoolCBR.model.Recorrido;
 import unlp.ttpsInfoPoolCBR.model.Usuario;
 import unlp.ttpsInfoPoolCBR.util.MapperUtils;
+import unlp.ttpsInfoPoolCBR.vo.RecorridoVo;
 import unlp.ttpsInfoPoolCBR.vo.RolVo;
 import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
 
@@ -16,9 +22,13 @@ import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
  * Created by Axel on 22/11/2014.
  */
 public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,UsuarioVo> implements IUsuarioDao{
+	
     public UsuarioDaoJPAImpl() {
         super(Usuario.class, UsuarioVo.class);
     }
+    
+    @Autowired
+    IRecorridoDao recorridoDao;
     
     @Override
     public UsuarioVo buscarPorEmail(EntityManager em,String email) throws Exception{
@@ -180,6 +190,38 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,UsuarioVo> impl
 	            throw ex;
 	        }
 	        return listaUsuarioVo;
+	}
+	
+	@Override
+    @Transactional
+    public void borrar(EntityManager em,Integer idUsuarioVO) throws Exception {
+        try{
+            Usuario usuario = em.find(persistentClass,idUsuarioVO);
+            RecorridoVo recorridoVo;
+            UsuarioVo usuarioVo;
+            if(!usuario.equals(null)){
+            	for (Recorrido recorrido : usuario.getRecorridosMios()) {
+					this.getRecorridoDao().borrar(em, recorrido.getId());
+				}
+            	for (Recorrido recorrido : usuario.getRecorridosViajo()) {
+            		recorridoVo = MapperUtils.map(recorrido, RecorridoVo.class);
+            		usuarioVo = MapperUtils.map(usuario, UsuarioVo.class);
+					this.getRecorridoDao().eliminarPasajero(em, recorridoVo, usuarioVo);
+				}
+            	usuario.setBorrado(Boolean.TRUE);
+            	em.merge(usuario);
+            }
+        }catch(Exception ex){
+            throw ex;
+        }
+    }
+
+	public IRecorridoDao getRecorridoDao() {
+		return recorridoDao;
+	}
+
+	public void setRecorridoDao(IRecorridoDao recorridoDao) {
+		this.recorridoDao = recorridoDao;
 	}
 
 }

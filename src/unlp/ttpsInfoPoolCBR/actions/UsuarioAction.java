@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import unlp.ttpsInfoPoolCBR.dao.recorrido.IRecorridoDao;
 import unlp.ttpsInfoPoolCBR.dao.rol.IRolDao;
 import unlp.ttpsInfoPoolCBR.dao.usuario.IUsuarioDao;
 import unlp.ttpsInfoPoolCBR.util.EntityManagerFactoryHolder;
@@ -38,6 +39,9 @@ public class UsuarioAction extends ActionSupport implements IMensajesVista{
 	
 	@Autowired
 	IUsuarioDao usuarioDao;
+	
+	@Autowired
+	IRecorridoDao recorridoDao;
 	
 	@Autowired
 	IRolDao rolDao;

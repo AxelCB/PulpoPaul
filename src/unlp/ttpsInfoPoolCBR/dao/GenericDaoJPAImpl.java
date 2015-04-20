@@ -55,7 +55,9 @@ public class GenericDaoJPAImpl<M extends AbstractEntity,VO extends AbstractVo> i
         try{
             M objetoM = em.find(persistentClass,idObjetoVO);
             if(!objetoM.equals(null)){
-                em.remove(objetoM);
+//                em.remove(objetoM);
+            	objetoM.setBorrado(Boolean.TRUE);
+            	em.merge(objetoM);
             }
         }catch(Exception ex){
             throw ex;
@@ -64,6 +66,18 @@ public class GenericDaoJPAImpl<M extends AbstractEntity,VO extends AbstractVo> i
 
     @Override
     public List<VO> listar(EntityManager em) throws Exception {
+        List<M> listaM = new ArrayList<M>();
+        try{
+            TypedQuery<M> jpaql = em.createQuery("select o from " + persistentClass.getSimpleName() + " o WHERE borrado = false",persistentClass);
+            listaM = jpaql.getResultList();
+            return MapperUtils.map(listaM, this.getVoClass());
+        }catch(Exception ex){
+            throw ex;
+        }
+    }
+    
+    @Override
+    public List<VO> listarTodos(EntityManager em) throws Exception {
         List<M> listaM = new ArrayList<M>();
         try{
             TypedQuery<M> jpaql = em.createQuery("select o from " + persistentClass.getSimpleName() + " o",persistentClass);

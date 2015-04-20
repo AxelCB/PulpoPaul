@@ -17,6 +17,7 @@ public interface IGenericDao<M extends AbstractEntity,VO extends AbstractVo> {
     public void borrar(EntityManager em,Integer idObjetoVO) throws Exception;
 
     public List<VO> listar(EntityManager em)throws Exception;
+    public List<VO> listarTodos(EntityManager em)throws Exception;
     public VO encontrar(EntityManager em,Integer id) throws Exception;
     
     public void drop(EntityManager em)throws Exception;

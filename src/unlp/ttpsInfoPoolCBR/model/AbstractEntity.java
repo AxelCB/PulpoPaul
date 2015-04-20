@@ -1,9 +1,10 @@
 package unlp.ttpsInfoPoolCBR.model;
 
+import java.io.Serializable;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import java.io.Serializable;
 
 /**
  * Created by Axel on 22/11/2014.
