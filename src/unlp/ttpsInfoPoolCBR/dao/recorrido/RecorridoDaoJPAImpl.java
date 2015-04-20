@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import unlp.ttpsInfoPoolCBR.dao.GenericDaoJPAImpl;
 import unlp.ttpsInfoPoolCBR.model.Recorrido;
 import unlp.ttpsInfoPoolCBR.model.Usuario;
@@ -78,5 +80,26 @@ public class RecorridoDaoJPAImpl extends GenericDaoJPAImpl<Recorrido,RecorridoVo
 		}
 		return recorridoVo;
 	}
+	
+	@Override
+    @Transactional
+    public void borrar(EntityManager em,Integer idRecorridoVO) throws Exception {
+        try{
+            Recorrido recorrido = em.find(persistentClass,idRecorridoVO);
+            RecorridoVo recorridoVo;
+            UsuarioVo usuarioVo;
+            if(!recorrido.equals(null)){
+            	recorridoVo = MapperUtils.map(recorrido, RecorridoVo.class);
+            	for (Usuario pasajero : recorrido.getPasajeros()) {
+            		usuarioVo = MapperUtils.map(pasajero, UsuarioVo.class);
+            		this.eliminarPasajero(em, recorridoVo, usuarioVo);
+            	}
+            	recorrido.setBorrado(Boolean.TRUE);
+            	em.merge(recorrido);
+            }
+        }catch(Exception ex){
+            throw ex;
+        }
+    }
     
 }

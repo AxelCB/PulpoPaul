@@ -20,4 +20,6 @@ public interface IRecorridoDao extends IGenericDao<Recorrido,RecorridoVo> {
 	
 	public RecorridoVo eliminarPasajero(EntityManager em,RecorridoVo recorridoVo,UsuarioVo usuarioVo) throws Exception;
 	
+	@Override
+    public void borrar(EntityManager em,Integer idRecorridoVO) throws Exception;
 }
