@@ -14,6 +14,7 @@
 	
 	<!-- Comienzo de pagina -->
 	<div class="container">
+		<span class="invi" id="propio">no</span>
 		<div class="jumbotron">
 			<h2><s:property value="getText('historic.travelsIParticipate')"/></h2>
 			<table id="recorridosTable">

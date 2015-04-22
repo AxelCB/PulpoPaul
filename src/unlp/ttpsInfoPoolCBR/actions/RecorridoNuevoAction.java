@@ -264,6 +264,20 @@ public class RecorridoNuevoAction extends ActionSupport{
         	
         	if(this.getIdRecorrido() > 0){
         		recorrido.setId(this.getIdRecorrido());
+        		try {
+        			
+        			if(em==null){
+        				em = EntityManagerFactoryHolder.getEntityManager();
+        			}
+					RecorridoVo recAux = recorridoDao.encontrar(em, this.getIdRecorrido());
+				} 
+        		catch (Exception e) {
+					e.printStackTrace();
+					em.close();
+					this.setMensajeError(this.getText("default.defaultError"));
+					this.setMensajeOk("");
+					return "error";
+				}
         	}
         	
         	try {

@@ -90,7 +90,7 @@ public class UsuarioAction extends ActionSupport implements IMensajesVista{
 				EntityManagerFactoryHolder.beginTransaction(em);
 				this.usuarioDao.borrar(em, usuarioId);
 				EntityManagerFactoryHolder.commitTransaction(em);
-				this.setMensajeOk("El usuario se elimino correctamente");
+				this.setMensajeOk("user.deleteOK");
 				return "exito";
 			}catch(Exception ex){
 				EntityManagerFactoryHolder.rollbackTransaction(em);

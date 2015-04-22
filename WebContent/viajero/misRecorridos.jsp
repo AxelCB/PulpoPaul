@@ -14,6 +14,7 @@
 	<jsp:include page="navigation.jsp"/>
 	
 	<div class="container">
+		<span class="invi" id="propio">si</span>
 		<div class="jumbotron">
 			<h2><s:property value="getText('myTravels.title')"/></h2>
 			<table id="recorridosTable">
@@ -54,7 +55,7 @@
 	                    	</a>
 	                    </td>
 	                    <td>
-	                    	<a href="enConstruccion">
+	                    	<a href="#">
 	                    		<span class="glyphicon glyphicon-trash"></span>
 	                    	</a>
 	                    </td>

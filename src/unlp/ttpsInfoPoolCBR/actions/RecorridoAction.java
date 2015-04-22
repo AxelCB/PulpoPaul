@@ -180,6 +180,35 @@ public class RecorridoAction extends ActionSupport implements IMensajesVista{
     	return "input";
     }
     
+    @Action(value="borrarRecorrido", results={
+    		@Result(name="exito", location="misRecorridos", type="chain"),
+    		@Result(name="error", location="misRecorridos", type="chain"),
+    		@Result(name="nologed", location="index", type="chain")
+    })
+    public String borrarRecorrido(){
+    	if(SessionUtils.checkLogin()){
+			EntityManager em = null;
+			try{
+				em = EntityManagerFactoryHolder.getEntityManager();
+				EntityManagerFactoryHolder.beginTransaction(em);
+				this.recorridoDao.borrar(em, idRecorrido);
+				EntityManagerFactoryHolder.commitTransaction(em);
+				this.setMensajeOk(this.getText("myTravels.deleteOK"));
+				return "exito";
+			}catch(Exception ex){
+				EntityManagerFactoryHolder.rollbackTransaction(em);
+				ex.printStackTrace();
+    			this.setMensajeError(this.getText("default.defaultError"));
+    			this.setMensajeOk("");
+    			return "error";
+			}
+		}else{
+    		this.setMensajeError(this.getText("default.noLoggedError"));
+    		this.setMensajeOk("");
+    		return "nologed";
+    	}
+    }
+    
     //Getters y Setters
 	public IRecorridoDao getRecorridoDao() {
 		return recorridoDao;

@@ -92,7 +92,7 @@ public class RecorridoDaoJPAImpl extends GenericDaoJPAImpl<Recorrido,RecorridoVo
             UsuarioVo usuarioVo;
             if(!recorrido.equals(null)){
             	recorridoVo = MapperUtils.map(recorrido, RecorridoVo.class);
-            	for (Usuario pasajero : recorrido.getPasajeros()) {
+            	for (UsuarioVo pasajero : recorridoVo.getPasajeros()) {
             		usuarioVo = MapperUtils.map(pasajero, UsuarioVo.class);
             		this.eliminarPasajero(em, recorridoVo, usuarioVo);
             	}

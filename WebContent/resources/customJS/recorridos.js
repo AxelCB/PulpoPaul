@@ -65,6 +65,27 @@ $(document).ready(function() {
          ]
       });
     
+	 $('.glyphicon-trash').click(function(){
+		 if($(this).parent('recorridosTable')){
+			 var row = $(this).parents('tr').children('td');
+			 var idRecorrido = $(row[0]).text();
+			 if(confirm('¿Seguro que desea eliminar el recorrido seleccionado?')){
+				 window.location.href="borrarRecorrido?idRecorrido="+idRecorrido;
+			 }
+		 }
+		 else{
+
+		 }
+	 })
+	 
+	 $('#detalleRecorrido').delegate('.glyphicon-trash', 'click', function(){
+		 var idUsuario = $(this).data('id');
+		 var idRecorrido = $(this).data('recorrido');
+		 if(confirm('¿Seguro que desea eliminar el pasajero seleccionado?')){
+			 //window.location.href="borrarRecorrido?idRecorrido="+idRecorrido; TODO
+		 }
+	 });
+    
     $('.glyphicon-plus').click(function(){    	
     	$("#nombre").text('');
     	$("#propietario").text('');
@@ -90,10 +111,11 @@ $(document).ready(function() {
     	end = null;
 
     	var row = $(this).parents('tr').children('td');
+    	var idRecorrido = $(row[0]).text();
     	$.ajax({
     		  type: "GET",
     		  url: "/PulpoPaul/buscarRecorrido",
-    		  data: { idRecorrido: $(row[0]).text() }
+    		  data: { idRecorrido: idRecorrido }
     	})
     	.fail(function() {
     		alert('Se ha producido un error al traer los datos del servidor');
@@ -130,10 +152,17 @@ $(document).ready(function() {
     		$("#horaIda").text(json.horaSalida);
     		
     		$("#precio").text('$' + json.precio);
+    		var propio = $('#propio').text();
     		if(json.pasajeros.length > 0){
     			var str = '';
     			for(i in json.pasajeros){
-    				str += '<p><span class="glyphicon glyphicon-warning-sign" data-tipo="pasajero" data-id="' + json.pasajeros[i].id + '"></span>  ' + json.pasajeros[i].nombres +'</p>'
+    				str += '<p>';
+    				str += '<span class="glyphicon glyphicon-warning-sign" data-tipo="pasajero" data-id="' + json.pasajeros[i].id + '"></span>  ';
+    				if(propio == 'si'){
+    					str += '<span class="glyphicon glyphicon-trash" data-recorrido="' + idRecorrido + '" data-id="' + json.pasajeros[i].id + '"></span>  ';
+    				}
+    				str += json.pasajeros[i].nombres;
+    				str += '</p>';
     			}
     			$('#pasajeros').append(str);
     		}
