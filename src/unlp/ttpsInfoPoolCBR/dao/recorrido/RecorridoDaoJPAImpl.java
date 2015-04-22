@@ -31,7 +31,7 @@ public class RecorridoDaoJPAImpl extends GenericDaoJPAImpl<Recorrido,RecorridoVo
         try{ 
         	Usuario usuario = MapperUtils.map(usuarioVo, Usuario.class);
             TypedQuery<Recorrido> jpaql = em.createQuery(
-            		"SELECT r FROM Recorrido r WHERE r.propietario!=:usuario AND :usuario NOT MEMBER OF r.pasajeros"
+            		"SELECT r FROM Recorrido r WHERE r.propietario!=:usuario AND borrado = false AND :usuario NOT MEMBER OF r.pasajeros"
             		,persistentClass);
             jpaql.setParameter("usuario", usuario);
 //            		"select r from " + persistentClass.getSimpleName() + " r "
@@ -65,6 +65,7 @@ public class RecorridoDaoJPAImpl extends GenericDaoJPAImpl<Recorrido,RecorridoVo
 	}
 
 	@Override
+	@Transactional
 	public RecorridoVo eliminarPasajero(EntityManager em,
 			RecorridoVo recorridoVo, UsuarioVo usuarioVo) throws Exception {
 		Recorrido recorrido = null;
@@ -74,6 +75,7 @@ public class RecorridoDaoJPAImpl extends GenericDaoJPAImpl<Recorrido,RecorridoVo
 			usuario = em.find(Usuario.class,usuarioVo.getId());
 			
 			recorrido.eliminarPasajero(usuario);
+			recorrido=em.merge(recorrido);
 			recorridoVo = MapperUtils.map(recorrido, RecorridoVo.class);
 		}catch(Exception ex){
 			ex.printStackTrace();

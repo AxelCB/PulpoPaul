@@ -33,7 +33,7 @@ public class DenunciaDaoJPAImpl extends GenericDaoJPAImpl<Denuncia,DenunciaVo> i
 		List<Denuncia> listaM = new ArrayList<Denuncia>();
         try{
         	Usuario admin = em.find(Usuario.class, adminVo.getId());
-            TypedQuery<Denuncia> jpaql = em.createQuery("select d from Denuncia d INNER JOIN d.denunciado WHERE d.denunciado = :denunciado" 
+            TypedQuery<Denuncia> jpaql = em.createQuery("select d from Denuncia d INNER JOIN d.denunciado WHERE d.denunciado = :denunciado and borrado = false" 
             		,persistentClass);
             jpaql.setParameter("denunciado", admin);
             listaM = jpaql.getResultList();

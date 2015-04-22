@@ -35,7 +35,7 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,UsuarioVo> impl
     	Usuario usuario = null;
     	UsuarioVo usuarioVo = null;
     	try{
-	    	TypedQuery<Usuario> jpaql = em.createQuery("select u from Usuario u where u.email = :email", Usuario.class);
+	    	TypedQuery<Usuario> jpaql = em.createQuery("select u from Usuario u where u.email = :email and borrado = false", Usuario.class);
 	    	jpaql.setParameter("email", email);
 	    	List<Usuario> listaUsuario = jpaql.getResultList();
 	    	if(!listaUsuario.isEmpty()){
@@ -129,7 +129,7 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,UsuarioVo> impl
 	public UsuarioVo traerMisRecorridos(EntityManager em,UsuarioVo usuarioVo) throws Exception{
 		Usuario usuario = null;
 		try{
-			TypedQuery<Usuario> jpaql = em.createQuery("select u from Usuario u join fetch u.recorridosMios where u.id = :id", Usuario.class);
+			TypedQuery<Usuario> jpaql = em.createQuery("select u from Usuario u join fetch u.recorridosMios where u.id = :id and borrado = false", Usuario.class);
 			jpaql.setParameter("id", usuarioVo.getId());
 			List<Usuario> usuarios = jpaql.getResultList();
 			if(!usuarios.isEmpty()){
@@ -148,7 +148,7 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,UsuarioVo> impl
 		 List<Usuario> listaUsuario = new ArrayList<Usuario>();
 		 List<UsuarioVo> listaUsuarioVo = new ArrayList<UsuarioVo>();
 	        try{
-	            TypedQuery<Usuario> jpaql = em.createQuery("select u from " + persistentClass.getSimpleName() + " u where rol_id = :idRol",persistentClass);
+	            TypedQuery<Usuario> jpaql = em.createQuery("select u from " + persistentClass.getSimpleName() + " u where rol_id = :idRol and borrado = false",persistentClass);
 	            jpaql.setParameter("idRol", rol.getId());
 	            listaUsuario = jpaql.getResultList();
 	            listaUsuarioVo = MapperUtils.map(listaUsuario,UsuarioVo.class);
@@ -162,7 +162,7 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,UsuarioVo> impl
 	public UsuarioVo traerBandejaEntrada(EntityManager em,UsuarioVo usuarioVo) throws Exception{
 		Usuario usuario = null;
 		try{
-			TypedQuery<Usuario> jpaql = em.createQuery("select u from Usuario u join fetch u.bandejaEntrada where u.id = :id", Usuario.class);
+			TypedQuery<Usuario> jpaql = em.createQuery("select u from Usuario u join fetch u.bandejaEntrada where u.id = :id and borrado = false", Usuario.class);
 			jpaql.setParameter("id", usuarioVo.getId());
 			List<Usuario> usuarios = jpaql.getResultList();
 			if(!usuarios.isEmpty()){
@@ -182,7 +182,7 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,UsuarioVo> impl
 		 List<Usuario> listaUsuario = new ArrayList<Usuario>();
 		 List<UsuarioVo> listaUsuarioVo = new ArrayList<UsuarioVo>();
 	        try{
-	            TypedQuery<Usuario> jpaql = em.createQuery("select u from " + persistentClass.getSimpleName() + " u where id != :idUsuario",persistentClass);
+	            TypedQuery<Usuario> jpaql = em.createQuery("select u from " + persistentClass.getSimpleName() + " u where id != :idUsuario and borrado = false",persistentClass);
 	            jpaql.setParameter("idUsuario", idUsuario);
 	            listaUsuario = jpaql.getResultList();
 	            listaUsuarioVo = MapperUtils.map(listaUsuario,UsuarioVo.class);

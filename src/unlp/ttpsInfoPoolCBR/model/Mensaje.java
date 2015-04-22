@@ -18,14 +18,14 @@ public class Mensaje extends AbstractEntity{
     private static final long serialVersionUID = -6523492302813042450L;
 
     @Column(nullable = false)
-    private String asunto;
+    private String asunto="";
 
     @Column(length = 1023,
     		nullable = false)
-    private String contenido;
+    private String contenido="";
     
     @Column
-    private Boolean leido;
+    private Boolean leido = Boolean.FALSE;
     
     @Column
     private Date fecha;

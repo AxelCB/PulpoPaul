@@ -25,7 +25,7 @@ public class EventoDaoJPAImpl extends GenericDaoJPAImpl<Evento,EventoVo> impleme
     public EventoVo buscarPorNombre(EntityManager em,String nombre) throws Exception{
     	EventoVo eventoVo = null;
     	try{
-	    	TypedQuery<Evento> jpaql = em.createQuery("select e from Evento e where e.nombre = :nombre", Evento.class);
+	    	TypedQuery<Evento> jpaql = em.createQuery("select e from Evento e where e.nombre = :nombre and borrado = false", Evento.class);
 	    	jpaql.setParameter("nombre", nombre);
 	    	List<Evento> listaEvento = jpaql.getResultList();
 	    	if(!listaEvento.isEmpty()){

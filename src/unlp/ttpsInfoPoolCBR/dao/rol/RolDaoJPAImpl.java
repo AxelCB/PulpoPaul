@@ -24,7 +24,7 @@ public class RolDaoJPAImpl extends GenericDaoJPAImpl<Rol,RolVo> implements IRolD
         Rol rol = null;
         RolVo rolVo = null;
         try{
-            TypedQuery<Rol> jpaql = em.createQuery("select r from Rol r where r.nombre = :nombre", Rol.class);
+            TypedQuery<Rol> jpaql = em.createQuery("select r from Rol r where r.nombre = :nombre and borrado = false", Rol.class);
             jpaql.setParameter("nombre",nombre);
             
             List<Rol> listaRol = jpaql.getResultList();
