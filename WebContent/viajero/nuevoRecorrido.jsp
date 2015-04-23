@@ -18,7 +18,7 @@
 	<!-- Comienzo de pagina -->
 	<div class="container">
 		<div class="jumbotron">	
-			<h2><s:property value="getText('newTravel.title')"/>Nuevo recorrido</h2>
+			<h2><s:property value="getText('newTravel.title')"/></h2>
 			<div class="row">	
 				<form class="form-horizontal col-sm-6" method="post" action="recorridoNuevoAgregar">
 					

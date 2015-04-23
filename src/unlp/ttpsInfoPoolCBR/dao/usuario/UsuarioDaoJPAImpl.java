@@ -162,7 +162,7 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,UsuarioVo> impl
 	public UsuarioVo traerBandejaEntrada(EntityManager em,UsuarioVo usuarioVo) throws Exception{
 		Usuario usuario = null;
 		try{
-			TypedQuery<Usuario> jpaql = em.createQuery("select u from Usuario u join fetch u.bandejaEntrada where u.id = :id and borrado = false", Usuario.class);
+			TypedQuery<Usuario> jpaql = em.createQuery("select u from Usuario u join fetch u.bandejaEntrada where u.id = :id and u.borrado = false", Usuario.class);
 			jpaql.setParameter("id", usuarioVo.getId());
 			List<Usuario> usuarios = jpaql.getResultList();
 			if(!usuarios.isEmpty()){
@@ -203,6 +203,8 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,UsuarioVo> impl
             	for (Recorrido recorrido : usuario.getRecorridosMios()) {
 					this.getRecorridoDao().borrar(em, recorrido.getId());
 				}
+            	em.merge(usuario);
+            	em.flush();
             	for (Recorrido recorrido : usuario.getRecorridosViajo()) {
             		recorridoVo = MapperUtils.map(recorrido, RecorridoVo.class);
             		usuarioVo = MapperUtils.map(usuario, UsuarioVo.class);
