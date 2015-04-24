@@ -129,12 +129,15 @@ public class UsuarioDaoJPAImpl extends GenericDaoJPAImpl<Usuario,UsuarioVo> impl
 	public UsuarioVo traerMisRecorridos(EntityManager em,UsuarioVo usuarioVo) throws Exception{
 		Usuario usuario = null;
 		try{
-			TypedQuery<Usuario> jpaql = em.createQuery("select u from Usuario u join fetch u.recorridosMios where u.id = :id and u.borrado = false", Usuario.class);
+			TypedQuery<Usuario> jpaql = em.createQuery("select u from Usuario u join fetch u.recorridosMios rm where u.id = :id and u.borrado = false and rm.borrado = false", Usuario.class);
 			jpaql.setParameter("id", usuarioVo.getId());
 			List<Usuario> usuarios = jpaql.getResultList();
 			if(!usuarios.isEmpty()){
 				usuario = usuarios.get(0);
 				usuarioVo = MapperUtils.map(usuario, UsuarioVo.class);
+			}
+			else{
+				usuarioVo.setRecorridosMios(null);
 			}
 		}
 		catch(Exception ex){
