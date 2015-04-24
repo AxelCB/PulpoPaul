@@ -47,6 +47,7 @@ public class RecorridoAction extends ActionSupport implements IMensajesVista{
     private Integer idRecorrido;
     private Integer idMensaje;
     private Boolean aceptar;
+    private Integer idUsuario;
 
     @Action(value="buscarRecorrido")
     public String buscar(){
@@ -209,6 +210,37 @@ public class RecorridoAction extends ActionSupport implements IMensajesVista{
     	}
     }
     
+    @Action(value="borrarViajero", results={
+    		@Result(name="exito", location="misRecorridos", type="chain"),
+    		@Result(name="error", location="misRecorridos", type="chain"),
+    		@Result(name="nologed", location="index", type="chain")    		
+    })
+    public String borrarViajero(){
+    	if(SessionUtils.checkLogin()){
+			EntityManager em = null;
+			try{
+				em = EntityManagerFactoryHolder.getEntityManager();
+				EntityManagerFactoryHolder.beginTransaction(em);
+				RecorridoVo recorridoVo = this.recorridoDao.encontrar(em, idRecorrido);
+				UsuarioVo usuarioVo = this.usuarioDao.encontrar(em, idUsuario);
+				this.recorridoDao.eliminarPasajero(em, recorridoVo, usuarioVo);
+				EntityManagerFactoryHolder.commitTransaction(em);
+				this.setMensajeOk(this.getText("myTravels.passengerDeleteOK"));
+				return "exito";
+			}catch(Exception ex){
+				EntityManagerFactoryHolder.rollbackTransaction(em);
+				ex.printStackTrace();
+    			this.setMensajeError(this.getText("default.defaultError"));
+    			this.setMensajeOk("");
+    			return "error";
+			}
+		}else{
+    		this.setMensajeError(this.getText("default.noLoggedError"));
+    		this.setMensajeOk("");
+    		return "nologed";
+    	}
+    }
+    
     //Getters y Setters
 	public IRecorridoDao getRecorridoDao() {
 		return recorridoDao;
@@ -251,6 +283,12 @@ public class RecorridoAction extends ActionSupport implements IMensajesVista{
 	}
 	public void setUsuarioDao(IUsuarioDao usuarioDao) {
 		this.usuarioDao = usuarioDao;
+	}
+	public Integer getIdUsuario() {
+		return idUsuario;
+	}
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 	@Override
 	public String getMensajeError() {

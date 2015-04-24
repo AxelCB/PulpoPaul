@@ -82,7 +82,7 @@ $(document).ready(function() {
 		 var idUsuario = $(this).data('id');
 		 var idRecorrido = $(this).data('recorrido');
 		 if(confirm('¿Seguro que desea eliminar el pasajero seleccionado?')){
-			 //window.location.href="borrarRecorrido?idRecorrido="+idRecorrido; TODO
+			 window.location.href="borrarViajero?idRecorrido="+idRecorrido+"&idUsuario="+idUsuario;
 		 }
 	 });
     
