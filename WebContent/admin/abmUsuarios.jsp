@@ -26,6 +26,7 @@
 						<th><s:property value="getText('user.lastname')"/></th>
 						<th><s:property value="getText('user.telephone')"/></th>
 						<th><s:property value="getText('user.email')"/></th>
+						<th><s:property value="getText('default.deleted')"/></th>
 						<th></th>
 						<th></th>
 						<th></th>
@@ -39,6 +40,7 @@
 						<td><s:property value="apellido"/></td>
 						<td><s:property value="telefono"/></td>
 						<td><s:property value="email"/></td>
+						<th><s:property value="borrado"/></th>
 						<td><a href="#" ><span class="glyphicon glyphicon-envelope"></span></a></td>
 						<td><a href="#" ><span class="glyphicon glyphicon-warning-sign"></span></a></td>
 						<td><a href="#" ><span class="glyphicon glyphicon-trash"></span></a></td>

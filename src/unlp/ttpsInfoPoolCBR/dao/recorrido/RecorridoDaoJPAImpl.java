@@ -73,10 +73,12 @@ public class RecorridoDaoJPAImpl extends GenericDaoJPAImpl<Recorrido,RecorridoVo
 		try{
 			recorrido = em.find(Recorrido.class, recorridoVo.getId());
 			usuario = em.find(Usuario.class,usuarioVo.getId());
-//			usuario.getRecorridosViajo().remove(recorrido);
 			
+			recorrido.setLugares(recorrido.getLugares()+1);
 			recorrido.eliminarPasajero(usuario);
+			usuario.getRecorridosViajo().remove(recorrido);
 			recorrido=em.merge(recorrido);
+			usuario=em.merge(usuario);
 			recorridoVo = MapperUtils.map(recorrido, RecorridoVo.class);
 		}catch(Exception ex){
 			ex.printStackTrace();

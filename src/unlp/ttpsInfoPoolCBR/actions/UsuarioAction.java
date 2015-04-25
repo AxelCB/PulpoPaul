@@ -60,7 +60,7 @@ public class UsuarioAction extends ActionSupport implements IMensajesVista{
 			EntityManager em = null;
 			try{
 				em = EntityManagerFactoryHolder.getEntityManager();
-				usuarios=usuarioDao.listar(em);
+				usuarios=usuarioDao.listarTodos(em);
 				return "exito";
 			}catch(Exception ex){
 				this.getLogger().error(ex.getMessage(),ex);

@@ -8,14 +8,14 @@ public class CalificacionRecorridoVo extends AbstractVo {
 	private static final long serialVersionUID = 1844169114833294874L;
 	
 	private Integer calificacion;
-    private ViajeVo calificado;
+    private RecorridoVo calificado;
     private UsuarioVo calificador;
 
     public CalificacionRecorridoVo(){
     	super();
     }
 
-    public CalificacionRecorridoVo(Integer calificacion, ViajeVo calificado,
+    public CalificacionRecorridoVo(Integer calificacion, RecorridoVo calificado,
 			UsuarioVo calificador) {
 		super();
 		this.calificacion = calificacion;
@@ -39,11 +39,11 @@ public class CalificacionRecorridoVo extends AbstractVo {
         this.calificacion = calificacion;
     }
 
-    public ViajeVo getCalificado() {
+    public RecorridoVo getCalificado() {
         return calificado;
     }
 
-    public void setCalificado(ViajeVo calificado) {
+    public void setCalificado(RecorridoVo calificado) {
         this.calificado = calificado;
     }
 }
