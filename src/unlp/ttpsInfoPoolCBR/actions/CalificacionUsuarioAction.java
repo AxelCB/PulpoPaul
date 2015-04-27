@@ -106,8 +106,8 @@ public class CalificacionUsuarioAction extends ActionSupport implements IMensaje
     	}
 	}
 	@Action(value="nuevaCalificacionUsuario",results={
-			@Result(name = "exito", location = "listarUsuarios", type = "chain"),
-	        @Result(name = "error", location = "listarUsuarios",type="chain"),
+			@Result(name = "exito", location = "misRecorridos", type = "chain"),
+	        @Result(name = "error", location = "misRecorridos",type="chain"),
 	        @Result(name = "nologed", location = "index", type = "chain")}
 	)
 	public String crearCalificacionUsuario(){
@@ -120,7 +120,7 @@ public class CalificacionUsuarioAction extends ActionSupport implements IMensaje
 				CalificacionUsuarioVo calificacionUsuarioVo = new CalificacionUsuarioVo(this.getCalificacion(), SessionUtils.getUsuario(), calificado);
 				this.getCalificacionUsuarioDao().guardar(em, calificacionUsuarioVo);
 				EntityManagerFactoryHolder.commitTransaction(em);
-				this.setMensajeOk(this.getText("user.deleteOK"));
+				this.setMensajeOk(this.getText("qualify.userOk"));
 				return "exito";
 			}catch(Exception ex){
 				EntityManagerFactoryHolder.rollbackTransaction(em);

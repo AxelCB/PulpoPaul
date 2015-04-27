@@ -73,10 +73,7 @@ $(document).ready(function() {
 				 window.location.href="borrarRecorrido?idRecorrido="+idRecorrido;
 			 }
 		 }
-		 else{
-
-		 }
-	 })
+	 });
 	 
 	 $('#detalleRecorrido').delegate('.glyphicon-trash', 'click', function(){
 		 var idUsuario = $(this).data('id');
@@ -85,6 +82,40 @@ $(document).ready(function() {
 			 window.location.href="borrarViajero?idRecorrido="+idRecorrido+"&idUsuario="+idUsuario;
 		 }
 	 });
+	 
+	 $('#detalleRecorrido').delegate('.glyphicon-star', 'click', function(){
+		iniciarCalificacion(this);
+	 });
+	 
+	 $('#recorridosTable').delegate('.glyphicon-star', 'click', function(){
+		iniciarCalificacion(this); 
+	 });
+	 
+	 $('#calificarBtn').click(function(){
+		 var puntos = $('#puntosCalificacion').val();
+		 var calificadoId = $('#calificadoId').val();
+		 if($('#tipoCalificacion').val() == "pasajero"){
+			 window.location.href="nuevaCalificacionUsuario?calificacion=" + puntos + "&calificadoId=" + calificadoId;			 
+		 }
+		 else{
+			 window.location.href="nuevaCalificacionRecorrido?calificacion=" + puntos + "&calificadoId=" + calificadoId;
+		 }
+
+	 });
+	 
+	 function iniciarCalificacion(element){
+		var idUsuario = $(element).data('id');
+		var tipo = $(element).data('tipo');
+		if(tipo == "pasajero" && idUsuario == $('#idUsuario').text()){
+			alert('No te podes calificar a vos mismo');
+		}
+		else{
+			$('#puntosCalificacion').val(5);
+			$('#calificadoId').val(idUsuario);
+			$('#tipoCalificacion').val(tipo);
+			$('#calificacion').modal();
+		}		 
+	 }
     
     $('.glyphicon-plus').click(function(){    	
     	$("#nombre").text('');
@@ -158,6 +189,7 @@ $(document).ready(function() {
     			for(i in json.pasajeros){
     				str += '<p>';
     				str += '<span class="glyphicon glyphicon-warning-sign" data-tipo="pasajero" data-id="' + json.pasajeros[i].id + '"></span>  ';
+    				str += '<span class="glyphicon glyphicon-star" data-tipo="pasajero" data-id="' + json.pasajeros[i].id + '"></span>  ';
     				if(propio == 'si'){
     					str += '<span class="glyphicon glyphicon-trash" data-recorrido="' + idRecorrido + '" data-id="' + json.pasajeros[i].id + '"></span>  ';
     				}

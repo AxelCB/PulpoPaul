@@ -140,6 +140,32 @@
 	    </div>
 	</div>
 	
+
+	<div class="modal fade" id="calificacion" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  	<div class="modal-dialog modal-sm">
+	    	<div class="modal-content">
+	      		<div class="modal-header">
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        		<h4 class="modal-title"><s:property value="getText('default.qualifying')"/></h4>
+	      		</div>
+	      		<div class="modal-body">
+					<div class="row">
+						<div class="col-lg-12">
+							<span class="glyphicon glyphicon-star"></span>
+							<input type="number" min="0" max="10" id="puntosCalificacion"/>
+							<input type="number" id="calificadoId" class="invi"/>
+							<input type="text" id="tipoCalificacion" class="invi"/>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" id="calificarBtn"><s:property value="getText('default.qualifying')"/></button>
+	        		<button type="button" class="btn btn-default" data-dismiss="modal"><s:property value="getText('default.close')"/></button>
+	      		</div>
+			</div>
+	    </div>
+	</div>
+	
 	<jsp:include page="scripts.jsp"/>
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>  
 	<script src="${pageContext.request.contextPath}/resources/customJS/recorridos.js"></script>

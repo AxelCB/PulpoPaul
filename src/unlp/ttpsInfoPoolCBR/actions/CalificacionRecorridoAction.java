@@ -106,8 +106,8 @@ public class CalificacionRecorridoAction extends ActionSupport implements IMensa
     	}
 	}
 	@Action(value="nuevaCalificacionRecorrido",results={
-			@Result(name = "exito", location = "listarRecorridos", type = "chain"),
-	        @Result(name = "error", location = "listarRecorridos",type="chain"),
+			@Result(name = "exito", location = "historial", type = "chain"),
+	        @Result(name = "error", location = "historial",type="chain"),
 	        @Result(name = "nologed", location = "index", type = "chain")}
 	)
 	public String crearCalificacionRecorrido(){
