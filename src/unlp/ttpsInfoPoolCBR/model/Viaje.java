@@ -9,7 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -43,8 +42,8 @@ public class Viaje extends AbstractEntity{
     //TODO
     private Recorrido recorrido;
 
-    @OneToMany(mappedBy="calificado")
-    private List<CalificacionRecorrido> calificaciones= new ArrayList<CalificacionRecorrido>();
+//    @OneToMany(mappedBy="calificado")
+//    private List<CalificacionRecorrido> calificaciones= new ArrayList<CalificacionRecorrido>();
     
     @ManyToMany(mappedBy="misViajes"
     		/*,fetch = FetchType.EAGER,
@@ -122,12 +121,12 @@ public class Viaje extends AbstractEntity{
     public void setDia(Date dia) {
         this.dia = dia;
     }
-    public List<CalificacionRecorrido> getCalificaciones() {
-        return calificaciones;
-    }
-    public void setCalificaciones(List<CalificacionRecorrido> calificaciones) {
-        this.calificaciones = calificaciones;
-    }
+//    public List<CalificacionRecorrido> getCalificaciones() {
+//        return calificaciones;
+//    }
+//    public void setCalificaciones(List<CalificacionRecorrido> calificaciones) {
+//        this.calificaciones = calificaciones;
+//    }
     public List<Usuario> getViajeros() {
         return viajeros;
     }

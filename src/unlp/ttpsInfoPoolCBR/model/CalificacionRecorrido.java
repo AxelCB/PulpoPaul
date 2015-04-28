@@ -19,7 +19,7 @@ public class CalificacionRecorrido extends AbstractEntity {
 
     @ManyToOne(optional = false)
 //    @JoinColumn(name="calificado_id")
-    private Viaje calificado;
+    private Recorrido calificado;
 
     @ManyToOne(optional = false)
 //    @JoinColumn(name="calificador_id")
@@ -29,7 +29,7 @@ public class CalificacionRecorrido extends AbstractEntity {
     	super();
     }
 
-    public CalificacionRecorrido(Integer calificacion, Viaje calificado,
+    public CalificacionRecorrido(Integer calificacion, Recorrido calificado,
 			Usuario calificador) {
 		super();
 		this.calificacion = calificacion;
@@ -53,11 +53,11 @@ public class CalificacionRecorrido extends AbstractEntity {
         this.calificacion = calificacion;
     }
 
-    public Viaje getCalificado() {
+    public Recorrido getCalificado() {
         return calificado;
     }
 
-    public void setCalificado(Viaje calificado) {
+    public void setCalificado(Recorrido calificado) {
         this.calificado = calificado;
     }
 }

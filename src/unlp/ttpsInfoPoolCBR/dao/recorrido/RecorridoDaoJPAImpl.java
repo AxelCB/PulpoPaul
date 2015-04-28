@@ -1,7 +1,9 @@
  package unlp.ttpsInfoPoolCBR.dao.recorrido;
 
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,6 +12,7 @@ import javax.persistence.TypedQuery;
 import org.springframework.transaction.annotation.Transactional;
 
 import unlp.ttpsInfoPoolCBR.dao.GenericDaoJPAImpl;
+import unlp.ttpsInfoPoolCBR.model.Mensaje;
 import unlp.ttpsInfoPoolCBR.model.Recorrido;
 import unlp.ttpsInfoPoolCBR.model.Usuario;
 import unlp.ttpsInfoPoolCBR.util.MapperUtils;
@@ -78,6 +81,7 @@ public class RecorridoDaoJPAImpl extends GenericDaoJPAImpl<Recorrido,RecorridoVo
 			recorrido.eliminarPasajero(usuario);
 			usuario.getRecorridosViajo().remove(recorrido);
 			recorrido=em.merge(recorrido);
+			this.avisarPasajeroDespuesDeExpulsionDeRecorrido(em, usuario, recorrido);
 			usuario=em.merge(usuario);
 			recorridoVo = MapperUtils.map(recorrido, RecorridoVo.class);
 		}catch(Exception ex){
@@ -106,5 +110,50 @@ public class RecorridoDaoJPAImpl extends GenericDaoJPAImpl<Recorrido,RecorridoVo
             throw ex;
         }
     }
-    
+	
+	public void avisarPasajeroDespuesDeExpulsionDeRecorrido(EntityManager em,Usuario pasajeroEliminado,Recorrido recorrido){
+		try{
+			Calendar calendar = Calendar.getInstance();
+			
+			//Creación de mensaje
+			Mensaje mensaje = new Mensaje();
+			
+			//Seteo de los campos que correspondan
+			/**********************************************************************/
+			/*         SANTI SI TENES QUE CAMBIAR EL MENSAJE MIRÁ ACÁ             */
+			/**********************************************************************/
+			
+			mensaje.setEmisor(recorrido.getPropietario());
+			mensaje.setReceptor(pasajeroEliminado);
+			mensaje.setFecha(new Date(calendar.getTimeInMillis()));
+			mensaje.setAsunto("Expulsión de un Recorrido");
+			mensaje.setContenido("Usted ha sido expulsado/a del recorrido "+recorrido.getNombre()+".");
+			
+			//Esto es necesario? para que está el campo recorrido?
+			//mensaje.setRecorrido(recorrido);
+			
+			mensaje = em.merge(mensaje);
+			pasajeroEliminado.getBandejaEntrada().add(mensaje);
+			
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+	}
+	
+	@Override
+	public RecorridoVo traerCalificaciones(EntityManager em, RecorridoVo recorridoVo)
+			throws Exception {
+		Recorrido recorrido = null;
+		try{
+			recorrido = em.find(Recorrido.class, recorridoVo.getId());
+			
+			recorrido.getCalificaciones();
+			
+			recorridoVo = MapperUtils.map(recorrido, RecorridoVo.class);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return recorridoVo;
+	}
+
 }

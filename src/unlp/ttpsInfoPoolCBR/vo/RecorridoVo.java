@@ -32,6 +32,7 @@ public class RecorridoVo extends AbstractVo{
     private UsuarioVo propietario;
     private List<UsuarioVo> pasajeros = new ArrayList<UsuarioVo>();
     private List<UsuarioVo> pasajerosHistorial = new ArrayList<UsuarioVo>();
+    private List<CalificacionRecorridoVo> calificaciones= new ArrayList<CalificacionRecorridoVo>();
 
     public RecorridoVo(String nombre, EventoVo evento, List<String> puntos,
 			String inicio, String fin, TramoViaje tramo, Time horaSalida,
@@ -206,6 +207,14 @@ public class RecorridoVo extends AbstractVo{
 
 	public void setTramo(TramoViaje tramo) {
 		this.tramo = tramo;
+	}
+
+	public List<CalificacionRecorridoVo> getCalificaciones() {
+		return calificaciones;
+	}
+
+	public void setCalificaciones(List<CalificacionRecorridoVo> calificaciones) {
+		this.calificaciones = calificaciones;
 	}
 
 }

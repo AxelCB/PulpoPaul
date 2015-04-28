@@ -83,6 +83,9 @@ public class Recorrido extends AbstractEntity{
     		//,
     			//fetch = FetchType.EAGER)
     private List<Usuario> pasajerosHistorial = new ArrayList<Usuario>();
+    
+    @OneToMany(mappedBy="calificado")
+    private List<CalificacionRecorrido> calificaciones= new ArrayList<CalificacionRecorrido>();
 
     public Recorrido(String nombre, Evento evento, List<String> puntos,
 			String inicio, String fin, TramoViaje tramo, Time horaSalida,
@@ -259,4 +262,12 @@ public class Recorrido extends AbstractEntity{
 		this.tramo = tramo;
 	}
 
+	public List<CalificacionRecorrido> getCalificaciones() {
+		return calificaciones;
+	}
+
+	public void setCalificaciones(List<CalificacionRecorrido> calificaciones) {
+		this.calificaciones = calificaciones;
+	}
+	
 }

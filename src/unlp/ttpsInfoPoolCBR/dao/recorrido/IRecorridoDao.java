@@ -22,4 +22,6 @@ public interface IRecorridoDao extends IGenericDao<Recorrido,RecorridoVo> {
 	
 	@Override
     public void borrar(EntityManager em,Integer idRecorridoVO) throws Exception;
+	
+	public RecorridoVo traerCalificaciones(EntityManager em,RecorridoVo recorridoVo) throws Exception;
 }
