@@ -2,6 +2,7 @@ package unlp.ttpsInfoPoolCBR.util;
 
 import org.springframework.beans.factory.FactoryBean;
 
+import unlp.ttpsInfoPoolCBR.vo.CalificacionRecorridoVo;
 import unlp.ttpsInfoPoolCBR.vo.EventoVo;
 import unlp.ttpsInfoPoolCBR.vo.UsuarioVo;
 
@@ -45,6 +46,7 @@ public class GsonSpringFactoryBean implements FactoryBean<Gson> {
 			gsb.addSerializationExclusionStrategy(new CustomExclusionStrategy(UsuarioVo.class, false, "historial"));
 			gsb.addSerializationExclusionStrategy(new CustomExclusionStrategy(UsuarioVo.class, false, "misViajes"));
 			gsb.addSerializationExclusionStrategy(new CustomExclusionStrategy(EventoVo.class, false, "recorridos"));
+			gsb.addSerializationExclusionStrategy(new CustomExclusionStrategy(CalificacionRecorridoVo.class, false, "calificado"));
 //			gsb.addSerializationExclusionStrategy(new CustomExclusionStrategy(RecorridoVo.class, false, "pasajerosHistorial"));
 //			gsb.addSerializationExclusionStrategy(new CustomExclusionStrategy(RecorridoVo.class, false, "propietario"));
 
