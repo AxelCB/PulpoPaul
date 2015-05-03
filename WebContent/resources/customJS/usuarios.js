@@ -13,7 +13,7 @@ $(document).ready(function(){
 	        'searchable' : false
 	     },
 	     {
-	    	 'targets' : [3, 4, 5, 6, 7],
+	    	 'targets' : [5, 6, 7, 8],
 	    	 'sortable' : false,
 	    	 'searchable' : false
 	     }
@@ -42,5 +42,10 @@ $(document).ready(function(){
 		 $('#mensajeEnviar').modal();
 	 })
 	 
+	 $('.glyphicon-star').click(function(){
+		 var row = $(this).parents('tr').children('td');
+		 var calificadoId = $(row[0]).text();		 
+		 window.location.href = "listarCalificaciones?calificadoId=" + calificadoId;
+	 })
 	 
 });

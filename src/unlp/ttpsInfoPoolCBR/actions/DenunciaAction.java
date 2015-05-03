@@ -32,9 +32,6 @@ import com.opensymphony.xwork2.ActionSupport;
 @Action(value = "denuncia")
 public class DenunciaAction extends ActionSupport implements IMensajesVista{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2653654270018155961L;
 	
 	private Logger logger = LoggerFactory.getLogger(DenunciaAction.class);

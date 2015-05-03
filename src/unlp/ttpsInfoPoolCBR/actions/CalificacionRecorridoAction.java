@@ -90,7 +90,7 @@ public class CalificacionRecorridoAction extends ActionSupport implements IMensa
 				EntityManagerFactoryHolder.beginTransaction(em);
 				this.getCalificacionRecorridoDao().borrar(em, calificacionId);
 				EntityManagerFactoryHolder.commitTransaction(em);
-				this.setMensajeOk(this.getText("user.deleteOK"));
+				this.setMensajeOk(this.getText("qualify.travelOk"));
 				return "exito";
 			}catch(Exception ex){
 				EntityManagerFactoryHolder.rollbackTransaction(em);
