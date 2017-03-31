@@ -1,6 +1,10 @@
 PulpoPaul
 =========
-Proyecto para InfoP@@l (trabajo taller de java)
+PulpoPaul es la versión de InfoPool(Car Pooling) creada por Santiago Ruta y Axel Collard Bovy para la Cátedra de Taller de Tecnologías de Producción de Software, opción Java, de la Universidad Nacional de La Plata Argentina.
+
+La misma permite a sus usuarios cargar eventos y recorridos y sumarse al recorrido de otros usuarios, para coordinar viajes hacia o desde la facultad, o hacia algun evento, para de esta forma ahorrar dinero, combustible, reducir la contaminación y tráfico producidos por la alta cantidad de vehículos en las calles.
+
+El sistema tiene incorporado, además, un sistema de mensajería entre usuarios, y de recomendaciones y denuncias, las cuales deberán ser tratadas por un administrador.
 
 IMPORTANTE
 ==========
